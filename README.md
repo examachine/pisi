@@ -1,9 +1,6 @@
-# pisi
+# PISI - Packages Installed Succesfully as Intended
+
 PISI package manager of Pardus linux distribution. The original development branch by the original author.
-
-Author: Eray Ozkural
-
-PISI - Packages Installed Succesfully as Intended
 
 PISI is a new package manager for the PARDUS
 distribution. In Turkish PISI means "kitty", and
@@ -19,3 +16,5 @@ Some of its distinctive features:
  - Framework approach to build applications and tools upon
  - Comprehensive CLI and a user-friendly qt GUI (distributed separately)
  - Extremely simple package construction
+
+Author: *Eray Ozkural*
