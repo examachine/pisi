@@ -1,0 +1,60 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2006, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+
+import sys
+import os
+
+import pisi
+from pisi.archive import ArchiveZip, ArchiveTar
+from pisi.zipfileext import BadZipfile
+import pisi.context as ctx
+import pisi.util as util
+
+def usage(errmsg):
+    print """
+    Error: %s
+    
+    Usage:
+      unpisi PiSi_package.PiSi
+    """ % (errmsg)
+
+    sys.exit(1)
+
+def main():
+
+    if len(sys.argv) < 2:
+        usage("PiSi package required..")
+
+    pisi.api.init(database=False, options='')
+
+    try:
+        arc = ArchiveZip(sys.argv[1], 'zip', 'r')
+    except BadZipfile, e:
+        print e
+        sys.exit(1)
+
+    arc.unpack_files(['files.xml', 'metadata.xml'], '.')
+    arc.unpack_files("install.tar.lzma", ctx.config.tmp_dir())
+    arc.unpack_dir_flat('comar','comar')
+
+    tar_file = util.join_path(ctx.config.tmp_dir(), "install.tar.lzma")
+    tar = ArchiveTar(tar_file, 'tarlzma')
+    tar.unpack_dir('.')
+
+    os.unlink(tar_file)
+    os.unlink(tar_file.rstrip('.lzma'))
+
+    pisi.api.finalize()            
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

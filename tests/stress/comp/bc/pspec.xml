@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>bc</Name>
+        <Homepage>http://www.gnu.org/software/bc/bc.htm</Homepage>
+        <Packager>
+            <Name>Pardus Testcioğlu</Name>
+            <Email>bilgi@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>Handy console-based calculator utility</Summary>
+        <Summary xml:lang="tr">Şık görünümlü bir konsol temelli hesap makinesı</Summary>
+        <Description>Handy console-based calculator utility</Description>
+        <Description xml:lang="tr">Konsolda çalışan şık görünümlü bir hesap makinesı</Description>
+        <Archive sha1sum="c8f258a7355b40a485007c40865480349c157292" type="targz">ftp://ftp.ulak.net.tr/gnu/gnu/bc/bc-1.06.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ab</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">bc-1.06-info-fix.diff</Patch>
+            <Patch level="1">bc-1.06-longopts.patch</Patch>
+            <Patch level="1">bc-1.06-readline42.diff</Patch>
+            <Patch level="1">bc-1.06-static-save.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>bc</Name>
+        <RuntimeDependency>
+            <Dependency>ab</Dependency>
+        </RuntimeDependency>
+        <Files>
+            <Path fileType="executable">/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-18</Date>
+            <Version>1.06</Version>
+            <Comment>First release.</Comment>
+            <Name>Pardus Testcioğlu</Name>
+            <Email>bilgi@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,101 @@
+diff -r -C2 bc-1.06.orig/doc/bc.texi bc-1.06/doc/bc.texi
+*** bc-1.06.orig/doc/bc.texi	Wed Sep 27 20:22:24 2000
+--- bc-1.06/doc/bc.texi	Fri Aug  3 16:44:49 2001
+***************
+*** 14,29 ****
+  @c end tex
+  
+! @titlepage
+! @title @command{bc}
+! @subtitle an arbitrary precision calculator language
+! @subtitle version 1.06
+! 
+! @author Philip A. Nelson
+! @page
+  
+  This manual documents @command{bc}, an arbitrary precision calculator language.
+  
+  This manual is part of GNU @command{bc}.@*
+! @sp4
+  Copyright (C) 1991, 1992, 1993, 1994, 1997 Free Software Foundation, Inc.
+  59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+--- 14,26 ----
+  @c end tex
+  
+! @ifinfo
+! @direntry
+! * bc: (bc).                    An arbitrary precision calculator language.
+! @end direntry
+  
+  This manual documents @command{bc}, an arbitrary precision calculator language.
+  
+  This manual is part of GNU @command{bc}.@*
+! 
+  Copyright (C) 1991, 1992, 1993, 1994, 1997 Free Software Foundation, Inc.
+  59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+***************
+*** 33,42 ****
+  are preserved on all copies.
+  
+! @iftex
+  Permission is granted to process this file through TeX and print the
+  results, provided the printed document carries copying permission
+  notice identical to this one except for the removal of this paragraph
+  (this paragraph not being relevant to the printed manual).
+! @end iftex
+  
+  Permission is granted to copy and distribute modified versions of this
+--- 30,39 ----
+  are preserved on all copies.
+  
+! @ignore
+  Permission is granted to process this file through TeX and print the
+  results, provided the printed document carries copying permission
+  notice identical to this one except for the removal of this paragraph
+  (this paragraph not being relevant to the printed manual).
+! @end ignore
+  
+  Permission is granted to copy and distribute modified versions of this
+***************
+*** 49,52 ****
+--- 46,59 ----
+  except that this permission notice may be stated in a translation approved
+  by the Foundation.
++ @end ifinfo
++ 
++ @titlepage
++ @title @command{bc}
++ @subtitle an arbitrary precision calculator language
++ @subtitle version 1.06
++ 
++ @author Philip A. Nelson
++ @page
++ 
+  
+  You may contact the author by:
+diff -r -C2 bc-1.06.orig/doc/dc.texi bc-1.06/doc/dc.texi
+*** bc-1.06.orig/doc/dc.texi	Thu Aug 31 11:57:43 2000
+--- bc-1.06/doc/dc.texi	Fri Aug  3 16:42:34 2001
+***************
+*** 42,47 ****
+  notice identical to this one except for the removal of this paragraph
+  (this paragraph not being relevant to the printed manual).
+- 
+  @end ignore
+  Permission is granted to copy and distribute modified versions of this
+  manual under the conditions for verbatim copying, provided that the entire
+--- 42,47 ----
+  notice identical to this one except for the removal of this paragraph
+  (this paragraph not being relevant to the printed manual).
+  @end ignore
++ 
+  Permission is granted to copy and distribute modified versions of this
+  manual under the conditions for verbatim copying, provided that the entire
+***************
+*** 86,90 ****
+  
+  @end titlepage
+- @page
+  
+  @node Top, Introduction, (dir), (dir)
+--- 86,89 ----

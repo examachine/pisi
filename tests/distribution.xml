@@ -1,0 +1,6 @@
+<PISI>
+  <SourceName>Pardus-Devel</SourceName>
+  <Version>1.1</Version>
+  <Description xml:lang="tr">Devel</Description>
+  <Type>Core</Type>
+</PISI>

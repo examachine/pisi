@@ -1,0 +1,92 @@
+#!/usr/bin/python
+#
+# Copyright (C) 2005, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+#
+# Authors: Eray, Baris
+
+import sys
+import locale
+import traceback
+import exceptions
+import signal
+import bsddb3.db as db
+import os
+
+import pisi.ui
+import pisi.context as ctx
+from pisi.cli.pisicli import PisiCLI
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
+def exit(retval = 0):
+    pisi.api.finalize()
+    sys.exit(retval)
+
+if __name__ == "__main__":
+
+    locale.setlocale(locale.LC_ALL, '')
+    print """Welcome to the interactive PISI shell.
+Type "help" to see a list of commands.
+To end the session, type "exit".
+You can run system commands by prefixing with '!' as in '!ls'.
+Copyright 2006 (c) Pardus.
+"""
+    while 1:
+        cmd = raw_input('pisi> ')
+        if cmd.strip()=='exit':
+            print 'Bye!'
+            exit()
+        if cmd.startswith('!'):
+            cmd = cmd[1:]
+            os.system(cmd)
+            continue
+        try:
+            cli = PisiCLI(cmd.split())
+            cli.run_command()
+        except pisi.operations.PisiUpgradeException, e:
+            print _('PISI has been upgraded.')
+        except Exception, value:
+            signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+            ui = pisi.cli.CLI() # make a temporary UI
+            show_traceback = False
+            if isinstance(value, exceptions.KeyboardInterrupt):
+                ui.error(_("Keyboard Interrupt: Exiting..."))
+            elif isinstance(value, pisi.Error):
+                ui.error(_("Program Terminated."))
+                show_traceback = ctx.get_option('debug')
+            elif isinstance(value, db.DBRunRecoveryError):
+                ui.error(_("""A database operation has been aborted. You should run pisi
+again for normal DB recovery procedure. Make sure you have free disk space. 
+You have to run rebuild-db only when there is file corruption and database upgrades."""))
+            elif isinstance(value, pisi.Exception):
+                show_traceback = True
+                ui.error(_("""Unhandled internal exception.
+Please file a bug report. (http://bugs.uludag.org.tr)"""))
+            else:
+                # For any other exception (possibly Python exceptions) show
+                # the traceback!
+                show_traceback = ctx.get_option('debug')
+                ui.error(_("System Error. Program Terminated."))
+        
+            if ctx.get_option('debug'):
+                ui.error(u"%s: %s" % (exception, value))
+            else:
+                 ui.error(unicode(value))
+        
+            ui.info(_("Please type 'help' for general help."))
+        
+            if show_traceback:
+                ui.info(_("Traceback:"))
+                #traceback.print_exc(file=sys.stdout)
+                traceback.print_tb(sys.exc_traceback)
+            else:
+                ui.info(_("Use --debug to see a traceback."))

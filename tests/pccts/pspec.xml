@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pccts</Name>
+        <Homepage>http://www.polhode.com</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
+        <Summary xml:lang="en">Purdue Compiler Construction Tool Set is an embedded C/C++ parser generator</Summary>
+        <Description xml:lang="en">Purdue Compiler Construction Tool Set is an embedded C/C++ parser generator</Description>
+	<Archive type="zip" sha1sum="5b3417efd5f537434b568114bcda853b4975d851">http://www.polhode.com/pccts133mr33.zip</Archive>
+        <Patches>
+            <Patch level="1">pccts-1.33.33-gentoo.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>unzip</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>pccts</Name>
+        <Files>
+          <Path fileType="header">/usr/include</Path>
+          <Path fileType="doc">/usr/share/doc</Path>
+          <Path fileType="executable">/usr/bin</Path>
+          <Path fileType="man">/usr/share/man</Path>
+        </Files>
+  </Package>
+
+    <History>
+      <Update release="1">
+        <Date>2005-09-16</Date>
+        <Version>1.33.33</Version>
+      </Update>
+    </History>
+
+</PISI>

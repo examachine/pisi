@@ -1,0 +1,125 @@
+From eray@uludag.org.tr Tue Jun 28 18:49:13 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from uludag.org.tr (localhost [127.0.0.1])
+	by uludag.org.tr (Postfix) with ESMTP id 80D2653C00C;
+	Tue, 28 Jun 2005 16:07:58 +0300 (EEST)
+X-Original-To: cekirdek@uludag.org.tr
+Delivered-To: cekirdek@uludag.org.tr
+Received: from [192.168.3.131] (unknown [193.140.73.11])
+	by uludag.org.tr (Postfix) with ESMTP id 0B6B753C00C
+	for <cekirdek@uludag.org.tr>; Tue, 28 Jun 2005 16:07:57 +0300 (EEST)
+From: Eray Ozkural <eray@uludag.org.tr>
+To: cekirdek@uludag.org.tr
+Date: Tue, 28 Jun 2005 15:49:13 +0000
+User-Agent: KMail/1.8.1
+MIME-Version: 1.0
+Message-Id: <200506281549.13525.eray@uludag.org.tr>
+Subject: [Cekirdek] source release ve binary build numaralari
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/cgi-bin/mailman/listinfo/cekirdek>, 
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/cgi-bin/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/cgi-bin/mailman/listinfo/cekirdek>, 
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============2126904290=="
+Mime-version: 1.0
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 865
+X-Length: 4347
+
+--===============2126904290==
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+yigitler,
+
+bu post'da dun tartistigimiz bir konuyu ilgilendiren
+paket versiyonu numaralarina tam bir aciklik getirmeye
+calisacagim.
+
+Bir PISI source'u uc tane sayiyla belirlenir:
+  name,  version,  release
+
+Burada version "convenience" icin bulunur. name + release
+ise her zaman *ayni* PISI source build islemine sebep olur.
+Bundan kasit su. version ve release tamamen bagimsiz.
+release 0 ile baslar. ornegin kdevelop
+
+ilk basta
+name: kdevelop, version: 3.4.1, release: 0
+dir
+
+Bu paketin yeni versiyonlariyla biz ugrastikca, yaptigimiz
+her  update, en minikleri dahi, release'i arttirir, ve her zaman
+bir arttirir (daha aciklayacagim), ama hic bir zaman geriye
+gitmez (0'lanmaz ornegin).
+
+ileride:
+name: kdevelop, version: 3.4.2, release: 3
+olabilir ornegin.
+
+Eger paketin gelistirildigi *distribution* source'u dahilinde
+bir versiyon dallanmasi varsa, ancak bu durumda release'e
+branch'ler eklenir.
+
+Diyelim ki yukaridaki paket pardus 1.0'in parcasiydi. simdi
+pardus 1.0.1 diye bir branch olusturulmak istendi, ornegin
+bu UEKAE overlay'ine karsilik gelsin. Bu durumda, versiyon
+iliskisini eksiksiz bicimde belirtmek icin:
+name: kdevelop, version: 3.4.2, release: 3.1
+
+demek yeterli olacaktir. Ekledigimiz '.1' suffix'i bize butun
+dal bilgisini verir. Boylece eksik hicbirsey olmaz.
+
+Binary package'lara gelince. Bir binary package dort 
+stringle her zaman bulunabilir. 
+  name,  version,  build, architecture
+
+burada name + build, *bir binary distribution* dahilinde,
+ornegin Pardus 1.0 x86 icin yapilmis tek ve tek bir paketi
+her zaman gosterir.
+
+Build, o architecture icin, o paketin kacinci kere build
+edildigini gosterir. Her paket release'inde en fazla bir
+artar.
+
+Bunu daha once tartistigimiz gibi tamamen incremental
+build script'inin buldugu md5'larla hesapliyoruz.
+
+Binary package'larin build numarasi icin bir dallanma/budaklanma
+semasi henuz onermiyorum, ama bana su anda ayni
+source package'lar gibi birsey yapilabilir geliyor. Bana buradaki
+en kritik mesele source ve binary package'larini, ve upstream
+version string'lerle kendi, SVN-tarzi version string'lerimizi
+karistirmamamiz.
+
+Kaplan gunler,
+
+--
+Eray
+
+--===============2126904290==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/cgi-bin/mailman/listinfo/cekirdek
+
+--===============2126904290==--
+

@@ -1,0 +1,69 @@
+--- pccts-1.33.33/support/genmk/genmk.c	Fri Aug  3 17:12:51 2001
++++ pccts-1.33.33/support/genmk/genmk-gentoo.c	Fri Aug  3 17:12:14 2001
+@@ -7,6 +7,11 @@
+  * U of MN
+  */
+ 
++/* modified 20010803 by Peter Kadau
++ * for better fhs-compliance
++ * i.e. from "none" to "hmmm soso" ;-)
++ */
++
+ #include <stdio.h>
+ #include <string.h>
+ #include "pcctscfg.h" /* be sensitive to what ANTLR/DLG call the files */
+@@ -65,7 +70,7 @@
+ static int  nondef_comp = 0; /* 1=compiler is non default */
+ static char *compilerCCC="CC";
+ static char *compilerCC="cc";
+-static char *pccts_path="/usr/local/pccts";
++static char *pccts_path="/usr/include/pccts";
+ 
+ #ifdef __STDC__
+ void help(void);
+@@ -356,7 +361,7 @@
+ 	{ "-cfiles",1,pCFiles,      "Additional files in C or C++ to compile"},
+ 	{ "-sor",0,pSor,           "Start of sorcerer group"},
+ 	{ "-pccts_path",1,ppccts_path,
+-			"Path for $PCCTS directory (default is /usr/local/pccts)"},
++			"Path for $PCCTS directory (default is /usr/include/pccts)"},
+ 	{ "-compiler",1,pCompiler,
+ 			"Default compiler (default is CC/cc)"},
+ 	{ "*", 0,pFile, 	        "" },	/* anything else is a file */
+@@ -495,13 +500,13 @@
+ 	else printf("SCAN = %s%s\n", DIR(), dlg_class);
+ 
+ 	printf("PCCTS = %s\n",pccts_path);
+-	printf("ANTLR_H = $(PCCTS)%sh\n", DirectorySymbol);
++	printf("ANTLR_H = $(PCCTS)\n");
+ 	if (num_sors>0) {
+-		printf("SOR_H = $(PCCTS)%ssorcerer%sh\n", DirectorySymbol, DirectorySymbol);
++		printf("SOR_H = $(PCCTS)%ssorcerer\n", DirectorySymbol);
+ 		printf("SOR_LIB = $(PCCTS)%ssorcerer%slib\n",
+ 			 	DirectorySymbol, DirectorySymbol);
+ 	}
+-	printf("BIN = $(PCCTS)%sbin\n", DirectorySymbol);
++	printf("BIN = %susr%sbin\n", DirectorySymbol, DirectorySymbol);
+ 	printf("ANTLR = $(BIN)%santlr\n", DirectorySymbol);
+ 	printf("DLG = $(BIN)%sdlg\n", DirectorySymbol);
+ 	if (num_sors>0) printf("SOR = $(BIN)%ssor\n", DirectorySymbol);
+--- pccts-1.33.33/sorcerer/lib/sorlist.c	1999-06-30 03:15:56.000000000 +0200
++++ pccts-1.33.33/sorcerer/lib/sorlist.c.new	2003-05-23 11:11:09.000000000 +0200
+@@ -28,6 +28,7 @@
+  */
+ #include <stdio.h>
+ #include <setjmp.h>
++#include "pcctscfg.h"
+ 
+ #ifdef PCCTS_USE_STDARG
+ #include <stdarg.h>
+--- pccts-1.33.33/sorcerer/lib/sintstack.c	1999-06-30 15:08:06.000000000 +0200
++++ pccts-1.33.33/sorcerer/lib/sintstack.c.new	2003-05-23 12:54:26.000000000 +0200
+@@ -28,6 +28,7 @@
+  */
+ #include <stdio.h>
+ #include <setjmp.h>
++#include "pcctscfg.h"
+ 
+ #ifdef PCCTS_USE_STDARG
+ #include <stdarg.h>

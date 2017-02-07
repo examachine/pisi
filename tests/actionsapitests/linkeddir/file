@@ -1,0 +1,6 @@
+toplam 4
+drwxr-xr-x 2 meren users 4096 Mar 10 12:55 adirectory
+lrwxrwxrwx 1 meren users   14 Mar 10 12:41 brokenlink -> /no/such/place
+-rw-r--r-- 1 meren users    0 Mar 10 12:57 file
+lrwxrwxrwx 1 meren users    4 Mar 10 12:42 linktoadirectory -> /etc
+lrwxrwxrwx 1 meren users   11 Mar 10 12:42 linktoafile -> /etc/passwd

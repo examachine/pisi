@@ -1,0 +1,57 @@
+PISI 1.0.9 25 April 2006:
+
+ * source index/database and remote builds by name
+ * "emerge" command, now we are just like gentoo :)
+ * performance and usability improvements. faster database access and
+   faster updates. index integrity, authenticity and compression. 
+   smaller db files and simplification in db schema / less seeks. 
+   correct use of berkeley DB cache.
+ * several other improvements and bugfixes
+
+PISI 1.0.2 25 December 2005:
+
+ * some minor bugs were corrected
+
+PISI 1.0.1 24 December 2005:
+
+ * bugfix release. one important improvement is preventing the accumulation
+   of inactive database logs (we handle catastrophic failure in
+   another way, by making all critical data available as xml)
+
+PISI 1.0 21 December 2005:
+
+ * new command "check"
+ * a new tool "calc-build-order.py" to calculate build order 
+   for the entire distro
+ * various bugfixes and improvements, no significant issues remain
+
+PISI release candidate 2 12 December 2005:
+
+ * maintenance release for Pardus 1.0 RC1, various bugfixes
+
+PISI release candidate 1 9 December 2005:
+
+ * a command to search package text
+ * better reliability through transaction support for berkeley db
+ * db version file
+ * loads of bugfixes
+
+PISI Beta 1/2 release 17/18 November 2005:
+ 
+ * support for components, see the completed items in TODO
+ * a tool to find library dependencies
+ * various improvements and bugfixes
+
+PISI Alpha 9 release 13 November 2005:
+
+ * new package: pisi.pxml
+   * first release of autoxml, a metaclass for high-level xml processing
+   * uses 4suite.org for fast xml processing
+   * supports multiple parsers: minidom, 4suite and in the future: piksemel
+   * all xml structures in PISI have been updated to use autoxml
+ * improvements in the ui interface
+ * significant fixes for Turkish translations
+
+previous PISI releases had too many things to mention :)
+
+Author: Eray Ozkural

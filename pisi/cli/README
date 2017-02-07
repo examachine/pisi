@@ -1,0 +1,23 @@
+Writing commands:
+-----------------
+
+TODO: this is a *bit* out of date now.
+
+Subclass from Command.
+
+Be careful not to import PiSi modules before Command is run, e.g.
+do it in run() method. This is necessary to prevent an obscure
+initialization error.
+
+We used to import pisi.operations in pisi.cli
+
+This prevented pisi.operations from having the current global
+pisi.ui.ui because it's loaded before the UI is set! So, despite
+what you might understand from the python FAQ 1.2.3
+http://www.python.org/doc/faq/programming.html#how-do-i-share-global-variables-across-modules
+you have to be careful about the initialization order when using
+singleton modules.
+
+Another way to solve this is to ensure that the global module is
+always imported again in every function it is called (see
+ui.CLI.confirm() ) but this is more expensive.

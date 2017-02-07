@@ -1,0 +1,16 @@
+ripped from fedora !
+
+--- bc-1.06/bc/load.c.s390	Wed Sep 13 20:22:38 2000
++++ bc-1.06/bc/load.c	Wed Sep  5 16:10:18 2001
+@@ -156,7 +156,10 @@
+   long  label_no;
+   long  vaf_name;	/* variable, array or function number. */
+   long  func;
+-  program_counter save_adr;
++  /* Make save_adr static. Otherwise the whole address save stuff doesn't make
++     any sense at all and break e.g. on S390.
++     09/05/01 Phil Knirsch <pknirsch@redhat.de> */
++  static program_counter save_adr;
+ 
+   /* Initialize. */
+   str = code;

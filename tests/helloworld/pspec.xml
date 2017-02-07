@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>helloworld</Name>
+        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
+        <Summary xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Summary>
+        <Description xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Description>
+        <Archive type="targz" sha1sum="c8927baab2aae5fb4d1243067ca5244e3120f2ff">http://cekirdek.uludag.org.tr/~eray/hello-1.3.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>helloworld</Name>
+        <Files>
+            <Path fileType="binary">/</Path>
+        </Files>
+  </Package>
+
+          <History>
+            <Update release="1">
+                <Date>2005-08-21</Date>
+                <Version>0.1</Version>
+            </Update>
+        </History>
+</PISI>
+

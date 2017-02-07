@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>unzip</Name>
+        <Homepage>ftp://ftp.info-zip.org/pub/infozip/UnZip.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Info-ZIP</License>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
+        <Summary xml:lang="en">Unzipper for pkzip-compressed files</Summary>
+        <Description xml:lang="en">Unzipper for pkzip-compressed files</Description>
+        <Archive type="targz" sha1sum="51034a8098eddc8facb4db9ea1a935e813dbdb73">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/unzip550.tar.gz</Archive>
+        <Patches>
+		    <Patch level="1">unzip-5.50-dotdot.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libc</Dependency>
+            <Dependency>sed</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>unzip</Name>
+        <RuntimeDependencies>
+            <!-- <Dependency>libc</Dependency> -->
+        </RuntimeDependencies>
+        <Files>
+    	    <Path fileType="binary">/usr/bin</Path>
+    	    <Path fileType="doc">/usr/share/doc</Path>
+    	    <Path fileType="doc">/usr/share/man</Path>
+        </Files>
+  </Package>
+  <History>
+    <Update release="2">
+      <Date>2005-08-10</Date>
+      <Version>5.52</Version>
+    </Update>
+ </History>
+
+</PISI>
+

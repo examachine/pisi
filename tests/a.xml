@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<A href="http://www.cs.bilkent.edu.tr/~erayo">
+  cıvık mantardır bu
+  <Name>Eray Ozkural</Name>
+  <Number>868</Number>
+  <Description xml:lang="en">Lazy Tin</Description>
+  <Description xml:lang="tr">Tembel Teneke</Description>
+      <Project>pisi</Project>
+      <Project>noatun</Project>
+      <Project>kdevelop</Project>
+  <OtherInfo>
+    <BirthDate>18071976</BirthDate>
+    <Interest>AI</Interest>
+    <CodesWith>
+      <Person>Baris</Person>
+      <Person>Gurer</Person>
+      <Person>Caglar</Person>
+      <Person>Meren</Person>
+    </CodesWith>
+  </OtherInfo>
+</A>

@@ -1,0 +1,59 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2006, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+
+import os
+import sys
+import pisi
+
+def show_info(filename):
+    pisi.api.init(database=False, comar=False)
+    metadata, files = pisi.api.info_file(filename)
+    pisi.api.finalize()
+
+    paths = [fileinfo.path for fileinfo in files.list]
+    paths.sort()
+    return paths
+
+def uniq(alist):
+    set = {}
+    return [set.setdefault(e, e) for e in alist if e not in set]
+
+def usage(errmsg):
+    print """
+    Error: %s
+
+    Usage:
+      lspisi PiSi_package.PiSi         (lists the content of package)
+      lspisi dirs PiSi_package.PiSi    (lists directories in the package for the package developer)
+    """ % (errmsg)
+
+    sys.exit(1)
+
+
+def main():
+    if len(sys.argv) < 2 or ("dirs" in sys.argv and len(sys.argv) < 3):
+        usage("PiSi package required...")
+
+    if sys.argv[1] == "dirs":
+        dirlist = []
+        for file in show_info(sys.argv[2]):
+            dirlist.append(os.path.dirname(file))
+
+        for dir in uniq(dirlist):
+            print "<Path fileType=\"\">%s</Path>" % dir
+        
+    else:
+        for file in show_info(sys.argv[1]):
+            print "/%s" % file
+
+if __name__ == "__main__":
+    sys.exit(main())

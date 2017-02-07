@@ -1,0 +1,123 @@
+<!-- Document Type Declaration file for PISI pspec.xml files -->
+<!-- http://www.pardus.org.tr/projeler/pisi/ -->
+
+<!ELEMENT PISI (Source,Package+,History)>
+
+<!-- Source Section -->
+
+<!ELEMENT Source (
+	#PCDATA |
+	Name |
+	Homepage |
+	Icon |
+	Packager |
+	License |
+	IsA |
+	PartOf |
+	Summary |
+	Description |
+	Archive |
+	Patches |
+	BuildDependencies
+)*>
+
+<!ELEMENT Name (#PCDATA)>
+
+<!ELEMENT Homepage (#PCDATA)>
+
+<!ELEMENT Icon (#PCDATA)>
+
+<!ELEMENT Packager (Name, Email)>
+<!ELEMENT Email (#PCDATA)>
+
+<!ELEMENT License (#PCDATA)>
+
+<!ELEMENT IsA (#PCDATA)>
+
+<!ELEMENT PartOf (#PCDATA)>
+
+<!ELEMENT Summary (#PCDATA)>
+<!ATTLIST Summary xml:lang CDATA #IMPLIED>
+
+<!ELEMENT Description (#PCDATA)>
+<!ATTLIST Description xml:lang CDATA #IMPLIED>
+
+<!ELEMENT Archive (#PCDATA)>
+<!ATTLIST Archive sha1sum CDATA #REQUIRED>
+<!-- NOTE: we can limit possible types here to the ones that pisi know -->
+<!ATTLIST Archive type CDATA #REQUIRED>
+
+<!ELEMENT BuildDependencies (Dependency*)>
+
+<!ELEMENT Dependency (#PCDATA)>
+<!ATTLIST Dependency versionFrom CDATA #IMPLIED>
+<!ATTLIST Dependency versionTo CDATA #IMPLIED>
+<!ATTLIST Dependency version CDATA #IMPLIED>
+<!ATTLIST Dependency releaseFrom CDATA #IMPLIED>
+<!ATTLIST Dependency releaseTo CDATA #IMPLIED>
+<!ATTLIST Dependency release CDATA #IMPLIED>
+
+<!ELEMENT Patches (Patch*)>
+
+<!ELEMENT Patch (#PCDATA)>
+<!ATTLIST Patch compressionType CDATA #IMPLIED>
+<!ATTLIST Patch level CDATA #IMPLIED>
+<!ATTLIST Patch target CDATA #IMPLIED>
+
+
+<!-- Package Section -->
+
+<!ELEMENT Package (
+	#PCDATA |
+	Name |
+	License |
+	IsA |
+	PartOf |
+	Summary |
+	Description |
+	RuntimeDependencies |
+	Files |
+	Conflicts |
+	AdditionalFiles |
+	Provides
+)*>
+
+<!ELEMENT Provides (COMAR)+>
+<!ELEMENT COMAR (#PCDATA)>
+<!ATTLIST COMAR script CDATA #IMPLIED>
+
+<!ELEMENT Conflicts (Package)+>
+<!-- we have a problem here, this Package tag only contains a package name
+while dtd treats this as another Package section, who said dtd doesnt
+suck anyway -->
+
+<!ELEMENT AdditionalFiles (AdditionalFile+)>
+<!ELEMENT AdditionalFile (#PCDATA)>
+<!ATTLIST AdditionalFile target CDATA #REQUIRED>
+<!ATTLIST AdditionalFile permission CDATA #IMPLIED>
+<!ATTLIST AdditionalFile owner CDATA #IMPLIED>
+
+<!ELEMENT RuntimeDependencies (Dependency*)>
+
+<!ELEMENT Files (Path)+>
+
+<!ELEMENT Path (#PCDATA)>
+<!-- NOTE: is this list correct? -->
+<!ATTLIST Path fileType
+	(executable|library|data|config|doc|man|info|localedata|header)
+	#REQUIRED>
+<!ATTLIST Path permanent (false|true) #IMPLIED>
+
+
+<!-- History Section -->
+
+<!ELEMENT History (Update+)>
+
+<!ELEMENT Update (#PCDATA | Date | Version | Comment | Name | Email)*>
+<!ATTLIST Update release CDATA #REQUIRED>
+<!-- FIXME: valid types must be used instead of CDATA -->
+<!ATTLIST Update type CDATA #IMPLIED>
+
+<!ELEMENT Date (#PCDATA)>
+<!ELEMENT Version (#PCDATA)>
+<!ELEMENT Comment (#PCDATA)>

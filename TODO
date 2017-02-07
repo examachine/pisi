@@ -1,0 +1,247 @@
+Author: Eray Ozkural, all tasks marked were accomplished by Eray if not indicated otherwise
+
+PiSi TODO List
+==============
+
+A list of tasks to accomplish, organized into priority sections
+
+Legend:
+
+- Todo
+? Not determined if/how we have to do
+/ In progress
++ Accomplished
+
+1. Pre-Alpha
+
+ + reading spec file
+ + writing
+   + files
+   + metadata
+ + Actions API framework
+   + sample api modules (autotools)
+   + unit test
+ + source building
+ + package module
+   + extraction
+   + add file / compression
+ + package creation
+ + install database
+ + package database
+ + command line interface
+   + pisi-build
+   + pisi-install
+   + pisi-index
+   + pisi-updatedb
+ + single repository index
+ + simple dependency checking
+ + Package/Files
+
+2. Alpha
+
+ + multi-package dependency analysis (eray)
+   + design a package operation planner
+   + install/remove operations (eray)
+ + command line interface:
+   + pisi remove
+   + svn-like CLI
+ + configuration file
+   + define the format of the configuration file
+   + extend Config module (config.py) accordingly
+   + define configuration keys (baris - meren)
+ + query
+   + list of installed packages (eray)
+ + refactor actionsAPI (caglar)
+ + fix xml indentation (meren)
+ + define file types (doc, executable, conf, etc...) (baris - meren)
+ + write specfile (eray)
+ + file locking for database access [not tested!] (eray)
+ + implement file uri
+   + extend the modules dealing with files accordingly
+ + ui module improvements
+   + methods for interaction (yes, no questions, etc.)
+ + implement source database (eray)
+ + easy package preparation
+   + convert ebuild to pisi
+ + COMAR interface
+   + what do we need to specify in a package.
+   + package install: register config script
+   + package remove: unregister config script
+ + internet installation
+   + support URI's whereever a filename is supported
+   + http server
+   + pisi updatedb over internet
+
+3. Beta
+
+ + build cmd: installl build deps
+ + improve url support, it's a little dumb at the moment
+   + devise a File class that works with URLs
+   + add URL support to autoxml
+ + info cmd: reverse dependencies of a package
+ + a helper script for finding dependencies (eray)
+ + autoxml: automated xml processing (eray)
+   + design
+   + basic types
+   + list type
+   + class type
+   + localtext/text types
+   + revised interface
+   + improved error handling, check routines, hooks, format/print routines 
+   + xmlfile support (read/write)
+   + string member, in addition to tag/attribute members
+   + replace specfile with new specfile using autoxml
+   + autoxmlize: metadata, index, dependency and related code paths
+   + inheritance support
+   + revise writing, error reporting, tests
+ + components (eray)
+   + requirements
+   + xml format, add to PSPEC
+   + index component.xml's and make use of them in build
+   + a database of components: 
+     + query components by name
+     + query list of packages in a component
+     + index: update component database(s)
+     + bug fixing
+   + install/remove/upgrade components
+   + safety switch: preserve system.base, install system.devel for build, etc. 
+   + info <component>
+   + started documentation
+   + component dependencies
+ + multiple package repository (eray)
+   + decide how to implement
+   + support repo order
+ + refactor xml support and implement multiple backends
+   + 4suite support (initial patch by faik, completed by eray)
+   + piksemel support (eray)
+   + fix autoxml implementation to use 4suite by default
+ + partial caching and automatic resume for file download (meren)
+   + use a '.part' extension
+ + search-file command (eray)
+ + exception handling (eray)
+   + uniform exception hierarchy
+   + proper handling
+ + API: we even have application users (eray)
+   + a facade module pisi.api  (eray)
+   + a library init command (eray)
+   + high-level package ops, index (eray)
+   + info/util commands (eray)
+   + build commands (baris)
+ + documentation
+   + actionsAPI documentation, unittests (caglar - meren)
+   + versioning information document (eray - baris)
+ + UI
+   + PISIMAT
+   + pykde GUI (cartman)
+   + improve interface (eray)
+    + refactor UI, reintroduce base class
+    + add an ack interface, start cleaning up a bit
+   + cli (eray)
+    + ask alternatives to choose from
+   + eliminate \n's from infos, what's the point?
+   + metaclass coolness for CLI command framework (eray)
+ + i18n support
+   + translations and correct language for summary, description (packagers)
+   + make pisi messages translatable (eray)
+   + .pot support for dist script (gurer)
+   + translate messages mesajların çevirisinin yapılması (pisi tr.po) (eray)
+   + proper unicode handling in code - tons of fixes (eray - baris)
+ + configure-pending (eray)
+ + proper commar connection (baris - gurer)
+ + ignore-deps (eray)
+ + more robust upgrade (eray)
+ + query (eray)
+   + comar OM information (Provides)
+   + find package by name, display summary/description
+   + info --files option (like rpm -ql, but better of course)
+ + implement missing unit tests
+   + sourcedb
+   + package (baris)
+   + configuration file (baris)
+ + upgrade (eray)
+   + upgrade operation
+   + test upgrade op
+   + system-wide upgrade (upgrade-all) komutu
+ + incremental build (eray)
+   + generate binary release number by comparing MD5s (eray)
+   + keep track of successfully completed configure, make, install
+     steps (necessary for large-scale builds?) (meren)
+ + database locking bugs (eray)
+
+4. Release
+
+ * high priority
+
+ + transaction stuff for database (eray)
+ + database version file
+
+ * low priority
+
+ + search command: (eray)
+   + implement an inverted index
+   + search in summary and description
+
+5. Post Release
+
+ * high priority
+
+ - package signing
+   - a flag to sign package after building
+   - code to check if the package has a valid signature
+ - cli improvements
+   - non interactive mode (similar to --auto in urpmi)
+ / high-level build commands
+   + an emerge command, just for fun
+     + make use of binary repo to satisfy dependencies in emerge
+   / build command enhancements:
+     + aware of repo sources
+     ? full dependency analysis like install/upgrade etc.
+   ? build-all (or build-distro) command, or as a separate tool
+ + make a package and sourcedb for each repo
+   + packagedb
+   + sourceb
+ ? improve url support: consider adding "other" protocols
+   - removable media: media://
+
+ * medium priority
+
+ - UI impl: non-interactive use that selects defaults and logs output
+ - UI impl: a general purpose Qt UI
+ / multi-architecture support
+   + design decisions
+   + extend XML specs to support that
+   - cross-platform building support
+ - incremental build/fetch for repository index (pisi-index.xml)
+ / xdelta support (caglar)
+   - diffsets
+ - a command (check-repo) to check if repos are consistent wrt dep relations
+ - component improvements (optional)
+   - maintain a list of components each component has
+   - maintain a list of packages 
+ - more support for categories:
+   - put categories into a database
+   - fast search for categories
+
+ * low priority
+
+ / overhaul installdb (try to merge its use with packagedb) (eray)
+ / verify metodlari
+   + SpecFile
+   + MetaData
+   + Files
+   - Index (somebody should write one :} )
+ - autoxml:
+   - revise error checking, printing and tests
+   - uri type
+   - date type
+   - enum type
+   - make autoxml dependent on only xmlext and xmlfile interfaces
+ - search command: (eray)
+   - search components
+   - english stemming
+   - turkish stemming
+   - phonetic/syntactic fault tolerance (whichever works!)
+     - in particular evaluate soundex and metaphone
+     - research if there are language independent phonetic encodings
+     - implement as an option (or make it possible to turn it off if it works well :))
+   - fault tolerant search in package names (somehow)

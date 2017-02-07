@@ -1,0 +1,249 @@
+From eray@uludag.org.tr Wed Sep  7 20:15:04 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id BE4C284D16;
+	Wed,  7 Sep 2005 20:15:15 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 128A11878DE;
+	Wed,  7 Sep 2005 20:09:27 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 8A1AD1878D6
+	for <cekirdek@liste.uludag.org.tr>;
+	Wed,  7 Sep 2005 20:09:13 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 56F5B908AE; Wed,  7 Sep 2005 20:15:02 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from [192.168.1.5] (unknown [85.97.87.38])
+	by uludag.org.tr (Postfix) with ESMTP id 0057B84D16
+	for <cekirdek@uludag.org.tr>; Wed,  7 Sep 2005 20:15:01 +0300 (EEST)
+From: Eray Ozkural <eray@uludag.org.tr>
+Organization: Pardus
+To: cekirdek@uludag.org.tr
+Date: Wed, 7 Sep 2005 20:15:04 +0300
+User-Agent: KMail/1.7.2
+MIME-Version: 1.0
+Message-Id: <200509072015.04792.eray@uludag.org.tr>
+Cc: 
+Subject: [Cekirdek] [PISI Design] Dandik Fedora'nin component treesi
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============1420878072=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 3643
+X-Length: 4136
+
+--===============1420878072==
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Bu aslinda mandrake'ye gore biraz daha akli basinda ve daha
+onemlisi component mantigina uygun bir liste, bir iki degisiklik
+disinda bu listeyle baslamakta fayda var. Bir de tabii gentoo'nun
+kendi listesi var, onu da gentoo'cular gonderebilir mi listeye lutfen?
+
+Bu dedigim gibi iki seviyeli bir tree, oldukca iyi aslinda.... sadece
+dedigim gibi component/category karisimi biraz onun disinda gayet
+guzel... Bir de baktim "group" demisler, group da iyi bir sozcuk aslinda
+degistirmeye gerek yok degil mi component lafini?
+
+Saygilar,
+
+Desktop
+   X11
+   GNOME
+   KDE
+Applications
+   Editors
+   Engineering and Scientific
+   Graphical Internet
+   Text-based Internet
+   Office/Productivity
+   Sound and Video
+   Authoring and Publishing
+   Graphics
+   Games and Entertainment
+Servers
+   Server Configuration Tools
+   Web Server
+   Mail Server
+   Windows File Server
+   DNS Name Server
+   FTP Server
+   PostgreSQL Database
+   MySQL Database
+   News Server
+   Network Servers
+   Legacy Network Server
+Development
+   Development Tools
+   X Software Development
+   GNOME ""
+   KDE ""
+   Legacy ""
+   Java Development
+   Eclipse
+System
+   Language Support (includes fonts and input methods)
+   Administration Tools
+   System Tools
+   Printing Support
+
+-- 
+Eray Ozkural (exa), Uludag Gelistiricisi
+http://cekirdek.uludag.org.tr/~eray   http://www.kde.org
+http://www.cs.bilkent.edu.tr/~erayo   http://www.malfunct.com
+
+--===============1420878072==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============1420878072==--
+
+From gurer@uludag.org.tr Wed Sep  7 22:04:45 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id 00FBF380AA;
+	Wed,  7 Sep 2005 22:04:23 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 4BEDB1878F8;
+	Wed,  7 Sep 2005 21:58:34 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id CBC0E159028
+	for <cekirdek@liste.uludag.org.tr>;
+	Wed,  7 Sep 2005 21:58:32 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 5EB758654F; Wed,  7 Sep 2005 22:04:21 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from cable73-96.anadolu.kablonet.com.tr (unknown [195.174.73.96])
+	(using SSLv3 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by uludag.org.tr (Postfix) with ESMTP id D92BD380AA
+	for <cekirdek@uludag.org.tr>; Wed,  7 Sep 2005 22:04:20 +0300 (EEST)
+From: =?ISO-8859-1?Q?G=FCrer_=D6zen?= <gurer@uludag.org.tr>
+To: cekirdek@uludag.org.tr
+In-Reply-To: <200509072015.04792.eray@uludag.org.tr>
+References: <200509072015.04792.eray@uludag.org.tr>
+Organization: TUBITAK - UEKAE
+Date: Wed, 07 Sep 2005 22:04:45 +0300
+Message-Id: <1126119885.10981.13.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.2.3 
+Cc: 
+Subject: [Cekirdek] component hadisesi
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============1294830247=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 3648
+X-Length: 4903
+
+--===============1294830247==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Kanalda meren, exa, çağlar, ben biraz fikir teatisinde bulunduk. Teati
+dedim de çay çekti canım. Özetlen:
+
+Component bir görev için bir araya gelmiş ve görevin ayrı parçalarını
+yapan paketler dedik. Kullanım amacı kullanıcının bir alt sistemi (kde,
+tex) bir hamlede kurabilmesini sağlamak, gerektiğinde dependency olarak
+kullanılmak.
+
+Aynı işi yapan farklı programların bir grubu (library, editor, archiver,
+vs) kesinlikle component olmuyor.
+
+Temel olarak iki tipi var:
+
+KDE (kicker, kwm, kdm, kopete, vs)
+burda aynı koddan türemiş ve bize masaüstü sağlayan paketlerin bir
+componenti var.
+
+Base (kernel, grub, libc, bash, vs)
+burda ayrı kodlardan gelen ve bize açılıp çalışabilen bir sistem
+sağlayan paketlerin bir componenti var.
+
+Aynı paket birden fazla componente dahil olmuyor, bu component değil
+bağımlılık ilişkisi. Örnek:
+libxml2 is a part of Gnome
+kopete (a partof KDE) depends on libxml2    (bunu uydurdum, kopete
+libxml2 kullanmıyor olabilir)
+
+Yani componenti *asıl* olarak kod ilişkisi belirliyor, ama örneğin base
+paketinde direk kod ilişkisi yoksa da, birbirleriyle çok içiçe iş yapan
+programları bir component altında grupladık. İkincil kriter birlikte
+çalışma.
+
+Karma bi örnek:
+Tex componenti içinde aynı koddan gelen kpathsea, tetex,vs paketleri var
+diyelim, ama farklı kodu olan hevea da buraya girebilir, çünkü html
+generate edebilen bir tex sistemi için gerekli.
+
+Hiçbir componente ait olmayan, sadece dependency ve category ilişkileri
+olan paketler olabilir. Bunlar mesela other diye bi dizinde
+(componentler aynı zamanda paket deposundaki dizinler, bu şart değil ama
+kolaylık) tutulur.
+
+Componentleri hiyerarşiye koymak kötü bi fikir değil, fedoranın ana
+grupları bu konuda fena değil.
+
+Kafa karışıklığı kalmadı sanırım. Kategorileri konuşmadık daha :)
+
+Bu vesileyle yavaş yavaş pisi depomuzu a/ b/ c/ lerden kurtarıp
+component bazlı dizinlere geçirmeye başlayalım dedik.
+
+
+
+--===============1294830247==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============1294830247==--
+

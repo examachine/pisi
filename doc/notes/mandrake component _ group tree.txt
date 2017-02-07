@@ -1,0 +1,879 @@
+From eray@uludag.org.tr Thu Jul 21 15:54:55 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id 351D885A97;
+	Thu, 21 Jul 2005 15:55:08 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 0742810A659;
+	Thu, 21 Jul 2005 15:52:59 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id BABCC10A654
+	for <cekirdek@liste.uludag.org.tr>;
+	Thu, 21 Jul 2005 15:52:56 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 91D0C86099; Thu, 21 Jul 2005 15:55:05 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from [192.168.1.5] (unknown [85.99.19.56])
+	by uludag.org.tr (Postfix) with ESMTP id 0143385A97
+	for <cekirdek@uludag.org.tr>; Thu, 21 Jul 2005 15:55:04 +0300 (EEST)
+From: Eray Ozkural <eray@uludag.org.tr>
+Organization: Pardus
+To: cekirdek@uludag.org.tr
+Date: Thu, 21 Jul 2005 15:54:55 +0300
+User-Agent: KMail/1.7.2
+MIME-Version: 1.0
+Message-Id: <200507211554.55602.eray@uludag.org.tr>
+Cc: 
+Subject: [Cekirdek] [PISI design] mandrake component / group tree
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============2130999829=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 1651
+X-Length: 4961
+
+--===============2130999829==
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Mandrake'de "group" diye geciyor terim. Belki daha iyidir component'dan. Bu 
+component lafi akil mi karistiriyor diye killaniyorum hala.
+
+Bu arada, mandrake'nin bu olayini tam begenmedim. Tamam System'in alti
+bizim dusundugumuz gibi, ama gerisi biraz daha category mantiginda, 
+debian'inki gibi yapilmis. Aslinda Archiving, Books, Cluster, Sciences, 
+Development, Networking fena degil ama bizim daha anlamli birseyler yapmamiz 
+gerekebilir, bu vizyonunuzu daraltmasin. Ornegin bizde OpenOffice bir 
+component olacak. Ya bizim componentlari en iyi python module'leri gibi 
+dusunun, "alt" notasyonu da bunu gostermek icin '.' olsun.
+
+apps.office partof apps
+apps.office.openoffice partof apps.office
+
+openoffice-libs partof apps.office.openoffice
+openoffice-bin partof apps.office.openoffice
+
+ornegin
+
+buradaki tabii ki onemli sey component hiyerarsisinin *birlikte install 
+edilen* adamlara ihtimam etmesi. Ornegin asagida System.Base aynen boyle, bu 
+da guzel birsey!
+
+Altlarindaki paketleri yazmiyorum.
+
+Mandrake Group Tree
+--------------------------------
+
+Accessibility
+Archiving
+   Backup
+   Cd burning
+   Compression
+   Other
+Books
+   Computer books
+   Howtos
+   Literature
+   Other
+Cluster
+   Message Passing
+   Queueing Services
+Communications
+Configuration
+Databases
+Development
+   C
+   C++
+   Databases
+   Debug
+   Gnome and GTK+
+   Java
+   KDE and Qt
+   Kernel
+   Libraries
+   Other
+   Perl
+   Python
+Documentation
+Editors
+Education
+Emulators
+File Tools
+Games
+   Adventure
+   Arcade
+   Boards
+   Cards
+   Other
+   Puzzles
+   Sports
+   Strategy
+Graphical desktop
+   Enlightenment
+   FVWM based
+   GNOME
+   Icewm
+   KDE
+   Other
+   Sawfish
+   WindowMakes
+   Xfce
+Graphics
+Monitoring
+Networking
+  Chat
+   File transfer
+   Instant messaging
+   Instant Messaging
+   IRC
+   Mail
+   News
+   Other
+   Remote access
+   WWW
+Office
+Publishing
+Sciences
+  Astronomy
+  Biology
+  Chemistry
+  Computer science
+  Geosciences
+  Mathematics
+  Other
+  Physics
+System
+  Base
+  Configuration
+  Cryptography
+  Deployment
+  Fonts
+  Internationalization
+  Kernel and hardware
+  Libraries
+  Servers
+  X11
+  XFree86
+Shells
+Sounds
+System
+Terminals
+Text tools
+Toys
+Video
+
+-- 
+Eray
+
+--===============2130999829==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============2130999829==--
+
+From serdar@uludag.org.tr Thu Jul 21 16:10:37 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id 6010F85F66;
+	Thu, 21 Jul 2005 16:12:48 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 7E52910A661;
+	Thu, 21 Jul 2005 16:10:39 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 2FAA4950E8
+	for <cekirdek@liste.uludag.org.tr>;
+	Thu, 21 Jul 2005 16:10:37 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 5ECC486095; Thu, 21 Jul 2005 16:12:46 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from webmail.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id 5801F86094
+	for <cekirdek@uludag.org.tr>; Thu, 21 Jul 2005 16:12:46 +0300 (EEST)
+Received: from 193.140.74.2 (SquirrelMail authenticated user serdar)
+	by webmail.uludag.org.tr with HTTP;
+	Thu, 21 Jul 2005 16:10:37 +0300 (EEST)
+Message-ID: <51672.193.140.74.2.1121951437.squirrel@webmail.uludag.org.tr>
+In-Reply-To: <200507211554.55602.eray@uludag.org.tr>
+References: <200507211554.55602.eray@uludag.org.tr>
+Date: Thu, 21 Jul 2005 16:10:37 +0300 (EEST)
+Subject: Re: [Cekirdek] [PISI design] mandrake component / group tree
+From: serdar@uludag.org.tr
+To: cekirdek@uludag.org.tr
+User-Agent: SquirrelMail/1.4.4
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+Importance: Normal
+Cc: 
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============1295726599=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 1655
+X-Length: 7560
+
+--===============1295726599==
+Content-Type: text/plain;charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Selamlar..
+
+Benim görüşüm, kullanıcının karşısına ilk anda bu kadar çok
+kategori çıkarsa, çabucak refüze olacağıdır. Kapsamları daraltıp,
+işi 2 kademe yerine 3-4 kademeye yaymak daha kullanışlı olur
+sanıyorum.
+
+İyi bir örnek değil ama, freshmeat.net'te ki kategorilere bir bakabiliriz.
+
+# Adaptive Technologies  (51 projects)
+# Artistic Software (165 projects)
+# Communications (5684 projects)
+# Database (2022 projects)
+# Desktop Environment (2373 projects)
+# Documentation (172 projects)
+# Education (896 projects)
+# freshmeat.net (28 projects)
+# Games/Entertainment (2720 projects)
+# Home Automation (80 projects)
+# Information Management (1259 projects)
+# Internet (10220 projects)
+# Multimedia (6251 projects)
+# Office/Business (2066 projects)
+# Other/Nonlisted Topic (261 projects)
+# Printing (227 projects)
+# Religion (50 projects)
+# Scientific/Engineering (2705 projects)
+# Security (1591 projects)
+# Software Development (10758 projects)
+# System (10314 projects)
+# Terminals (321 projects)
+# Text Editors (647 projects)
+# Text Processing (2416 projects)
+# Utilities (3056 projects)
+
+Bu listeden çıkarılabilecek bir sürü şey olabilir. Hatta minor
+şeyler birleştirilip bir alt seviyede detaylandırılabilir. Freshmeat
+bunları upuzun uzatıyor, böylece aradığını bulmak daha kolay
+oluyor.
+
+Yukarıdaki liste çok uygun değil. Örneğin, Text Editors ile Office
+ayrımı çoğu için anlam ifade etmez. Database ile
+development/business'in ayrık durması da anlamsız bence, Databases
+development ve belki business altında listlenebilir.
+
+Liste ne kadar uzun olursa, o kadar bıkkınlık verici olacaktır
+sanıyorum. Bu yüzden de laf gelimi, her kademede en fazla 10 girdi
+olacak şekilde daha derin listeler hazırlanmasının faydalı
+olacağını düşünüyorum..
+
+Saygı ve sevgiler..
+
+> Mandrake'de "group" diye geciyor terim. Belki daha iyidir component'dan.
+> Bu
+> component lafi akil mi karistiriyor diye killaniyorum hala.
+>
+> Bu arada, mandrake'nin bu olayini tam begenmedim. Tamam System'in alti
+> bizim dusundugumuz gibi, ama gerisi biraz daha category mantiginda,
+> debian'inki gibi yapilmis. Aslinda Archiving, Books, Cluster, Sciences,
+> Development, Networking fena degil ama bizim daha anlamli birseyler
+> yapmamiz
+> gerekebilir, bu vizyonunuzu daraltmasin. Ornegin bizde OpenOffice bir
+> component olacak. Ya bizim componentlari en iyi python module'leri gibi
+> dusunun, "alt" notasyonu da bunu gostermek icin '.' olsun.
+>
+> apps.office partof apps
+> apps.office.openoffice partof apps.office
+>
+> openoffice-libs partof apps.office.openoffice
+> openoffice-bin partof apps.office.openoffice
+>
+> ornegin
+>
+> buradaki tabii ki onemli sey component hiyerarsisinin *birlikte install
+> edilen* adamlara ihtimam etmesi. Ornegin asagida System.Base aynen boyle,
+> bu
+> da guzel birsey!
+>
+> Altlarindaki paketleri yazmiyorum.
+>
+> Mandrake Group Tree
+> --------------------------------
+>
+> Accessibility
+> Archiving
+>    Backup
+>    Cd burning
+>    Compression
+>    Other
+> Books
+>    Computer books
+>    Howtos
+>    Literature
+>    Other
+> Cluster
+>    Message Passing
+>    Queueing Services
+> Communications
+> Configuration
+> Databases
+> Development
+>    C
+>    C++
+>    Databases
+>    Debug
+>    Gnome and GTK+
+>    Java
+>    KDE and Qt
+>    Kernel
+>    Libraries
+>    Other
+>    Perl
+>    Python
+> Documentation
+> Editors
+> Education
+> Emulators
+> File Tools
+> Games
+>    Adventure
+>    Arcade
+>    Boards
+>    Cards
+>    Other
+>    Puzzles
+>    Sports
+>    Strategy
+> Graphical desktop
+>    Enlightenment
+>    FVWM based
+>    GNOME
+>    Icewm
+>    KDE
+>    Other
+>    Sawfish
+>    WindowMakes
+>    Xfce
+> Graphics
+> Monitoring
+> Networking
+>   Chat
+>    File transfer
+>    Instant messaging
+>    Instant Messaging
+>    IRC
+>    Mail
+>    News
+>    Other
+>    Remote access
+>    WWW
+> Office
+> Publishing
+> Sciences
+>   Astronomy
+>   Biology
+>   Chemistry
+>   Computer science
+>   Geosciences
+>   Mathematics
+>   Other
+>   Physics
+> System
+>   Base
+>   Configuration
+>   Cryptography
+>   Deployment
+>   Fonts
+>   Internationalization
+>   Kernel and hardware
+>   Libraries
+>   Servers
+>   X11
+>   XFree86
+> Shells
+> Sounds
+> System
+> Terminals
+> Text tools
+> Toys
+> Video
+>
+> --
+> Eray
+> _______________________________________________
+> Cekirdek mailing list
+> Cekirdek@uludag.org.tr
+> http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+>
+
+
+
+--===============1295726599==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============1295726599==--
+
+From eray@uludag.org.tr Wed Jul 27 13:02:17 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id AABE08584B;
+	Wed, 27 Jul 2005 13:02:30 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id EAF71E558D;
+	Wed, 27 Jul 2005 12:59:53 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id CF155E558D
+	for <cekirdek@liste.uludag.org.tr>;
+	Wed, 27 Jul 2005 12:59:52 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 0B4998584E; Wed, 27 Jul 2005 13:02:29 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from [192.168.1.5] (unknown [85.99.19.56])
+	by uludag.org.tr (Postfix) with ESMTP id 719658584B
+	for <cekirdek@uludag.org.tr>; Wed, 27 Jul 2005 13:02:28 +0300 (EEST)
+From: Eray Ozkural <eray@uludag.org.tr>
+Organization: Pardus
+To: cekirdek@uludag.org.tr
+Subject: Re: [Cekirdek] [PISI design] mandrake component / group tree
+Date: Wed, 27 Jul 2005 13:02:17 +0300
+User-Agent: KMail/1.7.2
+References: <200507211554.55602.eray@uludag.org.tr>
+In-Reply-To: <200507211554.55602.eray@uludag.org.tr>
+MIME-Version: 1.0
+Message-Id: <200507271302.17641.eray@uludag.org.tr>
+Cc: 
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============2058226043=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 1835
+X-Length: 5701
+
+--===============2058226043==
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Buna bakip dusundunuz mu? Bakiniz, mandrake'nin daha cok kategorik
+bir ayrim, cok component mantigina uymuyor. Fedora daha uygun aslinda ama o da 
+cok basit yararli olmak icin.
+
+On Thursday 21 July 2005 03:54 pm, Eray Ozkural wrote:
+> Mandrake'de "group" diye geciyor terim. Belki daha iyidir component'dan. Bu
+> component lafi akil mi karistiriyor diye killaniyorum hala.
+>
+> Bu arada, mandrake'nin bu olayini tam begenmedim. Tamam System'in alti
+> bizim dusundugumuz gibi, ama gerisi biraz daha category mantiginda,
+> debian'inki gibi yapilmis. Aslinda Archiving, Books, Cluster, Sciences,
+> Development, Networking fena degil ama bizim daha anlamli birseyler
+> yapmamiz gerekebilir, bu vizyonunuzu daraltmasin. Ornegin bizde OpenOffice
+> bir component olacak. Ya bizim componentlari en iyi python module'leri gibi
+> dusunun, "alt" notasyonu da bunu gostermek icin '.' olsun.
+>
+> apps.office partof apps
+> apps.office.openoffice partof apps.office
+>
+> openoffice-libs partof apps.office.openoffice
+> openoffice-bin partof apps.office.openoffice
+>
+> ornegin
+>
+> buradaki tabii ki onemli sey component hiyerarsisinin *birlikte install
+> edilen* adamlara ihtimam etmesi. Ornegin asagida System.Base aynen boyle,
+> bu da guzel birsey!
+>
+> Altlarindaki paketleri yazmiyorum.
+>
+> Mandrake Group Tree
+> --------------------------------
+>
+> Accessibility
+> Archiving
+>    Backup
+>    Cd burning
+>    Compression
+>    Other
+> Books
+>    Computer books
+>    Howtos
+>    Literature
+>    Other
+> Cluster
+>    Message Passing
+>    Queueing Services
+> Communications
+> Configuration
+> Databases
+> Development
+>    C
+>    C++
+>    Databases
+>    Debug
+>    Gnome and GTK+
+>    Java
+>    KDE and Qt
+>    Kernel
+>    Libraries
+>    Other
+>    Perl
+>    Python
+> Documentation
+> Editors
+> Education
+> Emulators
+> File Tools
+> Games
+>    Adventure
+>    Arcade
+>    Boards
+>    Cards
+>    Other
+>    Puzzles
+>    Sports
+>    Strategy
+> Graphical desktop
+>    Enlightenment
+>    FVWM based
+>    GNOME
+>    Icewm
+>    KDE
+>    Other
+>    Sawfish
+>    WindowMakes
+>    Xfce
+> Graphics
+> Monitoring
+> Networking
+>   Chat
+>    File transfer
+>    Instant messaging
+>    Instant Messaging
+>    IRC
+>    Mail
+>    News
+>    Other
+>    Remote access
+>    WWW
+> Office
+> Publishing
+> Sciences
+>   Astronomy
+>   Biology
+>   Chemistry
+>   Computer science
+>   Geosciences
+>   Mathematics
+>   Other
+>   Physics
+> System
+>   Base
+>   Configuration
+>   Cryptography
+>   Deployment
+>   Fonts
+>   Internationalization
+>   Kernel and hardware
+>   Libraries
+>   Servers
+>   X11
+>   XFree86
+> Shells
+> Sounds
+> System
+> Terminals
+> Text tools
+> Toys
+> Video
+
+-- 
+Eray Ozkural (exa), Uludag Gelistiricisi
+http://cekirdek.uludag.org.tr/~eray   http://www.kde.org
+http://www.cs.bilkent.edu.tr/~erayo   http://www.malfunct.com
+
+--===============2058226043==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============2058226043==--
+
+From eray@uludag.org.tr Wed Sep  7 20:05:53 2005
+Return-Path: <cekirdek-bounces@liste.uludag.org.tr>
+X-Original-To: eray@uludag.org.tr
+Delivered-To: eray@uludag.org.tr
+Received: from liste.uludag.org.tr (pisi.uludag.org.tr [193.140.100.210])
+	by uludag.org.tr (Postfix) with ESMTP id 8D2A084F4B;
+	Wed,  7 Sep 2005 20:06:04 +0300 (EEST)
+Received: from pisi.uludag.org.tr (localhost [127.0.0.1])
+	by liste.uludag.org.tr (Postfix) with ESMTP id 086A718789A;
+	Wed,  7 Sep 2005 20:00:16 +0300 (EEST)
+X-Original-To: cekirdek@liste.uludag.org.tr
+Delivered-To: cekirdek@liste.uludag.org.tr
+Received: from uludag.org.tr (comar.uludag.org.tr [193.140.100.220])
+	by liste.uludag.org.tr (Postfix) with ESMTP id F039818789A
+	for <cekirdek@liste.uludag.org.tr>;
+	Wed,  7 Sep 2005 20:00:02 +0300 (EEST)
+Received: by uludag.org.tr (Postfix)
+	id 401CE8F9B9; Wed,  7 Sep 2005 20:05:51 +0300 (EEST)
+Delivered-To: cekirdek@uludag.org.tr
+Received: from [192.168.1.5] (unknown [85.97.87.38])
+	by uludag.org.tr (Postfix) with ESMTP id A4EC084F4B
+	for <cekirdek@uludag.org.tr>; Wed,  7 Sep 2005 20:05:50 +0300 (EEST)
+From: Eray Ozkural <eray@uludag.org.tr>
+Organization: Pardus
+To: cekirdek@uludag.org.tr
+Subject: Re: [Cekirdek] [PISI design] mandrake component / group tree
+Date: Wed, 7 Sep 2005 20:05:53 +0300
+User-Agent: KMail/1.7.2
+References: <200507211554.55602.eray@uludag.org.tr>
+In-Reply-To: <200507211554.55602.eray@uludag.org.tr>
+MIME-Version: 1.0
+Message-Id: <200509072005.53482.eray@uludag.org.tr>
+Cc: 
+X-BeenThere: cekirdek@liste.uludag.org.tr
+X-Mailman-Version: 2.1.5
+Precedence: list
+Reply-To: cekirdek@uludag.org.tr
+List-Id: cekirdek.liste.uludag.org.tr
+List-Unsubscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=unsubscribe>
+List-Archive: <http://liste.uludag.org.tr/mailman/private/cekirdek>
+List-Post: <mailto:cekirdek@liste.uludag.org.tr>
+List-Help: <mailto:cekirdek-request@liste.uludag.org.tr?subject=help>
+List-Subscribe: <http://liste.uludag.org.tr/mailman/listinfo/cekirdek>,
+	<mailto:cekirdek-request@liste.uludag.org.tr?subject=subscribe>
+Content-Type: multipart/mixed;
+  boundary="===============1083705676=="
+Sender: cekirdek-bounces@liste.uludag.org.tr
+Errors-To: cekirdek-bounces@liste.uludag.org.tr
+X-UID: 3642
+X-Length: 5765
+
+--===============1083705676==
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+bunu gormus muydunuz?
+
+genelde iki seviye ana component'lari belirtmek icin yeterli
+mandrake'nin kafasinin karismasi icin kategorilerle componentlari
+karismasi yeterli olmus, yani asagidaki bircok sey aslinda component
+*degil* kategori.
+
+On Thursday 21 July 2005 03:54 pm, Eray Ozkural wrote:
+> Mandrake'de "group" diye geciyor terim. Belki daha iyidir component'dan. Bu
+> component lafi akil mi karistiriyor diye killaniyorum hala.
+>
+> Bu arada, mandrake'nin bu olayini tam begenmedim. Tamam System'in alti
+> bizim dusundugumuz gibi, ama gerisi biraz daha category mantiginda,
+> debian'inki gibi yapilmis. Aslinda Archiving, Books, Cluster, Sciences,
+> Development, Networking fena degil ama bizim daha anlamli birseyler
+> yapmamiz gerekebilir, bu vizyonunuzu daraltmasin. Ornegin bizde OpenOffice
+> bir component olacak. Ya bizim componentlari en iyi python module'leri gibi
+> dusunun, "alt" notasyonu da bunu gostermek icin '.' olsun.
+>
+> apps.office partof apps
+> apps.office.openoffice partof apps.office
+>
+> openoffice-libs partof apps.office.openoffice
+> openoffice-bin partof apps.office.openoffice
+>
+> ornegin
+>
+> buradaki tabii ki onemli sey component hiyerarsisinin *birlikte install
+> edilen* adamlara ihtimam etmesi. Ornegin asagida System.Base aynen boyle,
+> bu da guzel birsey!
+>
+> Altlarindaki paketleri yazmiyorum.
+>
+> Mandrake Group Tree
+> --------------------------------
+>
+> Accessibility
+> Archiving
+>    Backup
+>    Cd burning
+>    Compression
+>    Other
+> Books
+>    Computer books
+>    Howtos
+>    Literature
+>    Other
+> Cluster
+>    Message Passing
+>    Queueing Services
+> Communications
+> Configuration
+> Databases
+> Development
+>    C
+>    C++
+>    Databases
+>    Debug
+>    Gnome and GTK+
+>    Java
+>    KDE and Qt
+>    Kernel
+>    Libraries
+>    Other
+>    Perl
+>    Python
+> Documentation
+> Editors
+> Education
+> Emulators
+> File Tools
+> Games
+>    Adventure
+>    Arcade
+>    Boards
+>    Cards
+>    Other
+>    Puzzles
+>    Sports
+>    Strategy
+> Graphical desktop
+>    Enlightenment
+>    FVWM based
+>    GNOME
+>    Icewm
+>    KDE
+>    Other
+>    Sawfish
+>    WindowMakes
+>    Xfce
+> Graphics
+> Monitoring
+> Networking
+>   Chat
+>    File transfer
+>    Instant messaging
+>    Instant Messaging
+>    IRC
+>    Mail
+>    News
+>    Other
+>    Remote access
+>    WWW
+> Office
+> Publishing
+> Sciences
+>   Astronomy
+>   Biology
+>   Chemistry
+>   Computer science
+>   Geosciences
+>   Mathematics
+>   Other
+>   Physics
+> System
+>   Base
+>   Configuration
+>   Cryptography
+>   Deployment
+>   Fonts
+>   Internationalization
+>   Kernel and hardware
+>   Libraries
+>   Servers
+>   X11
+>   XFree86
+> Shells
+> Sounds
+> System
+> Terminals
+> Text tools
+> Toys
+> Video
+
+-- 
+Eray Ozkural (exa), Uludag Gelistiricisi
+http://cekirdek.uludag.org.tr/~eray   http://www.kde.org
+http://www.cs.bilkent.edu.tr/~erayo   http://www.malfunct.com
+
+--===============1083705676==
+Content-Type: text/plain; charset="iso-8859-9"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+_______________________________________________
+Cekirdek mailing list
+Cekirdek@uludag.org.tr
+http://liste.uludag.org.tr/mailman/listinfo/cekirdek
+
+--===============1083705676==--
+

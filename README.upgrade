@@ -1,0 +1,5 @@
+For upgrading from pisi 1.0 and before
+
+You have to move the packages in /var/lib/pisi under /var/lib/pisi/package and remove /var/db/pisi/ directory.
+
+db version has changed, so a rebuild-db will be unfortunately necessary.

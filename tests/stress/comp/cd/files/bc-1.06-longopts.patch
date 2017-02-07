@@ -1,0 +1,28 @@
+a bug in the argument processing of 'bc' (v1.06) prevents it from properly 
+reading long-format options.
+
+patch by joe bruin
+
+http://bugs.gentoo.org/show_bug.cgi?id=51525
+
+--- bc-1.06.orig/bc/main.c
++++ bc-1.06/bc/main.c
+@@ -63,7 +63,7 @@
+   printf ("usage: %s [options] [file ...]\n%s%s%s%s%s%s%s", progname,
+           "  -h  --help         print this usage and exit\n",
+ 	  "  -i  --interactive  force interactive mode\n",
+-	  "  -l  --mathlib      use the predefine math routnes\n",
++	  "  -l  --mathlib      use the predefined math routines\n",
+ 	  "  -q  --quiet        don't print initial banner\n",
+ 	  "  -s  --standard     non-standard bc constructs are errors\n",
+ 	  "  -w  --warn         warn about non-standard bc constructs\n",
+@@ -93,6 +93,9 @@
+ 
+       switch (optch)
+ 	{
++	case 0: /* Long option setting a var. */
++	  break;
++
+ 	case 'c':  /* compile only */
+ 	  compile_only = TRUE;
+ 	  break;
