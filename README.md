@@ -17,4 +17,4 @@ Some of its distinctive features:
  - Comprehensive CLI and a user-friendly qt GUI (distributed separately)
  - Extremely simple package construction
 
-Author: *Eray Ozkural*
+*Eray Ozkural, PhD*
