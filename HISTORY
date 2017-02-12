@@ -39,6 +39,15 @@ seamlessly was an important feature of PISI, and again, not really found in any 
 Pardus. Although more than 10 years old, I suspect, PISI remains the most compact, featureful and efficient package manager 
 of all.
 
+The design of PISI was based on a document about an XML format designed by Pardus developers before I joined the team. I saw
+that it is basically the same thing as dpkg, so I made a major revision to the document, and added a whole lot of features
+that I had designed as an addition to dpkg / apt-get, such as the ability to deal with source packages in the right way, the
+unique versioning / revisioning schema of PISI, package / component / is-a models, dependency system, and proposed to write
+the project in python. The most critical design and features belong to me, such as the details of the XML format, autoxml,
+the databases, the graph and dependency algorithms, the commands, the CLI, search API, the first GUI, documents,
+translations, and so forth. I am still amazed at how short the code is for what it does, thank you Guido for python! All
+those cool python features like list comprehensions and metaclasses did something for me, after all.
+
 The development branch's goal is to remove the Pardus dependencies. My vision for PISI was beyond Pardus, I had designed it 
 as a replacement for dpkg. It can easily replace dpkg/apt-get in a debian based system, or gentoo package manager in a 
 gentoo based system, with some due effort, of course. The later releases will likely drop all support for Pardus in 
