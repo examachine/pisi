@@ -1,0 +1,35 @@
+xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom
+xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom
+** Running all tests
+
+* Running tests in actionsapitests.py
+
+* Running tests in archivetests.py
+
+* Running tests in autoxmltests.py
+
+* Running tests in buildtests.py
+
+* Running tests in configfiletests.py
+
+* Running tests in conflicttests.py
+
+* Running tests in constantstests.py
+
+* Running tests in dependencytests.py
+
+* Running tests in fetchertests.py
+
+* Running tests in filestests.py
+
+* Running tests in filetests.py
+
+* Running tests in graphtests.py
+
+* Running tests in installdbtests.py
+
+* Running tests in metadatatests.py
+
+* Running tests in ootests.py
+
+* Running tests in packagedbtests.py

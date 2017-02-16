@@ -6,7 +6,8 @@ There are python unit tests and shell scripts in this directory.
 
 Run the python tests with
 
-$ tests/run.py
+$ rm -rf tmp/
+$ tests/run.py | tee tests/tests.log 
 
 Shell scripts use the CLIs to perform package operations.
 
