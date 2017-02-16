@@ -12,14 +12,15 @@
 # Authors:  Eray Ozkural <eray at pardus.org.tr>
 #           Baris Metin <baris at pardus.org.tr>
 
-"""Top level PISI interfaces. a facade to the entire PISI system"""
+"""Top level PISI interfaces. A facade to the entire PISI system"""
 
 import os
 import sys
 import logging
 import logging.handlers
 from os.path import exists
-import bsddb3.db as db
+#import bsddb3.db as db
+import bsddb3
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
