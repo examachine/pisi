@@ -1,4 +1,5 @@
-Author: Eray Ozkural, all tasks marked were accomplished by Eray if not indicated otherwise
+Author: Eray Ozkural, 
+Tasks marked done were accomplished by Eray if not indicated otherwise
 
 PiSi TODO List
 ==============
@@ -185,6 +186,9 @@ Legend:
 
  * high priority
 
+ - refactoring
+   sort of match the refactoring of pisi-2.x series and improve it
+ - accelerate search
  - package signing
    - a flag to sign package after building
    - code to check if the package has a valid signature
