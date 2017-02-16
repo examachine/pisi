@@ -1,71 +1,115 @@
 HISTORY
 =======
 
-PISI was the Pardus Linux package manager, I wrote most of it while working at TUBITAK/UEKAE during 2005-2006 as a
-researcher, and it took me about half a year to write it, and another half year to revise it (80-90% of commit
-numbers/size), save for build commands, and the actionsapi library, and I personally made the original 1.0 release at
-Pardus, fixing 300+ bugs and wishlist issues. Then, my clueless co-workers brought in a non-verbal robotic person to the
-team who did not contribute anything new to the code except for a bugfix somewhere, but only stripped down some of the new
-features, mistaking this destructive act for "maintenance" (he is only a contributor, not an author). The latter releases do
-not have anything new added to the code, they've only stripped down some features and commands like the search API. They've
-also tried to remove my name from the AUTHORS list and from individual sources, in an attempt to hide my contributions,
-pretending that PISI was written collaboratively. It was not. I wrote most of it, I was the only seasoned programmer who
-worked on PISI, amazingly, it turns out that it does take some skill to design an efficient system tool; I was also one of 
-the few ones who weren't overtly lazy and did not spend the entire day writing blogs about irrelevant stuff and drinking tea 
-and tobacco like a state officer. The Turkish Linux Users Group award for PISI was also given to me personally, not the 
-team. I left the award trophy as a gesture of kindness to promote team unity. Since I am not pleased with the later Pardus 
-release branch that I find to be desecrating my poetic code, I am reviving the original development branch. I've uploaded 
-the last development branch I found on my local SVN copies, out of 1.1_beta12. The next release will be 1.1. I declare the 
-1.0 release and branch to be obsolete. May its bits rot in peace.
+PISI was the Pardus Linux package manager, I wrote most of it while
+working at TUBITAK/UEKAE during 2005-2006 as a researcher, and it took
+me about half a year to write it, and another half year to revise it
+(80-90% of commit numbers/size), save for build commands, and the
+actionsapi library, and I personally made the original 1.0 release at
+Pardus, fixing 300+ bugs and wishlist issues. Then, my clueless
+co-workers brought in a non-verbal robotic person to the team who did
+not contribute anything new to the code except for a bugfix somewhere,
+but only stripped down some of the new features, mistaking this
+destructive act for "maintenance" (he is only a contributor, not an
+author). The latter releases do not have anything new added to the
+code, they've only stripped down some features and commands like the
+search API. They've also tried to remove my name from the AUTHORS list
+and from individual sources, in an attempt to hide my contributions,
+pretending that PISI was written collaboratively. It was not. I wrote
+most of it, I was the only seasoned programmer who worked on PISI,
+amazingly, it turns out that it does take some skill to design an
+efficient system tool; I was also one of the few ones who weren't
+overtly lazy and did not spend the entire day writing blogs about
+irrelevant stuff and drinking tea and tobacco like a state
+officer. The Turkish Linux Users Group award for PISI was also given
+to me personally, not the team. I left the award trophy as a gesture
+of kindness to promote team unity. Since I am not pleased with the
+later Pardus release branch that I find to be desecrating my poetic
+code, I am reviving the original development branch. I've uploaded the
+last development branch I found on my local SVN copies, out of
+1.1_beta12. The next release will be 1.1. I declare the 1.0 release
+and branch to be obsolete. May its bits rot in peace.
 
-There are two very interesting generic python novelties I developed for PISI. The use of metaclasses was essential to both. 
-The first one is something I call autoxml, and it uses python metaclasses to work with XML based configuration using 
-Berkeley DB, but the DB  is completely abstracted. It's basically a neat nosql python XML/DB framework. The other 
-interesting thing is the command framework using metaclasses, which also worked beautifully. The algorithms are also pretty 
-compact. I designed and implemented some graph algorithms to deal with dependency resolution, and so forth. These algorithms 
-make a pretty useful library, you can write a lot of effective package tools around the PISI framework, as we proved in the 
-server scripts of Pardus.
+There are two very interesting generic python novelties I developed
+for PISI. The use of metaclasses was essential to both.  The first one
+is something I call autoxml, and it uses python metaclasses to work
+with XML based configuration using Berkeley DB, but the DB is
+completely abstracted. It's basically a neat nosql python XML/DB
+framework. The other interesting thing is the command framework using
+metaclasses, which also worked beautifully. The algorithms are also
+pretty compact. I designed and implemented some graph algorithms to
+deal with dependency resolution, and so forth. These algorithms make a
+pretty useful library, you can write a lot of effective package tools
+around the PISI framework, as we proved in the server scripts of
+Pardus.
 
-PISI also has some features not found in any other package manager that I know of, such as the ability to work with 
-hierarchical components and metadata information in a clean, non-kludgey way, and the smooth merging of binary and source 
-package approaches of debian and gentoo. PISI is sort of like gentoo package tools ported to debian and debian package tools 
-ported to gentoo, and rewritten in python in a better way. Admittedly, there are some missing features, the handling of 
-virtual packages leaves something to be desired, I really should rewrite that part, it's the same old problem with debian 
-package resolution, but unlike debian, both dpkg and apt-get layers are implemented in a single library, no silly perl 
-scripts and the like. Even making everything pure python scripts was a huge contribution. Caglar's actionsapi was also quite 
-nice, Caglar was very hard working, he developed most of the packages himself. Baris contributed some nice bugfixes and 
-developed most of the build path, which does something a lot like gentoo. Getting both the binary and source packages work 
-seamlessly was an important feature of PISI, and again, not really found in any other package manager the way it is in 
-Pardus. Although more than 10 years old, I suspect, PISI remains the most compact, featureful and efficient package manager 
-of all.
+PISI also has some features not found in any other package manager
+that I know of, such as the ability to work with hierarchical
+components and metadata information in a clean, non-kludgey way, and
+the smooth merging of binary and source package approaches of debian
+and gentoo. PISI is sort of like gentoo package tools ported to debian
+and debian package tools ported to gentoo, and rewritten in python in
+a better way. Admittedly, there are some missing features, the
+handling of virtual packages leaves something to be desired, I really
+should rewrite that part, it's the same old problem with debian
+package resolution, but unlike debian, both dpkg and apt-get layers
+are implemented in a single library, no silly perl scripts and the
+like. Even making everything pure python scripts was a huge
+contribution. Caglar's actionsapi was also quite nice, Caglar was very
+hard working, he developed most of the packages himself. Baris
+contributed some nice bugfixes and developed most of the build path,
+which does something a lot like gentoo. Getting both the binary and
+source packages work seamlessly was an important feature of PISI, and
+again, not really found in any other package manager the way it is in
+Pardus. Although more than 10 years old, I suspect, PISI remains the
+most compact, featureful and efficient package manager of all.
 
-The design of PISI was based on a document about an XML format designed by Pardus developers before I joined the team. I saw
-that it is basically the same thing as dpkg, so I made a major revision to the document, and added a whole lot of features
-that I had designed as an addition to dpkg / apt-get, such as the ability to deal with source packages in the right way, the
-unique versioning / revisioning schema of PISI, package / component / is-a models, dependency system, and proposed to write
-the project in python. The most critical design and features belong to me, such as the details of the XML format, autoxml,
-the databases, the graph and dependency algorithms, the commands, the CLI, search API, the first GUI, documents,
-translations, and so forth. I am still amazed at how short the code is for what it does, thank you Guido for python! All
-those cool python features like list comprehensions and metaclasses did something for me, after all.
+The design of PISI was based on a document about an XML format
+designed by Pardus developers before I joined the team. I saw that it
+is basically the same thing as dpkg, so I made a major revision to the
+document, and added a whole lot of features that I had designed as an
+addition to dpkg / apt-get, such as the ability to deal with source
+packages in the right way, the unique versioning / revisioning schema
+of PISI, package / component / is-a models, dependency system, and
+proposed to write the project in python. The most critical design and
+features belong to me, such as the details of the XML format, autoxml,
+the databases, the graph and dependency algorithms, the commands, the
+CLI, search API, the first GUI, documents, translations, and so
+forth. I am still amazed at how short the code is for what it does,
+thank you Guido for python! All those cool python features like list
+comprehensions and metaclasses did something for me, after all.
 
-The development branch's goal is to remove the Pardus dependencies. My vision for PISI was beyond Pardus, I had designed it 
-as a replacement for dpkg. It can easily replace dpkg/apt-get in a debian based system, or gentoo package manager in a 
-gentoo based system, with some due effort, of course. The later releases will likely drop all support for Pardus in 
-recognition of their failure to make a cogent OS distribution. Because of their sheer incompetence, TUBITAK later dropped 
-the PISI based Pardus distribution unwittingly and replaced it with a debian based distribution, when what they really 
-needed was a competent development team that could improve the, IMHO quite satisfactory, system tools. However, the heart of 
-Pardus is still the PISI package manager, and naturally the other system tools such as Gurer's COMAR and Baris's YALI. Those 
-three tools + PISI packages make a Pardus distro. I will not bother trying to rewrite COMAR and YALI, but I have other ideas 
-that will make PISI a portable package manager, which is most of the reason I decided to write it in python. Since Pardus no 
-more exists, there is no more a reason to support COMAR, it seems. COMAR would be a replacement for debconf, but its author 
-didn't appreciate this goal, which means we would need a better COMAR release or a COMAR rewrite for a new Pardus distro in 
-the future. We can probably make a hybrid PISI/debconf system on a debian derivative, too. The problem with debconf is the 
-perl dependency, which is among the worst PL's ever designed, unlike python, which rocks. 😉
+The development branch's goal is to remove the Pardus dependencies. My
+vision for PISI was beyond Pardus, I had designed it as a replacement
+for dpkg. It can easily replace dpkg/apt-get in a debian based system,
+or gentoo package manager in a gentoo based system, with some due
+effort, of course. The later releases will likely drop all support for
+Pardus in recognition of their failure to make a cogent OS
+distribution. Because of their sheer incompetence, TUBITAK later
+dropped the PISI based Pardus distribution unwittingly and replaced it
+with a debian based distribution, when what they really needed was a
+competent development team that could improve the, IMHO quite
+satisfactory, system tools. However, the heart of Pardus is still the
+PISI package manager, and naturally the other system tools such as
+Gurer's COMAR and Baris's YALI. Those three tools + PISI packages make
+a Pardus distro. I will not bother trying to rewrite COMAR and YALI,
+but I have other ideas that will make PISI a portable package manager,
+which is most of the reason I decided to write it in python. Since
+Pardus no more exists, there is no more a reason to support COMAR, it
+seems. COMAR would be a replacement for debconf, but its author didn't
+appreciate this goal, which means we would need a better COMAR release
+or a COMAR rewrite for a new Pardus distro in the future. We can
+probably make a hybrid PISI/debconf system on a debian derivative,
+too. The problem with debconf is the perl dependency, which is among
+the worst PL's ever designed, unlike python, which rocks. 😉
 
-Let me know what you want to call the package manger in English, I'm considering various alternatives. Kitty, and pussy are 
-among the names I'm considering. PISI means Packages Intended Successfully as Intended, but I made that up as an acronym for 
-PISI which is an affectionate word for a cat in Turkish (like pussy), which was a name decided before I even designed the 
-code, comar likewise is a slang for dog in Turkish. I love my PISI, of course. <3
+Let me know what you want to call the package manger in English, I'm
+considering various alternatives. Kitty, and pussy are among the names
+I'm considering. PISI means Packages Intended Successfully as
+Intended, but I made that up as an acronym for PISI which is an
+affectionate word for a cat in Turkish (like pussy), which was a name
+decided before I even designed the code, comar likewise is a slang for
+dog in Turkish. I love my PISI, of course. <3
 
 Happy hacking! :3
 
