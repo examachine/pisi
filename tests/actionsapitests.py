@@ -93,6 +93,7 @@ class ActionsAPITestCase(TestCase):
         copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
         ourguy = 'tests/actionsapitests/%s' % os.readlink('tests/actionsapitests/linktoafile')
         self.assert_(os.path.exists(ourguy))
+        os.remove('tests/actionsapitests/adirectory/linktoafile')
 
         copy('tests/actionsapitests/file', 'tests/actionsapitests/file-copy')
         self.assertEqual(os.path.exists('tests/actionsapitests/file-copy'), True)
