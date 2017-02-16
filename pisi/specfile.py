@@ -32,7 +32,6 @@ import pisi.context as ctx
 from pisi.dependency import Dependency
 import pisi.dependency
 import pisi.component as component
-from pisi.util import Checks
 import pisi.util as util
 
 
