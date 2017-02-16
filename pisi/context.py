@@ -56,7 +56,7 @@ build_leftover = None
 #    """ Register a UI implementation"""
 #    ui = _impl
 
-import bsddb3.db as db
+#import bsddb3.db as db
 
 # copy of DBShelve.txn_proc, the only difference is it doesn't need a shelf object
 #FIXME: remove this redundancy, and move all this stuff to database.py

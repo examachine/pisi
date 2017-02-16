@@ -1,8 +1,8 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 # a simple tool to find the correct build order of source
 # packages in the repository. this one works really fast.
 # just give it the repository directory as an argument
-# author: exa
+# author: Eray Ozkural (exa) <eray.ozkural@gmail.com>
 
 import sys
 import os

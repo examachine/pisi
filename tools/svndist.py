@@ -1,6 +1,6 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 # a script to preare PiSi source tarball from svn
-# author: exa
+# author: Eray Ozkural (exa) <eray.ozkural@gmail.com>
 
 #TODO: arguments for svn snapshot with rev number, or a tag to override default
 

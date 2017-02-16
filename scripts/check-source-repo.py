@@ -1,6 +1,6 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 # a simple tool to list stuff in source repository
-# author: exa
+# author: Eray Ozkural (exa) <eray.ozkural@gmail.com>
 
 import sys
 import os
