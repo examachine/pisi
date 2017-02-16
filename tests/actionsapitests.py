@@ -13,13 +13,14 @@ import zipfile
 import shutil
 import os
 
-import testcase
+#import testcase
+from testcase import *
 
-class ActionsAPITestCase(testcase.TestCase):
+class ActionsAPITestCase(TestCase):
     def setUp(self):
         from pisi.actionsapi.variables import initVariables
 
-        testcase.TestCase.setUp(self)
+        TestCase.setUp(self)
         initVariables()
         #FIXME: test incomplete
         return
