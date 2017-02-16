@@ -9,6 +9,9 @@ Run the python tests with
 $ rm -rf tmp/
 $ tests/run.py 
 
+Run individual tests with giving arguments
+$ tests/run.py actionsapi
+
 Shell scripts use the CLIs to perform package operations.
 
 Most tests were written by Eray Ozkural
