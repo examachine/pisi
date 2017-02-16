@@ -1,3 +1,350 @@
+testFileList (actionsapitests.ActionsAPITestCase) ... [35mDestination directory /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp does not exist. Creating it.
+[0m[35mWriting current database version for dbversion
+[0m[35mWriting current database version for filesdbversion
+[0mok
+testShelltoolsCanAccessDir (actionsapitests.ActionsAPITestCase) ... ok
+testShelltoolsCanAccessFile (actionsapitests.ActionsAPITestCase) ... ok
+testShelltoolsCopy (actionsapitests.ActionsAPITestCase) ... FAIL
+testShelltoolsEcho (actionsapitests.ActionsAPITestCase) ... ok
+testShelltoolsMakedirs (actionsapitests.ActionsAPITestCase) ... ok
+testShelltoolsSystem (actionsapitests.ActionsAPITestCase) ... ok
+
+======================================================================
+FAIL: testShelltoolsCopy (actionsapitests.ActionsAPITestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/actionsapitests.py", line 69, in testShelltoolsCopy
+    self.assertEqual(os.path.islink('tests/actionsapitests/brokenlink-copy'), True)
+AssertionError: False != True
+
+----------------------------------------------------------------------
+Ran 7 tests in 12.039s
+
+FAILED (failures=1)
+testMakeZip (archivetests.ArchiveFileTestCase) ... ERROR
+testUnpackTar (archivetests.ArchiveFileTestCase) ... ERROR
+testUnpackZip (archivetests.ArchiveFileTestCase) ... ERROR
+testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ERROR
+
+======================================================================
+ERROR: testMakeZip (archivetests.ArchiveFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 81, in testMakeZip
+    spec = SpecFile("tests/pccts/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 337, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testUnpackTar (archivetests.ArchiveFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 31, in testUnpackTar
+    spec = SpecFile("tests/popt/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 337, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testUnpackZip (archivetests.ArchiveFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 55, in testUnpackZip
+    spec = SpecFile("tests/pccts/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 337, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testUnpackZipCond (archivetests.ArchiveFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 97, in testUnpackZipCond
+    spec = SpecFile("tests/pccts/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 337, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.661s
+
+FAILED (errors=4)
+testDeclaration (autoxmltests.AutoXmlTestCase) ... ok
+testReadWrite (autoxmltests.AutoXmlTestCase) ... ERROR
+testWriteRead (autoxmltests.AutoXmlTestCase) ... ERROR
+testStr (autoxmltests.LocalTextTestCase) ... ok
+
+======================================================================
+ERROR: testReadWrite (autoxmltests.AutoXmlTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/autoxmltests.py", line 58, in testReadWrite
+    a.read('tests/a.xml')
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testWriteRead (autoxmltests.AutoXmlTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/autoxmltests.py", line 84, in testWriteRead
+    a.write('/tmp/a2.xml')
+  File "./pisi/pxml/autoxml.py", line 452, in write
+    self.encode(self.rootNode(), errs)
+  File "./pisi/pxml/autoxml.py", line 356, in encode
+    encode_member(self, node, errs)
+  File "./pisi/pxml/autoxml.py", line 544, in encode
+    encode_a(node, value, errs)
+  File "./pisi/pxml/autoxml.py", line 812, in encode
+    obj.encode(node, errs)
+  File "./pisi/pxml/autoxml.py", line 101, in encode
+    setNodeAttribute(newnode, 'xml:lang', key)
+NameError: global name 'setNodeAttribute' is not defined
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.007s
+
+FAILED (errors=2)
+testBasicBuild (buildtests.BuildTestCase) ... ERROR
+testBuildNumber (buildtests.BuildTestCase) ... ERROR
+
+======================================================================
+ERROR: testBasicBuild (buildtests.BuildTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 38, in testBasicBuild
+    pb = Builder(pspec)
+  File "./pisi/build.py", line 128, in __init__
+    self.set_spec_file(specuri)
+  File "./pisi/build.py", line 149, in set_spec_file
+    spec.read(specuri, ctx.config.tmp_dir())
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testBuildNumber (buildtests.BuildTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 44, in testBuildNumber
+    self.testBasicBuild()
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 38, in testBasicBuild
+    pb = Builder(pspec)
+  File "./pisi/build.py", line 128, in __init__
+    self.set_spec_file(specuri)
+  File "./pisi/build.py", line 149, in set_spec_file
+    spec.read(specuri, ctx.config.tmp_dir())
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.869s
+
+FAILED (errors=2)
+testAccessMethods (configfiletests.ConfigFileTestCase) ... ok
+testFlagsExists (configfiletests.ConfigFileTestCase) ... ok
+testSections (configfiletests.ConfigFileTestCase) ... ok
+testValues (configfiletests.ConfigFileTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+testConflictWithEachOther (conflicttests.ConflictTestCase) ... ok
+testConflictWithEachOtherAndInstalled (conflicttests.ConflictTestCase) ... ok
+testConflictWithInstalled (conflicttests.ConflictTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.420s
+
+OK
+testConstValues (constantstests.ContextTestCase) ... ok
+testConstness (constantstests.ContextTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+testReleaseFrom (dependencytests.DependencyTestCase) ... ok
+testReleaseIs (dependencytests.DependencyTestCase) ... ok
+testReleaseTo (dependencytests.DependencyTestCase) ... ok
+testVersionFrom (dependencytests.DependencyTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+testFetch (fetchertests.FetcherTestCase) ... ERROR
+testResume (fetchertests.FetcherTestCase) ... ERROR
+
+======================================================================
+ERROR: testFetch (fetchertests.FetcherTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 29, in setUp
+    self.spec.read("tests/helloworld/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testResume (fetchertests.FetcherTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 29, in setUp
+    self.spec.read("tests/helloworld/pspec.xml")
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (errors=2)
+testFileInfo (filestests.FilesTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+testLocalFile (filetests.FileTestCase) ... ok
+testRemoteRead (filetests.FileTestCase) ... ERROR
+
+======================================================================
+ERROR: testRemoteRead (filetests.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/filetests.py", line 30, in testRemoteRead
+    f = File("http://uludag.org.tr/haberler/rootfs0.2.html", File.read)
+  File "./pisi/file.py", line 160, in __init__
+    localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
+  File "./pisi/file.py", line 119, in download
+    fetch_url(uri, transfer_dir, ctx.ui.Progress)
+  File "./pisi/fetcher.py", line 55, in fetch_url
+    fetch.fetch()
+  File "./pisi/fetcher.py", line 100, in fetch
+    self.fetchRemoteFile(partial_file)
+  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
+    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
+  File "./pisi/fetcher.py", line 253, in err
+    raise FetchError(error)
+FetchError: Cannot fetch http://uludag.org.tr/haberler/rootfs0.2.html; nodename nor servname provided, or not known
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.149s
+
+FAILED (errors=1)
+testCycle (graphtests.GraphTestCase) ... ok
+testTopologicalSort (graphtests.GraphTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+testInstall (installdbtests.InstallDBTestCase) ... ok
+testRemoveDummy (installdbtests.InstallDBTestCase) ... ok
+testRemovePurge (installdbtests.InstallDBTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.986s
+
+OK
+testRead (metadatatests.MetaDataTestCase) ... ERROR
+testVerify (metadatatests.MetaDataTestCase) ... ERROR
+testWrite (metadatatests.MetaDataTestCase) ... ERROR
+
+======================================================================
+ERROR: testRead (metadatatests.MetaDataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testVerify (metadatatests.MetaDataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 36, in testVerify
+    md = self.testRead()
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testWrite (metadatatests.MetaDataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 32, in testWrite
+    md = self.testRead()
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (errors=3)
+testautosuper (ootests.OOTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+testAdd (packagedbtests.PackageDBTestCase) ... ERROR
+testRemove (packagedbtests.PackageDBTestCase) ... ERROR
+
+======================================================================
+ERROR: testAdd (packagedbtests.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/packagedbtests.py", line 27, in setUp
+    self.spec.read('tests/popt/pspec.xml')
+  File "./pisi/pxml/autoxml.py", line 426, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+
+======================================================================
+ERROR: testRemove (packagedbtests.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/packagedbtests.py", line 25, in setUp
+    testcase.TestCase.setUp(self)
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/testcase.py", line 29, in setUp
+    database = database, write = database)
+  File "./pisi/api.py", line 105, in init
+    ctx.filesdb = pisi.files.FilesDB()
+  File "./pisi/files.py", line 54, in __init__
+    shelve.LockedDBShelf.__init__(self, 'files')
+  File "./pisi/lockeddbshelve.py", line 124, in __init__
+    self.open(filename, dbname, filetype, flags, mode)
+  File "./pisi/lockeddbshelve.py", line 155, in open
+    self.lock()
+  File "./pisi/lockeddbshelve.py", line 165, in lock
+    raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
+Error: Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time.
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.825s
+
+FAILED (errors=2)
 xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom
 xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom
 ** Running all tests
@@ -33,3 +380,21 @@ xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to mini
 * Running tests in ootests.py
 
 * Running tests in packagedbtests.py
+Traceback (most recent call last):
+  File "tests/run.py", line 53, in <module>
+    run_all()
+  File "tests/run.py", line 39, in run_all
+    run_test_suite(module.suite)
+  File "tests/run.py", line 28, in run_test_suite
+    pisi.api.finalize()
+  File "./pisi/api.py", line 127, in finalize
+    pisi.repodb.finalize()
+  File "./pisi/repodb.py", line 126, in finalize
+    db.close()
+  File "./pisi/repodb.py", line 52, in close
+    self.d.close()
+  File "./pisi/lockeddbshelve.py", line 170, in close
+    self.db.close()
+  File "/usr/local/lib/python2.7/site-packages/bsddb3/dbobj.py", line 138, in close
+    return self._cobj.close(*args, **kwargs)
+bsddb3.db.DBRunRecoveryError: (-30973, 'BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery -- BDB0060 PANIC: fatal region error detected; run recovery')
