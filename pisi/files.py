@@ -16,7 +16,6 @@ during the build process of a package and used in installation.'''
 
 
 import pisi.pxml.autoxml as autoxml
-from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
 
 
