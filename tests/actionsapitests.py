@@ -79,7 +79,7 @@ class ActionsAPITestCase(TestCase):
         self.assertEqual(os.readlink('tests/actionsapitests/adirectory/brokenlink'), '/no/such/place')
         os.remove('tests/actionsapitests/adirectory/brokenlink')
 
-        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/adirectory/', False)
+        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/adirectory/', True)
         self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linktoadirectory/file'), True)
         self.assertEqual(os.path.getsize('tests/actionsapitests/adirectory/linktoadirectory/file'), 321)
         shutil.rmtree('tests/actionsapitests/adirectory/linktoadirectory')
