@@ -8,6 +8,8 @@
 import sys
 import string
 
+import pisi
+
 # not an error!
 
 class CycleException(pisi.Exception):
