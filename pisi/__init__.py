@@ -36,4 +36,4 @@ class Error(Exception):
 import pisi.api
 
 # FIXME: can't do this due to name clashes in config and other singletons booo
-#pisi.api import *
+#from pisi.api import *
