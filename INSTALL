@@ -1,5 +1,14 @@
 Author: Eray Ozkural
 
+INSTALLATION INSTRUCTIONS
+=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Generic Instructions:
+---------------------
+
+Installation:
+
 You can install PiSi on your system with a single command.
 
 # ./setup.py install
@@ -16,3 +25,70 @@ run the following command as root:
 
 # pisi rebuild-db
 
+For testing, please read tests/README
+
+
+OS X Instructions:
+------------------
+
+Install homebrew from https://brew.sh, and then 
+
+$ brew install python
+
+$ pip install bsddb3
+
+$ ./setup.py install
+
+$ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
+
+$ pisi help
+xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom
+xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom
+Usage: pisi [options] <command> [arguments]
+
+where <command> is one of:
+
+        add-repo (ar) - Add a repository
+           build (bi) - Build PISI packages
+                check - Verify installation
+                clean - Clean stale locks
+configure-pending (cp) - Configure pending packages
+    delete-cache (dc) - Delete cache files
+          emerge (em) - Build and install PISI source packages from repository
+                graph - Graph package relations
+             help (?) - Prints help for given commands
+           index (ix) - Index PISI files in a given directory
+                 info - Display package information
+         install (it) - Install PISI packages
+  list-available (la) - List available packages in the repositories
+ list-components (lc) - List available components
+  list-installed (li) - Print the list of all installed packages  
+    list-pending (lp) - List pending packages
+       list-repo (lr) - List repositories
+    list-sources (ls) - List available sources
+   list-upgrades (lu) - List packages to be upgraded
+     rebuild-db (rdb) - Rebuild Databases
+          remove (rm) - Remove PISI packages
+     remove-repo (rr) - Remove repositories
+          search (sr) - Search packages
+     search-file (sf) - Search for a file
+     update-repo (ur) - Update repository databases
+         upgrade (up) - Upgrade PISI packages
+
+Use "pisi help <command>" for help on a specific command.
+
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -D DESTDIR, --destdir=DESTDIR
+                        change the system root for pisi commands
+  -y, --yes-all         assume yes in all yes/no queries
+  -u USERNAME, --username=USERNAME
+  -p PASSWORD, --password=PASSWORD
+  -v, --verbose         detailed output
+  -d, --debug           show debugging information
+  -N, --no-color        print like a man
+$
+
+It should work on a current OS X installation.
