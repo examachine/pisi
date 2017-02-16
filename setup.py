@@ -36,9 +36,9 @@ class Install(install):
         for lang in i18n_languages.split(' '):
             print "Installing '%s' translations..." % lang
             os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
-            if not self.root:
-                self.root = "/"
-            destpath = os.path.join(self.root, "usr/share/locale/%s/LC_MESSAGES" % lang)
+            if not self.prefix:
+                self.prefix = "/"
+            destpath = os.path.join(self.prefix, "usr/share/locale/%s/LC_MESSAGES" % lang)
             try:
                 os.makedirs(destpath)
             except:
@@ -46,7 +46,7 @@ class Install(install):
             shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
 
     def installdoc(self):
-        destpath = os.path.join(self.root, "usr/share/doc/pisi")
+        destpath = os.path.join(self.prefix, "usr/share/doc/pisi")
         try:
             os.makedirs(destpath)
         except:
@@ -59,7 +59,7 @@ class Install(install):
 
     def generateConfigFile(self):
         import pisi.configfile
-        destpath = os.path.join(self.root, "etc/pisi/")
+        destpath = os.path.join(self.prefix, "etc/pisi/")
         try:
             os.makedirs(destpath)
         except:
@@ -87,10 +87,10 @@ setup(name="pisi",
     version= pisi.__version__,
     description="PISI (Packages Installed Successfully as Intended)",
     long_description="PISI is the package management system of Pardus Linux.",
-    license="GNU GPL2",
-    author="Pardus Developers",
-    author_email="pisi@pardus.org.tr",
-    url="http://www.pardus.org.tr/eng/pisi/",
+    license="GNU AGPL-3.0",
+    author="Eray Ozkural, Baris Metin, S. Caglar Onur",
+    author_email="eray.ozkural@gmail.com",
+    url="https://github.com/examachine/pisi",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search'],
     scripts = ['pisi-cli', 'scripts/repostats.py', 'scripts/find-lib-deps.py', 
