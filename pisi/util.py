@@ -14,6 +14,12 @@ import statvfs
 import operator
 import subprocess
 
+import pisi.context as ctx
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 
 class Error(Exception):
     pass
