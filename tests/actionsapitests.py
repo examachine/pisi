@@ -79,15 +79,17 @@ class ActionsAPITestCase(TestCase):
         self.assertEqual(os.readlink('tests/actionsapitests/adirectory/brokenlink'), '/no/such/place')
         os.remove('tests/actionsapitests/adirectory/brokenlink')
 
-        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/anotherdirectory/', False)
-        self.assertEqual(os.path.exists('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), True)
-        self.assertEqual(os.path.getsize('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), 321)
-        shutil.rmtree('tests/actionsapitests/anotherdirectory/linktoadirectory')
-
         copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
         self.assertEqual(os.path.isfile('tests/actionsapitests/adirectory/file'), True)
         #overwrite..
         copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
+        os.remove('tests/actionsapitests/adirectory/file')
+
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
+        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/anotherdirectory/', False)
+        self.assertEqual(os.path.exists('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), True)
+        self.assertEqual(os.path.getsize('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), 321)
+        shutil.rmtree('tests/actionsapitests/anotherdirectory/linktoadirectory')
         os.remove('tests/actionsapitests/adirectory/file')
 
         copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
