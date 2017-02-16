@@ -90,11 +90,12 @@ def init_dbenv(write=False, writeversion=False):
             flags =  (db.DB_INIT_MPOOL |      # cache
                       db.DB_INIT_TXN |        # transaction subsystem
                       db.DB_INIT_LOG |        # logging subsystem
+                      db.DB_INIT_LOCK |       # locking subsystem
                       db.DB_RECOVER |         # run normal recovery
                       db.DB_CREATE)           # allow db to create files
+            # TODO: consider DB_THREAD
             ctx.dbenv.set_cachesize(0, 4*1024*1024)
             ctx.dbenv.open(pisi.context.config.db_dir(), flags)
-            ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
         else:
             raise Error(_("Cannot write to PISI database."))
     else:
