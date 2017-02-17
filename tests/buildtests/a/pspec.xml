@@ -16,7 +16,7 @@
         <Summary xml:lang="tr">PiSi için merhaba dünya uygulaması, süper bir konsol uygulaması</Summary>
         <Description>Just a basic application. Nothing to describe.</Description>
         <Description xml:lang="tr">Sadece basit bir uygulama, açıklayacak bir şey yok</Description>
-        <Archive sha1sum="fc917dec7b9729de935698f273f8007b2223653d" type="targz">http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz</Archive>
+        <Archive sha1sum="1cb709d49334775118c5df5a0aab25efa26d5757" type="targz">https://github.com/examachine/pisi/blob/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2</Archive>
     </Source>
 
     <Package>
