@@ -134,5 +134,28 @@ really well in practice, forcing refactoring every now
 and then.
 
 2. If you are interested in "Playstation 2 Linux Games Programming" 
-or "How to extend C programs with Guile", please don't exercise
-your valuable skills in this project.
+or "How to extend C programs with Guile", please do not exercise
+your valuable skills in this project. Only, half joking. :P
+
+3. Please do not suggest replacements of used libraries and auxiliary 
+software and formats unless you have a very good rationale for it.
+
+4. Please do not remove existing features without a very good reason.
+
+5. Please try to maintain maximum backwards compatibility, though some 
+minor changes might be made for major revisions.
+
+6. Best coding practices result from writing software that has
+a clearly stated purpose, pre-conditions, and post-conditions. PISI
+is written in a library-like manner, for this very reason, the parts of
+it that are modular are generally useful, like the XML metaclass autoxml,
+the persistency backend that uses Berkeley DB, and the command metaclass.
+It is advisable to develop new feature sets following a similar, re-usable,
+generic programming style.
+
+7. Test-driven development is a most preferable rapid development
+methodology. The sooner you may write the tests for your application.
+the quicker you can start writing code that will not break it. One of 
+PISI's strengths is the comprehensive test suite. If you start writing
+the code with some test cases, it should diminish your coding
+time.
