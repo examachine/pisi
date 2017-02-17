@@ -317,6 +317,9 @@ class Archive:
             'binary': ArchiveBinary
         }
 
+        if not handlers.has_key(arch_type):
+            raise ArchiveError(_("Archive type not recognized"))
+
         self.archive = handlers.get(arch_type)(file_path, arch_type)
 
     def unpack(self, target_dir, clean_dir = False):
