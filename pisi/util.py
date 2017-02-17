@@ -7,7 +7,7 @@
 import os
 import re
 import sys
-import sha
+import hashlib
 import shutil
 import string
 import statvfs
@@ -407,13 +407,14 @@ def copy_dir(src, dest):
 
 def check_file_hash(filename, hash):
     """Check the files integrity with a given hash"""
+    print 'check_file_hash',sha1_file(filename),hash
     return sha1_file(filename) == hash
 
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
     # Broken links can cause problem!
     try:
-        m = sha.new()
+        m = hashlib.sha1()
         f = file(filename, 'rb')
         for line in f:
             m.update(line)
@@ -424,7 +425,7 @@ def sha1_file(filename):
 def sha1_data(data):
     """calculate sha1 hash of given data"""
     try:
-        m = sha.new()
+        m = hashlib.sha1()
         m.update(data)
         return m.hexdigest()
     except:
