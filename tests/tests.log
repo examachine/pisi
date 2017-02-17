@@ -1,7 +1,4 @@
-testFileList (actionsapitests.ActionsAPITestCase) ... [35mDestination directory /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp does not exist. Creating it.
-[0m[35mWriting current database version for dbversion
-[0m[35mWriting current database version for filesdbversion
-[0mok
+testFileList (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessDir (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessFile (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCopy (actionsapitests.ActionsAPITestCase) ... ok
@@ -10,7 +7,7 @@ testShelltoolsMakedirs (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsSystem (actionsapitests.ActionsAPITestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 10.638s
+Ran 7 tests in 4.388s
 
 OK
 testMakeZip (archivetests.ArchiveFileTestCase) ... ok
@@ -19,38 +16,18 @@ testUnpackZip (archivetests.ArchiveFileTestCase) ... ok
 testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 13.249s
+Ran 4 tests in 3.753s
 
 OK
 testDeclaration (autoxmltests.AutoXmlTestCase) ... ok
-testReadWrite (autoxmltests.AutoXmlTestCase) ... ERROR
+testReadWrite (autoxmltests.AutoXmlTestCase) ... ok
 testWriteRead (autoxmltests.AutoXmlTestCase) ... ok
 testStr (autoxmltests.LocalTextTestCase) ... ok
-
-======================================================================
-ERROR: testReadWrite (autoxmltests.AutoXmlTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/autoxmltests.py", line 70, in testReadWrite
-    a.write('/tmp/a.xml')
-  File "./pisi/pxml/autoxml.py", line 452, in write
-    self.encode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 356, in encode
-    encode_member(self, node, errs)
-  File "./pisi/pxml/autoxml.py", line 544, in encode
-    encode_a(node, value, errs)
-  File "./pisi/pxml/autoxml.py", line 643, in encode
-    writetext(node, token, unicode(value))
-  File "./pisi/pxml/autoxml.py", line 518, in writetext
-    addText(node, "", text)
-  File "./pisi/pxml/xmlextpiks.py", line 169, in addText
-    node.insertData(text)
-UnicodeEncodeError: 'ascii' codec can't encode character u'\u0131' in position 1: ordinal not in range(128)
 
 ----------------------------------------------------------------------
 Ran 4 tests in 0.009s
 
-FAILED (errors=1)
+OK
 testBasicBuild (buildtests.BuildTestCase) ... ** Running all tests
 
 * Running tests in actionsapitests.py
@@ -116,7 +93,7 @@ Traceback (most recent call last):
 FetchError: Cannot fetch http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz; nodename nor servname provided, or not known
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.866s
+Ran 2 tests in 1.182s
 
 FAILED (errors=2)
 testAccessMethods (configfiletests.ConfigFileTestCase) ... ok
@@ -125,7 +102,7 @@ testSections (configfiletests.ConfigFileTestCase) ... ok
 testValues (configfiletests.ConfigFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.002s
+Ran 4 tests in 0.001s
 
 OK
 testConflictWithEachOther (conflicttests.ConflictTestCase) ... ok
@@ -133,7 +110,7 @@ testConflictWithEachOtherAndInstalled (conflicttests.ConflictTestCase) ... ok
 testConflictWithInstalled (conflicttests.ConflictTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 3.397s
+Ran 3 tests in 4.204s
 
 OK
 testConstValues (constantstests.ContextTestCase) ... ok
@@ -217,7 +194,7 @@ Traceback (most recent call last):
 FetchError: Cannot fetch http://uludag.org.tr/haberler/rootfs0.2.html; nodename nor servname provided, or not known
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.007s
+Ran 2 tests in 0.129s
 
 FAILED (errors=1)
 testCycle (graphtests.GraphTestCase) ... ok
@@ -232,49 +209,87 @@ testRemoveDummy (installdbtests.InstallDBTestCase) ... ok
 testRemovePurge (installdbtests.InstallDBTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 3.159s
+Ran 3 tests in 2.161s
 
 OK
-testRead (metadatatests.MetaDataTestCase) ... ok
-testVerify (metadatatests.MetaDataTestCase) ... ok
+testRead (metadatatests.MetaDataTestCase) ... ERROR
+testVerify (metadatatests.MetaDataTestCase) ... ERROR
 testWrite (metadatatests.MetaDataTestCase) ... ERROR
+
+======================================================================
+ERROR: testRead (metadatatests.MetaDataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 430, in read
+    self.decode(self.rootNode(), errs)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 686, in decode
+    obj.decode(node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 632, in decode
+    x = autoxml.basic_cons_map[token_type](text)
+TypeError: long() argument must be a string or a number, not 'NoneType'
+
+======================================================================
+ERROR: testVerify (metadatatests.MetaDataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 36, in testVerify
+    md = self.testRead()
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 430, in read
+    self.decode(self.rootNode(), errs)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 686, in decode
+    obj.decode(node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 632, in decode
+    x = autoxml.basic_cons_map[token_type](text)
+TypeError: long() argument must be a string or a number, not 'NoneType'
 
 ======================================================================
 ERROR: testWrite (metadatatests.MetaDataTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 33, in testWrite
-    md.write('/tmp/metadata-test.xml')
-  File "./pisi/pxml/autoxml.py", line 452, in write
-    self.encode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 356, in encode
-    encode_member(self, node, errs)
-  File "./pisi/pxml/autoxml.py", line 544, in encode
-    encode_a(node, value, errs)
-  File "./pisi/pxml/autoxml.py", line 692, in encode
-    obj.encode(classnode, errs)
-  File "./pisi/pxml/autoxml.py", line 356, in encode
-    encode_member(self, node, errs)
-  File "./pisi/pxml/autoxml.py", line 544, in encode
-    encode_a(node, value, errs)
-  File "./pisi/pxml/autoxml.py", line 692, in encode
-    obj.encode(classnode, errs)
-  File "./pisi/pxml/autoxml.py", line 356, in encode
-    encode_member(self, node, errs)
-  File "./pisi/pxml/autoxml.py", line 544, in encode
-    encode_a(node, value, errs)
-  File "./pisi/pxml/autoxml.py", line 643, in encode
-    writetext(node, token, unicode(value))
-  File "./pisi/pxml/autoxml.py", line 497, in writetext
-    addText(node, tagpath, text)
-  File "./pisi/pxml/xmlextpiks.py", line 169, in addText
-    node.insertData(text)
-UnicodeEncodeError: 'ascii' codec can't encode character u'\u0131' in position 1: ordinal not in range(128)
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 32, in testWrite
+    md = self.testRead()
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
+    md.read('tests/popt/metadata.xml')
+  File "./pisi/pxml/autoxml.py", line 430, in read
+    self.decode(self.rootNode(), errs)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 686, in decode
+    obj.decode(node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 346, in decode
+    decode_member(self, node, errs, where)
+  File "./pisi/pxml/autoxml.py", line 539, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+  File "./pisi/pxml/autoxml.py", line 632, in decode
+    x = autoxml.basic_cons_map[token_type](text)
+TypeError: long() argument must be a string or a number, not 'NoneType'
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.005s
+Ran 3 tests in 0.004s
 
-FAILED (errors=1)
+FAILED (errors=3)
 testautosuper (ootests.OOTestCase) ... ok
 
 ----------------------------------------------------------------------
@@ -282,5 +297,3 @@ Ran 1 test in 0.000s
 
 OK
 testAdd (packagedbtests.PackageDBTestCase) ... 
-
-******ERROR: HANGED******

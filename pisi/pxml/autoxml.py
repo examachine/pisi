@@ -54,7 +54,7 @@ mandatory, optional = range(2) # poor man's enum
 
 # basic types
 
-String = types.UnicodeType
+String = types.StringType
 Text = types.UnicodeType
 Integer = types.IntType
 Long = types.LongType
