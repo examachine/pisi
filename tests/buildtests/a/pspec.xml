@@ -4,7 +4,7 @@
 <PISI>
     <Source>
         <Name>a</Name>
-        <Homepage>http://cekirdek.uludag.org.tr/~meren/merhaba-pisi.php</Homepage>
+        <Homepage>http://wiki.pisilinux.org/tr/index.php?title=PiSi_Hello_World</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
             <Email>meren@uludag.org.tr</Email>
