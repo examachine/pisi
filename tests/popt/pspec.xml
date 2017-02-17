@@ -22,7 +22,7 @@
         4) popt provides convience functions for parsing strings
             into argv[] style arrays
         </Description>
-        <Archive sha1sum="66f3c77b87a160951b180447f4a6dce68ad2f71b" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/popt-1.7.tar.gz</Archive>
+        <Archive sha1sum="66f3c77b87a160951b180447f4a6dce68ad2f71b" type="targz">ftp://ftp.gnome.org/mirror/archive/ftp.sunet.se/pub/vendor/sun/freeware/SOURCES/popt-1.7.tar.gz</Archive>
         <Patches>
           <Patch compressionType="gz" level="1">popt-1.7-uclibc.patch.gz</Patch>
         </Patches>

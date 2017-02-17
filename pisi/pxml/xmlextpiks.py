@@ -77,8 +77,9 @@ def getNodeText(node, tagpath = ""):
     if not child:
         return None
     if child.type() == iks.DATA:
-        # in any case, strip whitespaces...
-        return child.data().strip()
+        # KLUDGE: python 2.x bug: force decoding as UTF-8
+        child_data = unicode(child.data(), 'utf8')
+        return child_data.strip() # in any case, strip whitespaces...
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 
