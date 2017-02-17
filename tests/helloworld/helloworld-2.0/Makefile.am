@@ -1,0 +1,2 @@
+EXTRA_DIST = exa-id README
+SUBDIRS = src
