@@ -164,3 +164,7 @@ methodology. The sooner you may write the tests for your application.
 the quicker you can start writing code that will not break it. One of
 PISI's strengths is the comprehensive test suite. If you start writing
 the code with some test cases, it should diminish your coding time.
+
+8.Functional programming style reduces coding effort. Try to use
+functional programming like list comprehensions, and higher order
+functions, if there are complex relations you are dealing with.
