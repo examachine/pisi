@@ -15,7 +15,7 @@
         <PartOf>component</PartOf>
         <Summary xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Summary>
         <Description xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Description>
-        <Archive type="targz" sha1sum="3d7ee247c109d28db3437d2ce24f0e16f388d874">https://github.com/examachine/pisi/blob/master/tests/helloworld/helloworld-2.0.tar.bz2</Archive>
+        <Archive type="tarbz2" sha1sum="3d7ee247c109d28db3437d2ce24f0e16f388d874">https://github.com/examachine/pisi/raw/master/tests/helloworld/helloworld-2.0.tar.bz2</Archive>
     </Source>
 
     <Package>
