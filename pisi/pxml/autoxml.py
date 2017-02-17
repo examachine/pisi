@@ -54,7 +54,7 @@ mandatory, optional = range(2) # poor man's enum
 
 # basic types
 
-String = types.StringType
+String = types.UnicodeType
 Text = types.UnicodeType
 Integer = types.IntType
 Long = types.LongType
@@ -99,7 +99,7 @@ class LocalText(dict):
         for key in self.iterkeys():
             newnode = addNode(node, self.tag)
             setNodeAttribute(newnode, 'xml:lang', key)
-            addText(newnode, '',  self[key])
+            addText(newnode, '',  self[key].encode('utf8'))
 
     #FIXME: maybe more appropriate for pisi.util
     @staticmethod
@@ -149,15 +149,15 @@ class LocalText(dict):
     def __str__(self):
         L = LocalText.get_lang()
         if self.has_key(L):
-            return unicode(self[L])
+            return self[L]
         elif self.has_key('en'):
             # fallback to English, blah
-            return unicode(self['en'])
+            return self['en']
         elif self.has_key('tr'):
             # fallback to Turkish
-            return unicode(self['tr'])
+            return self['tr']
         else:
-            return unicode()
+            return ""
 
 class Writer(formatter.DumbWriter):
     """adds unicode support"""
@@ -394,11 +394,13 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.print_text = print_text
         if not dict.has_key('__str__'):
             def str(self):
-                strfile = StringIO()
+                strfile = StringIO(u'')
                 self.print_text(strfile)
-                str = strfile.getvalue()
+                print 'strfile=',unicode(strfile)
+                s = strfile.getvalue()
                 strfile.close()
-                return str
+                print 's=',s,type(s)
+                return s
             cls.__str__ = str
         
         if not dict.has_key('__eq__'):
@@ -494,7 +496,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 return getNodeText(node, tagpath)
             def writetext(node, tagpath, text):
                 #print 'write tag', node, tagpath, text
-                addText(node, tagpath, text)
+                addText(node, tagpath, text.encode('utf8'))
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
@@ -515,7 +517,8 @@ class autoxml(oo.autosuper, oo.autoprop):
             #node.normalize() # piksemel doesn't have this
             return getNodeText(node)
         def writetext(node, blah, text):
-            addText(node, "", text)
+            #print 'writing', text, type(text)
+            addText(node, "", text.encode('utf-8'))
         anonfuns = cls.gen_anon_basic(token, spec, readtext, writetext)
         return cls.gen_named_comp(token, spec, anonfuns)
 
@@ -623,13 +626,18 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def decode(node, errs, where):
             """decode from DOM node, the value, watching the spec"""
+            #text = unicode(readtext(node, token), 'utf8')
             text = readtext(node, token)
-            #print 'read text ', text
+            #print 'decoding', token_type, text, type(text), '.'
+            x = autoxml.basic_cons_map[token_type](text)
+            #print x, type(x)
             if text:
                 try:
+                    #print token_type, autoxml.basic_cons_map[token_type]
                     value = autoxml.basic_cons_map[token_type](text)
                 except:
                     value = None
+                    #print 'fuuuuck', text
                     errs.append(where + ': ' + _('Type mismatch: read text cannot be decoded'))
                 return value
             else:
@@ -737,7 +745,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             for node in nodes:
                 dummy = newNode(node, "Dummy")
                 addNode(dummy, '', node)
-                l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
+                l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix, 'utf8')))
                 #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                 ix += 1
             return l
@@ -832,7 +840,11 @@ class autoxml(oo.autosuper, oo.autoprop):
 
     basic_cons_map = {
         types.StringType : str,
-        types.UnicodeType : unicode,
+        #TODO: python 3.x: same behavior?
+        #python 2.x: basic_cons_map[unicode](a) where a is unicode str yields
+        #TypeError: decoding Unicode is not supported
+        #types.UnicodeType : lambda x: unicode(x,'utf8'), lambda x:x?
+        types.UnicodeType : lambda x:x, #: unicode
         types.IntType : int,
         types.FloatType : float,
         types.LongType : long

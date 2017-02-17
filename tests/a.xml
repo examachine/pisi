@@ -2,10 +2,10 @@
 
 <A href="http://www.cs.bilkent.edu.tr/~erayo">
   cıvık mantardır bu
-  <Name>Eray Ozkural</Name>
+  <Name>Eray Özkural</Name>
   <Number>868</Number>
   <Description xml:lang="en">Lazy Tin</Description>
-  <Description xml:lang="tr">Tembel Teneke</Description>
+  <Description xml:lang="tr">Tembel Tenekeğ</Description>
       <Project>pisi</Project>
       <Project>noatun</Project>
       <Project>kdevelop</Project>
@@ -13,10 +13,11 @@
     <BirthDate>18071976</BirthDate>
     <Interest>AI</Interest>
     <CodesWith>
-      <Person>Baris</Person>
-      <Person>Gurer</Person>
-      <Person>Caglar</Person>
+      <Person>Barış</Person>
+      <Person>Çağlar</Person>
+      <Person>Gürer</Person>
       <Person>Meren</Person>
+      <Person>大地</Person>
     </CodesWith>
   </OtherInfo>
 </A>
