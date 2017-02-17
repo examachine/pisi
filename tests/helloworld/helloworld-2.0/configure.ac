@@ -3,11 +3,11 @@ dnl process the file with autoconf to produce configure script
 
 dnl initialize autoconf and check an id file to find src dir
 dnl AC_REVISION
-AC_INIT(./config/auto-cxx-id)
+AC_INIT(./config/helloworld-id)
 AC_CONFIG_AUX_DIR(./config)
 
 dnl initialize automake
-AM_INIT_AUTOMAKE(auto-cxx,1.0.0)
+AM_INIT_AUTOMAKE(helloworld,2.0.0)
 dnl initialize auxiliary shell scripts
 AM_CONFIG_HEADER(config/config.h)
 
