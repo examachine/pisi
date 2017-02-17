@@ -171,11 +171,14 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
-        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        self.zip_obj = zipfile.ZipFile(self.file_path, mode, zipfile.ZIP_DEFLATED)
 
     def close(self):
         """Close the zip archive."""
         self.zip_obj.close()
+
+    def list_archive(self):
+        return self.zip_obj.namelist()
 
     def add_to_archive(self, file_name, arc_name=None):
         """Add file or directory path to the zip file"""
@@ -196,13 +199,12 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, arc_name, zipfile.ZIP_DEFLATED)
-
                 if not arc_name:
-                    zinfo = self.zip_obj.getinfo(file_name)
-                else:
-                    zinfo = self.zip_obj.getinfo(arc_name)
-                zinfo.create_system = 3
+                    arc_name = file_name
+                self.zip_obj.write(file_name, arc_name)
+
+                #zinfo = self.zip_obj.getinfo(arc_name)
+                #zinfo.create_system = 3
 
     def add_basename_to_archive(self, file_name):
         """Add only the basepath to the zip file. For example; if the given

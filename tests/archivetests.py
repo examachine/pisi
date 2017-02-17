@@ -90,8 +90,8 @@ class ArchiveFileTestCase(testcase.TestCase):
         sourceDir = targetDir + "/pccts"
         zip.add_to_archive(sourceDir)
         zip.close()
-
-        #TODO: do some more work to test the integrity of new zip file
+        self.assertEqual(os.path.exists(newZip), True)
+        self.assertEqual(len(zip.list_archive()),326)
     
     def testUnpackZipCond(self):
         spec = SpecFile("tests/pccts/pspec.xml")
