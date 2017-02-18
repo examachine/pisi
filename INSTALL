@@ -37,6 +37,10 @@ $ brew install python
 
 $ pip install bsddb3
 
+Install piksemel XML processing library
+
+$ brew install coreutils xz
+
 $ ./setup.py install
 
 $ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
