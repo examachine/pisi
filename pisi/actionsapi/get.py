@@ -26,7 +26,7 @@ import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi.variables
-pisi.actionsapi.variables.initVariables()
+#pisi.actionsapi.variables.initVariables()
 
 class BinutilsError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -192,6 +192,10 @@ def AS():
 
 def CC():
     return getBinutilsInfo('gcc')
+    ## if util.is_osx():
+    ##     return getBinutilsInfo('gcc-6')
+    ## else:
+    ##     return getBinutilsInfo('gcc')
 
 def CXX():
     return getBinutilsInfo('g++')

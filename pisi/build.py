@@ -214,6 +214,7 @@ class Builder:
         # Each time a builder is created we must reset
         # environment. See bug #2575
         pisi.actionsapi.variables.initVariables()
+        print '***** MEOWW *****'
 
         env = {
             "PKG_DIR": self.pkg_dir(),
@@ -565,7 +566,7 @@ class Builder:
         metadata.package.architecture = "Any"
         metadata.package.packageFormat = ctx.get_option('package_format')
         
-        size = 0
+        size = long(0)
         if package.debug_package:
             d = self.pkg_debug_dir()
         else:

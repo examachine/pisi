@@ -36,6 +36,7 @@ def exportFlags():
     os.environ['LDFLAGS'] = values.build.ldflags
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
+    #print '***', values.build, values.build.jobs
 
 class Env(object):
     '''General environment variables used in actions API'''
@@ -94,10 +95,10 @@ class Dirs:
 # because of uninitialized context (ctx) because of exportFlags().
 #
 
-class Glb:
-    def __init__(self):
-        self.env = Env()
-        self.dirs = Dirs()
+## class Glb:
+##     def __init__(self):
+##         self.env = Env()
+##         self.dirs = Dirs()
 
 # We import this module from build.py becase we need to reset/init glb
 # for each build. # See bug #2575
@@ -105,8 +106,7 @@ glb = None
 
 def initVariables():
     global glb
-    if not glb:
-        glb = ctx
-        glb.env = Env()
-        glb.dirs = Dirs()
+    glb = ctx
+    glb.env = Env()
+    glb.dirs = Dirs()
 

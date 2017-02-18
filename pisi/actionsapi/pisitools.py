@@ -31,7 +31,7 @@ from pisi.util import join_path
 
 # ActionsAPI Modules
 import pisi.actionsapi
-pisi.actionsapi.variables.initVariables()
+#pisi.actionsapi.variables.initVariables()
 import pisi.actionsapi.get as get
 from pisi.actionsapi.pisitoolsfunctions import *
 from pisi.actionsapi.shelltools import *
@@ -42,12 +42,6 @@ from pisi.actionsapi import error
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
-    #print 'globals=',globals()
-    #print 'locals=',locals()
-    #print '** srcDir=',get.sourceDIR()
-    #print '** WorkDir=',WorkDir
-    #print 'glb,env,dirs',pisi.actionsapi.variables.glb,pisi.actionsapi.variables.glb.env,pisi.actionsapi.variables.glb.dirs
-    #print 'dobin',get.installDIR(), destinationDirectory,sourceFile
     executable_insinto(join_path(get.installDIR(), destinationDirectory),
                        sourceFile)
  
