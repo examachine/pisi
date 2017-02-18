@@ -16,7 +16,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import libtools
 from pisi.actionsapi import get
 
-WorkDir = "hello-1.3"
+WorkDir = "hello-2.0"
 
 def setup():
     autotools.configure()
@@ -30,7 +30,7 @@ def install():
     '''/opt/helloworld/'''
     pisitools.dodir("/opt/helloworld")
     
-    '''/usr/share/doc/helloworld-0.1-1/Makefile.am'''
+    '''/usr/share/doc/helloworld-2.0/Makefile.am'''
     pisitools.dodoc("Makefile.am")
 
     '''/opt/helloworld/helloworld'''
@@ -79,7 +79,7 @@ def install():
     '''delete home'''
     pisitools.removeDir("/home")
 
-    '''src/helloworld.cpp --> /usr/share/doc/helloworld-0.1-1/goodbyeworld.cpp'''
+    '''src/helloworld.cpp --> /usr/share/doc/helloworld-2.0/goodbyeworld.cpp'''
     pisitools.newdoc("src/helloworld.cpp", "goodbyeworld.cpp")
 
     '''/opt/pardus'''
