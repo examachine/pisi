@@ -536,6 +536,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             
         def decode(self, node, errs, where):
             """decode component from DOM node"""
+            #print '*', name
             setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
             
         def encode(self, node, errs):
@@ -629,15 +630,15 @@ class autoxml(oo.autosuper, oo.autoprop):
             #text = unicode(readtext(node, token), 'utf8')
             text = readtext(node, token)
             #print 'decoding', token_type, text, type(text), '.'
-            x = autoxml.basic_cons_map[token_type](text)
-            #print x, type(x)
             if text:
                 try:
                     #print token_type, autoxml.basic_cons_map[token_type]
                     value = autoxml.basic_cons_map[token_type](text)
-                except:
+                except Exception, e:
+                    print 'exception', e
                     value = None
                     #print 'fuuuuck', text
+                    #if req == 
                     errs.append(where + ': ' + _('Type mismatch: read text cannot be decoded'))
                 return value
             else:
