@@ -27,7 +27,7 @@ class FileTestCase(testcase.TestCase):
         self.assert_(len(x)>0)
         
     def testRemoteRead(self):
-        f = File("http://uludag.org.tr/haberler/rootfs0.2.html", File.read)
+        f = File("https://github.com/examachine/pisi/wiki", File.read)
         x = f.readlines()
         self.assert_(len(x)>0)
 
