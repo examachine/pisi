@@ -15,11 +15,11 @@
         <PartOf>component</PartOf>
         <Summary xml:lang="en">Info ZIP (encryption support)</Summary>
         <Description xml:lang="en">Info ZIP (encryption support)</Description>
-        <Archive type="targz" sha1sum="0600c93218e6acf1be75dd79da4244eabc8e16cf">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/zip23.tar.gz</Archive>
+        <Archive type="targz" sha1sum="34ba126eb3344b0a35ee1a00fff9639994c7aba4">http://pkgs.fedoraproject.org/repo/pkgs/zip/zip231.tar.gz/6bfc076664416251d7624ab3538d1cb9/zip231.tar.gz</Archive>
         <Patches>
-    		<Patch>zip-2.3-unix_configure-pic.patch</Patch>
+    		<!--Patch>zip-2.3-unix_configure-pic.patch</Patch> -->
     		<!-- <Patch level="1">zip-CAN-2004-1010.patch</Patch> -->
-            <Patch level="1">zcrypt.patch</Patch>
+            <!-- <Patch level="1">zcrypt.patch</Patch> -->
         </Patches>
         <BuildDependencies>
             <Dependency>unzip</Dependency>
@@ -41,9 +41,13 @@
 
   <History>
     <Update release="3">
-        <Date>2005-08-11</Date>
-        <Version>2.4</Version>
+        <Date>2005-11-20</Date>
+        <Version>2.31</Version>
     </Update>
+     <Update release="2">
+       <Date>2005-11-10</Date>
+       <Version>2.31</Version>
+     </Update>
   </History>
 
 </PISI>
