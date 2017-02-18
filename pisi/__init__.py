@@ -12,7 +12,7 @@
 
 # PiSi version
 
-__version__ = "1.1_beta16"
+__version__ = "1.1_beta17"
 
 __dbversion__ = "1.1_beta8"
 __filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck

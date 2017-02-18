@@ -1,10 +1,14 @@
-----> **** BUG: packagedb hangs!!
-
+Not too many failures :)
+$ date
+Sat Feb 18 20:46:04 MSK 2017
 $ tests/run.py 
 ** Running all tests
 
 * Running tests in actionsapitests.py
-testFileList (actionsapitests.ActionsAPITestCase) ... ok
+testFileList (actionsapitests.ActionsAPITestCase) ... Destination directory /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp does not exist. Creating it.
+Writing current database version for dbversion
+Writing current database version for filesdbversion
+ok
 testShelltoolsCanAccessDir (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessFile (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCopy (actionsapitests.ActionsAPITestCase) ... ok
@@ -13,7 +17,7 @@ testShelltoolsMakedirs (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsSystem (actionsapitests.ActionsAPITestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 3.857s
+Ran 7 tests in 8.839s
 
 OK
 
@@ -28,7 +32,7 @@ ok
 testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 8.532s
+Ran 4 tests in 10.783s
 
 OK
 
@@ -39,7 +43,7 @@ testWriteRead (autoxmltests.AutoXmlTestCase) ... ok
 testStr (autoxmltests.LocalTextTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.011s
+Ran 4 tests in 0.009s
 
 OK
 
@@ -48,8 +52,7 @@ testBasicBuild (buildtests.BuildTestCase) ... Building PISI source package: a
 Compiling action script
 Safety switch: the component system.devel cannot be found
 Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
-check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
-merhaba-pisi-1.0.tar.bz2 [cached]
+merhaba-pisi-1.0.tar.bz2       (1.0 KB)100%      0.00 B/s [??:??:??] [complete]
 Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
 Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
  unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
@@ -144,7 +147,7 @@ Keeping Build Directory
 ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 9.284s
+Ran 2 tests in 6.180s
 
 OK
 
@@ -155,7 +158,7 @@ testSections (configfiletests.ConfigFileTestCase) ... ok
 testValues (configfiletests.ConfigFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.002s
+Ran 4 tests in 0.001s
 
 OK
 
@@ -165,7 +168,7 @@ testConflictWithEachOtherAndInstalled (conflicttests.ConflictTestCase) ... ok
 testConflictWithInstalled (conflicttests.ConflictTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 3.382s
+Ran 3 tests in 3.639s
 
 OK
 
@@ -206,7 +209,7 @@ Traceback (most recent call last):
 IOError: [Errno 2] No such file or directory: 'tests/helloworld/hello-1.3.tar.gz.part'
 
 ----------------------------------------------------------------------
-Ran 2 tests in 1.298s
+Ran 2 tests in 1.338s
 
 FAILED (errors=1)
 
@@ -243,7 +246,7 @@ Traceback (most recent call last):
 FetchError: Cannot fetch http://uludag.org.tr/haberler/rootfs0.2.html; nodename nor servname provided, or not known
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.224s
+Ran 2 tests in 0.179s
 
 FAILED (errors=1)
 
@@ -262,7 +265,7 @@ testRemoveDummy (installdbtests.InstallDBTestCase) ... ok
 testRemovePurge (installdbtests.InstallDBTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 2.269s
+Ran 3 tests in 2.005s
 
 OK
 
@@ -272,7 +275,7 @@ testVerify (metadatatests.MetaDataTestCase) ... ok
 testWrite (metadatatests.MetaDataTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.006s
+Ran 3 tests in 0.005s
 
 OK
 
@@ -285,4 +288,121 @@ Ran 1 test in 0.000s
 OK
 
 * Running tests in packagedbtests.py
-testAdd (packagedbtests.PackageDBTestCase) ... 
+testAdd (packagedbtests.PackageDBTestCase) ... ok
+testRemove (packagedbtests.PackageDBTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.371s
+
+OK
+
+* Running tests in packagetests.py
+testAddExtract (packagetests.PackageTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.397s
+
+OK
+
+* Running tests in repodbtests.py
+testAddRemoveCycle (repodbtests.RepoDBTestCase) ... 
+Test 0
+
+Repo foo added to system.
+Repo foo removed from system.
+
+Test 1
+
+Repo foo added to system.
+Repo foo removed from system.
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.190s
+
+OK
+
+* Running tests in searchtests.py
+testSearch (searchtests.SearchTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.441s
+
+OK
+
+* Running tests in sourcedbtests.py
+testAddRemove (sourcedbtests.SourceDBTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.362s
+
+OK
+
+* Running tests in specfiletests.py
+testCopy (specfiletests.SpecFileNewTestCase) ... ok
+testFields (specfiletests.SpecFileNewTestCase) ... ok
+testIsAPartOf (specfiletests.SpecFileNewTestCase) ... ok
+testVerify (specfiletests.SpecFileNewTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.016s
+
+OK
+
+* Running tests in utiltests.py
+testCleanArTimestamp (utiltests.UtilTestCase) ... ok
+testDirSize (utiltests.UtilTestCase) ... FAIL
+testGetFileHashes (utiltests.UtilTestCase) ... FAIL
+testRemovePathPrefix (utiltests.UtilTestCase) ... ok
+testSubPath (utiltests.UtilTestCase) ... ok
+
+======================================================================
+FAIL: testDirSize (utiltests.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/utiltests.py", line 70, in testDirSize
+    self.assertEqual(dir_size('tests/utilfiles/linktonowhere'), 23)
+AssertionError: 0 != 23
+
+======================================================================
+FAIL: testGetFileHashes (utiltests.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/utiltests.py", line 79, in testGetFileHashes
+    self.assertEqual(len([x for x in get_file_hashes('tests/utilfiles/')]), 4)
+AssertionError: 3 != 4
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.061s
+
+FAILED (failures=2)
+
+* Running tests in versiontests.py
+testGeBug (versiontests.VersionTestCase) ... ok
+testOpsCharacters (versiontests.VersionTestCase) ... ok
+testOpsKeywords (versiontests.VersionTestCase) ... ok
+testOpsNumerical (versiontests.VersionTestCase) ... ok
+testSingle (versiontests.VersionTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+
+* Running tests in xmlexttests.py
+testAdd (xmlexttests.XmlExtTestCase) ... ok
+testGet (xmlexttests.XmlExtTestCase) ... FAIL
+
+======================================================================
+FAIL: testGet (xmlexttests.XmlExtTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/xmlexttests.py", line 34, in testGet
+    self.assertEqual(len(codeswith), 4)
+AssertionError: 5 != 4
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=1)
+Rigel:pisi malfunct$ 
