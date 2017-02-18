@@ -23,9 +23,11 @@ _ = __trans.ugettext
 
 # Pisi Modules
 import pisi.context as ctx
+import pisi.util as util
 
 # ActionsAPI Modules
 import pisi.actionsapi
+from pisi.actionsapi import get
 from pisi.actionsapi.shelltools import *
 
 class FileError(pisi.actionsapi.Error):
@@ -50,9 +52,17 @@ def executable_insinto(destinationDirectory, *sourceFiles):
         makedirs(destinationDirectory)
 
     for sourceFile in sourceFiles:
+        #print 'pkgsrcDIR()=',get.sourceDIR()
+        sourceFile = join_path(get.sourceDIR(), sourceFile)
+        #print 'sourceFile,destDir=',sourceFile, destinationDirectory
         for source in glob.glob(sourceFile):
-            # FIXME: use an internal install routine for these
-            system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
+            #TODO FIXME: use an internal install routine for these
+            if util.is_osx()==True:
+                util.run_batch('ginstall -m0755 -o root -g wheel %s %s' %
+                               (source, destinationDirectory),sudo=True)
+            else:
+                util.run_batch('install -m0755 -o root -g root %s %s' %
+                               (source, destinationDirectory),sudo=True)
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
@@ -64,6 +74,7 @@ def readable_insinto(destinationDirectory, *sourceFiles):
         makedirs(destinationDirectory)
 
     for sourceFile in sourceFiles:
+        sourceFile = join_path(get.sourceDIR(), sourceFile)
         for source in glob.glob(sourceFile):
             system('install -m0644 "%s" %s' % (source, destinationDirectory))
 

@@ -98,8 +98,10 @@ def human_readable_rate(size = 0):
 # Process Releated Functions #
 ##############################
 
-def run_batch(cmd):
+def run_batch(cmd, sudo = False):
     """run command and report return value and output"""
+    if sudo:
+        cmd = "sudo " + cmd
     ctx.ui.info(_('Running ') + cmd, verbose=True)
     p = subprocess.Popen(cmd, shell=True, 
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -119,8 +121,10 @@ class TeeOutFile:
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
 # values instead. but this is good enough :)
-def run_logged(cmd):
+def run_logged(cmd, sudo = False):
     """run command and get return value"""
+    if sudo:
+        cmd = "sudo " + cmd
     ctx.ui.info(_('Running ') + cmd, verbose=True)
     if ctx.stdout:
         stdout = ctx.stdout
@@ -143,6 +147,10 @@ def run_logged(cmd):
 
     return p.returncode
 
+def is_osx():
+    import platform
+    val = platform.platform().startswith('Darwin')
+    return(val)
     
 ######################
 # Terminal functions #
@@ -297,6 +305,8 @@ def copy_file(src,dest):
     check_file(src)
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
+
+#def install(
 
 def is_ar_file(file_path):
     return  open(file_path).readline().strip() == '!<arch>'
