@@ -24,7 +24,6 @@ def setup():
     pass
 
 def build():
-    print '**** FUUUCK'
     autotools.make("-f unix/Makefile clean generic2")
 
 def install():
