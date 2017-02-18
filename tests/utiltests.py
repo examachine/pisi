@@ -70,18 +70,18 @@ class UtilTestCase(testcase.TestCase):
         self.assertEqual(dir_size('tests/utilfiles/linktonowhere'), 23)
         self.assertEqual(dir_size('tests/utilfiles/directory'), 74536)
         self.assertEqual(dir_size('tests/utilfiles/linktoarfile'), 22)
-        self.assertEqual(dir_size('tests/utilfiles/'), 149117)
+        self.assertEqual(dir_size('tests/utilfiles/'), 149121)
         restore_svn_paths(svn_paths)
 
     def testGetFileHashes(self):
         svn_paths = get_svn_paths('tests/utilfiles')
         move_svn_paths(svn_paths)
-        self.assertEqual(len([x for x in get_file_hashes('tests/utilfiles/')]), 4)
+        self.assertEqual(len([x for x in get_file_hashes('tests/utilfiles/')]), 5)
         for tpl in get_file_hashes('tests/utilfiles/'):
-            if os.path.basename(tpl[0]) == 'linktonowhere':
-                self.assertEqual(tpl[1], '2d3732ababb24b5dd040a192dc72841cb9684d4e')
+            if os.path.basename(tpl[0]) == 'myname.txt':
+                self.assertEqual(tpl[1], '9688bd316f79bc3280b642f08ccbe7253f3d9ba0')
             if os.path.basename(tpl[0]) == 'linktoarfile':
-                self.assertEqual(tpl[1], '8be108bc4bfb7d18a10da6d6b76060f0409dc7c6')
+                self.assertEqual(tpl[1], 'bc79b8f997abcc39f3dc2e9e18fb139ded363e49')
         restore_svn_paths(svn_paths)
 
 suite = unittest.makeSuite(UtilTestCase)
