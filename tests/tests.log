@@ -348,3 +348,383 @@ testGet (xmlexttests.XmlExtTestCase) ... ok
 Ran 2 tests in 0.001s
 
 OK
+
+$ tests/light.sh 
+/Volumes/Centauri/Users/malfunct/Code/projects/pisi
++ rm -rf tmp
++ mkdir tmp
++ set -e
++ pisi-cli -Dtmp -E --ignore-build-no build tests/zip/pspec.xml tests/unzip/pspec.xml
+Writing current database version for dbversion
+Writing current database version for filesdbversion
+Outputting packages in the working directory.
+Building PISI source package: zip
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Unsatisfied Build Dependencies: patch 
+Ignoring build dependencies.
+Fetching source from: http://pkgs.fedoraproject.org/repo/pkgs/zip/zip231.tar.gz/6bfc076664416251d7624ab3538d1cb9/zip231.tar.gz
+zip231.tar.gz                  (763.0 KB)100%      0.00 B/s [??:??:??] [complete]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/zip231.tar.gz
+Unpacking archive...check_file_hash 34ba126eb3344b0a35ee1a00fff9639994c7aba4 34ba126eb3344b0a35ee1a00fff9639994c7aba4
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work)
+Setting up source...
+setup
+Building source...
+build
+sh unix/configure "gcc" "-mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX "
+Check for the C preprocessor
+Check if we can use asm code
+Check for ANSI options
+Check for prototypes
+Check the handling of const
+Check for time_t
+Check for size_t
+Check for gcc no-builtin flag
+Check for rmdir
+Check for strchr
+Check for strrchr
+Check for rename
+Check for mktemp
+Check for mktime
+Check for mkstemp
+Check for memset
+Check for errno declaration
+Check for directory libraries
+Check for readlink
+Check for directory include file
+Check for non existent include files
+Check for terminal I/O include file
+Check for valloc
+Check for 64bit fseek
+Check for /usr/local/bin and /usr/local/man
+Check for OS-specific flags
+Check for symbolic links
+eval make -f unix/Makefile zips `cat flags`
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work/zip-2.31'
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zip.c
+zip.c:615:12: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+    printf(cryptnote[i]);
+           ^~~~~~~~~~~~
+1 warning generated.
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipfile.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipup.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO fileio.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO util.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO globals.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crypt.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO ttyio.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO unix/unix.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crc32.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crctab.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO deflate.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO trees.c
+gcc -o zip  zip.o zipfile.o zipup.o fileio.o util.o globals.o crypt.o ttyio.o unix.o crc32.o crctab.o deflate.o trees.o  
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipnote.c
+zipnote.c:435:12: warning: comparison of array 'a' not equal to a null pointer
+      is always true [-Wtautological-pointer-compare]
+    while (a != NULL && *a != MARK)
+           ^    ~~~~
+zipnote.c:444:7: warning: comparison of array 'a' not equal to a null pointer is
+      always true [-Wtautological-pointer-compare]
+  if (a != NULL)                        /* change zip file comment */
+      ^    ~~~~
+2 warnings generated.
+rm -f zipfile_.c; ln -s zipfile.c zipfile_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL zipfile_.c
+rm -f zipfile_.c
+rm -f fileio_.c; ln -s fileio.c fileio_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL fileio_.c
+rm -f fileio_.c
+rm -f util_.c; ln -s util.c util_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL util_.c
+rm -f util_.c
+rm -f unix_.c; ln -s unix/unix.c unix_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL unix_.c
+rm -f unix_.c
+gcc -o zipnote  zipnote.o  zipfile_.o fileio_.o util_.o globals.o unix_.o 
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipsplit.c
+gcc -o zipsplit  zipsplit.o zipfile_.o fileio_.o util_.o globals.o unix_.o 
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipcloak.c
+rm -f crypt_.c; ln -s crypt.c crypt_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL crypt_.c
+rm -f crypt_.c
+gcc -o zipcloak  zipcloak.o zipfile_.o fileio_.o util_.o globals.o unix_.o crctab.o crypt_.o ttyio.o 
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work/zip-2.31'
+Installing...
+install
+Stripping files..
+** Building package zip
+Generating files.xml,
+Including directory '/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/install/usr/bin'
+Build number is not available. For repo builds you must enable buildno in pisi.conf.
+Generating metadata.xml,
+Creating PISI package ./zip-2.31-2.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: unzip
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Unsatisfied Build Dependencies: libc sed patch 
+Ignoring build dependencies.
+Fetching source from: http://pkgs.fedoraproject.org/repo/pkgs/unzip/unzip60.tar.gz/62b490407489521db863b523a7f86375/unzip60.tar.gz
+unzip60.tar.gz                 (1.3 MB)100%    741.17 KB/s [00:00:00] [complete]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/unzip60.tar.gz
+Unpacking archive...check_file_hash abf7de8a4018a983590ed6f5cbd990d4740f8a22 abf7de8a4018a983590ed6f5cbd990d4740f8a22
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work)
+Setting up source...
+setup
+Building source...
+build
+**** FUUUCK
+
+         This is a Unix-specific target.  (Just so you know.)
+
+( cd bzip2; make -f Makebz2.iz RM="rm -f" clean )
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60/bzip2'
+rm -f blocksort.o huffman.o crctable.o randtable.o compress.o decompress.o bzlib.o libbz2.a
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60/bzip2'
+rm -f unzip funzip unzipsfx unzip.o crc32.o  crypt.o envargs.o explode.o extract.o fileio.o globals.o inflate.o list.o match.o process.o ttyio.o ubz2err.o unreduce.o unshrink.o zipinfo.o unix.o funzip.o crc32.o  cryptf.o globalsf.o inflatef.o ttyiof.o unzipsfx.o crc32_.o  crypt_.o extract_.o fileio_.o globals_.o inflate_.o match_.o process_.o ttyio_.o ubz2err_.o unix_.o api.o apihelp.o crc_gcc.o \
+  crc_sysv.o unzipstb.o crypt_.c extract_.c globals_.c inflate_.c \
+  ttyio_.c crc_i386s.s msdos_.c process_.c unix_.c unzipsfx.c
+rm -f flags
+rm -rf ./IZunzip
+make -f unix/Makefile unzips CF="-O -I. -Ibzip2 -DUNIX   -DBSD"
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60'
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD crc32.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD envargs.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD explode.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD extract.c
+extract.c:476:23: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                      LoadFarString(ReportMsg)));
+                      ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+extract.c:755:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+extract.c:756:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(ReportMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+3 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD fileio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD list.c
+list.c:184:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:510:48: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+            Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                               ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:594:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:677:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+4 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD match.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD process.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD ttyio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD ubz2err.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unreduce.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unshrink.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD zipinfo.c
+zipinfo.c:774:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+zipinfo.c:963:48: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+            Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                               ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+2 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unix/unix.c
+cc -o unzip  -Lbzip2 unzip.o crc32.o  crypt.o envargs.o explode.o extract.o fileio.o globals.o inflate.o list.o match.o process.o ttyio.o ubz2err.o unreduce.o unshrink.o zipinfo.o unix.o  -s
+ld: warning: option -s is obsolete and being ignored
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD funzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o cryptf.o crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o globalsf.o globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o inflatef.o inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o ttyiof.o ttyio.c
+cc -o funzip  funzip.o crc32.o  cryptf.o globalsf.o inflatef.o ttyiof.o -s
+ld: warning: option -s is obsolete and being ignored
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o unzipsfx.o unzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o crc32_.o crc32.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o crypt_.o crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o extract_.o extract.c
+extract.c:476:23: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                      LoadFarString(ReportMsg)));
+                      ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+1 warning generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o fileio_.o fileio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o globals_.o globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o inflate_.o inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o match_.o match.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o process_.o process.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o ttyio_.o ttyio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o ubz2err_.o ubz2err.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o unix_.o unix/unix.c
+cc -o unzipsfx  unzipsfx.o crc32_.o  crypt_.o extract_.o fileio_.o globals_.o inflate_.o match_.o process_.o ttyio_.o ubz2err_.o unix_.o -s
+ld: warning: option -s is obsolete and being ignored
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60'
+Installing...
+install
+Stripping files..
+** Building package unzip
+Generating files.xml,
+Build number is not available. For repo builds you must enable buildno in pisi.conf.
+Generating metadata.xml,
+Creating PISI package ./unzip-6.0-2.pisi.
+Done.
+Keeping Build Directory
++ pisi-cli -Dtmp index .
+* Building index of PISI files under .
+Adding unzip-6.0-2.pisi to package index
+Package unzip: metadata corrupt, skipping...
+package.package.packageSize: Type mismatch. Expected <type 'long'>, got <type 'int'>
+Adding zip-2.31-2.pisi to package index
+Package zip: metadata corrupt, skipping...
+package.package.packageSize: Type mismatch. Expected <type 'long'>, got <type 'int'>
+Adding ./tests/buildtests/a/pspec.xml to source index
+Adding ./tests/buildtests/merhaba-pisi-1.0/pspec.xml to source index
+Adding ./tests/helloworld/pspec.xml to source index
+Adding ./tests/pccts/pspec.xml to source index
+Adding ./tests/popt/pspec.xml to source index
+Adding component.xml to component index
+Adding component.xml to component index
+Adding ./tests/stress/comp/ab/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding ./tests/stress/comp/bc/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding ./tests/stress/comp/cd/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding component.xml to component index
+Adding ./tests/stress/lang/de/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.lang component
+Adding ./tests/stress/lang/ef/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.lang component
+Adding ./tests/unzip/pspec.xml to source index
+Adding ./tests/unzip2/pspec.xml to source index
+Adding ./tests/zip/pspec.xml to source index
+Adding ./tests/zip2/pspec.xml to source index
+Program Terminated.
+ERROR: gpg --detach-sig pisi-index.xml failed
+Please use 'pisi help' for general help.
+Use --debug to see a traceback.
+$ 
