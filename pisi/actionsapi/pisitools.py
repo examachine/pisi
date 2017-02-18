@@ -173,7 +173,6 @@ def rename(sourceFile, destinationFile):
     baseDir = os.path.dirname(sourceFile)
 
     try:
-        #print 'rename:',get.workDIR(), sourceFile, baseDir, destinationFile
         sourceFile = join_path(get.installDIR(), sourceFile)
         os.rename(sourceFile,
                   join_path(get.installDIR(), baseDir, destinationFile))
