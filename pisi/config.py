@@ -113,7 +113,7 @@ class Config(object):
 
     # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
-    # ihtiyacımız var? (baris)
+    # ihtiyacımız var? (baris) FIXME
     def install_dir(self):
         return self.tmp_dir() + ctx.const.install_dir_suffix
 
