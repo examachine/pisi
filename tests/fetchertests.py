@@ -40,7 +40,7 @@ class FetcherTestCase(testcase.TestCase):
         os.remove(fetchedFile)
 
     def testResume(self):
-        resume_test_file = "tests/helloworld/hello-1.3.tar.gz.part"
+        resume_test_file = "tests/helloworld/helloworld-2.0.tar.bz2.part"
         shutil.copy(resume_test_file, ctx.config.archives_dir())
         self.fetch.fetch()
         fetchedFile = os.path.join(self.destpath, self.url.filename())
