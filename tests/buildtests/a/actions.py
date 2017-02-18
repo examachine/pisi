@@ -14,7 +14,7 @@ from pisi.actionsapi import pisitools
 WorkDir = "merhaba-pisi-1.0"
 
 def install():
-    print '* WorkDir=',WorkDir
+    print 'actions.py: WorkDir=',WorkDir
     pisitools.dobin("/usr/bin/merhaba-pisi.py")
     pisitools.rename("/usr/bin/merhaba-pisi.py", "merhaba-pisi")    
     pisitools.dosym("./merhaba-pisi", "/usr/bin/justasysmlink")
