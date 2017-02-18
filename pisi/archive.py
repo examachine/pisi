@@ -104,7 +104,8 @@ class ArchiveTar(ArchiveBase):
         oldwd = os.getcwd()
         os.chdir(target_dir)
 
-        install_tar_path = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar)
+        install_tar_path = util.join_path(ctx.config.tmp_dir(),
+                                          ctx.const.install_tar)
         for tarinfo in self.tar:
             # Installing packages (especially shared libraries) is a
             # bit tricky. You should also change the inode if you
@@ -148,12 +149,16 @@ class ArchiveTar(ArchiveBase):
     def close(self):
         self.tar.close()
 
-        if self.tar.mode == 'wb' and self.type == 'tarlzma':
+        if self.tar.mode == 'w' and self.type == 'tarlzma':
             batch = None
-            if ctx.config.values.build.compressionlevel:
-                batch = "lzmash -%s %s" % (ctx.config.values.build.compressionlevel, self.file_path)
+            if util.is_osx():
+                lzma = "lzma"
             else:
-                batch = "lzmash %s" % self.file_path
+                lzma = "lzmash"
+            if ctx.config.values.build.compressionlevel:
+                batch = "%s -%s %s" % (lzma, ctx.config.values.build.compressionlevel, self.file_path)
+            else:
+                batch = "%s %s" % (lzma, self.file_path)
 
             ret, out, err = util.run_batch(batch)
             if ret != 0:
@@ -201,6 +206,7 @@ class ArchiveZip(ArchiveBase):
             else:
                 if not arc_name:
                     arc_name = file_name
+                #print 'Adding %s as %s' % (file_name, arc_name)
                 self.zip_obj.write(file_name, arc_name)
 
                 #zinfo = self.zip_obj.getinfo(arc_name)
