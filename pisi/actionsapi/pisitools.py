@@ -31,34 +31,46 @@ from pisi.util import join_path
 
 # ActionsAPI Modules
 import pisi.actionsapi
+pisi.actionsapi.variables.initVariables()
 import pisi.actionsapi.get as get
 from pisi.actionsapi.pisitoolsfunctions import *
 from pisi.actionsapi.shelltools import *
 
 from pisi.actionsapi import error
 
+
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
-    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
+    #print 'globals=',globals()
+    #print 'locals=',locals()
+    #print '** srcDir=',get.sourceDIR()
+    #print '** WorkDir=',WorkDir
+    #print 'glb,env,dirs',pisi.actionsapi.variables.glb,pisi.actionsapi.variables.glb.env,pisi.actionsapi.variables.glb.dirs
+    #print 'dobin',get.installDIR(), destinationDirectory,sourceFile
+    executable_insinto(join_path(get.installDIR(), destinationDirectory),
+                       sourceFile)
  
 def dodir(destinationDirectory):
     '''creates a directory tree'''
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
 def dodoc(*sourceFiles):
-    '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
-    readable_insinto(join_path(get.installDIR(), join_path('/usr/share/doc', get.srcTAG())), *sourceFiles)
+    '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
+    readable_insinto(join_path(get.installDIR(), '/usr/share/doc', get.srcTAG()), sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
-    
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
-    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
+    executable_insinto(join_path(get.installDIR(), destinationDirectory),                           sourceFile)
+
+def doexes(sourceFiles, destinationDirectory):
+    '''insert a executable file into destination directory'''
+    ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
+    executable_insinto(join_path(get.installDIR(), destinationDirectory),                           sourceFiles)
 
 def dohtml(*sourceFiles):
-    '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
- 
+    '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html''' 
     ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
     destionationDirectory = join_path(get.installDIR(), 'usr/share/doc' ,get.srcTAG(), 'html')
 
@@ -160,8 +172,11 @@ def rename(sourceFile, destinationFile):
 
     baseDir = os.path.dirname(sourceFile)
 
-    try:        
-        os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
+    try:
+        #print 'rename:',get.workDIR(), sourceFile, baseDir, destinationFile
+        sourceFile = join_path(get.installDIR(), sourceFile)
+        os.rename(sourceFile,
+                  join_path(get.installDIR(), baseDir, destinationFile))
     except OSError:
         error(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
