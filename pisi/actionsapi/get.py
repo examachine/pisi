@@ -21,10 +21,12 @@ _ = __trans.ugettext
 
 # PISI Modules
 import pisi.actionsapi
+import pisi.util as util
 import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi.variables
+pisi.actionsapi.variables.initVariables()
 
 class BinutilsError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -69,6 +71,18 @@ def pkgDIR():
 
 def workDIR():
     return env.work_dir
+
+def sourceDIR():
+    return env.src_dir
+
+## def pkgsrcDIR():
+##     print 'pkgsrcDIR dbg',env.pkg_dir, env.work_dir
+##     try:
+##         pkgworkdir = env.pkg_dir
+##     except KeyError:
+##         pkgworkdir = srcDIR()
+                    
+##     return util.join_path(env.work_dir, pkgworkdir)
 
 def installDIR():
     '''returns the path of binary packages'''
