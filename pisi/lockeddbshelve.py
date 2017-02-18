@@ -90,7 +90,7 @@ def init_dbenv(write=False, writeversion=False):
             flags =  (db.DB_INIT_MPOOL |      # cache
                       db.DB_INIT_TXN |        # transaction subsystem
                       db.DB_INIT_LOG |        # logging subsystem
-                      db.DB_INIT_LOCK |       # locking subsystem
+                      #db.DB_INIT_LOCK |       # locking subsystem
                       db.DB_RECOVER |         # run normal recovery
                       db.DB_CREATE)           # allow db to create files
             # TODO: consider DB_THREAD
