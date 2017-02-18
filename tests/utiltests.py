@@ -80,7 +80,7 @@ class UtilTestCase(testcase.TestCase):
         for tpl in get_file_hashes('tests/utilfiles/'):
             if os.path.basename(tpl[0]) == 'myname.txt':
                 self.assertEqual(tpl[1], '9688bd316f79bc3280b642f08ccbe7253f3d9ba0')
-            if os.path.basename(tpl[0]) == 'linktoarfile':
+            if os.path.basename(tpl[0]) == 'arfilewithtimestamps.a':
                 self.assertEqual(tpl[1], 'bc79b8f997abcc39f3dc2e9e18fb139ded363e49')
         restore_svn_paths(svn_paths)
 
