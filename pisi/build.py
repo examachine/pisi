@@ -53,14 +53,18 @@ class Error(pisi.Error):
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
-    
+    #print 'get_file_type',path,str(pinfo_list),install_dir
     Match = lambda x: [match for match in glob.glob(install_dir + x) if join(install_dir, path).find(match) > -1]
 
     def Sort(x):
         x.sort(reverse=True)
         return x
-    
-    best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
+
+    matches = [pinfo.path for pinfo in pinfo_list if Match(pinfo.path)]
+    if len(matches)>0:
+        best_matched_path = Sort(matches)[0]
+    else:
+        raise Error, _("No file matches %s in Spec file." % path)
     info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
     return info.fileType, info.permanent
 
@@ -364,19 +368,24 @@ class Builder:
 
     def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
+        ctx.ui.info(_('Compiling action script'))
         scriptfile = util.join_path(self.specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
+            #localSymbols = {}
+            #globalSymbols = {}
+            #localSymbols = locals()
+            #globalSymbols = globals()
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
             raise Error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
         except SyntaxError, e:
             raise Error(_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
-
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
         self.srcDir = self.pkg_src_dir()
+        os.environ['SRC_DIR'] = self.srcDir
         
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -397,7 +406,7 @@ class Builder:
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
-
+        print func
         if func in self.actionLocals:
             self.actionLocals[func]()
         else:
@@ -607,7 +616,7 @@ class Builder:
                     continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
-                fsize = util.dir_size(fpath)
+                fsize = long(util.dir_size(fpath))
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
                                      size=fsize, hash=fhash)
 
