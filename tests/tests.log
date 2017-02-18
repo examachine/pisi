@@ -1,3 +1,9 @@
+----> **** BUG: packagedb hangs!!
+
+$ tests/run.py 
+** Running all tests
+
+* Running tests in actionsapitests.py
 testFileList (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessDir (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessFile (actionsapitests.ActionsAPITestCase) ... ok
@@ -7,112 +13,163 @@ testShelltoolsMakedirs (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsSystem (actionsapitests.ActionsAPITestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 4.388s
+Ran 7 tests in 3.857s
 
 OK
-testMakeZip (archivetests.ArchiveFileTestCase) ... ok
-testUnpackTar (archivetests.ArchiveFileTestCase) ... ok
-testUnpackZip (archivetests.ArchiveFileTestCase) ... ok
+
+* Running tests in archivetests.py
+testMakeZip (archivetests.ArchiveFileTestCase) ... check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+ok
+testUnpackTar (archivetests.ArchiveFileTestCase) ... check_file_hash 66f3c77b87a160951b180447f4a6dce68ad2f71b 66f3c77b87a160951b180447f4a6dce68ad2f71b
+ok
+testUnpackZip (archivetests.ArchiveFileTestCase) ... check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+ok
 testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 3.753s
+Ran 4 tests in 8.532s
 
 OK
+
+* Running tests in autoxmltests.py
 testDeclaration (autoxmltests.AutoXmlTestCase) ... ok
 testReadWrite (autoxmltests.AutoXmlTestCase) ... ok
 testWriteRead (autoxmltests.AutoXmlTestCase) ... ok
 testStr (autoxmltests.LocalTextTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.009s
+Ran 4 tests in 0.011s
 
 OK
-testBasicBuild (buildtests.BuildTestCase) ... ** Running all tests
-
-* Running tests in actionsapitests.py
-
-* Running tests in archivetests.py
-
-* Running tests in autoxmltests.py
 
 * Running tests in buildtests.py
-[35mBuilding PISI source package: a
-[0m[35mSafety switch: the component system.devel cannot be found
-[0mFetching source from: http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz
-ERROR
-testBuildNumber (buildtests.BuildTestCase) ... [35mBuilding PISI source package: a
-[0m[35mSafety switch: the component system.devel cannot be found
-[0mFetching source from: http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz
-ERROR
+testBasicBuild (buildtests.BuildTestCase) ... Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+actions.py: WorkDir = merhaba-pisi-1.0
+Password:
+Stripping files..
+** Building package a
+Generating files.xml,
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-1.pisi.
+Done.
+Keeping Build Directory
+ok
+testBuildNumber (buildtests.BuildTestCase) ... Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+actions.py: WorkDir = merhaba-pisi-1.0
+Stripping files..
+** Building package a
+Generating files.xml,
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-1.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+Stripping files..
+** Building package a
+Generating files.xml,
+(found old version tmp/a-1.0-1-1.pisi)
+There are changes, incrementing build no to 2
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-2.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+Stripping files..
+** Building package a
+Generating files.xml,
+(found old version tmp/a-1.0-1-1.pisi)
+(found old version tmp/a-1.0-1-2.pisi)
+There is no change from previous build 2
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-2.pisi.
+Done.
+Keeping Build Directory
+ok
 
-======================================================================
-ERROR: testBasicBuild (buildtests.BuildTestCase)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 39, in testBasicBuild
-    pb.build()
-  File "./pisi/build.py", line 194, in build
-    self.fetch_source_archive()
-  File "./pisi/build.py", line 308, in fetch_source_archive
-    self.sourceArchive.fetch()
-  File "./pisi/sourcearchive.py", line 50, in fetch
-    fetch_url(self.url, ctx.config.archives_dir(), progress)
-  File "./pisi/fetcher.py", line 55, in fetch_url
-    fetch.fetch()
-  File "./pisi/fetcher.py", line 100, in fetch
-    self.fetchRemoteFile(partial_file)
-  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
-    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-  File "./pisi/fetcher.py", line 253, in err
-    raise FetchError(error)
-FetchError: Cannot fetch http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz; nodename nor servname provided, or not known
+Ran 2 tests in 9.284s
 
-======================================================================
-ERROR: testBuildNumber (buildtests.BuildTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 44, in testBuildNumber
-    self.testBasicBuild()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 39, in testBasicBuild
-    pb.build()
-  File "./pisi/build.py", line 194, in build
-    self.fetch_source_archive()
-  File "./pisi/build.py", line 308, in fetch_source_archive
-    self.sourceArchive.fetch()
-  File "./pisi/sourcearchive.py", line 50, in fetch
-    fetch_url(self.url, ctx.config.archives_dir(), progress)
-  File "./pisi/fetcher.py", line 55, in fetch_url
-    fetch.fetch()
-  File "./pisi/fetcher.py", line 100, in fetch
-    self.fetchRemoteFile(partial_file)
-  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
-    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-  File "./pisi/fetcher.py", line 253, in err
-    raise FetchError(error)
-FetchError: Cannot fetch http://cekirdek.uludag.org.tr/~meren/merhaba-pisi-1.0.tar.gz; nodename nor servname provided, or not known
+OK
 
-----------------------------------------------------------------------
-Ran 2 tests in 1.182s
-
-FAILED (errors=2)
+* Running tests in configfiletests.py
 testAccessMethods (configfiletests.ConfigFileTestCase) ... ok
 testFlagsExists (configfiletests.ConfigFileTestCase) ... ok
 testSections (configfiletests.ConfigFileTestCase) ... ok
 testValues (configfiletests.ConfigFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.001s
+Ran 4 tests in 0.002s
 
 OK
+
+* Running tests in conflicttests.py
 testConflictWithEachOther (conflicttests.ConflictTestCase) ... ok
 testConflictWithEachOtherAndInstalled (conflicttests.ConflictTestCase) ... ok
 testConflictWithInstalled (conflicttests.ConflictTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 4.204s
+Ran 3 tests in 3.382s
 
 OK
+
+* Running tests in constantstests.py
 testConstValues (constantstests.ContextTestCase) ... ok
 testConstness (constantstests.ContextTestCase) ... ok
 
@@ -120,6 +177,8 @@ testConstness (constantstests.ContextTestCase) ... ok
 Ran 2 tests in 0.000s
 
 OK
+
+* Running tests in dependencytests.py
 testReleaseFrom (dependencytests.DependencyTestCase) ... ok
 testReleaseIs (dependencytests.DependencyTestCase) ... ok
 testReleaseTo (dependencytests.DependencyTestCase) ... ok
@@ -129,47 +188,37 @@ testVersionFrom (dependencytests.DependencyTestCase) ... ok
 Ran 4 tests in 0.001s
 
 OK
-testFetch (fetchertests.FetcherTestCase) ... ERROR
-testResume (fetchertests.FetcherTestCase) ... ERROR
 
-======================================================================
-ERROR: testFetch (fetchertests.FetcherTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 35, in testFetch
-    self.fetch.fetch()
-  File "./pisi/fetcher.py", line 100, in fetch
-    self.fetchRemoteFile(partial_file)
-  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
-    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-  File "./pisi/fetcher.py", line 253, in err
-    raise FetchError(error)
-FetchError: Cannot fetch http://cekirdek.uludag.org.tr/~eray/hello-1.3.tar.gz; nodename nor servname provided, or not known
+* Running tests in fetchertests.py
+testFetch (fetchertests.FetcherTestCase) ... ok
+testResume (fetchertests.FetcherTestCase) ... ERROR
 
 ======================================================================
 ERROR: testResume (fetchertests.FetcherTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 45, in testResume
-    self.fetch.fetch()
-  File "./pisi/fetcher.py", line 100, in fetch
-    self.fetchRemoteFile(partial_file)
-  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
-    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-  File "./pisi/fetcher.py", line 253, in err
-    raise FetchError(error)
-FetchError: Cannot fetch http://cekirdek.uludag.org.tr/~eray/hello-1.3.tar.gz; nodename nor servname provided, or not known
+  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 44, in testResume
+    shutil.copy(resume_test_file, ctx.config.archives_dir())
+  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py", line 119, in copy
+    copyfile(src, dst)
+  File "/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: 'tests/helloworld/hello-1.3.tar.gz.part'
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.007s
+Ran 2 tests in 1.298s
 
-FAILED (errors=2)
+FAILED (errors=1)
+
+* Running tests in filestests.py
 testFileInfo (filestests.FilesTestCase) ... ok
 
 ----------------------------------------------------------------------
 Ran 1 test in 0.001s
 
 OK
+
+* Running tests in filetests.py
 testLocalFile (filetests.FileTestCase) ... ok
 testRemoteRead (filetests.FileTestCase) ... ERROR
 
@@ -194,9 +243,11 @@ Traceback (most recent call last):
 FetchError: Cannot fetch http://uludag.org.tr/haberler/rootfs0.2.html; nodename nor servname provided, or not known
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.129s
+Ran 2 tests in 0.224s
 
 FAILED (errors=1)
+
+* Running tests in graphtests.py
 testCycle (graphtests.GraphTestCase) ... ok
 testTopologicalSort (graphtests.GraphTestCase) ... ok
 
@@ -204,96 +255,34 @@ testTopologicalSort (graphtests.GraphTestCase) ... ok
 Ran 2 tests in 0.000s
 
 OK
+
+* Running tests in installdbtests.py
 testInstall (installdbtests.InstallDBTestCase) ... ok
 testRemoveDummy (installdbtests.InstallDBTestCase) ... ok
 testRemovePurge (installdbtests.InstallDBTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 2.161s
+Ran 3 tests in 2.269s
 
 OK
-testRead (metadatatests.MetaDataTestCase) ... ERROR
-testVerify (metadatatests.MetaDataTestCase) ... ERROR
-testWrite (metadatatests.MetaDataTestCase) ... ERROR
 
-======================================================================
-ERROR: testRead (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 430, in read
-    self.decode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 686, in decode
-    obj.decode(node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 632, in decode
-    x = autoxml.basic_cons_map[token_type](text)
-TypeError: long() argument must be a string or a number, not 'NoneType'
-
-======================================================================
-ERROR: testVerify (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 36, in testVerify
-    md = self.testRead()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 430, in read
-    self.decode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 686, in decode
-    obj.decode(node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 632, in decode
-    x = autoxml.basic_cons_map[token_type](text)
-TypeError: long() argument must be a string or a number, not 'NoneType'
-
-======================================================================
-ERROR: testWrite (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 32, in testWrite
-    md = self.testRead()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 430, in read
-    self.decode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 686, in decode
-    obj.decode(node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 346, in decode
-    decode_member(self, node, errs, where)
-  File "./pisi/pxml/autoxml.py", line 539, in decode
-    setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-  File "./pisi/pxml/autoxml.py", line 632, in decode
-    x = autoxml.basic_cons_map[token_type](text)
-TypeError: long() argument must be a string or a number, not 'NoneType'
+* Running tests in metadatatests.py
+testRead (metadatatests.MetaDataTestCase) ... ok
+testVerify (metadatatests.MetaDataTestCase) ... ok
+testWrite (metadatatests.MetaDataTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.004s
+Ran 3 tests in 0.006s
 
-FAILED (errors=3)
+OK
+
+* Running tests in ootests.py
 testautosuper (ootests.OOTestCase) ... ok
 
 ----------------------------------------------------------------------
 Ran 1 test in 0.000s
 
 OK
+
+* Running tests in packagedbtests.py
 testAdd (packagedbtests.PackageDBTestCase) ... 
