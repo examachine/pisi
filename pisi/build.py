@@ -818,6 +818,7 @@ class Builder:
                 ctx.build_leftover = join(self.pkg_dir(), ctx.const.install_tar_lzma)
                 tar = archive.ArchiveTar(ctx.const.install_tar_lzma, "tarlzma")
                 for finfo in files.list:
+                    #print finfo.path
                     orgname = arcname = join("install", finfo.path)
                     if package.debug_package:
                         orgname = join("debug", finfo.path)
