@@ -1,4 +1,5 @@
-# Copyright (C) 2005, TUBITAK/UEKAE
+# -*- coding: utf-8 -*-
+## Copyright (C) 2005, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -31,8 +32,9 @@ class XmlExtTestCase(testcase.TestCase):
         self.assertEqual(xmlext.getNodeText(self.doc, 'Number'), '868')
         self.assertEqual(xmlext.getNodeText(self.doc, 'OtherInfo/BirthDate'), '18071976')
         codeswith = xmlext.getAllNodes(self.doc, 'OtherInfo/CodesWith/Person')
-        self.assertEqual(len(codeswith), 4)
-        self.assertEqual(xmlext.getNodeText(codeswith[2]), 'Caglar')
+        self.assertEqual(len(codeswith), 5)
+        self.assertEqual(xmlext.getNodeText(codeswith[1]),
+                         u'Çağlar')
         
     def testAdd(self):
         node = xmlext.newDocument('pardus')
