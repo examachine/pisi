@@ -1,7 +1,7 @@
 PISI 1.1.1 18 February 2017:
 
  * First release by the original author after 1.1 beta revisions of development branch.
- * Ported to OS/X.
+ * Ported to OS X.
  * Multiple showstopper bugs in devel branch fixed
  * Unit tests passed rigorously
 
