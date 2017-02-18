@@ -214,7 +214,7 @@ class Builder:
         # Each time a builder is created we must reset
         # environment. See bug #2575
         pisi.actionsapi.variables.initVariables()
-        print '***** MEOWW *****'
+        #print '***** MEOWW *****'
 
         env = {
             "PKG_DIR": self.pkg_dir(),
