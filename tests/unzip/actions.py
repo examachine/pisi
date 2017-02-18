@@ -15,6 +15,8 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
+WorkDir = "unzip60"
+
 def setup():
     pisitools.dosed("unix/Makefile", "-O3", get.CFLAGS())
     pisitools.dosed("unix/Makefile", "CC=gcc LD=gcc", "CC=${CC:-gcc} LD=${CC:-gcc}")
@@ -22,7 +24,8 @@ def setup():
     pass
 
 def build():
-    autotools.make("-f unix/Makefile linux")
+    print '**** FUUUCK'
+    autotools.make("-f unix/Makefile clean generic2")
 
 def install():
     pisitools.insinto("/usr/bin/", "unzip")

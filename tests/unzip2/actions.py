@@ -24,7 +24,7 @@ def setup():
     pass
 
 def build():
-    autotools.make("-f unix/Makefile linux")
+    autotools.make("-f unix/Makefile clean generic2")
 
 def install():
     pisitools.insinto("/usr/bin/", "unzip")
