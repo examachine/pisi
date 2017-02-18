@@ -33,28 +33,28 @@ class BuildTestCase(testcase.TestCase):
         pisi.context.config.values.build.buildno = True
 
     def testBasicBuild(self):
+        self.cleanOutput()
         shutil.copy('tests/buildtests/a/actions.py-1', 'tests/buildtests/a/actions.py')
         pspec = 'tests/buildtests/a/pspec.xml'
         pb = Builder(pspec)
         pb.build()
         self.assert_(os.path.exists('tmp/a-1.0-1-1.pisi'))
 
-    ## def testBuildNumber(self):
-    ##     self.cleanOutput()
-    ##     self.testBasicBuild()
-        
-    ##     pspec = 'tests/buildtests/a/pspec.xml'
-    ##     shutil.copy('tests/buildtests/a/actions.py-2', 'tests/buildtests/a/actions.py')
-    ##     pb = Builder(pspec)
-    ##     pb.build()
-    ##     self.assert_(os.path.exists('tmp/a-1.0-1-2.pisi'))
+    def testBuildNumber(self):
+        self.testBasicBuild()
 
-    ##     pb = Builder(pspec)
-    ##     pb.build()
-    ##     # because nothing is changed
-    ##     self.assert_(not os.path.exists('tmp/a-1.0-1-3.pisi'))
+        pspec = 'tests/buildtests/a/pspec.xml'
+        shutil.copy('tests/buildtests/a/actions.py-2', 'tests/buildtests/a/actions.py')
+        pb = Builder(pspec)
+        pb.build()
+        self.assert_(os.path.exists('tmp/a-1.0-1-2.pisi'))
+
+        pb = Builder(pspec)
+        pb.build()
+        # because nothing is changed
+        self.assert_(not os.path.exists('tmp/a-1.0-1-3.pisi'))
         
-    ##     os.remove('tests/buildtests/a/actions.py')
-    ##     os.remove('tmp/a-1.0-1-2.pisi')
+        os.remove('tests/buildtests/a/actions.py')
+        os.remove('tmp/a-1.0-1-2.pisi')
 
 suite = unittest.makeSuite(BuildTestCase)
