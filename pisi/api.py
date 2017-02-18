@@ -54,7 +54,8 @@ class Error(pisi.Error):
 
 def init(database = True, write = True,
          options = None, ui = None, comar = True,
-         stdout = None, stderr = None,
+         #stdout = None, stderr = None,
+         stdout = sys.stdout, stderr = sys.stderr,
          comar_sockname = None):
     """Initialize PiSi subsystem"""
 
