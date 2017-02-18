@@ -27,8 +27,10 @@ of kindness to promote team unity. Since I am not pleased with the
 later Pardus release branch that I find to be desecrating my poetic
 code, I am reviving the original development branch. I've uploaded the
 last development branch I found on my local SVN copies, out of
-1.1_beta12. The next release will be 1.1. I declare the 1.0 release
-and branch to be obsolete. May its bits rot in peace.
+1.1_beta12. The next release will be 1.2, and then the next major 
+revision will be called 3.0. I declare the 1.0 and 1.1 releases
+and 2.x branch from TUBITAK, which is not truly a major revision to pisi code,
+to be obsolete. May its bits rot in peace.
 
 There are two very interesting generic python novelties I developed
 for PISI. The use of metaclasses was essential to both.  The first one
