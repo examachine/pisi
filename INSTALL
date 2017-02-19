@@ -1,7 +1,7 @@
-Author: Eray Ozkural
-
 INSTALLATION INSTRUCTIONS
 =-=-=-=-=-=-=-=-=-=-=-=-=
+
+Author: Eray Ozkural
 
 
 Generic Instructions:
@@ -17,8 +17,8 @@ If you are on a Pardus system, you should delete /usr/lib/pardus/pisi
 when you are installing the SVN version
 
 PiSi requires piksemel XML processing library, the newest version
-bsd bindings called "bsddb3" and Pardus configuration manager COMAR
-in order to run.
+Berkekey DB python bindings called "bsddb3" and Pardus configuration 
+manager COMAR in order to run.
 
 If you are upgrading from an old PiSi release you may have to 
 run the following command as root:
@@ -39,7 +39,11 @@ $ pip install bsddb3
 
 Install piksemel XML processing library
 
-$ brew install coreutils xz
+$ brew install coreutils xz gnupg2
+
+set up gnupg2 if needed:
+
+$ gpg --gen-key
 
 $ ./setup.py install
 
