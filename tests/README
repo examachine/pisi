@@ -13,5 +13,15 @@ Run individual tests with giving arguments
 $ tests/run.py actionsapi
 
 Shell scripts use the CLIs to perform package operations.
+$ ls tests/*.sh
+tests/build.sh		tests/remoterepo.sh
+tests/light.sh		tests/upgrade.sh
+
+Run these tests individually.
+
+There are also stress tests under stress directory:
+$ ls tests/stress/
+comp		component.xml	lang		stress.sh
+
 
 Most tests were written by Eray Ozkural
