@@ -34,7 +34,8 @@ Some of its distinctive features:
 
 To see help about basic usage, simply issue
 
-`$ pisi --help
+~~~~
+$ pisi --help
 $ pisi --help
 
 Usage: pisi [options] <command> [arguments]
@@ -74,7 +75,8 @@ Use "pisi help <command>" for help on a specific command.
 Options:
   --version   show program's version number and exit
   -h, --help  show this help message and exit
-`
+~~~~
+
 PISI has an advanced CLI tool that allows you to access both low-level and
 high-level package operations easily. You can arrange repos, view package DB's,
 build, install, upgrade, remove, and search packages, install packages from
@@ -82,14 +84,14 @@ sources as in Gentoo distribution with an equivalent emerge command.
 
 You may find extra tools in scripts directory:
 
-`$ ls -G scripts
+~~~~
+$ ls -G scripts
 calc-build-order.py       fix_old_metadata_files.py repostats.py
 cat-db.py                 lspisi                    residuary-binary.py
 check-source-repo.py      missing-binary.py         rmcomp-source-repo.py
 convert_history.py        pisimedia                 unpisi
 fetchAll.py               pisish
 find-lib-deps.py          repo-diff.py
-
-`
+~~~~
 
 *Eray Ozkural, PhD*
