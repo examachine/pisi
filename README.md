@@ -82,7 +82,7 @@ high-level package operations easily. You can arrange repos, view package DB's,
 build, install, upgrade, remove, and search packages, install packages from
 sources as in Gentoo distribution with an equivalent emerge command. 
 
-You may find extra tools in scripts directory:
+You may find extra tools in the scripts directory:
 
 ~~~~
 $ ls -G scripts
