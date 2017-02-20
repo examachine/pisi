@@ -1,4 +1,4 @@
-#Copyright Licenses Used by PISI Packag
+#Copyright Licenses Used by PISI Package
 
 ## GPL v3.0
 
