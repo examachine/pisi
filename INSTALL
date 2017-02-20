@@ -8,6 +8,7 @@ Dependencies:
 -------------
 
 * Berkeley DB 4.x
+* python bsddb3 package
 * piksemel
 * coreutils 
 * xz
