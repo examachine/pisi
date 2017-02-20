@@ -160,7 +160,7 @@ command metaclass.  It is advisable to develop new feature sets
 following a similar, re-usable, generic programming style.
 
 7. Test-driven development is a most preferable rapid development
-methodology. The sooner you may write the tests for your application.
+methodology. The sooner you may write the tests for your application,
 the quicker you can start writing code that will not break it. One of
 PISI's strengths is the comprehensive test suite. If you start writing
 the code with some test cases, it should diminish your coding time.
