@@ -4,7 +4,7 @@ Authors and contributors
 Authors:
 
 Eray Özkural <eray [at] pardus.org.tr> - ops, commands, db, autoxml, graph, deps, api, CLI, search, tests, docs, 300+ bugfixes
-Barış Metin <baris [at] pardus.org.tr> - build commands, bugfixes, tests
+Barış Metin <baris [at] pardus.org.tr> - build code path, bugfixes, tests
 S. Çağlar Onur <caglar [at] pardus.org.tr> - actionsapi, tests
 A. Murat Eren <meren [at] pardus.org.tr> - archive, fetcher, ui stuff, tests
 
