@@ -23,6 +23,7 @@
 #destinationdirectory = /
 #autoclean = False
 #xdelta = False
+#bandwidth_limit = 0
 #
 #[build]
 #host = i686-pc-linux-gnu
@@ -63,6 +64,7 @@ class GeneralDefaults:
     destinationdirectory = "/"
     autoclean = False
     xdelta = False
+    bandwidth_limit = 0
     distribution = "Pardus"
     distribution_release = "1.1"
     http_proxy = os.getenv("HTTP_PROXY") or None
@@ -71,11 +73,11 @@ class GeneralDefaults:
 
 class BuildDefaults:
     """Default values for [build] section"""
-    host = "i686-pc-linux-gnu"
+    host = "" # "i686-pc-linux-gnu"
     jobs = "-j1"   
     generateDebug = False
-    cflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
-    cxxflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
+    cflags = "-O2 -pipe -fomit-frame-pointer"
+    cxxflags = "-O2 -pipe -fomit-frame-pointer"
     ldflags = ""
     buildno = False
     buildhelper = None

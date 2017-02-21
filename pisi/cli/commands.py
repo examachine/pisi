@@ -97,6 +97,8 @@ class Command(object):
                      default=False, help=_("show debugging information"))
         p.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("print like a man"))
+        p.add_option("-L", "--bandwidth-limit", action="store", default = 0,
+                     help = _("Keep bandwidth usage under specified KB's"))
         return p
 
     def options(self):
