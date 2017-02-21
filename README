@@ -12,7 +12,7 @@ Some of its distinctive features:
  - Efficient and small
  - Package sources are written in XML and python
  - Fast database access implemented with berkeley DB
- - Integrates low-level and high-level package operations (dependency resolution)
+ - Integrates low-level and high-level package operations (dependencies)
  - Framework approach to build applications and tools upon
  - Comprehensive CLI and a user-friendly qt GUI (distributed separately)
  - Extremely simple package construction
