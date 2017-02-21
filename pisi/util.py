@@ -81,6 +81,20 @@ def remove_prefix(a,b):
     assert prefix(a,b)
     return b[len(a):]
 
+def suffix(a, b):
+    """Check if sequence a is a suffix of sequence b."""
+    if len(a) > len(b):
+        return False
+    for i in range(1, len(a) + 1):
+        if a[-i] != b[-i]:
+            return False
+    return True
+
+def remove_suffix(a, b):
+    """Remove suffix a from sequence b."""
+    assert suffix(a, b)
+    return b[:-len(a)]
+
 def human_readable_size(size = 0):
     symbols, depth = [' B', 'KB', 'MB', 'GB'], 0
 
@@ -415,10 +429,9 @@ def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
     shutil.copytree(src, dest)
 
-def check_file_hash(filename, hash):
+def check_file_hash(filename, expected_hash):
     """Check the files integrity with a given hash"""
-    print 'check_file_hash',sha1_file(filename),hash
-    return sha1_file(filename) == hash
+    return sha1_file(filename) == expected_hash
 
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
@@ -464,6 +477,7 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
 def do_patch(sourceDir, patchFile, level = 0, target = ''):
     """simple function to apply patches.."""
     cwd = os.getcwd()
+    ctx.ui.debug("Applying patch %s in source directory %sourceDir with level %d" % (patchFile, sourceDir, level))
     os.chdir(sourceDir)
     
     if level == None:
