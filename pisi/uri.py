@@ -69,6 +69,9 @@ class URI(object):
 
     def is_remote_file(self):
         return not self.is_local_file()
+
+    def is_mirror(self):
+        return self.get_uri().startswith("mirrors://")
         
     def is_absolute_path(self):
         return util.absolute_path(self.__path)

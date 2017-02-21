@@ -45,7 +45,7 @@ class Config(object):
     
     def __init__(self, options = Options()):
         self.options = options
-        self.values = ConfigurationFile("/etc/pisi/pisi.conf")
+        self.values = ConfigurationFile(ctx.const.pisi_conf)
 
         destdir = self.get_option('destdir')
         if destdir:

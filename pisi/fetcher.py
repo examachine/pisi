@@ -10,6 +10,8 @@
 # Please read the COPYING file.
 #
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
+#           A. Murat Eren <meren@pardus.org.tr>
+#           Faik Uygur <faik@pardus.org.tr>
 
 """Yet another Pisi module for fetching files from various sources. Of
 course, this is not limited to just fetching source files. We fetch
@@ -27,18 +29,20 @@ from mimetypes import guess_type
 from mimetools import Message
 from base64 import encodestring
 from shutil import move
-from time import time
-from time import gmtime
+from time import time,gmtime
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
+
+from urlgrabber import urlgrab, grabber
 
 # pisi modules
 import pisi
 import pisi.util as util
 import pisi.context as ctx
 from pisi.uri import URI
+from pisi.mirrors import Mirrors
 
 class FetchError(pisi.Error):
     pass
@@ -56,6 +60,71 @@ def fetch_url(url, destdir, progress=None, resume=True):
     if progress:
         pass
 
+# urlgrabber hook by Faik
+class UIHandler:
+    def __init__(self, progress):
+        self.filename        = None
+        self.url             = None
+        self.basename        = None
+        self.downloaded_size = 0
+        self.percent         = None
+        self.rate            = 0.0
+        self.size            = 0
+        self.eta             = '--:--:--'
+        self.symbol          = '--/-'
+        self.last_updated    = 0
+        self.exist_size      = 0
+
+    def start(self, archive, url, basename, size, text):
+        if os.path.exists(archive):
+            self.exist_size = os.path.getsize(archive)
+        self.filename   = util.remove_suffix(ctx.const.partial_suffix, basename)
+        self.url        = url
+        self.basename   = basename
+        self.total_size = size or 0
+        self.text       = text
+
+        self.now    = lambda: time()
+        self.t_diff = lambda: self.now() - self.s_time
+
+        self.s_time = self.now()
+
+    def update(self, size):
+
+        if self.size == size:
+            return
+
+        self.size = size
+        if self.total_size:
+            self.percent = (size * 100.0) / self.total_size
+        else:
+            self.percent = 0
+
+        if int(self.now()) != int(self.last_updated) and size > 0:
+            try:
+                self.rate, self.symbol = util.human_readable_rate((size - self.exist_size) / (self.now() - self.s_time))
+            except ZeroDivisionError:
+                return
+            if self.total_size:
+                self.eta  = '%02d:%02d:%02d' %\
+                    tuple([i for i in gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
+
+        self._update_ui()
+
+    def end(self, read):
+        pass
+
+    def _update_ui(self):
+        ctx.ui.display_progress(operation       = "fetching",
+                                percent         = self.percent,
+                                filename        = self.filename,
+                                total_size      = self.total_size or self.size,
+                                downloaded_size = self.size,
+                                rate            = self.rate,
+                                eta             = self.eta,
+                                symbol          = self.symbol)
+
+        self.last_updated = self.now()
 
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
@@ -94,16 +163,19 @@ class Fetcher:
 
         partial_file = archive_file + '.part'
 
-        if self.url.is_local_file():
-            self.fetchLocalFile(partial_file)
+        if self.url.is_mirror():
+            self.fetchFromMirror(partial_file)
         else:
-            self.fetchRemoteFile(partial_file)
+            if self.url.is_local_file():
+                self.fetchLocalFile(partial_file)
+            else:
+                self.fetchRemoteFile(partial_file)
 
-        if os.stat(partial_file).st_size == 0:
-            os.remove(partial_file)
-            self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
+            if os.stat(partial_file).st_size == 0:
+                os.remove(partial_file)
+                self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
 
-        move(partial_file, archive_file)
+            move(partial_file, archive_file)
 
         return archive_file 
 
@@ -166,7 +238,84 @@ class Fetcher:
         fileObj = open(url.path())
         self._do_grab(fileObj, dest, total_size)
 
-    def fetchRemoteFile (self, archive_file):
+    def fetchRemoteFile(self, archive_file):
+        try:
+            urlgrab(self.url.get_uri(),
+                    archive_file,
+                    progress_obj = UIHandler(self.progress),
+                    http_headers = self._get_http_headers(),
+                    ftp_headers  = self._get_ftp_headers(),
+                    proxies      = self._get_proxies(),
+                    throttle     = self._get_bandwith_limit(),
+                    reget        = self._test_range_support(archive_file),
+                    copy_local   = 1,
+                    user_agent   = 'PISI Fetcher/' + pisi.__version__)
+        except grabber.URLGrabError, e:
+            raise FetchError(_('Could not fetch destination file "%s": %s')
+                             % (self.url.get_uri(), e))
+
+    def _get_http_headers(self):
+        headers = []
+        if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
+            enc = base64.encodestring('%s:%s' % self.url.auth_info())
+            headers.append(('Authorization', 'Basic %s' % enc),)
+        return tuple(headers)
+
+    def _get_ftp_headers(self):
+        headers = []
+        if self.url.auth_info() and self.url.scheme() == "ftp":
+            enc = base64.encodestring('%s:%s' % self.url.auth_info())
+            headers.append(('Authorization', 'Basic %s' % enc),)
+        return tuple(headers)
+
+    def _get_proxies(self):
+        proxies = {}
+        
+        if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
+            proxies[pisi.uri.URI(ctx.config.values.general.http_proxy).scheme()] = ctx.config.values.general.http_proxy
+
+        if ctx.config.values.general.https_proxy and self.url.scheme() == "https":
+            proxies[pisi.uri.URI(ctx.config.values.general.https_proxy).scheme()] = ctx.config.values.general.https_proxy
+
+        if ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
+            proxies[pisi.uri.URI(ctx.config.values.general.ftp_proxy).scheme()] = ctx.config.values.general.ftp_proxy
+
+        if self.url.scheme() in proxies:
+            ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
+
+        return proxies
+
+    def _get_bandwith_limit(self):
+        bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
+        if bandwidth_limit and bandwidth_limit != "0":
+            ctx.ui.warning(_("Bandwidth usage is limited to %s KB/s") % bandwidth_limit)
+            return 1024 * int(bandwidth_limit)
+        else:
+            return 0
+
+    def _test_range_support(self,partial_file):
+        if not os.path.exists(partial_file):
+            return None
+
+        import urllib2
+        print '**', self.url.get_uri()
+        try:
+            file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
+        except urllib2.URLError:
+            ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
+            os.remove(partial_file)
+            return None
+
+        headers = file_obj.info()
+        file_obj.close()
+        if headers.has_key('Content-Length'):
+            return 'simple'
+        else:
+            ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
+            os.remove(partial_file)
+            return None
+
+    def fetchRemoteFileOld (self, archive_file):
         from httplib import HTTPException
 
         if os.path.exists(archive_file) and self.resume:
@@ -211,6 +360,28 @@ class Fetcher:
             total_size = 0
 
         self._do_grab(fileObj, dest, total_size)
+
+    def fetchFromMirror(self, archive_file):
+         uri = self.url.get_uri()
+         sep = uri[len("mirrors://"):].split("/")
+         name = sep.pop(0)
+         archive = "/".join(sep)
+ 
+         mirrors = Mirrors().get_mirrors(name)
+         if not mirrors:
+             raise Error(_("%s mirrors are not defined.") % name)
+ 
+         for mirror in mirrors:
+             try:
+                 url = util.join_path(mirror, archive)
+                 ctx.ui.warning(_('Fetching source from mirror: %s') % url)
+                 fetch_url(url, os.path.dirname(archive_file))
+                 return
+             except pisi.fetcher.FetchError:
+                 pass
+ 
+         raise pisi.fetcher.FetchError(_('Could not fetch source from %s mirrors.') % name);
+ 
 
     def formatRequest(self, request):
         if self.url.auth_info():

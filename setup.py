@@ -88,7 +88,7 @@ setup(name="pisi",
     description="PISI (Packages Installed Successfully as Intended)",
     long_description="PISI is the package management system of Pardus Linux.",
     license="GNU AGPL-3.0",
-    author="Eray Ozkural, Baris Metin, S. Caglar Onur",
+    author="Eray Ozkural, Baris Metin, S. Caglar Onur, Murat Eren and contributors",
     author_email="eray.ozkural@gmail.com",
     url="https://github.com/examachine/pisi",
     package_dir = {'': ''},
@@ -96,6 +96,7 @@ setup(name="pisi",
     scripts = ['pisi-cli', 'scripts/repostats.py', 'scripts/find-lib-deps.py', 
                'scripts/lspisi', 'scripts/unpisi',
                'scripts/calc-build-order.py', 'scripts/pisish', 'scripts/pisimedia'],
+    data_files = [ ('etc/pisi', ['etc/mirrors.conf']) ],
     cmdclass = {
         'install' : Install
     }

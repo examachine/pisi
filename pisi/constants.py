@@ -20,6 +20,8 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import sys
+from os.path import join
 
 class _constant:
     "Constant members implementation"
@@ -51,6 +53,9 @@ class Constants:
         # suffix for lzma
         self.__c.lzma_suffix = ".lzma"
 
+        self.__c.partial_suffix = ".part"
+        self.__c.temporary_suffix = ".tmp"
+
         # suffix for auto generated debug packages
         self.__c.debug_name_suffix = "-debug"
         self.__c.debug_file_suffix = ".debug"
@@ -78,6 +83,8 @@ class Constants:
         self.__c.metadata_xml = "metadata.xml"
         self.__c.install_tar = "install.tar"
         self.__c.install_tar_lzma = "install.tar.lzma"
+        self.__c.pisi_conf = "/etc/pisi/pisi.conf"
+        self.__c.mirrors_conf = "/etc/pisi/mirrors.conf"
 
         # functions in actions_file
         self.__c.setup_func = "setup"
