@@ -14,12 +14,13 @@ Dependencies:
 * xz
 * gnupg2
 
+
 Generic Instructions:
 ---------------------
 
 Installation:
 
-You can install PiSi on your system with a single command.
+You can install PISI on your system with a single command.
 
 # ./setup.py install
 
@@ -30,7 +31,7 @@ PiSi requires piksemel XML processing library, the newest version
 Berkekey DB python bindings called "bsddb3" and Pardus configuration 
 manager COMAR in order to run.
 
-If you are upgrading from an old PiSi release you may have to 
+If you are upgrading from an old PISI release you may have to 
 run the following command as root:
 
 # pisi rebuild-db
@@ -47,6 +48,12 @@ $ brew install python
 
 $ pip install bsddb3
 
+I used the following command to install the latest berkeley-db:
+
+$ BERKELEYDB_DIR=$(brew --cellar)/berkeley-db/6.2.23 YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 pip install bsddb3
+
+$ pip install pycurl urlgrabber
+
 Install piksemel XML processing library
 
 $ brew install coreutils xz gnupg2
@@ -58,5 +65,9 @@ $ gpg --gen-key
 $ ./setup.py install
 
 $ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
+
+move configuration to /etc
+
+$ sudo cp -a /usr/local/etc/pisi/ /etc/pisi
 
 It should work on a current OS X installation.
