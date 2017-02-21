@@ -9,7 +9,7 @@ set -x # xtrace
 set -e # errexit
 rm -rf tmp
 #echo "*** build tests"
-pisi-cli -Dtmp build https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/zip/pspec.xml https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/unzip/pspec.xml
+pisi-cli -Dtmp build --ignore-dependency https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/zip/pspec.xml https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/unzip/pspec.xml
 
 #partial-builds
 pisi-cli -Dtmp build --until=setup https://github.com/pars-linux/corporate2/blob/master/system/base/gawk/pspec.xml
