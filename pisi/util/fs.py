@@ -1,268 +1,27 @@
-# -*- coding: utf-8 -*-
+# -*- coding:utf-8 -*-
 #
-# misc. utility functions, including process and file utils
+# Copyright (C) 2005, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+#
+# Description: File/Directory Related Functions
+#
 # Author:  Eray Ozkural <eray@pardus.org.tr>
-#
-# standard python modules
+
 import os
-import re
-import sys
 import hashlib
 import shutil
-import string
-import statvfs
-import operator
-import subprocess
 
+import pisi
 import pisi.context as ctx
 
-import gettext
-__trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
-
-
-class Error(Exception):
-    pass
-
-class FileError(Error):
-    pass
-
-
-#########################
-# string/list/functional#
-#########################
-
-def every(pred, seq):
-    return reduce(operator.and_, map(pred, seq), True)
-
-def any(pred, seq):
-    return reduce(operator.or_, map(pred, seq), False)
-
-def unzip(seq):
-    return zip(*seq)
-
-def concat(l):
-    '''concatenate a list of lists'''
-    return reduce( operator.concat, l )
-
-def strlist(l):
-    """concatenate string reps of l's elements"""
-    return "".join(map(lambda x: str(x) + ' ', l))
-
-def multisplit(str, chars):
-    """ split str with any of chars"""
-    l = [str]
-    for c in chars:
-        l = concat(map(lambda x:x.split(c), l))
-    return l
-
-def same(l):
-    '''check if all elements of a sequence are equal'''
-    if len(l)==0:
-        return True
-    else:
-        last = l.pop()
-        for x in l:
-            if x!=last:
-                return False
-        return True
-
-def prefix(a, b):
-    '''check if sequence a is a prefix of sequence b'''
-    if len(a)>len(b):
-        return False
-    for i in range(0,len(a)):
-        if a[i]!=b[i]:
-            return False
-    return True
-
-def remove_prefix(a,b):
-    "remove prefix a from sequence b"
-    assert prefix(a,b)
-    return b[len(a):]
-
-def suffix(a, b):
-    """Check if sequence a is a suffix of sequence b."""
-    if len(a) > len(b):
-        return False
-    for i in range(1, len(a) + 1):
-        if a[-i] != b[-i]:
-            return False
-    return True
-
-def remove_suffix(a, b):
-    """Remove suffix a from sequence b."""
-    assert suffix(a, b)
-    return b[:-len(a)]
-
-def human_readable_size(size = 0):
-    symbols, depth = [' B', 'KB', 'MB', 'GB'], 0
-
-    while size > 1000 and depth < 3:
-        size = float(size / 1024)
-        depth += 1
-
-    return size, symbols[depth]
-
-def human_readable_rate(size = 0):
-    x = human_readable_size(size)
-    return x[0], x[1] + '/s'
-
-##############################
-# Process Releated Functions #
-##############################
-
-def run_batch(cmd, sudo = False):
-    """run command and report return value and output"""
-    if sudo:
-        cmd = "sudo " + cmd
-    ctx.ui.info(_('Running ') + cmd, verbose=True)
-    p = subprocess.Popen(cmd, shell=True, 
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
-    return (p.returncode, out, err)
-
-# you can't use the following for Popen, oops
-class TeeOutFile:
-    def __init__(self, file):
-        self.file = file
-    
-    def write(self, str):
-        self.write(str)
-        ctx.ui.debug(str)
-
-# TODO: it might be worthwhile to try to remove the
-# use of ctx.stdout, and use run_batch()'s return
-# values instead. but this is good enough :)
-def run_logged(cmd, sudo = False):
-    """run command and get return value"""
-    if sudo:
-        cmd = "sudo " + cmd
-    ctx.ui.info(_('Running ') + cmd, verbose=True)
-    if ctx.stdout:
-        stdout = ctx.stdout
-    else:
-        if ctx.get_option('debug'):
-            stdout = None
-        else:
-            stdout = subprocess.PIPE
-    if ctx.stderr:
-        stderr = ctx.stderr
-    else:
-        if ctx.get_option('debug'):
-            stderr = None
-        else:
-            stderr = subprocess.STDOUT
-
-    p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
-    out, err = p.communicate()    
-    ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
-
-    return p.returncode
-
-def is_osx():
-    import platform
-    val = platform.platform().startswith('Darwin')
-    return(val)
-    
-######################
-# Terminal functions #
-######################
-
-def has_xterm():
-    return os.environ.has_key("TERM") and sys.stderr.isatty()
-    
-def xterm_title(message):
-    """sets message as a console window's title"""
-    if os.environ.has_key("TERM") and sys.stderr.isatty():
-        terminalType = os.environ["TERM"]
-        for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
-            if terminalType.startswith(term):
-                sys.stderr.write("\x1b]2;"+str(message)+"\x07")
-                sys.stderr.flush()
-                break
-
-def xterm_title_reset():
-    """resets console window's title"""
-    if os.environ.has_key("TERM"):
-        terminalType = os.environ["TERM"]
-        xterm_title(os.environ["TERM"])
-
-    
-#############################
-# Path Processing Functions #
-#############################
-
-def splitpath(a):
-    """split path into components and return as a list
-    os.path.split doesn't do what I want like removing trailing /"""
-    comps = a.split(os.path.sep)
-    if comps[len(comps)-1]=='':
-        comps.pop()
-    return comps
-
-def makepath(comps, relative = False, sep = os.path.sep):
-    """reconstruct a path from components"""
-    path = reduce(lambda x,y: x + sep + y, comps, '')
-    if relative:
-        return path[len(sep):]
-    else:
-        return path
-
-def parentpath(a, sep = os.path.sep):
-    # remove trailing '/'
-    a = a.rstrip(sep)
-    return a[:a.rfind(sep)]
-
-def parenturi(a):
-    return parentpath(a, '/')
-
-# I'm not sure how necessary this is. Ahem.
-def commonprefix(l):
-    """an improved version of os.path.commonprefix,
-    returns a list of path components"""
-    common = []
-    comps = map(splitpath, l)
-    for i in range(0, min(len,l)):
-        compi = map(lambda x: x[i], comps) # get ith slice
-        if same(compi):
-            common.append(compi[0])
-    return common
-
-# but this one is necessary
-def subpath(a, b):
-    "find if path a is before b in the directory tree"
-    return prefix(splitpath(a), splitpath(b))
-
-def removepathprefix(prefix, path):
-    "remove path prefix a from b, finding the pathname rooted at a"
-    comps = remove_prefix(splitpath(prefix), splitpath(path))
-    if len(comps) > 0:
-        return join_path(*tuple(comps))
-    else:
-        return ""
-
-def absolute_path(path):
-    "determine if given @path is absolute"
-    comps = splitpath(path)
-    return comps[0] == ''
-
-def join_path(a, *p):
-    """Join two or more pathname components, inserting '/' as needed"""
-    """The python original version has a silly logic"""
-    path = a
-    for b in p:
-        b = b.lstrip('/')
-        if path == '' or path.endswith('/'):
-            path +=  b
-        else:
-            path += '/' + b
-    return path
-
-####################################
-# File/Directory Related Functions #
-####################################
+import process
+from path import join_path
 
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
@@ -486,8 +245,8 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
         target = ''
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d %s < %s" % 
-                                    (level, target, patchFile))
+    (ret, out, err) = process.run_batch("patch -p%d %s < %s" % 
+                                        (level, target, patchFile))
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
@@ -587,71 +346,3 @@ def clean_locks(top = '.'):
                 path = join_path(root, fn)
                 ctx.ui.info(_('Removing lock %s'), path)
                 os.unlink(path)
-
-########################################
-# Package/Repository Related Functions #
-########################################
-
-def package_name(name, version, release, build, prependSuffix=True):
-    fn = name + '-' + version + '-' + release
-    if build:
-        fn += '-' + str(build)
-    if prependSuffix:
-        fn += ctx.const.package_suffix
-    return fn
-
-def is_package_name(fn, package_name = None):
-    "check if fn is a valid filename for given package_name"
-    "if not given a package name, see if fn fits the package name rules"
-    if (package_name==None) or fn.startswith(package_name + '-'):
-        if fn.endswith(ctx.const.package_suffix):
-            # get version string, skip separator '-'
-            verstr = fn[len(package_name) + 1:
-                        len(fn)-len(ctx.const.package_suffix)]
-            import string
-            for x in verstr.split('-'):
-                # weak rule: version components after '-' start with a digit
-                if x is '' or (not x[0] in string.digits):
-                    return False
-            return True
-    return False
-
-def env_update():
-    import pisi.environment
-    ctx.ui.info(_('Updating environment...'))
-
-    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
-    if not os.path.exists(env_dir):
-        os.makedirs(env_dir, 0755)
-
-    pisi.environment.update_environment(ctx.config.dest_dir())
-
-def pure_package_name(package_name):
-    "return pure package name from given string"
-    "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
- 
-    if package_name.endswith(ctx.const.package_suffix):
-        package_name = package_name.rstrip(ctx.const.package_suffix)
-
-    return parse_package_name(package_name)[0]
-
-def parse_package_name(package_name):
-    "return package name and version string"
-    "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
-
-    # but we should handle package names like 855resolution
-    name = []
-    for part in package_name.split("-"):
-        if name != [] and part[0] in string.digits:
-            break
-        else:
-            name.append(part)
-    name = "-".join(name)
-    version = package_name[len(name) + 1:]
-    
-    return (name, version)
- 
-def generate_pisi_file(patchFile, fromFile, toFile):
-    if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
-        raise Error(_("ERROR: xdelta patch %s %s %s failed") % (patchFile, fromFile, toFile))
-

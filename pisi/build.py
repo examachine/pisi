@@ -147,7 +147,8 @@ class Builder:
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
-            specuri = URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
+            # FIXME: doesn't work for file://
+            specuri = URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
         spec = SpecFile()
         spec.read(specuri, ctx.config.tmp_dir())
