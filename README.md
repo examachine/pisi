@@ -34,8 +34,7 @@ Some of its distinctive features:
 
 To see help about basic usage, simply issue
 
-~~~~
-$ pisi --help
+~~~~ 
 $ pisi --help
 
 Usage: pisi [options] <command> [arguments]
@@ -92,6 +91,18 @@ check-source-repo.py      missing-binary.py         rmcomp-source-repo.py
 convert_history.py        pisimedia                 unpisi
 fetchAll.py               pisish
 find-lib-deps.py          repo-diff.py
+~~~~
+
+You may also try pisish, a PISI CLI that works like a shell:
+~~~~
+$ pisish
+Welcome to the interactive PISI shell.
+Type "help" to see a list of commands.
+To end the session, type "exit".
+You can run system commands by prefixing with '!' as in '!ls'.
+Copyright 2006 (c) Pardus.
+
+pisi> 
 ~~~~
 
 *Eray Ozkural, PhD*
