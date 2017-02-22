@@ -112,14 +112,14 @@ class ComponentDB(object):
     def get_component(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError, e:
             raise Error(_('Component %s not found') % name)
 
     def get_component_repo(self, name, repo=None, txn = None):
         #name = shelve.LockedDBShelf.encodekey(name)
         try:
             return self.d.get_item_repo(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError, e:
             raise Error(_('Component %s not found') % name)
 
     def get_union_comp(self, name, txn = None, repo = pisi.db.itembyrepo.repos ):

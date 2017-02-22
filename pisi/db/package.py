@@ -64,7 +64,7 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):

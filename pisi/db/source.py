@@ -57,13 +57,13 @@ class SourceDB(object):
     def get_spec(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError, e:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def get_spec_repo(self, name, repo=None, txn = None):
         try:
             return self.d.get_item_repo(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError, e:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def pkgtosrc(self, name, txn = None):

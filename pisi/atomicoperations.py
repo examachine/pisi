@@ -151,7 +151,7 @@ class Install(AtomicOperation):
         # check if package is in database
         # If it is not, put it into 3rd party packagedb
         if not ctx.packagedb.has_package(self.pkginfo.name):
-            ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
+            ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepo.thirdparty)
         
         # check file conflicts
         file_conflicts = []
@@ -181,7 +181,7 @@ class Install(AtomicOperation):
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
         
             #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
-            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.itembyrepodb.installed)
+            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.db.itembyrepo.installed)
             ipkg = ctx.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
 
@@ -356,7 +356,7 @@ class Install(AtomicOperation):
         ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
 
         # installed packages
-        ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
+        ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepo.installed, txn=txn)
 
 
 def install_single(pkg, upgrade = False):
@@ -385,7 +385,7 @@ class Remove(AtomicOperation):
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name, pisi.itembyrepodb.installed)
+        self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepo.installed)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:
@@ -510,7 +510,7 @@ def virtual_install(metadata, files, txn):
         ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
 
     # installed packages
-    ctx.packagedb.add_package(metadata.package, pisi.itembyrepodb.installed, txn=txn)
+    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepo.installed, txn=txn)
 
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""
