@@ -29,6 +29,7 @@ import pisi
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
+import pisi.xmldoc as xmldoc
 import pisi.xmldoc.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.operations as operations
@@ -104,7 +105,7 @@ def init(database = True, write = True,
         ctx.repodb = pisi.db.repo.init()
         ctx.installdb = pisi.db.install.init()
         ctx.filesdb = pisi.db.files.FilesDB()
-        ctx.componentdb = pisi.component.ComponentDB()
+        ctx.componentdb = xmldoc.ComponentDB()
         ctx.packagedb = packagedb.init_db()
         ctx.sourcedb = pisi.db.source.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])
