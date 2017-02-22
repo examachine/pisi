@@ -11,10 +11,11 @@
 
 import unittest
 import os
+import time
 
 from pisi import version
 from pisi.oo import *
-
+ 
 class OOTestCase(unittest.TestCase):
     def setUp(self):
         pass
@@ -36,7 +37,7 @@ class OOTestCase(unittest.TestCase):
         
         self.assert_( D().meth() == "DCBA" )
 
-    def testautoconstant(self):
+    def testconstant(self):
         class A:
             __metaclass__ = constant
             def __init__(self):
@@ -50,5 +51,31 @@ class OOTestCase(unittest.TestCase):
             passed = True
         self.assert_(passed)
 
-suite = unittest.makeSuite(OOTestCase)
+    def testsingleton(self):
+        class A:
+            __metaclass__ = singleton
+            def __init__(self):
+                self.a = time.time()
+        a1 = A()
+        a2 = A()
+        self.assert_(a1 is a2)
 
+    def testconstantsingleton(self):
+        class A:
+            __metaclass__ = constantsingleton
+            #__metaclass__ = fuckoff
+            def __init__(self):
+                self.a = 1
+                self.b = 2
+        mya = A()
+        try:
+            passed = False
+            mya.a = 0
+        except ConstError, e:
+            passed = True
+        self.assert_(passed)
+        self.assertEqual(mya.a, 1)
+        mya2 = A()
+        self.assert_(mya is mya2)
+
+suite = unittest.makeSuite(OOTestCase)

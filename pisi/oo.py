@@ -17,6 +17,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+
 class autoprop(type):
     '''A metaclass for automatic property creation based on
     accessor/modifier methods'''
@@ -62,7 +63,7 @@ class singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
@@ -87,3 +88,9 @@ class constant(type):
             # we don't have an attribute by this name
             raise NameError, name
         cls.__delattr__ = __delattr__
+
+
+#in python 3.x this should just work
+# some bugginess still persists in python 2.x
+class constantsingleton(constant,singleton):
+    pass
