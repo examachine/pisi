@@ -24,8 +24,8 @@ import pisi
 import pisi.context as ctx
 import pisi.archive as archive
 from pisi.uri import URI
-from pisi.xmldoc.metadata import MetaData
-from pisi.xmldoc.files import Files
+from pisi.struct.metadata import MetaData
+from pisi.struct.files import Files
 import pisi.util as util
 
 class Error(pisi.Error):

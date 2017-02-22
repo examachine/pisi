@@ -29,8 +29,8 @@ import pisi
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.xmldoc as xmldoc
-import pisi.xmldoc.dependency as dependency
+import pisi.struct as struct
+import pisi.struct.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.operations as operations
 import pisi.db as db
@@ -38,14 +38,14 @@ import pisi.db as db
 #import pisi.db.repo as repodb
 #import pisi.db.install as installdb
 #import pisi.db.source as sourcedb
-import pisi.xmldoc.component as component
-from pisi.xmldoc.index import Index
+import pisi.struct.component as component
+from pisi.struct.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade, emerge
 from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
-from pisi.xmldoc.metadata import MetaData
-from pisi.xmldoc.files import Files
+from pisi.struct.metadata import MetaData
+from pisi.struct.files import Files
 from pisi.file import File
 import pisi.search
 import pisi.db.lockeddbshelve as shelve
@@ -106,7 +106,7 @@ def init(database = True, write = True,
         ctx.repodb = db.repo.init()
         ctx.installdb = db.install.init()
         ctx.filesdb = db.files.FilesDB()
-        ctx.componentdb = xmldoc.ComponentDB()
+        ctx.componentdb = struct.ComponentDB()
         ctx.packagedb = db.package.init_db()
         ctx.sourcedb = db.source.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])

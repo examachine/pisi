@@ -9,9 +9,10 @@
 #
 # Please read the COPYING file.
 #
-# Archive module provides access to regular archive file types.
 # Author: Eray Ozkural
 #         Baris Metin
+
+'''Archive module provides access to regular archive file types.'''
 
 # standard library modules
 import os

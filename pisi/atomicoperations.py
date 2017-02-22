@@ -24,11 +24,11 @@ import bsddb3.db as db
 import pisi
 import pisi.context as ctx
 import pisi.db.package as packagedb
-import pisi.xmldoc.dependency as dependency
+import pisi.struct.dependency as dependency
 import pisi.util as util
-from pisi.xmldoc.specfile import *
-from pisi.xmldoc.metadata import MetaData
-from pisi.xmldoc.files import Files
+from pisi.struct.specfile import *
+from pisi.struct.metadata import MetaData
+from pisi.struct.files import Files
 from pisi.uri import URI
 import pisi.ui
 from pisi.version import Version
