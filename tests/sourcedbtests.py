@@ -14,9 +14,9 @@ import os
 
 import pisi.context as ctx
 import pisi.api
-import pisi.sourcedb
+import pisi.db.source as sourcedb
 from pisi import util
-from pisi.specfile import SpecFile
+from pisi.xmldoc import SpecFile
 
 import testcase
 class SourceDBTestCase(testcase.TestCase):
@@ -24,7 +24,7 @@ class SourceDBTestCase(testcase.TestCase):
     def setUp(self):
         testcase.TestCase.setUp(self)
 
-        self.sourcedb = pisi.sourcedb.init()
+        self.sourcedb = sourcedb.init()
         self.spec = SpecFile()
         self.spec.read("tests/popt/pspec.xml")
         if not ctx.repodb.has_repo('test'):
