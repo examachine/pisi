@@ -63,7 +63,6 @@ class OOTestCase(unittest.TestCase):
     def testconstantsingleton(self):
         class A:
             __metaclass__ = constantsingleton
-            #__metaclass__ = fuckoff
             def __init__(self):
                 self.a = 1
                 self.b = 2
