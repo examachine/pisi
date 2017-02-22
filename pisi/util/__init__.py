@@ -14,10 +14,6 @@
 
 # standard python modules
 
-import re
-import string
-import statvfs
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
