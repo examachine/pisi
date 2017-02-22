@@ -30,9 +30,9 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import lockeddbshelve as shelve
+from itembyrepo import ItemByRepoDB
+import itembyrepo
 
 class Error(pisi.Error):
     pass

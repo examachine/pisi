@@ -23,7 +23,7 @@ import bsddb3.db as db
 
 import pisi
 import pisi.context as ctx
-import pisi.packagedb as packagedb
+import pisi.db.package as packagedb
 import pisi.dependency as dependency
 import pisi.util as util
 from pisi.specfile import *

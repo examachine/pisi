@@ -18,9 +18,9 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.lockeddbshelve as shelve
+import lockeddbshelve as shelve
 import pisi.context as ctx
-import pisi.packagedb as packagedb
+import package
 import pisi.util as util
 from pisi.uri import URI
        

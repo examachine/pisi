@@ -11,7 +11,7 @@
 #
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 #
-# Simplifies working with URLs, purl module provides common URL
+# Simplifies working with URLs, module provides common URL
 # parsing and processing
 
 from urlparse import urlparse

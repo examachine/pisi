@@ -21,7 +21,7 @@ from graph import *
 
 class PGraph(Digraph):
     
-    def __init__(self, packagedb, repo = pisi.itembyrepodb.repos):
+    def __init__(self, packagedb, repo = pisi.db.itembyrepo.repos):
         super(PGraph, self).__init__()
         self.packagedb = packagedb
         self.repo = repo

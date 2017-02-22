@@ -26,9 +26,9 @@ from pisi.uri import URI
 import pisi.util as util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph
-import pisi.packagedb as packagedb
-import pisi.repodb
-import pisi.installdb
+import pisi.db.package as packagedb
+import pisi.db.repo as repodb
+import pisi.db.install as installdb
 from pisi.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations

@@ -19,9 +19,9 @@ import pisi
 import pisi.context as ctx
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
-import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.db.lockeddbshelve as shelve
+from pisi.db.itembyrepo import ItemByRepoDB
+import pisi.db.itembyrepo as itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -104,7 +104,7 @@ class ComponentDB(object):
     def destroy(self):
         self.d.destroy()
 
-    def has_component(self, name, repo = pisi.itembyrepodb.repos, txn = None):
+    def has_component(self, name, repo = pisi.db.itembyrepo.repos, txn = None):
         #name = shelve.LockedDBShelf.encodekey(name)
         name = str(name)
         return self.d.has_key(name, repo, txn)
@@ -122,7 +122,7 @@ class ComponentDB(object):
         except pisi.itembyrepodb.NotfoundError, e:
             raise Error(_('Component %s not found') % name)
 
-    def get_union_comp(self, name, txn = None, repo = pisi.itembyrepodb.repos ):
+    def get_union_comp(self, name, txn = None, repo = pisi.db.itembyrepo.repos ):
         """get a union of all repository components packages, not just the first repo in order.
         get only basic repo info from the first repo"""
         def proc(txn):

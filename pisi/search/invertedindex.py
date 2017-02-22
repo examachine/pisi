@@ -13,9 +13,9 @@
 
 import types
 
-import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.db.lockeddbshelve as shelve
+from pisi.db.itembyrepo import ItemByRepoDB
+import pisi.db.itembyrepo as itembyrepodb
 
 class InvertedIndex(object):
     """a database of term -> set of documents"""

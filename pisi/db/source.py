@@ -28,11 +28,12 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.util as util
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
-import pisi.repodb
-from pisi.itembyrepodb import ItemByRepoDB
+import lockeddbshelve as shelve
+import repo
+from itembyrepo import ItemByRepoDB
 
 class NotfoundError(pisi.Error):
     pass

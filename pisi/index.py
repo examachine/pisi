@@ -24,8 +24,8 @@ import pisi
 import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.metadata as metadata
-import pisi.packagedb as packagedb
-import pisi.sourcedb as sourcedb
+import pisi.db.package as packagedb
+import pisi.db.source as sourcedb
 import pisi.util as util
 from pisi.package import Package
 from pisi.pxml.xmlfile import XmlFile

@@ -32,10 +32,10 @@ import pisi.util as util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.operations as operations
-import pisi.packagedb as packagedb
-import pisi.repodb
-import pisi.installdb
-import pisi.sourcedb
+import pisi.db.package as packagedb
+import pisi.db.repo as repodb
+import pisi.db.install as installdb
+import pisi.db.source as sourcedb
 import pisi.component as component
 from pisi.index import Index
 import pisi.cli
@@ -46,7 +46,7 @@ from pisi.metadata import MetaData
 from pisi.files import Files
 from pisi.file import File
 import pisi.search
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 from pisi.version import Version
 
 class Error(pisi.Error):
@@ -101,12 +101,12 @@ def init(database = True, write = True,
     ctx.database = database
     if database:
         shelve.init_dbenv(write=write)
-        ctx.repodb = pisi.repodb.init()
-        ctx.installdb = pisi.installdb.init()
-        ctx.filesdb = pisi.files.FilesDB()
+        ctx.repodb = pisi.db.repo.init()
+        ctx.installdb = pisi.db.install.init()
+        ctx.filesdb = pisi.db.files.FilesDB()
         ctx.componentdb = pisi.component.ComponentDB()
         ctx.packagedb = packagedb.init_db()
-        ctx.sourcedb = pisi.sourcedb.init()
+        ctx.sourcedb = pisi.db.source.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])
     else:
         ctx.repodb = None
@@ -125,8 +125,8 @@ def finalize():
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
 
-        pisi.repodb.finalize()
-        pisi.installdb.finalize()
+        pisi.db.repo.finalize()
+        pisi.db.install.finalize()
         if ctx.filesdb != None:
             ctx.filesdb.close()
             ctx.filesdb = None
@@ -137,7 +137,7 @@ def finalize():
             packagedb.finalize_db()
             ctx.packagedb = None
         if ctx.sourcedb:
-            pisi.sourcedb.finalize()
+            pisi.db.source.finalize()
             ctx.sourcedb = None
         pisi.search.finalize()
         if ctx.dbenv:
@@ -159,7 +159,7 @@ def list_upgradable():
 
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
-def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
+def package_graph(A, repo = pisi.db.itembyrepo.installed, ignore_installed = False):
     """Construct a package relations graph, containing
     all dependencies of packages A, if ignore_installed
     option is True, then only uninstalled deps will
@@ -290,7 +290,7 @@ def search_package_names(query):
             r.add(pkgname)
     return r
 
-def search_package_terms(terms, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
+def search_package_terms(terms, lang = None, search_names = True, repo = pisi.db.itembyrepo.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
@@ -301,7 +301,7 @@ def search_package_terms(terms, lang = None, search_names = True, repo = pisi.it
             r |= search_package_names(term)
     return r
 
-def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
+def search_package(query, lang = None, search_names = True, repo = pisi.db.itembyrepo.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query('summary', lang, query, repo = repo)

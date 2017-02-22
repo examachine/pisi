@@ -21,7 +21,7 @@ import pisi.context as ctx
 #import pisi.packagedb as packagedb
 from pisi.version import Version
 import pisi.pxml.autoxml as autoxml
-import pisi.itembyrepodb
+import pisi.db.itembyrepo as itembyrepodb
 
 class Dependency:
 
