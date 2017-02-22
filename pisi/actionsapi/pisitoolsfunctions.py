@@ -42,7 +42,7 @@ class ArgumentError(pisi.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def executable_insinto(destinationDirectory, sourceFiles):
+def executable_insinto(destinationDirectory, *sourceFiles):
     '''insert a executable file into destinationDirectory'''
 
     if not sourceFiles or not destinationDirectory:
@@ -51,6 +51,7 @@ def executable_insinto(destinationDirectory, sourceFiles):
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
+    #print '****', destinationDirectory, sourceFiles
     for sourceFile in list(sourceFiles):
         #print 'pkgsrcDIR()=',get.sourceDIR()
         sourceFile = join_path(get.sourceDIR(), sourceFile)
@@ -64,7 +65,7 @@ def executable_insinto(destinationDirectory, sourceFiles):
                 util.run_batch('install -m0755 -o root -g root %s %s' %
                                (source, destinationDirectory),sudo=True)
 
-def readable_insinto(destinationDirectory, sourceFiles):
+def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
 
     if not sourceFiles or not destinationDirectory:

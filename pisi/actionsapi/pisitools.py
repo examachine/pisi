@@ -38,10 +38,12 @@ from pisi.actionsapi.shelltools import *
 
 from pisi.actionsapi import error
 
-
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
+    ctx.ui.debug("%s -> %s" %
+                 (join_path(get.installDIR(), destinationDirectory),
+                  sourceFile))
     executable_insinto(join_path(get.installDIR(), destinationDirectory),
                        sourceFile)
  

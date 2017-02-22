@@ -22,6 +22,7 @@ import pisi.context as ctx
 
 import process
 from path import join_path
+from fun import remove_prefix
 
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
@@ -277,7 +278,7 @@ def strip_directory(top, excludelist=[]):
                 os.system("sed -i -e 's~/var/tmp/pisi/[[:graph:]]*/install/~/~g' %s" % frpath)
             
             # real path in .pisi package
-            p = '/' + removepathprefix(top, frpath)
+            p = '/' + remove_prefix(top, frpath)
             strip = True
             for exclude in excludelist:
                 if p.startswith(exclude):

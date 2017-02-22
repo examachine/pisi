@@ -9,10 +9,12 @@
 #
 # Please read the COPYING file.
 #
-# Description: Package/Repository Related Functions
-#
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 
+'''Package/Repository Related Functions'''
+
+import pisi
+import pisi.context as ctx
 
 def package_name(name, version, release, build, prependSuffix=True):
     fn = name + '-' + version + '-' + release
