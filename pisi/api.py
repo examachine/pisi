@@ -293,7 +293,7 @@ def search_package_names(query):
     return r
 
 def search_package_terms(terms, lang = None, search_names = True,
-                         repo = db.itembyrepo.all):
+                         repo = db.itembyrepo.alldb):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
@@ -305,7 +305,7 @@ def search_package_terms(terms, lang = None, search_names = True,
     return r
 
 def search_package(query, lang = None, search_names = True,
-                   repo = db.itembyrepo.all):
+                   repo = db.itembyrepo.alldb):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query('summary', lang, query, repo = repo)

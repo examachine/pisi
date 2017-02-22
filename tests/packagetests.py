@@ -14,7 +14,7 @@ import os
 
 from pisi import util
 import pisi.context as ctx
-from pisi import package
+from pisi.xmldoc import package
 
 import testcase
 class PackageTestCase(testcase.TestCase):

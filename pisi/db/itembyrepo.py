@@ -24,7 +24,7 @@ import pisi.util as util
 import pisi.context as ctx
 import lockeddbshelve as shelve
 
-installed, thirdparty, repos, all = range(1, 5)
+installed, thirdparty, repos, alldb = range(1, 5)
 
 """installed and thirdparty are special databases to keep track 
 of already installed stuff and third party stuff not in any real repository.
