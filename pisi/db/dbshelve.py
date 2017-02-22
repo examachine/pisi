@@ -84,7 +84,7 @@ class DBShelf:
                     raise e
                 except Exception, e:
                     autotxn.abort()
-                    #e.args += tuple(traceback.format_tb(sys.exc_traceback))
+                    e.args += tuple(traceback.format_tb(sys.exc_traceback))
                     raise e
                 autotxn.commit()
             else: # execute without transactions

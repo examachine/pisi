@@ -78,10 +78,10 @@ class ItemByRepoDB(object):
     def list(self, repo = None):
         if repo == None:
             repo = repos
-        if repo not in [repos, all]:
+        if repo not in [repos, alldb]:
             return [ k for k,data in self.d.items() if data.has_key(self.repo_str(repo))]
         else:
-            if repo == all:
+            if repo == alldb:
                 return [ pkg for pkg in self.d.keys() ]
             else:
                 return self.list_if( lambda k,data: ItemByRepoDB.not_just_tracking(data) )
@@ -90,10 +90,9 @@ class ItemByRepoDB(object):
     def order(self, repo = None):
         if repo == None:
             repo = repos
-        assert repo in [all, repos]
-        import pisi.repodb
+        assert repo in [alldb, repos]
         order = [ 'repo-' + x for x in ctx.repodb.list() ]
-        if repo == all:
+        if repo == alldb:
             order += ['trdparty', 'inst']
         return order
 
@@ -125,7 +124,7 @@ class ItemByRepoDB(object):
         if repo == None:
             repo = repos
         haskey = self.d.has_key(name, txn)
-        if repo == all:
+        if repo == alldb:
             return haskey
         elif repo == repos:
             data = self.d.get(name, txn)
@@ -142,7 +141,7 @@ class ItemByRepoDB(object):
             if not self.d.has_key(name, txn=txn):
                 raise NotfoundError(_('Key %s not found') % name)
             s = self.d.get(name, txn=txn)
-            if repo in [repos, all]:
+            if repo in [repos, alldb]:
                 for repostr in self.order(repo):
                     if s.has_key(repostr):
                         return (s[repostr], self.str_repo(repostr))
@@ -175,7 +174,7 @@ class ItemByRepoDB(object):
             return None
         
     def add_item(self, name, obj, repo, txn = None):
-        assert not repo in [all, repos]
+        assert not repo in [alldb, repos]
         repostr = self.repo_str(repo)
         def proc(txn):
             if not self.d.has_key(name):
@@ -187,7 +186,7 @@ class ItemByRepoDB(object):
         self.d.txn_proc(proc, txn)
         
     def remove_item_repo(self, name, repo, txn = None):
-        assert not repo in [all, repos]
+        assert not repo in [alldb, repos]
         name = str(name)
         def p(txn):
             s = self.d.get(name, txn)
@@ -209,7 +208,7 @@ class ItemByRepoDB(object):
     def remove_item(self, name, repo=None, txn=None):
         if repo == None:
             repo = repos
-        if not repo in [all, repos]:
+        if not repo in [alldb, repos]:
             self.remove_item_repo(name, repo,txn=txn)
         else:
             self.remove_item_only(name,txn=txn)
