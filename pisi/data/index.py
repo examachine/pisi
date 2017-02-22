@@ -27,7 +27,7 @@ import metadata
 import pisi.db.package as packagedb
 import pisi.db.source as sourcedb
 import pisi.util as util
-from pisi.package import Package
+from pisi.data.package import Package
 from pisi.pxml.xmlfile import XmlFile
 from pisi.file import File
 import pisi.pxml.autoxml as autoxml

@@ -25,7 +25,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.data.dependency as dependency
-import pisi.pgraph as pgraph
+import pisi.data.pgraph as pgraph
 import pisi.db.package as packagedb
 import pisi.db.repo as repodb
 import pisi.db.install as installdb

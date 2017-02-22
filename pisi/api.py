@@ -31,7 +31,7 @@ from pisi.uri import URI
 import pisi.util as util
 import pisi.data as struct
 import pisi.data.dependency as dependency
-import pisi.pgraph as pgraph
+import pisi.data.pgraph as pgraph
 import pisi.operations as operations
 import pisi.db as db
 #.package as packagedb
