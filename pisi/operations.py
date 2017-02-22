@@ -24,12 +24,12 @@ import pisi
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.dependency as dependency
+import pisi.xmldoc.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.db.package as packagedb
 import pisi.db.repo as repodb
 import pisi.db.install as installdb
-from pisi.index import Index
+from pisi.xmldoc.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
 import pisi.ui as ui

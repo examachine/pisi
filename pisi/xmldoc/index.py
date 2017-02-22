@@ -22,18 +22,18 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-import pisi.specfile as specfile
-import pisi.metadata as metadata
+import specfile
+import metadata
 import pisi.db.package as packagedb
 import pisi.db.source as sourcedb
 import pisi.util as util
-from pisi.package import Package
+from package import Package
 from pisi.pxml.xmlfile import XmlFile
 from pisi.file import File
 import pisi.pxml.autoxml as autoxml
 from pisi.uri import URI
-import pisi.component as component
-import pisi.specfile as specfile
+import component
+import specfile
 
 
 class Error(pisi.Error):

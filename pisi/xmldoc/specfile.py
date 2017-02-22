@@ -1,4 +1,4 @@
- n  # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
@@ -26,12 +26,13 @@ _ = __trans.ugettext
 from os.path import basename
 
 # pisi modules
+import pisi
 from pisi.pxml.xmlfile import XmlFile
 import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
-from pisi.dependency import Dependency
-import pisi.dependency
-import pisi.component as component
+from dependency import Dependency
+import dependency
+import component
 import pisi.util as util
 
 
