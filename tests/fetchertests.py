@@ -15,7 +15,7 @@ import os
 
 import pisi.context as ctx
 import pisi.api
-from pisi.specfile import SpecFile
+from pisi.xmldoc import SpecFile
 from pisi import fetcher
 from pisi import util
 from pisi import uri
