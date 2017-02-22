@@ -12,8 +12,10 @@
 # Author: Baris Metin <baris@pardus.org.tr
 
 """PISI constants. 
-If you have a "magic" constant value this is where it should be
+If you have a 'magic' constant value this is where it should be
 defined."""
+
+#TODO: FIXME: this singleton pattern looks awful on the eyes
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -41,7 +43,7 @@ class _constant:
         raise NameError, name
 
 class Constants:
-    "Pisi Constants Singleton"
+    "PISI Constants Singleton"
 
     __c = _constant()
 

@@ -36,5 +36,19 @@ class OOTestCase(unittest.TestCase):
         
         self.assert_( D().meth() == "DCBA" )
 
+    def testautoconstant(self):
+        class A:
+            __metaclass__ = constant
+            def __init__(self):
+                self.a = 1
+                self.b = 2
+        mya = A()
+        try:
+            passed = False
+            mya.a = 0
+        except ConstError, e:
+            passed = True
+        self.assert_(passed)
+
 suite = unittest.makeSuite(OOTestCase)
 
