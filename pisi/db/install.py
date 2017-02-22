@@ -26,7 +26,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import lockeddbshelve as shelve
-from pisi.struct.files import Files
+from pisi.data.files import Files
 import pisi.util as util
 from pisi.util import join_path as join
 

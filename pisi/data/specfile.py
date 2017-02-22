@@ -200,7 +200,7 @@ class Package:
     def installable(self):
         """calculate if pkg is installable currently"""
         deps = self.runtimeDependencies()
-        return pisi.struct.dependency.satisfies_dependencies(self.name, deps)
+        return pisi.data.dependency.satisfies_dependencies(self.name, deps)
 
     def __str__(self):
         if self.build:

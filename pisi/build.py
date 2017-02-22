@@ -27,19 +27,19 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-from pisi.struct.specfile import SpecFile
+from pisi.data.specfile import SpecFile
 import pisi.util as util
 from pisi.util import join_path as join, parenturi
 from pisi.file import File
 import pisi.context as ctx
-import pisi.struct.dependency as dependency
+import pisi.data.dependency as dependency
 import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
-from pisi.struct.files import Files, FileInfo
+from pisi.data.files import Files, FileInfo
 from pisi.fetcher import fetch_url
 from pisi.uri import URI
-from pisi.struct.metadata import MetaData
-import pisi.struct.component as component
+from pisi.data.metadata import MetaData
+import pisi.data.component as component
 from pisi.package import Package
 import pisi.archive as archive
 import pisi.actionsapi.variables
