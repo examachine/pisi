@@ -627,7 +627,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def decode(node, errs, where):
             """decode from DOM node, the value, watching the spec"""
-            #text = unicode(readtext(node, token), 'utf8')
+            #text = unicode(readtext(node, token), 'utf8') # CRUFT FIXME
             text = readtext(node, token)
             #print 'decoding', token_type, text, type(text), '.'
             if text:
@@ -637,8 +637,6 @@ class autoxml(oo.autosuper, oo.autoprop):
                 except Exception, e:
                     print 'exception', e
                     value = None
-                    #print 'fuuuuck', text
-                    #if req == 
                     errs.append(where + ': ' + _('Type mismatch: read text cannot be decoded'))
                 return value
             else:

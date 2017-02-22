@@ -53,7 +53,10 @@ def dodir(destinationDirectory):
 
 def dodoc(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
-    readable_insinto(join_path(get.installDIR(), '/usr/share/doc', get.srcTAG()), sourceFiles)
+    ctx.ui.debug("%s -> %s" %
+                 (str(sourceFiles),
+                  join_path(get.installDIR(), '/usr/share/doc', get.srcTAG())))
+    readable_insinto(join_path(get.installDIR(), '/usr/share/doc', get.srcTAG()), *sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 dbg=
-#dbg=-d
+dbg=-d
 pwd
 PATH=$PATH:.
 set -x
@@ -9,8 +9,8 @@ rm -rf tmp
 mkdir tmp
 set -e
 pisi-cli -Dtmp $dbg -E --ignore-build-no build tests/zip/pspec.xml tests/unzip/pspec.xml
-pisi-cli -Dtmp $dbg index .
-pisi-cli -Dtmp $dbg add-repo repo1 pisi-index.xml
+pisi-cli -Dtmp $dbg --skip-signing index .
+pisi-cli -Dtmp $dbg --yes-all add-repo repo1 pisi-index.xml
 pisi-cli -Dtmp $dbg list-repo
 pisi-cli -Dtmp $dbg update-repo repo1
 pisi-cli -Dtmp $dbg list-available

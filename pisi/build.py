@@ -39,8 +39,8 @@ from pisi.xmldoc.files import Files, FileInfo
 from pisi.fetcher import fetch_url
 from pisi.uri import URI
 from pisi.xmldoc.metadata import MetaData
-from pisi.xmldoc.package import Package
 import pisi.xmldoc.component as component
+from pisi.package import Package
 import pisi.archive as archive
 import pisi.actionsapi.variables
 

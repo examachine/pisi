@@ -92,14 +92,23 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             rmode = 'r:'
-            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
-            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + ctx.const.lzma_suffix,
-                                                             self.file_path))
+            if util.is_osx():
+                lzma = "lzma -d"
+                ret, out, err = util.run_batch("lzma -d -k " + self.file_path)
+
+            else:
+                lzma = "lzma d"
+                ret, out, err = util.run_batch("lzma d %s %s" %
+                                               (self.file_path +
+                                                ctx.const.lzma_suffix,
+                                                self.file_path))
             if ret != 0:
                 raise LZMAError(err)
         else:
             raise ArchiveError(_("Archive type not recognized"))
+        self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
 
+        print '* opening tarfile', self.file_path
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
@@ -139,7 +148,8 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:bz2'
             elif self.type == 'tarlzma':
                 wmode = 'w:'
-                self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
+                if not util.is_osx():
+                    self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
             else:
                 raise ArchiveError(_("Archive type not recognized"))
             self.tar = tarfile.open(self.file_path, wmode)

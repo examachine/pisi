@@ -52,7 +52,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
         makedirs(destinationDirectory)
 
     #print '****', destinationDirectory, sourceFiles
-    for sourceFile in list(sourceFiles):
+    for sourceFile in sourceFiles:
         #print 'pkgsrcDIR()=',get.sourceDIR()
         sourceFile = join_path(get.sourceDIR(), sourceFile)
         #print 'sourceFile,destDir=',sourceFile, destinationDirectory
@@ -74,7 +74,9 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
-    for sourceFile in list(sourceFiles):
+    print '* readable_insinto', destinationDirectory, sourceFiles
+    for sourceFile in sourceFiles:
+        print '* installing', sourceFile
         sourceFile = join_path(get.sourceDIR(), sourceFile)
         for source in glob.glob(sourceFile):
             system('install -m0644 "%s" %s' % (source, destinationDirectory))

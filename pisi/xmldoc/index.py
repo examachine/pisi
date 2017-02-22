@@ -27,7 +27,7 @@ import metadata
 import pisi.db.package as packagedb
 import pisi.db.source as sourcedb
 import pisi.util as util
-from package import Package
+from pisi.package import Package
 from pisi.pxml.xmlfile import XmlFile
 from pisi.file import File
 import pisi.pxml.autoxml as autoxml
@@ -122,7 +122,7 @@ class Index(XmlFile):
 
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
-        md.package.packageSize = os.path.getsize(path)
+        md.package.packageSize = long(os.path.getsize(path))
         if ctx.config.options and ctx.config.options.absolute_uris:
             # FIXME: the name "absolute_uris" does not seem to fit below :/
             md.package.packageURI = os.path.realpath(path)

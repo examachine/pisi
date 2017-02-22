@@ -35,5 +35,4 @@ from files import *
 from component import *
 from index import *
 from metadata import *
-from package import *
 from specfile import *
