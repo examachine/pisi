@@ -105,10 +105,10 @@ class ArchiveTar(ArchiveBase):
                                                 self.file_path))
             if ret != 0:
                 raise LZMAError(err)
+            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
         else:
             raise ArchiveError(_("Archive type not recognized"))
-        self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
-
+ 
         print '* opening tarfile', self.file_path
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()

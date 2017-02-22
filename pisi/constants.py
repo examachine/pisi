@@ -16,8 +16,6 @@
 If you have a 'magic' constant value this is where it should be
 defined."""
 
-#TODO: FIXME: this singleton pattern looks awful on the eyes
-
 import sys
 from os.path import join
 
