@@ -15,7 +15,7 @@ import os
 import pisi.context as ctx
 import pisi.api
 import pisi.db.install as installdb
-import pisi.xmldoc.files as files
+import pisi.data.files as files
 from pisi import util
 
 import testcase

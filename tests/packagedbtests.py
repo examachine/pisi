@@ -16,7 +16,7 @@ import pisi.context as ctx
 import pisi.api
 from pisi.db import PackageDB, Repo
 from pisi import util
-from pisi.xmldoc import SpecFile
+from pisi.data import SpecFile
 
 import testcase
 class PackageDBTestCase(testcase.TestCase):

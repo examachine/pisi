@@ -12,7 +12,7 @@
 import unittest
 import os
 
-import pisi.xmldoc.specfile as specfile
+import pisi.data.specfile as specfile
 import pisi.util as util
 
 class SpecFileNewTestCase(unittest.TestCase):

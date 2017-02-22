@@ -47,7 +47,7 @@ class ConflictTestCase(testcase.TestCase):
         ctx.installdb.install('inst4', '2.1', '2', '3')
 
         for name in packages.keys():
-            pkg = pisi.xmldoc.specfile.Package()
+            pkg = pisi.data.specfile.Package()
             pkg.name = name
             pkg.conflicts = packages[name]
             d_t[name] = pkg

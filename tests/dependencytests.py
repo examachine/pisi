@@ -12,7 +12,7 @@
 import unittest
 import os
 
-from pisi.xmldoc.dependency import *
+from pisi.data.dependency import *
 
 class DependencyTestCase(unittest.TestCase):
     def setUp(self):

@@ -16,7 +16,7 @@ import pisi.context as ctx
 import pisi.api
 import pisi.db.source as sourcedb
 from pisi import util
-from pisi.xmldoc import SpecFile
+from pisi.data import SpecFile
 
 import testcase
 class SourceDBTestCase(testcase.TestCase):

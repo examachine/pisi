@@ -12,7 +12,7 @@
 import unittest
 import os
 
-from pisi.xmldoc import metadata
+from pisi.data import metadata
 from pisi import util
 
 class MetaDataTestCase(unittest.TestCase):

@@ -20,7 +20,7 @@ from pisi import archive
 from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
-from pisi.xmldoc import SpecFile
+from pisi.data import SpecFile
 from pisi import uri 
 
 import testcase
