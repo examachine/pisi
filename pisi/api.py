@@ -251,7 +251,7 @@ def info(package, installed = False):
         return info_name(package, installed)
     
 def info_file(package_fn):
-    from package import Package
+    from data.package import Package
 
     if not os.path.exists(package_fn):
         raise Error (_('File %s not found') % package_fn)

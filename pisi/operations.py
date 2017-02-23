@@ -70,7 +70,7 @@ def install(packages, reinstall = False):
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
-    from package import Package
+    from data.package import Package
 
     ctx.ui.debug('A = %s' % str(package_URIs))
 

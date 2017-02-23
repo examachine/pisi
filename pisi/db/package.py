@@ -64,7 +64,7 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.db.itembyrepo.NotfoundError, e:
+        except itembyrepo.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):
@@ -151,10 +151,10 @@ pkgdb = None
 
 def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
-    if pkgdb.has_package(name, itembyrepodb.installed, txn=txn):
-        pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
-    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn=txn):
-        pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
+    if pkgdb.has_package(name, itembyrepo.installed, txn=txn):
+        pkgdb.remove_package(name, itembyrepo.installed, txn=txn)
+    if pkgdb.has_package(name, itembyrepo.thirdparty, txn=txn):
+        pkgdb.remove_package(name, itembyrepo.thirdparty, txn=txn)
 
 def init_db():
     global pkgdb

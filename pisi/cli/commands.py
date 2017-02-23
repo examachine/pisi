@@ -675,7 +675,7 @@ Usage: info <package1> <package2> ... <packagen>
             self.help()
             return
             
-        index = pisi.index.Index()
+        index = pisi.data.index.Index()
         index.distribution = None
         
         for arg in self.args:
