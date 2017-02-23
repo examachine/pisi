@@ -43,10 +43,30 @@ For testing, please read tests/README
 OS X Instructions:
 ------------------
 
+Mac Ports approach:
+
+Install MacPorts, and then GCC using the following guides:
+https://guide.macports.org/#installing
+http://www.ficksworkshop.com/blog/post/installing-gcc-on-mac
+
+Install PISI dependencies 
+$ sudo port install python bsddb3 coreutils xz gnupg
+$ pip install bsddb3 pycurl urlgrabber
+
+set up gnupg2 if needed:
+
+$ gpg --gen-key
+
+Install COMAR dependencies
+
+$ sudo port install dbus policykit
+$ pip install dbus
+
+Homebrew approach:
+
 Install homebrew from https://brew.sh, and then 
 
 $ brew install python
-
 $ pip install bsddb3
 
 I used the following command to install the latest berkeley-db:
@@ -77,5 +97,3 @@ It should work on a current OS X installation.
 
 References:
 
-https://guide.macports.org/
-http://www.ficksworkshop.com/blog/post/installing-gcc-on-mac
