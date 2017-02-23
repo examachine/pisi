@@ -70,7 +70,7 @@ comp		component.xml	lang		stress.sh
 
 ## Contributions
 
-Most of the tests were written by *Eray Ozkural* during the development
+Most of the tests were written by Eray during the development
 of the original 1.0 release. Other PISI authors have also contributed
 tests, most notably actionsapi by Caglar, build by Baris, fetcher by 
 Murat and the authors have well maintained the tests which were essential
