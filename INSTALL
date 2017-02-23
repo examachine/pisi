@@ -74,3 +74,8 @@ move configuration to /etc
 $ sudo cp -a /usr/local/etc/pisi/ /etc/pisi
 
 It should work on a current OS X installation.
+
+References:
+
+https://guide.macports.org/
+http://www.ficksworkshop.com/blog/post/installing-gcc-on-mac
