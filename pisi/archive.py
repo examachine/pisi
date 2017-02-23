@@ -149,8 +149,7 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:bz2'
             elif self.type == 'tarlzma':
                 wmode = 'w:'
-                if not util.is_osx():
-                    self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
+                self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
             else:
                 raise ArchiveError(_("Archive type not recognized"))
             self.tar = tarfile.open(self.file_path, wmode)
@@ -163,15 +162,12 @@ class ArchiveTar(ArchiveBase):
         if self.tar.mode == 'w' and self.type == 'tarlzma':
             batch = None
             if util.is_osx():
-                lzma = "lzma"
+                lzma = "lzma -z"
             else:
                 lzma = "lzmash"
             if ctx.config.values.build.compressionlevel:
-                batch = "%s -%s %s" % (lzma, ctx.config.values.build.compressionlevel, self.file_path)
-            else:
-                batch = "%s %s" % (lzma, self.file_path)
-
-            ret, out, err = util.run_batch(batch)
+                lzma += " -%d" % ctx.config.values.build.compressionlevel
+            ret, out, err = util.run_batch("%s %s" % (lzma, self.file_path))
             if ret != 0:
                 raise LZMAError(err)
 

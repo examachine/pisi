@@ -25,8 +25,10 @@ class TestCase(unittest.TestCase):
             options = pisi.config.Options()
             options.ignore_build_no = False
         options.destdir = 'tmp'
+        #options.debug = True #TODO: make these into options for run.py
+        #options.verbose = True
         pisi.api.init(options = options, comar = comar,
                       database = database, write = database)
 
-    def tearDown(self, ):
+    def tearDown(self):
         pisi.api.finalize()
