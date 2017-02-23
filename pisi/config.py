@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -45,7 +45,7 @@ class Config(object):
     
     def __init__(self, options = Options()):
         self.options = options
-        self.values = ConfigurationFile("/etc/pisi/pisi.conf")
+        self.values = ConfigurationFile(ctx.const.pisi_conf)
 
         destdir = self.get_option('destdir')
         if destdir:
@@ -113,7 +113,7 @@ class Config(object):
 
     # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
-    # ihtiyacımız var? (baris)
+    # ihtiyacımız var? (baris) FIXME
     def install_dir(self):
         return self.tmp_dir() + ctx.const.install_dir_suffix
 

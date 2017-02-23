@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -36,6 +36,7 @@ def exportFlags():
     os.environ['LDFLAGS'] = values.build.ldflags
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
+    #print '***', values.build, values.build.jobs
 
 class Env(object):
     '''General environment variables used in actions API'''
@@ -46,6 +47,7 @@ class Env(object):
         self.__vars = {
             'pkg_dir': 'PKG_DIR',
             'work_dir': 'WORK_DIR',
+            'src_dir': 'SRC_DIR',
             'install_dir': 'INSTALL_DIR',
             'src_name': 'SRC_NAME',
             'src_version': 'SRC_VERSION',
@@ -92,12 +94,19 @@ class Dirs:
 # singleton here.  Or else Python will bug us with NoneType errors
 # because of uninitialized context (ctx) because of exportFlags().
 #
-# We import this modue from build.py becase we need to reset/init glb
+
+## class Glb:
+##     def __init__(self):
+##         self.env = Env()
+##         self.dirs = Dirs()
+
+# We import this module from build.py becase we need to reset/init glb
 # for each build. # See bug #2575
 glb = None
 
 def initVariables():
     global glb
-    ctx.env = Env()
-    ctx.dirs = Dirs()
     glb = ctx
+    glb.env = Env()
+    glb.dirs = Dirs()
+

@@ -4,14 +4,15 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
 #
-# Archive module provides access to regular archive file types.
 # Author: Eray Ozkural
 #         Baris Metin
+
+'''Archive module provides access to regular archive file types.'''
 
 # standard library modules
 import os
@@ -92,19 +93,27 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             rmode = 'r:'
-            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
-            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + ctx.const.lzma_suffix,
-                                                             self.file_path))
+            if util.is_osx():
+                ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
+
+            else:
+                ret, out, err = util.run_batch("lzma d %s %s" %
+                                               (self.file_path +
+                                                ctx.const.lzma_suffix,
+                                                self.file_path))
             if ret != 0:
                 raise LZMAError(err)
+            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
         else:
             raise ArchiveError(_("Archive type not recognized"))
-
+ 
+        print '* opening tarfile', self.file_path
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
 
-        install_tar_path = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar)
+        install_tar_path = util.join_path(ctx.config.tmp_dir(),
+                                          ctx.const.install_tar)
         for tarinfo in self.tar:
             # Installing packages (especially shared libraries) is a
             # bit tricky. You should also change the inode if you
@@ -148,14 +157,15 @@ class ArchiveTar(ArchiveBase):
     def close(self):
         self.tar.close()
 
-        if self.tar.mode == 'wb' and self.type == 'tarlzma':
+        if self.tar.mode == 'w' and self.type == 'tarlzma':
             batch = None
-            if ctx.config.values.build.compressionlevel:
-                batch = "lzmash -%s %s" % (ctx.config.values.build.compressionlevel, self.file_path)
+            if util.is_osx():
+                lzma = "lzma -z"
             else:
-                batch = "lzmash %s" % self.file_path
-
-            ret, out, err = util.run_batch(batch)
+                lzma = "lzmash"
+            if ctx.config.values.build.compressionlevel:
+                lzma += " -%d" % ctx.config.values.build.compressionlevel
+            ret, out, err = util.run_batch("%s %s" % (lzma, self.file_path))
             if ret != 0:
                 raise LZMAError(err)
 
@@ -171,11 +181,14 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
-        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        self.zip_obj = zipfile.ZipFile(self.file_path, mode, zipfile.ZIP_DEFLATED)
 
     def close(self):
         """Close the zip archive."""
         self.zip_obj.close()
+
+    def list_archive(self):
+        return self.zip_obj.namelist()
 
     def add_to_archive(self, file_name, arc_name=None):
         """Add file or directory path to the zip file"""
@@ -196,13 +209,13 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, arc_name, zipfile.ZIP_DEFLATED)
-
                 if not arc_name:
-                    zinfo = self.zip_obj.getinfo(file_name)
-                else:
-                    zinfo = self.zip_obj.getinfo(arc_name)
-                zinfo.create_system = 3
+                    arc_name = file_name
+                #print 'Adding %s as %s' % (file_name, arc_name)
+                self.zip_obj.write(file_name, arc_name)
+
+                #zinfo = self.zip_obj.getinfo(arc_name)
+                #zinfo.create_system = 3
 
     def add_basename_to_archive(self, file_name):
         """Add only the basepath to the zip file. For example; if the given
@@ -314,6 +327,9 @@ class Archive:
             'zip': ArchiveZip,
             'binary': ArchiveBinary
         }
+
+        if not handlers.has_key(arch_type):
+            raise ArchiveError(_("Archive type not recognized"))
 
         self.archive = handlers.get(arch_type)(file_path, arch_type)
 

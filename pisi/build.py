@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -27,20 +27,20 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-from pisi.specfile import SpecFile
+from pisi.data.specfile import SpecFile
 import pisi.util as util
 from pisi.util import join_path as join, parenturi
 from pisi.file import File
 import pisi.context as ctx
-import pisi.dependency as dependency
+import pisi.data.dependency as dependency
 import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
-from pisi.files import Files, FileInfo
+from pisi.data.files import Files, FileInfo
 from pisi.fetcher import fetch_url
 from pisi.uri import URI
-from pisi.metadata import MetaData
-from pisi.package import Package
-import pisi.component as component
+from pisi.data.metadata import MetaData
+import pisi.data.component as component
+from pisi.data.package import Package
 import pisi.archive as archive
 import pisi.actionsapi.variables
 
@@ -53,14 +53,18 @@ class Error(pisi.Error):
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
-    
+    #print 'get_file_type',path,str(pinfo_list),install_dir
     Match = lambda x: [match for match in glob.glob(install_dir + x) if join(install_dir, path).find(match) > -1]
 
     def Sort(x):
         x.sort(reverse=True)
         return x
-    
-    best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
+
+    matches = [pinfo.path for pinfo in pinfo_list if Match(pinfo.path)]
+    if len(matches)>0:
+        best_matched_path = Sort(matches)[0]
+    else:
+        raise Error, _("No file matches %s in Spec file." % path)
     info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
     return info.fileType, info.permanent
 
@@ -143,7 +147,8 @@ class Builder:
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
-            specuri = URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
+            # FIXME: doesn't work for file://
+            specuri = URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
         spec = SpecFile()
         spec.read(specuri, ctx.config.tmp_dir())
@@ -210,6 +215,7 @@ class Builder:
         # Each time a builder is created we must reset
         # environment. See bug #2575
         pisi.actionsapi.variables.initVariables()
+        #print '***** MEOWW *****'
 
         env = {
             "PKG_DIR": self.pkg_dir(),
@@ -364,19 +370,24 @@ class Builder:
 
     def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
+        ctx.ui.info(_('Compiling action script'))
         scriptfile = util.join_path(self.specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
+            #localSymbols = {}
+            #globalSymbols = {}
+            #localSymbols = locals()
+            #globalSymbols = globals()
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
             raise Error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
         except SyntaxError, e:
             raise Error(_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
-
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
         self.srcDir = self.pkg_src_dir()
+        os.environ['SRC_DIR'] = self.srcDir
         
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -397,7 +408,7 @@ class Builder:
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
-
+        print func
         if func in self.actionLocals:
             self.actionLocals[func]()
         else:
@@ -556,7 +567,7 @@ class Builder:
         metadata.package.architecture = "Any"
         metadata.package.packageFormat = ctx.get_option('package_format')
         
-        size = 0
+        size = long(0)
         if package.debug_package:
             d = self.pkg_debug_dir()
         else:
@@ -607,7 +618,7 @@ class Builder:
                     continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
-                fsize = util.dir_size(fpath)
+                fsize = long(util.dir_size(fpath))
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
                                      size=fsize, hash=fhash)
 
@@ -639,7 +650,8 @@ class Builder:
                         return
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
-                except:
+                except Exception, e:
+                    print e
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
@@ -809,6 +821,7 @@ class Builder:
                 ctx.build_leftover = join(self.pkg_dir(), ctx.const.install_tar_lzma)
                 tar = archive.ArchiveTar(ctx.const.install_tar_lzma, "tarlzma")
                 for finfo in files.list:
+                    #print finfo.path
                     orgname = arcname = join("install", finfo.path)
                     if package.debug_package:
                         orgname = join("debug", finfo.path)

@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -29,24 +29,26 @@ import pisi
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.dependency as dependency
-import pisi.pgraph as pgraph
+import pisi.data as struct
+import pisi.data.dependency as dependency
+import pisi.data.pgraph as pgraph
 import pisi.operations as operations
-import pisi.packagedb as packagedb
-import pisi.repodb
-import pisi.installdb
-import pisi.sourcedb
-import pisi.component as component
-from pisi.index import Index
+import pisi.db as db
+#.package as packagedb
+#import pisi.db.repo as repodb
+#import pisi.db.install as installdb
+#import pisi.db.source as sourcedb
+import pisi.data.component as component
+from pisi.data.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade, emerge
 from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
-from pisi.metadata import MetaData
-from pisi.files import Files
+from pisi.data.metadata import MetaData
+from pisi.data.files import Files
 from pisi.file import File
 import pisi.search
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 from pisi.version import Version
 
 class Error(pisi.Error):
@@ -54,7 +56,8 @@ class Error(pisi.Error):
 
 def init(database = True, write = True,
          options = None, ui = None, comar = True,
-         stdout = None, stderr = None,
+         #stdout = None, stderr = None,
+         stdout = sys.stdout, stderr = sys.stderr,
          comar_sockname = None):
     """Initialize PiSi subsystem"""
 
@@ -100,12 +103,12 @@ def init(database = True, write = True,
     ctx.database = database
     if database:
         shelve.init_dbenv(write=write)
-        ctx.repodb = pisi.repodb.init()
-        ctx.installdb = pisi.installdb.init()
-        ctx.filesdb = pisi.files.FilesDB()
-        ctx.componentdb = pisi.component.ComponentDB()
-        ctx.packagedb = packagedb.init_db()
-        ctx.sourcedb = pisi.sourcedb.init()
+        ctx.repodb = db.repo.init()
+        ctx.installdb = db.install.init()
+        ctx.filesdb = db.files.FilesDB()
+        ctx.componentdb = struct.ComponentDB()
+        ctx.packagedb = db.package.init_db()
+        ctx.sourcedb = db.source.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])
     else:
         ctx.repodb = None
@@ -124,8 +127,8 @@ def finalize():
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
 
-        pisi.repodb.finalize()
-        pisi.installdb.finalize()
+        db.repo.finalize()
+        db.install.finalize()
         if ctx.filesdb != None:
             ctx.filesdb.close()
             ctx.filesdb = None
@@ -133,10 +136,10 @@ def finalize():
             ctx.componentdb.close()
             ctx.componentdb = None
         if ctx.packagedb:
-            packagedb.finalize_db()
+            db.package.finalize_db()
             ctx.packagedb = None
         if ctx.sourcedb:
-            pisi.sourcedb.finalize()
+            db.source.finalize()
             ctx.sourcedb = None
         pisi.search.finalize()
         if ctx.dbenv:
@@ -158,7 +161,7 @@ def list_upgradable():
 
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
-def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
+def package_graph(A, repo = db.itembyrepo.installed, ignore_installed = False):
     """Construct a package relations graph, containing
     all dependencies of packages A, if ignore_installed
     option is True, then only uninstalled deps will
@@ -196,14 +199,14 @@ def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
-    G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed) # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, db.itembyrepo.installed) # construct G_f
     for x in A.keys():
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = ctx.packagedb.get_package(x, pisi.itembyrepodb.installed)
+            pkg = ctx.packagedb.get_package(x, db.itembyrepodb.installed)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -215,7 +218,7 @@ def configure_pending():
     try:
         import pisi.comariface as comariface
         for x in order:
-            if ctx.installdb.is_installed(x):
+            if ctx.db.is_installed(x):
                 pkginfo = A[x]
                 pkgname = util.package_name(x, pkginfo.version,
                                         pkginfo.release,
@@ -248,7 +251,7 @@ def info(package, installed = False):
         return info_name(package, installed)
     
 def info_file(package_fn):
-    from package import Package
+    from data.package import Package
 
     if not os.path.exists(package_fn):
         raise Error (_('File %s not found') % package_fn)
@@ -260,9 +263,9 @@ def info_file(package_fn):
 def info_name(package_name, installed=False):
     """fetch package information for a package"""
     if installed:
-        package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
+        package = ctx.packagedb.get_package(package_name, db.itembyrepo.installed)
     else:
-        package, repo = ctx.packagedb.get_package_repo(package_name, pisi.itembyrepodb.repos)
+        package, repo = ctx.packagedb.get_package_repo(package_name, db.itembyrepo.repos)
         repostr = repo
  
     from pisi.metadata import MetaData
@@ -289,7 +292,8 @@ def search_package_names(query):
             r.add(pkgname)
     return r
 
-def search_package_terms(terms, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
+def search_package_terms(terms, lang = None, search_names = True,
+                         repo = db.itembyrepo.alldb):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
@@ -300,7 +304,8 @@ def search_package_terms(terms, lang = None, search_names = True, repo = pisi.it
             r |= search_package_names(term)
     return r
 
-def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
+def search_package(query, lang = None, search_names = True,
+                   repo = db.itembyrepo.alldb):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query('summary', lang, query, repo = repo)
@@ -324,8 +329,8 @@ def check(package):
                 ctx.ui.info("OK", verbose=True)
     return corrupt
 
-def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False, 
-          non_recursive=False):
+def index(dirs=None, output='pisi-index.xml', skip_sources=False,
+          skip_signing=False, non_recursive=False):
     """accumulate PISI XML files in a directory"""
     index = Index()
     index.distribution = None
@@ -346,7 +351,7 @@ def add_repo(name, indexuri, at = None):
     if ctx.repodb.has_repo(name):
         raise Error(_('Repo %s already present.') % name)
     else:
-        repo = pisi.repodb.Repo(URI(indexuri))
+        repo = db.repo.Repo(URI(indexuri))
         ctx.repodb.add_repo(name, repo, at = at)
         ctx.ui.info(_('Repo %s added to system.') % name)
 
@@ -471,10 +476,10 @@ def rebuild_db(files=False):
 
     # check db schema versions
     try:
-        pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
+        db.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
     except:
         files = True # exception means the files db version was wrong
-    pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
+    db.lockeddbshelve.init_dbenv(write=True, writeversion=True)
     destroy(files) # bye bye
 
     # save parameters and shutdown pisi

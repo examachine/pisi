@@ -2,7 +2,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -14,9 +14,9 @@ import os
 
 import pisi.context as ctx
 import pisi.api
-import pisi.sourcedb
+import pisi.db.source as sourcedb
 from pisi import util
-from pisi.specfile import SpecFile
+from pisi.data import SpecFile
 
 import testcase
 class SourceDBTestCase(testcase.TestCase):
@@ -24,7 +24,7 @@ class SourceDBTestCase(testcase.TestCase):
     def setUp(self):
         testcase.TestCase.setUp(self)
 
-        self.sourcedb = pisi.sourcedb.init()
+        self.sourcedb = sourcedb.init()
         self.spec = SpecFile()
         self.spec.read("tests/popt/pspec.xml")
         if not ctx.repodb.has_repo('test'):

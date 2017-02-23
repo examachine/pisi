@@ -1,7 +1,19 @@
-Author: Eray Ozkural
-
 INSTALLATION INSTRUCTIONS
 =-=-=-=-=-=-=-=-=-=-=-=-=
+
+Author: Eray Ozkural
+
+
+Dependencies:
+-------------
+
+* Berkeley DB 4.x
+* python bsddb3 package
+* piksemel
+* coreutils 
+* gettext
+* xz
+* gnupg2
 
 
 Generic Instructions:
@@ -9,7 +21,7 @@ Generic Instructions:
 
 Installation:
 
-You can install PiSi on your system with a single command.
+You can install PISI on your system with a single command.
 
 # ./setup.py install
 
@@ -17,10 +29,10 @@ If you are on a Pardus system, you should delete /usr/lib/pardus/pisi
 when you are installing the SVN version
 
 PiSi requires piksemel XML processing library, the newest version
-bsd bindings called "bsddb3" and Pardus configuration manager COMAR
-in order to run.
+Berkekey DB python bindings called "bsddb3" and Pardus configuration 
+manager COMAR in order to run.
 
-If you are upgrading from an old PiSi release you may have to 
+If you are upgrading from an old PISI release you may have to 
 run the following command as root:
 
 # pisi rebuild-db
@@ -37,58 +49,26 @@ $ brew install python
 
 $ pip install bsddb3
 
+I used the following command to install the latest berkeley-db:
+
+$ BERKELEYDB_DIR=$(brew --cellar)/berkeley-db/6.2.23 YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 pip install bsddb3
+
+$ pip install pycurl urlgrabber
+
+Install piksemel XML processing library
+
+$ brew install coreutils xz gnupg2
+
+set up gnupg2 if needed:
+
+$ gpg --gen-key
+
 $ ./setup.py install
 
 $ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
 
-$ pisi help
-xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom
-xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom
-Usage: pisi [options] <command> [arguments]
+move configuration to /etc
 
-where <command> is one of:
-
-        add-repo (ar) - Add a repository
-           build (bi) - Build PISI packages
-                check - Verify installation
-                clean - Clean stale locks
-configure-pending (cp) - Configure pending packages
-    delete-cache (dc) - Delete cache files
-          emerge (em) - Build and install PISI source packages from repository
-                graph - Graph package relations
-             help (?) - Prints help for given commands
-           index (ix) - Index PISI files in a given directory
-                 info - Display package information
-         install (it) - Install PISI packages
-  list-available (la) - List available packages in the repositories
- list-components (lc) - List available components
-  list-installed (li) - Print the list of all installed packages  
-    list-pending (lp) - List pending packages
-       list-repo (lr) - List repositories
-    list-sources (ls) - List available sources
-   list-upgrades (lu) - List packages to be upgraded
-     rebuild-db (rdb) - Rebuild Databases
-          remove (rm) - Remove PISI packages
-     remove-repo (rr) - Remove repositories
-          search (sr) - Search packages
-     search-file (sf) - Search for a file
-     update-repo (ur) - Update repository databases
-         upgrade (up) - Upgrade PISI packages
-
-Use "pisi help <command>" for help on a specific command.
-
-
-Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -D DESTDIR, --destdir=DESTDIR
-                        change the system root for pisi commands
-  -y, --yes-all         assume yes in all yes/no queries
-  -u USERNAME, --username=USERNAME
-  -p PASSWORD, --password=PASSWORD
-  -v, --verbose         detailed output
-  -d, --debug           show debugging information
-  -N, --no-color        print like a man
-$
+$ sudo cp -a /usr/local/etc/pisi/ /etc/pisi
 
 It should work on a current OS X installation.

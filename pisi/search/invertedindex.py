@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -13,9 +13,9 @@
 
 import types
 
-import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.db.lockeddbshelve as shelve
+from pisi.db.itembyrepo import ItemByRepoDB
+import pisi.db.itembyrepo as itembyrepodb
 
 class InvertedIndex(object):
     """a database of term -> set of documents"""

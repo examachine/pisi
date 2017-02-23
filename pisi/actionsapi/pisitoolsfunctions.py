@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -23,9 +23,11 @@ _ = __trans.ugettext
 
 # Pisi Modules
 import pisi.context as ctx
+import pisi.util as util
 
 # ActionsAPI Modules
 import pisi.actionsapi
+from pisi.actionsapi import get
 from pisi.actionsapi.shelltools import *
 
 class FileError(pisi.actionsapi.Error):
@@ -49,10 +51,19 @@ def executable_insinto(destinationDirectory, *sourceFiles):
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
+    #print '****', destinationDirectory, sourceFiles
     for sourceFile in sourceFiles:
+        #print 'pkgsrcDIR()=',get.sourceDIR()
+        sourceFile = join_path(get.sourceDIR(), sourceFile)
+        #print 'sourceFile,destDir=',sourceFile, destinationDirectory
         for source in glob.glob(sourceFile):
-            # FIXME: use an internal install routine for these
-            system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
+            #TODO FIXME: use an internal install routine for these
+            if util.is_osx()==True:
+                util.run_batch('ginstall -m0755 -o root -g wheel %s %s' %
+                               (source, destinationDirectory),sudo=True)
+            else:
+                util.run_batch('install -m0755 -o root -g root %s %s' %
+                               (source, destinationDirectory),sudo=True)
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
@@ -63,7 +74,10 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
+    print '* readable_insinto', destinationDirectory, sourceFiles
     for sourceFile in sourceFiles:
+        print '* installing', sourceFile
+        sourceFile = join_path(get.sourceDIR(), sourceFile)
         for source in glob.glob(sourceFile):
             system('install -m0644 "%s" %s' % (source, destinationDirectory))
 

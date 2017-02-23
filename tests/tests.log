@@ -1,157 +1,156 @@
-testFileList (actionsapitests.ActionsAPITestCase) ... [35mDestination directory /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp does not exist. Creating it.
-[0m[35mWriting current database version for dbversion
-[0m[35mWriting current database version for filesdbversion
-[0mok
+All unit tests are passed currently.
+
+$ tests/run.py
+** Running all tests
+
+* Running tests in actionsapitests.py
+testFileList (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessDir (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsCanAccessFile (actionsapitests.ActionsAPITestCase) ... ok
-testShelltoolsCopy (actionsapitests.ActionsAPITestCase) ... FAIL
+testShelltoolsCopy (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsEcho (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsMakedirs (actionsapitests.ActionsAPITestCase) ... ok
 testShelltoolsSystem (actionsapitests.ActionsAPITestCase) ... ok
 
-======================================================================
-FAIL: testShelltoolsCopy (actionsapitests.ActionsAPITestCase)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/actionsapitests.py", line 69, in testShelltoolsCopy
-    self.assertEqual(os.path.islink('tests/actionsapitests/brokenlink-copy'), True)
-AssertionError: False != True
+Ran 7 tests in 4.380s
 
-----------------------------------------------------------------------
-Ran 7 tests in 12.039s
+OK
 
-FAILED (failures=1)
-testMakeZip (archivetests.ArchiveFileTestCase) ... ERROR
-testUnpackTar (archivetests.ArchiveFileTestCase) ... ERROR
-testUnpackZip (archivetests.ArchiveFileTestCase) ... ERROR
-testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ERROR
-
-======================================================================
-ERROR: testMakeZip (archivetests.ArchiveFileTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 81, in testMakeZip
-    spec = SpecFile("tests/pccts/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 337, in initialize
-    self.read(uri, keepDoc, tmpDir)
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testUnpackTar (archivetests.ArchiveFileTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 31, in testUnpackTar
-    spec = SpecFile("tests/popt/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 337, in initialize
-    self.read(uri, keepDoc, tmpDir)
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testUnpackZip (archivetests.ArchiveFileTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 55, in testUnpackZip
-    spec = SpecFile("tests/pccts/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 337, in initialize
-    self.read(uri, keepDoc, tmpDir)
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testUnpackZipCond (archivetests.ArchiveFileTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/archivetests.py", line 97, in testUnpackZipCond
-    spec = SpecFile("tests/pccts/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 337, in initialize
-    self.read(uri, keepDoc, tmpDir)
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+* Running tests in archivetests.py
+testMakeZip (archivetests.ArchiveFileTestCase) ... check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+ok
+testUnpackTar (archivetests.ArchiveFileTestCase) ... check_file_hash 66f3c77b87a160951b180447f4a6dce68ad2f71b 66f3c77b87a160951b180447f4a6dce68ad2f71b
+check_file_hash 66f3c77b87a160951b180447f4a6dce68ad2f71b 66f3c77b87a160951b180447f4a6dce68ad2f71b
+ok
+testUnpackZip (archivetests.ArchiveFileTestCase) ... check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+check_file_hash 5b3417efd5f537434b568114bcda853b4975d851 5b3417efd5f537434b568114bcda853b4975d851
+ok
+testUnpackZipCond (archivetests.ArchiveFileTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 1.661s
+Ran 4 tests in 1.963s
 
-FAILED (errors=4)
+OK
+
+* Running tests in autoxmltests.py
 testDeclaration (autoxmltests.AutoXmlTestCase) ... ok
-testReadWrite (autoxmltests.AutoXmlTestCase) ... ERROR
-testWriteRead (autoxmltests.AutoXmlTestCase) ... ERROR
+testReadWrite (autoxmltests.AutoXmlTestCase) ... ok
+testWriteRead (autoxmltests.AutoXmlTestCase) ... ok
 testStr (autoxmltests.LocalTextTestCase) ... ok
 
-======================================================================
-ERROR: testReadWrite (autoxmltests.AutoXmlTestCase)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/autoxmltests.py", line 58, in testReadWrite
-    a.read('tests/a.xml')
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+Ran 4 tests in 0.009s
 
-======================================================================
-ERROR: testWriteRead (autoxmltests.AutoXmlTestCase)
+OK
+
+* Running tests in buildtests.py
+testBasicBuild (buildtests.BuildTestCase) ... Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+actions.py: WorkDir = merhaba-pisi-1.0
+Password:
+Stripping files..
+** Building package a
+Generating files.xml,
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-1.pisi.
+Done.
+Keeping Build Directory
+ok
+testBuildNumber (buildtests.BuildTestCase) ... Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+actions.py: WorkDir = merhaba-pisi-1.0
+Stripping files..
+** Building package a
+Generating files.xml,
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-1.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+Stripping files..
+** Building package a
+Generating files.xml,
+(found old version tmp/a-1.0-1-1.pisi)
+There are changes, incrementing build no to 2
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-2.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: a
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Fetching source from: https://github.com/examachine/pisi/raw/master/tests/buildtests/merhaba-pisi-1.0.tar.bz2
+check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+merhaba-pisi-1.0.tar.bz2 [cached]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/merhaba-pisi-1.0.tar.bz2
+Unpacking archive...check_file_hash d140159f1a3d0439e5e597a147479fb185e67c53 d140159f1a3d0439e5e597a147479fb185e67c53
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/a-1.0-1/work)
+Setting up source...
+setup
+Building source...
+build
+Installing...
+install
+Stripping files..
+** Building package a
+Generating files.xml,
+(found old version tmp/a-1.0-1-1.pisi)
+(found old version tmp/a-1.0-1-2.pisi)
+There is no change from previous build 2
+Generating metadata.xml,
+Creating PISI package tmp/a-1.0-1-2.pisi.
+Done.
+Keeping Build Directory
+ok
+
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/autoxmltests.py", line 84, in testWriteRead
-    a.write('/tmp/a2.xml')
-  File "./pisi/pxml/autoxml.py", line 452, in write
-    self.encode(self.rootNode(), errs)
-  File "./pisi/pxml/autoxml.py", line 356, in encode
-    encode_member(self, node, errs)
-  File "./pisi/pxml/autoxml.py", line 544, in encode
-    encode_a(node, value, errs)
-  File "./pisi/pxml/autoxml.py", line 812, in encode
-    obj.encode(node, errs)
-  File "./pisi/pxml/autoxml.py", line 101, in encode
-    setNodeAttribute(newnode, 'xml:lang', key)
-NameError: global name 'setNodeAttribute' is not defined
+Ran 2 tests in 4.257s
 
-----------------------------------------------------------------------
-Ran 4 tests in 0.007s
+OK
 
-FAILED (errors=2)
-testBasicBuild (buildtests.BuildTestCase) ... ERROR
-testBuildNumber (buildtests.BuildTestCase) ... ERROR
-
-======================================================================
-ERROR: testBasicBuild (buildtests.BuildTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 38, in testBasicBuild
-    pb = Builder(pspec)
-  File "./pisi/build.py", line 128, in __init__
-    self.set_spec_file(specuri)
-  File "./pisi/build.py", line 149, in set_spec_file
-    spec.read(specuri, ctx.config.tmp_dir())
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testBuildNumber (buildtests.BuildTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 44, in testBuildNumber
-    self.testBasicBuild()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/buildtests.py", line 38, in testBasicBuild
-    pb = Builder(pspec)
-  File "./pisi/build.py", line 128, in __init__
-    self.set_spec_file(specuri)
-  File "./pisi/build.py", line 149, in set_spec_file
-    spec.read(specuri, ctx.config.tmp_dir())
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.869s
-
-FAILED (errors=2)
+* Running tests in configfiletests.py
 testAccessMethods (configfiletests.ConfigFileTestCase) ... ok
 testFlagsExists (configfiletests.ConfigFileTestCase) ... ok
 testSections (configfiletests.ConfigFileTestCase) ... ok
@@ -161,14 +160,18 @@ testValues (configfiletests.ConfigFileTestCase) ... ok
 Ran 4 tests in 0.001s
 
 OK
+
+* Running tests in conflicttests.py
 testConflictWithEachOther (conflicttests.ConflictTestCase) ... ok
 testConflictWithEachOtherAndInstalled (conflicttests.ConflictTestCase) ... ok
 testConflictWithInstalled (conflicttests.ConflictTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 3.420s
+Ran 3 tests in 4.074s
 
 OK
+
+* Running tests in constantstests.py
 testConstValues (constantstests.ContextTestCase) ... ok
 testConstness (constantstests.ContextTestCase) ... ok
 
@@ -176,6 +179,8 @@ testConstness (constantstests.ContextTestCase) ... ok
 Ran 2 tests in 0.000s
 
 OK
+
+* Running tests in dependencytests.py
 testReleaseFrom (dependencytests.DependencyTestCase) ... ok
 testReleaseIs (dependencytests.DependencyTestCase) ... ok
 testReleaseTo (dependencytests.DependencyTestCase) ... ok
@@ -185,66 +190,34 @@ testVersionFrom (dependencytests.DependencyTestCase) ... ok
 Ran 4 tests in 0.001s
 
 OK
-testFetch (fetchertests.FetcherTestCase) ... ERROR
-testResume (fetchertests.FetcherTestCase) ... ERROR
 
-======================================================================
-ERROR: testFetch (fetchertests.FetcherTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 29, in setUp
-    self.spec.read("tests/helloworld/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testResume (fetchertests.FetcherTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/fetchertests.py", line 29, in setUp
-    self.spec.read("tests/helloworld/pspec.xml")
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+* Running tests in fetchertests.py
+testFetch (fetchertests.FetcherTestCase) ... ok
+testResume (fetchertests.FetcherTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.001s
+Ran 2 tests in 2.341s
 
-FAILED (errors=2)
+OK
+
+* Running tests in filestests.py
 testFileInfo (filestests.FilesTestCase) ... ok
 
 ----------------------------------------------------------------------
 Ran 1 test in 0.001s
 
 OK
+
+* Running tests in filetests.py
 testLocalFile (filetests.FileTestCase) ... ok
-testRemoteRead (filetests.FileTestCase) ... ERROR
-
-======================================================================
-ERROR: testRemoteRead (filetests.FileTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/filetests.py", line 30, in testRemoteRead
-    f = File("http://uludag.org.tr/haberler/rootfs0.2.html", File.read)
-  File "./pisi/file.py", line 160, in __init__
-    localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
-  File "./pisi/file.py", line 119, in download
-    fetch_url(uri, transfer_dir, ctx.ui.Progress)
-  File "./pisi/fetcher.py", line 55, in fetch_url
-    fetch.fetch()
-  File "./pisi/fetcher.py", line 100, in fetch
-    self.fetchRemoteFile(partial_file)
-  File "./pisi/fetcher.py", line 198, in fetchRemoteFile
-    self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-  File "./pisi/fetcher.py", line 253, in err
-    raise FetchError(error)
-FetchError: Cannot fetch http://uludag.org.tr/haberler/rootfs0.2.html; nodename nor servname provided, or not known
+wiki                           (0.0  B)  0%      0.00 B/s [??:??:??]ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.149s
+Ran 2 tests in 0.787s
 
-FAILED (errors=1)
+OK
+
+* Running tests in graphtests.py
 testCycle (graphtests.GraphTestCase) ... ok
 testTopologicalSort (graphtests.GraphTestCase) ... ok
 
@@ -252,149 +225,506 @@ testTopologicalSort (graphtests.GraphTestCase) ... ok
 Ran 2 tests in 0.000s
 
 OK
+
+* Running tests in installdbtests.py
 testInstall (installdbtests.InstallDBTestCase) ... ok
 testRemoveDummy (installdbtests.InstallDBTestCase) ... ok
 testRemovePurge (installdbtests.InstallDBTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 1.986s
+Ran 3 tests in 1.869s
 
 OK
-testRead (metadatatests.MetaDataTestCase) ... ERROR
-testVerify (metadatatests.MetaDataTestCase) ... ERROR
-testWrite (metadatatests.MetaDataTestCase) ... ERROR
 
-======================================================================
-ERROR: testRead (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testVerify (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 36, in testVerify
-    md = self.testRead()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testWrite (metadatatests.MetaDataTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 32, in testWrite
-    md = self.testRead()
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/metadatatests.py", line 22, in testRead
-    md.read('tests/popt/metadata.xml')
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
+* Running tests in metadatatests.py
+testRead (metadatatests.MetaDataTestCase) ... ok
+testVerify (metadatatests.MetaDataTestCase) ... ok
+testWrite (metadatatests.MetaDataTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.001s
+Ran 3 tests in 0.005s
 
-FAILED (errors=3)
+OK
+
+* Running tests in ootests.py
 testautosuper (ootests.OOTestCase) ... ok
 
 ----------------------------------------------------------------------
 Ran 1 test in 0.000s
 
 OK
-testAdd (packagedbtests.PackageDBTestCase) ... ERROR
-testRemove (packagedbtests.PackageDBTestCase) ... ERROR
-
-======================================================================
-ERROR: testAdd (packagedbtests.PackageDBTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/packagedbtests.py", line 27, in setUp
-    self.spec.read('tests/popt/pspec.xml')
-  File "./pisi/pxml/autoxml.py", line 426, in read
-    compress=compress, sign=sign, copylocal=copylocal)
-TypeError: readxml() got an unexpected keyword argument 'sha1sum'
-
-======================================================================
-ERROR: testRemove (packagedbtests.PackageDBTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/packagedbtests.py", line 25, in setUp
-    testcase.TestCase.setUp(self)
-  File "/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tests/testcase.py", line 29, in setUp
-    database = database, write = database)
-  File "./pisi/api.py", line 105, in init
-    ctx.filesdb = pisi.files.FilesDB()
-  File "./pisi/files.py", line 54, in __init__
-    shelve.LockedDBShelf.__init__(self, 'files')
-  File "./pisi/lockeddbshelve.py", line 124, in __init__
-    self.open(filename, dbname, filetype, flags, mode)
-  File "./pisi/lockeddbshelve.py", line 155, in open
-    self.lock()
-  File "./pisi/lockeddbshelve.py", line 165, in lock
-    raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
-Error: Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time.
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.825s
-
-FAILED (errors=2)
-xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom
-xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom
-** Running all tests
-
-* Running tests in actionsapitests.py
-
-* Running tests in archivetests.py
-
-* Running tests in autoxmltests.py
-
-* Running tests in buildtests.py
-
-* Running tests in configfiletests.py
-
-* Running tests in conflicttests.py
-
-* Running tests in constantstests.py
-
-* Running tests in dependencytests.py
-
-* Running tests in fetchertests.py
-
-* Running tests in filestests.py
-
-* Running tests in filetests.py
-
-* Running tests in graphtests.py
-
-* Running tests in installdbtests.py
-
-* Running tests in metadatatests.py
-
-* Running tests in ootests.py
 
 * Running tests in packagedbtests.py
-Traceback (most recent call last):
-  File "tests/run.py", line 53, in <module>
-    run_all()
-  File "tests/run.py", line 39, in run_all
-    run_test_suite(module.suite)
-  File "tests/run.py", line 28, in run_test_suite
-    pisi.api.finalize()
-  File "./pisi/api.py", line 127, in finalize
-    pisi.repodb.finalize()
-  File "./pisi/repodb.py", line 126, in finalize
-    db.close()
-  File "./pisi/repodb.py", line 52, in close
-    self.d.close()
-  File "./pisi/lockeddbshelve.py", line 170, in close
-    self.db.close()
-  File "/usr/local/lib/python2.7/site-packages/bsddb3/dbobj.py", line 138, in close
-    return self._cobj.close(*args, **kwargs)
-bsddb3.db.DBRunRecoveryError: (-30973, 'BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery -- BDB0060 PANIC: fatal region error detected; run recovery')
+testAdd (packagedbtests.PackageDBTestCase) ... ok
+testRemove (packagedbtests.PackageDBTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.253s
+
+OK
+
+* Running tests in packagetests.py
+testAddExtract (packagetests.PackageTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.399s
+
+OK
+
+* Running tests in repodbtests.py
+testAddRemoveCycle (repodbtests.RepoDBTestCase) ... 
+Test 0
+
+Repo foo added to system.
+Repo foo removed from system.
+
+Test 1
+
+Repo foo added to system.
+Repo foo removed from system.
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.314s
+
+OK
+
+* Running tests in searchtests.py
+testSearch (searchtests.SearchTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.868s
+
+OK
+
+* Running tests in sourcedbtests.py
+testAddRemove (sourcedbtests.SourceDBTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.638s
+
+OK
+
+* Running tests in specfiletests.py
+testCopy (specfiletests.SpecFileNewTestCase) ... ok
+testFields (specfiletests.SpecFileNewTestCase) ... ok
+testIsAPartOf (specfiletests.SpecFileNewTestCase) ... ok
+testVerify (specfiletests.SpecFileNewTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.013s
+
+OK
+
+* Running tests in utiltests.py
+testCleanArTimestamp (utiltests.UtilTestCase) ... ok
+testDirSize (utiltests.UtilTestCase) ... ok
+testGetFileHashes (utiltests.UtilTestCase) ... ok
+testRemovePathPrefix (utiltests.UtilTestCase) ... ok
+testSubPath (utiltests.UtilTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.013s
+
+OK
+
+* Running tests in versiontests.py
+testGeBug (versiontests.VersionTestCase) ... ok
+testOpsCharacters (versiontests.VersionTestCase) ... ok
+testOpsKeywords (versiontests.VersionTestCase) ... ok
+testOpsNumerical (versiontests.VersionTestCase) ... ok
+testSingle (versiontests.VersionTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+
+* Running tests in xmlexttests.py
+testAdd (xmlexttests.XmlExtTestCase) ... ok
+testGet (xmlexttests.XmlExtTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+
+$ tests/light.sh 
+/Volumes/Centauri/Users/malfunct/Code/projects/pisi
++ rm -rf tmp
++ mkdir tmp
++ set -e
++ pisi-cli -Dtmp -E --ignore-build-no build tests/zip/pspec.xml tests/unzip/pspec.xml
+Writing current database version for dbversion
+Writing current database version for filesdbversion
+Outputting packages in the working directory.
+Building PISI source package: zip
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Unsatisfied Build Dependencies: patch 
+Ignoring build dependencies.
+Fetching source from: http://pkgs.fedoraproject.org/repo/pkgs/zip/zip231.tar.gz/6bfc076664416251d7624ab3538d1cb9/zip231.tar.gz
+zip231.tar.gz                  (763.0 KB)100%      0.00 B/s [??:??:??] [complete]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/zip231.tar.gz
+Unpacking archive...check_file_hash 34ba126eb3344b0a35ee1a00fff9639994c7aba4 34ba126eb3344b0a35ee1a00fff9639994c7aba4
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work)
+Setting up source...
+setup
+Building source...
+build
+sh unix/configure "gcc" "-mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX "
+Check for the C preprocessor
+Check if we can use asm code
+Check for ANSI options
+Check for prototypes
+Check the handling of const
+Check for time_t
+Check for size_t
+Check for gcc no-builtin flag
+Check for rmdir
+Check for strchr
+Check for strrchr
+Check for rename
+Check for mktemp
+Check for mktime
+Check for mkstemp
+Check for memset
+Check for errno declaration
+Check for directory libraries
+Check for readlink
+Check for directory include file
+Check for non existent include files
+Check for terminal I/O include file
+Check for valloc
+Check for 64bit fseek
+Check for /usr/local/bin and /usr/local/man
+Check for OS-specific flags
+Check for symbolic links
+eval make -f unix/Makefile zips `cat flags`
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work/zip-2.31'
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zip.c
+zip.c:615:12: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+    printf(cryptnote[i]);
+           ^~~~~~~~~~~~
+1 warning generated.
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipfile.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipup.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO fileio.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO util.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO globals.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crypt.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO ttyio.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO unix/unix.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crc32.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO crctab.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO deflate.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO trees.c
+gcc -o zip  zip.o zipfile.o zipup.o fileio.o util.o globals.o crypt.o ttyio.o unix.o crc32.o crctab.o deflate.o trees.o  
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipnote.c
+zipnote.c:435:12: warning: comparison of array 'a' not equal to a null pointer
+      is always true [-Wtautological-pointer-compare]
+    while (a != NULL && *a != MARK)
+           ^    ~~~~
+zipnote.c:444:7: warning: comparison of array 'a' not equal to a null pointer is
+      always true [-Wtautological-pointer-compare]
+  if (a != NULL)                        /* change zip file comment */
+      ^    ~~~~
+2 warnings generated.
+rm -f zipfile_.c; ln -s zipfile.c zipfile_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL zipfile_.c
+rm -f zipfile_.c
+rm -f fileio_.c; ln -s fileio.c fileio_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL fileio_.c
+rm -f fileio_.c
+rm -f util_.c; ln -s util.c util_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL util_.c
+rm -f util_.c
+rm -f unix_.c; ln -s unix/unix.c unix_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL unix_.c
+rm -f unix_.c
+gcc -o zipnote  zipnote.o  zipfile_.o fileio_.o util_.o globals.o unix_.o 
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipsplit.c
+gcc -o zipsplit  zipsplit.o zipfile_.o fileio_.o util_.o globals.o unix_.o 
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO zipcloak.c
+rm -f crypt_.c; ln -s crypt.c crypt_.c
+gcc -c -mtune=i686 -O2 -pipe -fomit-frame-pointer -I. -DUNIX -DHAVE_DIRENT_H -DHAVE_TERMIOS_H -DHAVE_FSEEKO -DUTIL crypt_.c
+rm -f crypt_.c
+gcc -o zipcloak  zipcloak.o zipfile_.o fileio_.o util_.o globals.o unix_.o crctab.o crypt_.o ttyio.o 
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/work/zip-2.31'
+Installing...
+install
+Stripping files..
+** Building package zip
+Generating files.xml,
+Including directory '/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/zip-2.31-2/install/usr/bin'
+Build number is not available. For repo builds you must enable buildno in pisi.conf.
+Generating metadata.xml,
+Creating PISI package ./zip-2.31-2.pisi.
+Done.
+Keeping Build Directory
+Building PISI source package: unzip
+Compiling action script
+Safety switch: the component system.devel cannot be found
+Unsatisfied Build Dependencies: libc sed patch 
+Ignoring build dependencies.
+Fetching source from: http://pkgs.fedoraproject.org/repo/pkgs/unzip/unzip60.tar.gz/62b490407489521db863b523a7f86375/unzip60.tar.gz
+unzip60.tar.gz                 (1.3 MB)100%    741.17 KB/s [00:00:00] [complete]
+Source archive is stored: /Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/cache/pisi/archives/unzip60.tar.gz
+Unpacking archive...check_file_hash abf7de8a4018a983590ed6f5cbd990d4740f8a22 abf7de8a4018a983590ed6f5cbd990d4740f8a22
+ unpacked (/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work)
+Setting up source...
+setup
+Building source...
+build
+**** FUUUCK
+
+         This is a Unix-specific target.  (Just so you know.)
+
+( cd bzip2; make -f Makebz2.iz RM="rm -f" clean )
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60/bzip2'
+rm -f blocksort.o huffman.o crctable.o randtable.o compress.o decompress.o bzlib.o libbz2.a
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60/bzip2'
+rm -f unzip funzip unzipsfx unzip.o crc32.o  crypt.o envargs.o explode.o extract.o fileio.o globals.o inflate.o list.o match.o process.o ttyio.o ubz2err.o unreduce.o unshrink.o zipinfo.o unix.o funzip.o crc32.o  cryptf.o globalsf.o inflatef.o ttyiof.o unzipsfx.o crc32_.o  crypt_.o extract_.o fileio_.o globals_.o inflate_.o match_.o process_.o ttyio_.o ubz2err_.o unix_.o api.o apihelp.o crc_gcc.o \
+  crc_sysv.o unzipstb.o crypt_.c extract_.c globals_.c inflate_.c \
+  ttyio_.c crc_i386s.s msdos_.c process_.c unix_.c unzipsfx.c
+rm -f flags
+rm -rf ./IZunzip
+make -f unix/Makefile unzips CF="-O -I. -Ibzip2 -DUNIX   -DBSD"
+make[1]: Entering directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60'
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD crc32.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD envargs.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD explode.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD extract.c
+extract.c:476:23: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                      LoadFarString(ReportMsg)));
+                      ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+extract.c:755:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+extract.c:756:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(ReportMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+3 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD fileio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD list.c
+list.c:184:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:510:48: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+            Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                               ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:594:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+list.c:677:44: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+        Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                           ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+4 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD match.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD process.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD ttyio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD ubz2err.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unreduce.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unshrink.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD zipinfo.c
+zipinfo.c:774:38: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                     ((char *)slide, LoadFarString(ReportMsg)));
+                                     ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+zipinfo.c:963:48: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+            Info(slide, 0x401, ((char *)slide, LoadFarString(EndSigMsg)));
+                                               ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+2 warnings generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD unix/unix.c
+cc -o unzip  -Lbzip2 unzip.o crc32.o  crypt.o envargs.o explode.o extract.o fileio.o globals.o inflate.o list.o match.o process.o ttyio.o ubz2err.o unreduce.o unshrink.o zipinfo.o unix.o  -s
+ld: warning: option -s is obsolete and being ignored
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD funzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o cryptf.o crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o globalsf.o globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o inflatef.o inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DFUNZIP -o ttyiof.o ttyio.c
+cc -o funzip  funzip.o crc32.o  cryptf.o globalsf.o inflatef.o ttyiof.o -s
+ld: warning: option -s is obsolete and being ignored
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o unzipsfx.o unzip.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o crc32_.o crc32.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o crypt_.o crypt.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o extract_.o extract.c
+extract.c:476:23: warning: format string is not a string literal
+      (potentially insecure) [-Wformat-security]
+                      LoadFarString(ReportMsg)));
+                      ^             ~~~~~~~~~
+./unzpriv.h:1009:37: note: expanded from macro 'LoadFarString'
+#    define LoadFarString(x)        (char *)(x)
+                                    ^
+./unzpriv.h:2708:61: note: expanded from macro 'Info'
+       (*G.message)((zvoid *)&G, (uch *)(buf), (ulg)sprintf sprf_arg, (flag))
+                                                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/secure/_stdio.h:47:56: note: 
+      expanded from macro 'sprintf'
+  __builtin___sprintf_chk (str, 0, __darwin_obsz(str), __VA_ARGS__)
+                                                       ^
+1 warning generated.
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o fileio_.o fileio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o globals_.o globals.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o inflate_.o inflate.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o match_.o match.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o process_.o process.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o ttyio_.o ttyio.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o ubz2err_.o ubz2err.c
+cc -c -O -I. -Ibzip2 -DUNIX   -DBSD -DSFX -o unix_.o unix/unix.c
+cc -o unzipsfx  unzipsfx.o crc32_.o  crypt_.o extract_.o fileio_.o globals_.o inflate_.o match_.o process_.o ttyio_.o ubz2err_.o unix_.o -s
+ld: warning: option -s is obsolete and being ignored
+make[1]: Leaving directory `/Volumes/Centauri/Users/malfunct/Code/projects/pisi/tmp/var/tmp/pisi/unzip-6.0-2/work/unzip60'
+Installing...
+install
+Stripping files..
+** Building package unzip
+Generating files.xml,
+Build number is not available. For repo builds you must enable buildno in pisi.conf.
+Generating metadata.xml,
+Creating PISI package ./unzip-6.0-2.pisi.
+Done.
+Keeping Build Directory
++ pisi-cli -Dtmp index .
+* Building index of PISI files under .
+Adding unzip-6.0-2.pisi to package index
+Package unzip: metadata corrupt, skipping...
+package.package.packageSize: Type mismatch. Expected <type 'long'>, got <type 'int'>
+Adding zip-2.31-2.pisi to package index
+Package zip: metadata corrupt, skipping...
+package.package.packageSize: Type mismatch. Expected <type 'long'>, got <type 'int'>
+Adding ./tests/buildtests/a/pspec.xml to source index
+Adding ./tests/buildtests/merhaba-pisi-1.0/pspec.xml to source index
+Adding ./tests/helloworld/pspec.xml to source index
+Adding ./tests/pccts/pspec.xml to source index
+Adding ./tests/popt/pspec.xml to source index
+Adding component.xml to component index
+Adding component.xml to component index
+Adding ./tests/stress/comp/ab/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding ./tests/stress/comp/bc/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding ./tests/stress/comp/cd/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.comp component
+Adding component.xml to component index
+Adding ./tests/stress/lang/de/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.lang component
+Adding ./tests/stress/lang/ef/pspec.xml to source index
+PartOf tag not defined, looking for component
+Source is part of test.lang component
+Adding ./tests/unzip/pspec.xml to source index
+Adding ./tests/unzip2/pspec.xml to source index
+Adding ./tests/zip/pspec.xml to source index
+Adding ./tests/zip2/pspec.xml to source index
+Program Terminated.
+ERROR: gpg --detach-sig pisi-index.xml failed
+Please use 'pisi help' for general help.
+Use --debug to see a traceback.
+$ 

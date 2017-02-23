@@ -9,13 +9,13 @@ set -x # xtrace
 set -e # errexit
 rm -rf tmp
 #echo "*** build tests"
-pisi-cli -Dtmp build http://svn.uludag.org.tr/pardus/devel/system/base/zip/pspec.xml http://svn.uludag.org.tr/pardus/devel/system/base/unzip/pspec.xml
+pisi-cli -Dtmp build --ignore-dependency https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/zip/pspec.xml https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/unzip/pspec.xml
 
 #partial-builds
-pisi-cli -Dtmp build --until=setup http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build --until=build http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build --until=install http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build --until=package http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
+pisi-cli -Dtmp build --until=setup https://github.com/pars-linux/corporate2/blob/master/system/base/gawk/pspec.xml
+pisi-cli -Dtmp build --until=build https://github.com/pars-linux/corporate2/blob/master/system/base/gawk/pspec.xml
+pisi-cli -Dtmp build --until=install https://github.com/pars-linux/corporate2/blob/master/system/base/gawk/pspec.xml
+pisi-cli -Dtmp build --until=package https://github.com/pars-linux/corporate2/blob/master/system/base/gawk/pspec.xml
 
 #echo "*** repository tests"
 

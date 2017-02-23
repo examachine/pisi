@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -28,6 +28,7 @@ import pisi.context as ctx
 from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.fetcher import fetch_url
+from pisi.mirrors import Mirrors
 
 class Error(pisi.Error):
     pass
@@ -63,9 +64,11 @@ class SourceArchive:
 
     def unpack(self, clean_dir=True):
 
+        ctx.ui.debug("unpack: %s, %s" % (self.archiveFile, self.archive.sha1sum))
+
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            raise Error, _("unpack: check_file_hash failed")
+            raise Error, _("Unpack: archive file integrity is compromised")
             
         archive = Archive(self.archiveFile, self.archive.type)
         archive.unpack(self.pkg_work_dir, clean_dir)

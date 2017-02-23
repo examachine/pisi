@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -21,10 +21,12 @@ _ = __trans.ugettext
 
 # PISI Modules
 import pisi.actionsapi
+import pisi.util as util
 import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi.variables
+#pisi.actionsapi.variables.initVariables()
 
 class BinutilsError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -69,6 +71,18 @@ def pkgDIR():
 
 def workDIR():
     return env.work_dir
+
+def sourceDIR():
+    return env.src_dir
+
+## def pkgsrcDIR():
+##     print 'pkgsrcDIR dbg',env.pkg_dir, env.work_dir
+##     try:
+##         pkgworkdir = env.pkg_dir
+##     except KeyError:
+##         pkgworkdir = srcDIR()
+                    
+##     return util.join_path(env.work_dir, pkgworkdir)
 
 def installDIR():
     '''returns the path of binary packages'''
@@ -177,10 +191,16 @@ def AS():
     return getBinutilsInfo('as')
 
 def CC():
-    return getBinutilsInfo('gcc')
+    if util.is_osx():
+        return getBinutilsInfo('gcc-6')
+    else:
+        return getBinutilsInfo('gcc')
 
 def CXX():
-    return getBinutilsInfo('g++')
+    if util.is_osx():
+        return getBinutilsInfo('g++-6')
+    else:
+        return getBinutilsInfo('g++')
 
 def LD():
     return getBinutilsInfo('ld')

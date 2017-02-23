@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -77,8 +77,10 @@ def getNodeText(node, tagpath = ""):
     if not child:
         return None
     if child.type() == iks.DATA:
-        # in any case, strip whitespaces...
-        return child.data().strip()
+        # KLUDGE: FIXME: python 2.x bug: force decoding as UTF-8
+        child_data = unicode(child.data(), 'utf8')
+        #print 'child_data=', child_data
+        return child_data.strip() # in any case, strip whitespaces...
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 

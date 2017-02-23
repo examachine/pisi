@@ -2,7 +2,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -20,7 +20,7 @@ from pisi import archive
 from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
-from pisi.specfile import SpecFile
+from pisi.data import SpecFile
 from pisi import uri 
 
 import testcase
@@ -90,8 +90,8 @@ class ArchiveFileTestCase(testcase.TestCase):
         sourceDir = targetDir + "/pccts"
         zip.add_to_archive(sourceDir)
         zip.close()
-
-        #TODO: do some more work to test the integrity of new zip file
+        self.assertEqual(os.path.exists(newZip), True)
+        self.assertEqual(len(zip.list_archive()),326)
     
     def testUnpackZipCond(self):
         spec = SpecFile("tests/pccts/pspec.xml")

@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -123,7 +123,6 @@ def move(source, destination):
         else:
             error(_('ActionsAPI [move]: File %s doesn\'t exists.') % (filePath))
 
-# FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
 def copy(source, destination, sym = True):
     '''recursively copy a "source" file or directory to "destination"'''
     for filePath in glob.glob(source):

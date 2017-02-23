@@ -5,7 +5,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -15,6 +15,8 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
+WorkDir = "unzip60"
+
 def setup():
     pisitools.dosed("unix/Makefile", "-O3", get.CFLAGS())
     pisitools.dosed("unix/Makefile", "CC=gcc LD=gcc", "CC=${CC:-gcc} LD=${CC:-gcc}")
@@ -22,7 +24,7 @@ def setup():
     pass
 
 def build():
-    autotools.make("-f unix/Makefile linux")
+    autotools.make("-f unix/Makefile clean generic2")
 
 def install():
     pisitools.insinto("/usr/bin/", "unzip")

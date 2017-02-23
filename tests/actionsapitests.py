@@ -3,7 +3,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -79,20 +79,23 @@ class ActionsAPITestCase(TestCase):
         self.assertEqual(os.readlink('tests/actionsapitests/adirectory/brokenlink'), '/no/such/place')
         os.remove('tests/actionsapitests/adirectory/brokenlink')
 
-        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/adirectory/', False)
-        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linktoadirectory/file'), True)
-        self.assertEqual(os.path.getsize('tests/actionsapitests/adirectory/linktoadirectory/file'), 321)
-        shutil.rmtree('tests/actionsapitests/adirectory/linktoadirectory')
-
         copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
         self.assertEqual(os.path.isfile('tests/actionsapitests/adirectory/file'), True)
         #overwrite..
         copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
         os.remove('tests/actionsapitests/adirectory/file')
 
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
+        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/anotherdirectory/', False)
+        self.assertEqual(os.path.exists('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), True)
+        self.assertEqual(os.path.getsize('tests/actionsapitests/anotherdirectory/linktoadirectory/file'), 321)
+        shutil.rmtree('tests/actionsapitests/anotherdirectory/linktoadirectory')
+        os.remove('tests/actionsapitests/adirectory/file')
+
         copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
         ourguy = 'tests/actionsapitests/%s' % os.readlink('tests/actionsapitests/linktoafile')
         self.assert_(os.path.exists(ourguy))
+        os.remove('tests/actionsapitests/adirectory/linktoafile')
 
         copy('tests/actionsapitests/file', 'tests/actionsapitests/file-copy')
         self.assertEqual(os.path.exists('tests/actionsapitests/file-copy'), True)

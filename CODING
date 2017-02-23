@@ -1,63 +1,76 @@
-Coding standards, written by Eray Ozkural
+
+PISI Coding Standards
+=====================
+
+Written by Eray Ozkural 2006
+Updated Eray Ozkural 2017
 
 Guidelines
 ----------
 
-0. Before reading any further please observe 
-   PEP 8: Style Guide for Python Code 
-   http://www.python.org/peps/pep-0008.html
+0. Before reading any further please observe PEP 8: Style Guide for
+   Python Code http://www.python.org/peps/pep-0008.html
 
    In particular this means no lameCaps
 
-1. When using dirnames, don't expect the dir to end
-   with a trailing slash, and please use the dirnames
-   in pisiconfig. Use util.join_path instead of os.path.join
+1. When using dirnames, don't expect the dir to end with a trailing
+   slash, and please use the dirnames in pisiconfig. Use
+   util.join_path instead of os.path.join
+
 2. Python indentation is usually 4 spaces.
+
 3. Follow python philosophy of 'batteries included'
+
 4. Use exceptions, don't return error codes
-5. Don't make the PISI code have runtime dependencies on
-   a particular distribution (as much as possible).
-6. Don't assume narrow use cases. Allow for a mediocre
-   amount of generalization in your code, for pieces that
-   will be required later.
-7. If you are changing something, check if that change
-   breaks anything and fix breakage. For instance a
-   name. Running the tests is not always enough!
-8. A good design ensures separation of concerns. Every module
-   has a specific documented responsibility. Don't make the 
-   horse clean your windows.
-9. To ensure readability avoid nesting python constructs
-   more than 3 levels deep. Python is a good language (unlike C),
-   so you can define inner functions in a convenient way, use
-   such decomposition techniques to break down your code into
-   manageable chunks. The worst code you can write is one huge
-   procedure that goes on for 1000 (or more) lines.
-10. Use a particular abstraction like a class or function only
-   if it makes sense. Don't just define things because they can
-   be defined. Define only things that will/may be used.
-11. If you are doing an expensive task like searching through 
-   10000 text chunks, please use an efficient data structure
-   and algorithm. We are not MS engineers who know no data
-   structure beyond doubly linked lists and no algorithm beyond
-   quicksort.
+
+5. Don't make the PISI code have runtime dependencies on a particular
+   distribution (as much as possible).
+
+6. Don't assume narrow use cases. Allow for a mediocre amount of
+   generalization in your code, for pieces that will be required later.
+
+7. If you are changing something, check if that change breaks anything
+   and fix breakage. For instance a name. Running the tests is not
+   always enough!
+
+8. A good design ensures separation of concerns. Every module has a
+   specific documented responsibility. Don't make the horse clean your
+   windows.
+
+ 9. To ensure readability avoid nesting python constructs more than 3
+   levels deep. Python is a good language (unlike C), so you can
+   define inner functions in a convenient way, use such decomposition
+   techniques to break down your code into manageable chunks. The
+   worst code you can write is one huge procedure that goes on for
+   1000 (or more) lines.
+
+10. Use a particular abstraction like a class or function only if it
+   makes sense. Don't just define things because they can be
+   defined. Define only things that will/may be used.
+
+11. If you are doing an expensive task like searching through 10000
+   text chunks, please use an efficient data structure and
+   algorithm. We are not MS engineers who know no data structure
+   beyond doubly linked lists and no algorithm beyond quicksort.
+
 12. Resist the temptation to develop kludges and workarounds in
-   response to pressure. Take your time to solve the problems by
-   the book. The payoff comes later.
+   response to pressure. Take your time to solve the problems by the
+   book. The payoff comes later.
+
 13. Same thing goes for premature optimizations. Knuth and Dijkstra
    are watching over your shoulder. :)
 
 Branches and SVN
 ----------------
 
-There are two branches of pisi, one is called pisi-devel and 
-new features that are large enough to cause instability go 
-into that branch. The trunk version is supposed to be stable at
-all times. This means that you *must* run unit tests and other 
-test scripts after committing any change that cannot be tested
-in isolation. Run the unit tests periodically to catch unseen
-bugs. A release from the stable branch *must not* break any tests
-whatsoever, so extensive use of the test suite must precede any
-release.
+There are two branches of pisi, one is called pisi-devel and new
+features that are large enough to cause instability go into that
+branch. The trunk version is supposed to be stable at all times. This
+means that you *must* run unit tests and other test scripts after
+committing any change that cannot be tested in isolation. Run the unit
+tests periodically to catch unseen bugs. A release from the stable
+branch *must not* break any tests whatsoever, so extensive use of the
+test suite must precede any release.
 
 
 Unit testing
@@ -83,8 +96,7 @@ output message/data in your tests, check the data internally. By
 definition, unittest should just report succeeding and failing cases.
 
 If you didn't, take a look at the links below for having an idea of
-unit testing.
-http://www.extremeprogramming.org/rules/unittests.html
+unit testing.  http://www.extremeprogramming.org/rules/unittests.html
 http://www.extremeprogramming.org/rules/unittests2.html
 
 
@@ -93,46 +105,66 @@ Other tests
 
 There are a couple of nice test scripts for testing the basic
 capabilities of the command line interface such as building and
-upgrading. Unlike unit tests, you have to take a look at the output
-to understand that the scripts are doing well :)
+upgrading. Unlike unit tests, you have to take a look at the output to
+understand that the scripts are doing well :)
 
 Misc. Suggestions
 -----------------
 
 1. Demeter's Law
 
-In OO programming, try to invoke Demeter's law.
-One of the "rules" there is not directly accessing any
-objects that are further than, 2/3 refs, away. So the
-following code is OK.
-   destroy_system(a.system().name())
-but the following isn't as robust
-   destroy_system(object_store.root().a.system.name())
-As you can tell, this introduces too many implementation
-dependencies. The rule of thumb is that, in these cases
-this statement must have been elsewhere.... It may be a
-good idea to not count the object scope in this case,
-so in Python self.a means only one level of reference,
-not two.
+In OO programming, try to invoke Demeter's law.  One of the "rules"
+there is not directly accessing any objects that are further than, 2/3
+refs, away. So the following code is OK.
+destroy_system(a.system().name()) but the following isn't as robust
+destroy_system(object_store.root().a.system.name()) As you can tell,
+this introduces too many implementation dependencies. The rule of
+thumb is that, in these cases this statement must have been
+elsewhere.... It may be a good idea to not count the object scope in
+this case, so in Python self.a means only one level of reference, not
+two.
 
-One quibble with this: it may be preferable not to insist
-on this where it would be inefficient. So if everything
-is neatly packed into one object contained in another
-object, why replicate everything in the upper level? If
-the semantics prevents dependency changes, then chains
-of 3 or even 4 could be acceptable.
+One quibble with this: it may be preferable not to insist on this
+where it would be inefficient. So if everything is neatly packed into
+one object contained in another object, why replicate everything in
+the upper level? If the semantics prevents dependency changes, then
+chains of 3 or even 4 could be acceptable.
 
-OTOH, in Python and C++, it's not always good to implement 
-accessor/modifier pairs for every property of an object.
-It would be much simpler if you are not doing any special
-processing on the property (e.g. if what the type system
-does is sufficient).
+OTOH, in Python and C++, it's not always good to implement
+accessor/modifier pairs for every property of an object.  It would be
+much simpler if you are not doing any special processing on the
+property (e.g. if what the type system does is sufficient).
 
-The main rule of thumb in Demeter's Law is avoiding
-putting more than, say, 10 methods in a class. That works
-really well in practice, forcing refactoring every now
-and then.
+The main rule of thumb in Demeter's Law is avoiding putting more than,
+say, 10 methods in a class. That works really well in practice,
+forcing refactoring every now and then.
 
-2. If you are interested in "Playstation 2 Linux Games Programming" 
-or "How to extend C programs with Guile", please don't exercise
-your valuable skills in this project.
+2. If you are interested in "Playstation 2 Linux Games Programming" or
+"How to extend C programs with Guile", please do not exercise your
+valuable skills in this project. Only, half joking. :P
+
+3. Please do not suggest replacements of used libraries and auxiliary
+software and formats unless you have a very good rationale for it.
+
+4. Please do not remove existing features without a very good reason.
+
+5. Please try to maintain maximum backwards compatibility, though some
+minor changes might be made for major revisions.
+
+6. Best coding practices result from writing software that has a
+clearly stated purpose, pre-conditions, and post-conditions. PISI is
+written in a library-like manner, for this very reason, the parts of
+it that are modular are generally useful, like the XML metaclass
+autoxml, the persistency backend that uses Berkeley DB, and the
+command metaclass.  It is advisable to develop new feature sets
+following a similar, re-usable, generic programming style.
+
+7. Test-driven development is a most preferable rapid development
+methodology. The sooner you write the tests for your application,
+the quicker you may start writing code that will not break it. One of
+PISI's strengths is the comprehensive test suite. If you start writing
+the code with some test cases, it should diminish your coding time.
+
+8.Functional programming style reduces coding effort. Try to use
+functional programming like list comprehensions, and higher order
+functions, if there are complex relations you are dealing with.

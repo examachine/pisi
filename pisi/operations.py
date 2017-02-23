@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -24,12 +24,12 @@ import pisi
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.dependency as dependency
-import pisi.pgraph as pgraph
-import pisi.packagedb as packagedb
-import pisi.repodb
-import pisi.installdb
-from pisi.index import Index
+import pisi.data.dependency as dependency
+import pisi.data.pgraph as pgraph
+import pisi.db.package as packagedb
+import pisi.db.repo as repodb
+import pisi.db.install as installdb
+from pisi.data.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
 import pisi.ui as ui
@@ -70,7 +70,7 @@ def install(packages, reinstall = False):
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
-    from package import Package
+    from data.package import Package
 
     ctx.ui.debug('A = %s' % str(package_URIs))
 
@@ -585,7 +585,7 @@ def plan_remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, pisi.db.itembyrepo.installed)               # construct G_f
 
     # find the (install closure) graph of G_f by package 
     # set A using packagedb
@@ -595,12 +595,12 @@ def plan_remove(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x, pisi.itembyrepodb.installed)
-            rev_deps = ctx.packagedb.get_rev_deps(x, pisi.itembyrepodb.installed)
+            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepo.installed)
+            rev_deps = ctx.packagedb.get_rev_deps(x, pisi.db.itembyrepo.installed)
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
                 # and unsatisfied dependencies (this is important, too)
-                if ctx.packagedb.has_package(rev_dep, pisi.itembyrepodb.installed) and \
+                if ctx.packagedb.has_package(rev_dep, pisi.db.itembyrepo.installed) and \
                    dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)

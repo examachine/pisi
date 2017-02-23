@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -24,7 +24,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.api as api
-import pisi.packagedb as packagedb
+import pisi.db.package as packagedb
 from colors import colorize
 
 class Error(pisi.Error):
@@ -97,6 +97,8 @@ class Command(object):
                      default=False, help=_("show debugging information"))
         p.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("print like a man"))
+        p.add_option("-L", "--bandwidth-limit", action="store", default = 0,
+                     help = _("Keep bandwidth usage under specified KB's"))
         return p
 
     def options(self):
@@ -308,7 +310,7 @@ the package in graphviz format to 'pgraph.dot'.
                 repo = ctx.get_option('repository')
                 ctx.ui.info(_('Plotting packages in repository %s') % repo)
             else:
-                repo = pisi.itembyrepodb.repos
+                repo = pisi.db.itembyrepo.repos
             if self.args:
                 a = self.args
             else:
@@ -321,7 +323,7 @@ the package in graphviz format to 'pgraph.dot'.
                 # if A is empty, then graph all packages
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
-            repo = pisi.itembyrepodb.installed
+            repo = pisi.db.itembyrepo.installed
         g = pisi.api.package_graph(a, repo = repo, 
                                    ignore_installed = ctx.get_option('ignore_installed'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
@@ -673,7 +675,7 @@ Usage: info <package1> <package2> ... <packagen>
             self.help()
             return
             
-        index = pisi.index.Index()
+        index = pisi.data.index.Index()
         index.distribution = None
         
         for arg in self.args:
@@ -712,7 +714,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
-                self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
+                self.print_pkginfo(metadata, files,pisi.db.itembyrepo.installed)
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
@@ -720,7 +722,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in repository:'))
-                self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
+                self.print_pkginfo(metadata, files, pisi.db.itembyrepo.repos)
 
     def print_pkginfo(self, metadata, files, repo = None):
         import os.path
@@ -868,7 +870,7 @@ Usage: list-installed
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in list:
-            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
+            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepo.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -1081,7 +1083,7 @@ all repositories.
         self.finalize()
 
     def print_packages(self, repo):
-        from pisi import packagedb
+        import pisi.db.package as packagedb
 
         list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
@@ -1206,7 +1208,7 @@ Lists the packages that will be upgraded.
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in list:
-            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
+            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepo.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)

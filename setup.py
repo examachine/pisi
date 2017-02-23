@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -88,14 +88,16 @@ setup(name="pisi",
     description="PISI (Packages Installed Successfully as Intended)",
     long_description="PISI is the package management system of Pardus Linux.",
     license="GNU AGPL-3.0",
-    author="Eray Ozkural, Baris Metin, S. Caglar Onur",
+    author="Eray Ozkural, Baris Metin, S. Caglar Onur, Murat Eren and contributors",
     author_email="eray.ozkural@gmail.com",
     url="https://github.com/examachine/pisi",
     package_dir = {'': ''},
-    packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search'],
+    packages = ['pisi', 'pisi.util', 'pisi.db', 'pisi.pxml', 'pisi.data',
+                'pisi.cli', 'pisi.actionsapi', 'pisi.search'],
     scripts = ['pisi-cli', 'scripts/repostats.py', 'scripts/find-lib-deps.py', 
                'scripts/lspisi', 'scripts/unpisi',
                'scripts/calc-build-order.py', 'scripts/pisish', 'scripts/pisimedia'],
+    data_files = [ ('etc/pisi', ['etc/mirrors.conf']) ],
     cmdclass = {
         'install' : Install
     }
