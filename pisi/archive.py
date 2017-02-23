@@ -94,11 +94,9 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarlzma':
             rmode = 'r:'
             if util.is_osx():
-                lzma = "lzma -d"
-                ret, out, err = util.run_batch("lzma -d -k " + self.file_path)
+                ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
 
             else:
-                lzma = "lzma d"
                 ret, out, err = util.run_batch("lzma d %s %s" %
                                                (self.file_path +
                                                 ctx.const.lzma_suffix,
