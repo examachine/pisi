@@ -18,7 +18,6 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-#import pisi.packagedb as packagedb
 from pisi.version import Version
 import pisi.pxml.autoxml as autoxml
 import pisi.db.itembyrepo as itembyrepodb

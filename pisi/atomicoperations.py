@@ -89,7 +89,7 @@ class Install(AtomicOperation):
             ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
         self.package_fname = package_fname
-        self.package = pisi.package.Package(package_fname)
+        self.package = pisi.data.package.Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
@@ -483,7 +483,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        pisi.packagedb.remove_tracking_package(self.package_name, txn)
+        pisi.db.package.remove_tracking_package(self.package_name, txn)
 
 
 def remove_single(package_name):
