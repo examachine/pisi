@@ -81,7 +81,6 @@ Options:
   --version   show program's version number and exit
   -h, --help  show this help message and exit
 $ pisi help install
-$  pisi help install
 install (it): 
 Install PISI packages
 
