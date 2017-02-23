@@ -206,7 +206,7 @@ def configure_pending():
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = ctx.packagedb.get_package(x, db.itembyrepodb.installed)
+            pkg = ctx.packagedb.get_package(x, db.itembyrepo.installed)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
