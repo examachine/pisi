@@ -63,6 +63,8 @@ set up gnupg2 if needed:
 
 $ gpg --gen-key
 
+Install comar, if you can. :)
+
 $ ./setup.py install
 
 $ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
