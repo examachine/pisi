@@ -36,9 +36,9 @@ Pardus derivatives.
 * tests: unit tests, stress tests and test scripts
 * tools: misc. tools used by developers
 
-##Basic use:
+##Basic usage:
 
-To see help about basic usage, simply issue
+PISI is self-documenting. To see help about basic usage, simply issue
 
 ~~~~ 
 $ pisi --help
@@ -80,6 +80,44 @@ Use "pisi help <command>" for help on a specific command.
 Options:
   --version   show program's version number and exit
   -h, --help  show this help message and exit
+$ pisi help install
+$  pisi help install
+install (it): 
+Install PISI packages
+
+Usage: install <package1> <package2> ... <packagen>
+
+You may use filenames, URI's or package names for packages. If you have
+specified a package name, it should exist in a specified repository.
+
+You can also specify components instead of package names, which will be
+expanded to package names.
+
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -B, --ignore-comar    bypass comar configuration agent
+  -S, --bypass-safety   bypass safety switch
+  -n, --dry-run         do not perform any action, just show what would be
+                        done
+  -E, --ignore-dependency
+                        do not take dependency information into account
+  --reinstall           Reinstall already installed packages
+  --ignore-file-conflicts
+                        Ignore file conflicts
+  --ignore-build-no     do not take build no into account.
+  -D DESTDIR, --destdir=DESTDIR
+                        change the system root for pisi commands
+  -y, --yes-all         assume yes in all yes/no queries
+  -u USERNAME, --username=USERNAME
+  -p PASSWORD, --password=PASSWORD
+  -v, --verbose         detailed output
+  -d, --debug           show debugging information
+  -N, --no-color        print like a man
+  -L BANDWIDTH_LIMIT, --bandwidth-limit=BANDWIDTH_LIMIT
+                        Keep bandwidth usage under specified KB's
+
 ~~~~
 
 PISI has an advanced CLI tool that allows you to access both low-level and
