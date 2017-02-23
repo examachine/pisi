@@ -1083,7 +1083,7 @@ all repositories.
         self.finalize()
 
     def print_packages(self, repo):
-        from pisi import packagedb
+        import pisi.db.package as packagedb
 
         list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
