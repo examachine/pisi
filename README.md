@@ -5,19 +5,25 @@ development branch by the original author. It is prononunced as "pee-see".
 
 ##Synopsis:
 
-PISI is a new package manager for the PARDUS distribution. In Turkish, PISI
-means "kitty", and like a kitty, it is featureful and small.
+PISI is the next-gen package manager initially developed for the 
+PARDUS distribution in 2005. In Turkish, PISI means "kitty", and
+like a kitty, it is featureful and small. Multiple Linux distributions
+have adopted or tried PISI.
 
 Some of its distinctive features:
 
  - Implemented in python
  - Efficient and small
  - Package sources are written in XML and python
- - Fast database access implemented with berkeley DB
+ - Fast database access implemented with Berkeley DB
  - Integrates low-level and high-level package operations (dependency resolution)
  - Framework approach to build applications and tools upon
  - Comprehensive CLI and a user-friendly qt GUI (distributed separately)
  - Extremely simple package construction
+
+PISI is quite portable and appropriate for embedded systems, and is
+a comprehensive packaging solution for any OS environment beyond
+Pardus derivatives.
 
 ##Package contents:
 
