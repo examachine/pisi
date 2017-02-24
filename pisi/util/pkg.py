@@ -13,9 +13,19 @@
 
 '''Package/Repository Related Functions'''
 
+import os.path
+import string
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.context as ctx
 
+import process
+import path
+ 
 def package_name(name, version, release, build, prependSuffix=True):
     fn = name + '-' + version + '-' + release
     if build:
@@ -44,7 +54,7 @@ def env_update():
     import pisi.environment
     ctx.ui.info(_('Updating environment...'))
 
-    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
+    env_dir = path.join_path(ctx.config.dest_dir(), "/etc/env.d")
     if not os.path.exists(env_dir):
         os.makedirs(env_dir, 0755)
 
@@ -76,5 +86,5 @@ def parse_package_name(package_name):
     return (name, version)
  
 def generate_pisi_file(patchFile, fromFile, toFile):
-    if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
-        raise Error(_("ERROR: xdelta patch %s %s %s failed") % (patchFile, fromFile, toFile))
+    if process.run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
+        raise pisi.util.Error(_("ERROR: xdelta patch %s %s %s failed") % (patchFile, fromFile, toFile))

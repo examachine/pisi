@@ -36,6 +36,7 @@ import pisi.data.pgraph as pgraph
 import pisi.cli
 
 import common
+import component
 import conflict
 import remove
 import upgrade
@@ -387,7 +388,7 @@ def install(packages, reinstall = False):
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
-    from data.package import Package
+    from pisi.data.package import Package
 
     ctx.ui.debug('A = %s' % str(package_URIs))
 

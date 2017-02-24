@@ -30,6 +30,64 @@ from pisi.version import Version
 class Error(pisi.Error):
     pass
 
+def virtual_install(metadata, files, txn):
+    """Recreate the package info for rebuilddb command"""
+    # installdb
+    ctx.installdb.install(metadata.package.name,
+                          metadata.package.version,
+                          metadata.package.release,
+                          metadata.package.build,
+                          metadata.package.distribution,
+                          rebuild=True,
+                          txn=txn)
+
+    # filesdb
+    if files:
+        ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
+
+    # installed packages
+    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepo.installed, txn=txn)
+
+def resurrect_package(package_fn, write_files, txn = None):
+    """Resurrect the package from xml files"""
+
+    from os.path import exists
+
+    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package', 
+                                  package_fn, ctx.const.metadata_xml)
+    if not exists(metadata_xml):
+        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
+    
+    metadata = MetaData()
+    metadata.read(metadata_xml)
+    
+    errs = metadata.errors()
+    if errs:   
+        util.Checks.print_errors(errs)
+        raise Error, _("MetaData format wrong (%s)") % package_fn
+    
+    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
+
+    if write_files:
+        files_xml = util.join_path(ctx.config.lib_dir(), 'package',
+                                package_fn, ctx.const.files_xml)
+        if not exists(files_xml):
+            raise Error, _("Files XML '%s' cannot be found") % files_xml
+    
+        files = Files()
+        files.read(files_xml)
+        if files.errors():
+            raise Error, _("Invalid %s") % ctx.const.files_xml
+    else:
+        files = None
+
+    #import pisi.atomicoperations
+    def f(t):
+        pisi.atomicoperations.virtual_install(metadata, files, t)
+    ctx.txn_proc(f, txn)
+
+    ctx.ui.info(_('OK.'))
+
 def rebuild_db(files=False):
 
     assert ctx.database == False

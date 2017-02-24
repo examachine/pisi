@@ -23,11 +23,9 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
 import specfile
 import pisi.exml.xmlfile as xmlfile
 import pisi.exml.autoxml as autoxml
-import pisi.util as util
 
 class Source:
     __metaclass__ = autoxml.autoxml

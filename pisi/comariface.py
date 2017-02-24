@@ -35,7 +35,7 @@ def make_com():
         return com
     except ImportError:
         raise Error(_("comar package is not fully installed"))
-    except comar.Error:
+    except:
         raise Error(_("cannot connect to comar"))
 
 def wait_comar():

@@ -139,3 +139,21 @@ def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
+
+
+# The following are PISI operations which constitute the PISI API
+
+from pisi.op.build import build    
+from pisi.op.install import install
+from pisi.op.remove import remove
+from pisi.op.upgrade import upgrade
+from pisi.op.emerge import emerge
+from pisi.op.listops import list_available, list_upgradable
+from pisi.op.index import index
+from pisi.op.repo import add_repo, remove_repo, list_repos, update_repo
+from pisi.op.info import info_file
+from pisi.op.graph import package_graph
+from pisi.op.search import search_package_names, search_package_terms, search_package
+from pisi.op.configurepending import configure_pending
+from pisi.op.rebuilddb import rebuild_db
+from pisi.op.upgradepisi import upgrade_pisi

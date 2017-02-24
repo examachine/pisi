@@ -26,10 +26,9 @@ import pisi
 import pisi.context as ctx
 import pisi.util as util
 import pisi.data.pgraph as pgraph
-import pisi.db as db
 import pisi.cli
 from pisi.data.metadata import MetaData
-import pisi.search
+import pisi.comariface
 
 class Error(pisi.Error):
     pass
@@ -38,14 +37,14 @@ def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
-    G_f = pgraph.PGraph(ctx.packagedb, db.itembyrepo.installed) # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, pisi.db.itembyrepo.installed) # construct G_f
     for x in A.keys():
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = ctx.packagedb.get_package(x, db.itembyrepo.installed)
+            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepo.installed)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -56,7 +55,7 @@ def configure_pending():
     order.reverse()
     try:
         for x in order:
-            if ctx.db.is_installed(x):
+            if ctx.installdb.is_installed(x):
                 pkginfo = A[x]
                 pkgname = util.package_name(x, pkginfo.version,
                                         pkginfo.release,

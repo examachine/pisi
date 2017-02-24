@@ -94,6 +94,38 @@ Remove all repository information from the system.
             return
 
 
+class UpdateRepo(Command):
+    """Update repository databases
+Usage: update-repo [<repo1> <repo2> ... <repon>]
+<repoi>: repository name
+Synchronizes the PISI databases with the current repository.
+If no repository is given, all repositories are updated.
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self,args):
+        super(UpdateRepo, self).__init__(args)
+
+    name = ("update-repo", "ur")
+
+    def options(self):
+        self.parser.add_option("-f", "--force", action="store_true",
+                               default=False, 
+                               help=_("update database in any case"))
+
+    def run(self):
+        self.init(database = True)
+
+        if self.args:
+            repos = self.args
+        else:
+            repos = ctx.repodb.list()
+
+        for repo in repos:
+            pisi.api.update_repo(repo, ctx.get_option('force'))
+        self.finalize()
+
+
 class ListRepo(Command):
     """List repositories
 

@@ -29,7 +29,7 @@ class Error(pisi.Error):
     pass
 
 def info_file(package_fn):
-    from data.package import Package
+    from pisi.data.package import Package
 
     if not os.path.exists(package_fn):
         raise Error (_('File %s not found') % package_fn)

@@ -16,6 +16,11 @@
 import os
 import hashlib
 import shutil
+import statvfs
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
@@ -27,7 +32,7 @@ from fun import remove_prefix
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
     if not os.access(file, mode):
-        raise FileError("File " + file + " not found")
+        raise pisi.util.FileError("File " + file + " not found")
     return True
 
 def check_dir(dir):
@@ -125,7 +130,7 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
 
         try:
             return func(f)
-        except FileError, e:
+        except pisi.util.FileError, e:
             if os.path.islink(f):
                 ctx.ui.info(_("Including external link '%s'") % f)
             elif os.path.isdir(f):
@@ -147,7 +152,7 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
         yield (top, sha1_sum(top))
         return
 
-    # handle single symlink declaration here.
+    # handle single symlink declaration here.
     if os.path.islink(top):
         yield (top, sha1_sum(os.readlink(top), True))
         return
@@ -203,7 +208,7 @@ def sha1_file(filename):
             m.update(line)
         return m.hexdigest()
     except IOError:
-        raise FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
+        raise pisi.util.FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
     """calculate sha1 hash of given data"""
@@ -212,7 +217,7 @@ def sha1_data(data):
         m.update(data)
         return m.hexdigest()
     except:
-        raise Error(_("Cannot calculate SHA1 hash of given data"))
+        raise pisi.util.Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed
@@ -251,9 +256,9 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch (%s) failed") % (patchFile))
+            raise pisi.util.Error(_("ERROR: patch (%s) failed") % (patchFile))
         else:
-            raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile, out))
+            raise pisi.util.Error(_("ERROR: patch (%s) failed: %s") % (patchFile, out))
 
     os.chdir(cwd)
 

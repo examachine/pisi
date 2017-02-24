@@ -31,7 +31,6 @@ from pisi.exml.xmlfile import XmlFile
 import pisi.exml.autoxml as autoxml
 import pisi.context as ctx
 from dependency import Dependency
-import dependency
 import component
 import pisi.util as util
 

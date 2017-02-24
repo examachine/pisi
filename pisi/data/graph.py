@@ -5,7 +5,6 @@
 #
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 
-import sys
 import string
 
 import pisi

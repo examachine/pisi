@@ -191,16 +191,10 @@ def AS():
     return getBinutilsInfo('as')
 
 def CC():
-    if util.is_osx():
-        return getBinutilsInfo('gcc-6')
-    else:
-        return getBinutilsInfo('gcc')
+    return getBinutilsInfo('gcc')
 
 def CXX():
-    if util.is_osx():
-        return getBinutilsInfo('g++-6')
-    else:
-        return getBinutilsInfo('g++')
+    return getBinutilsInfo('g++')
 
 def LD():
     return getBinutilsInfo('ld')

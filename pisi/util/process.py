@@ -20,7 +20,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi
 import pisi.context as ctx
 
 def run_batch(cmd, sudo = False):
