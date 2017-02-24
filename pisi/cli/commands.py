@@ -21,10 +21,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.cli
 import pisi.context as ctx
-from pisi.uri import URI
 import pisi.util as util
-import pisi.api as api
-import pisi.db.package as packagedb
 from colors import colorize
 
 class Error(pisi.Error):

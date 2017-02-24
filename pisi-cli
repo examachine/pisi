@@ -79,5 +79,5 @@ if __name__ == "__main__":
     cli = pisicli.PisiCLI()
     try:
         cli.run_command()
-    except pisi.operations.PisiUpgradeException, e:
+    except pisi.op.upgradepisi.PisiUpgradeException, e:
         print _('PISI has been upgraded.')
