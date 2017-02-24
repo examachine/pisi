@@ -16,7 +16,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.cli
+#import pisi.cli
 
 class Error(pisi.Error):
     pass
@@ -39,6 +39,7 @@ This command deletes unused locks from the database directory."""
     name = ("clean", None)
 
     def run(self):
-        self.init()
+        self.init(database=False, write=False)
         pisi.util.clean_locks()
         self.finalize()
+    
