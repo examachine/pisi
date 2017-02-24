@@ -99,9 +99,13 @@ $ cd comar/comar
 Append
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/opt/local/lib")
 to the end of CMakeLists.txt
-$ cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local . 
-$ make VERBOSE=1
-$ make install
+$ cmake . 
+$ make DESTDIR=/usr/local/ install
+$ cd ..
+$ git clone https://github.com/pars-linux/comar-api.git
+$ cd comar-api
+$ ./setup.py install
+
 
 And then proceed with Generic PISI installation instructions above,
 as usual.
