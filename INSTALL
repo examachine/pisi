@@ -83,7 +83,10 @@ $ sudo port
 > select --set python python27
 > select --set pip pip27
 > exit
-$ pip install bsddb3 pycurl urlgrabber
+$ pip install pycurl urlgrabber
+$ pip download bsddb3
+$ python setup.py build
+$ sudo YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 python setup.py install
 
 set up gnupg2 if needed:
 
