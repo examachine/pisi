@@ -63,19 +63,19 @@ class ConflictTestCase(testcase.TestCase):
 
     def testConflictWithEachOther(self):
         packages = ["a", "b", "c", "d", "e"]
-        (C, D, pkg_conflicts) = pisi.operations.calculate_conflicts(packages, self.packagedb)
+        (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
         self.assert_(set(['a', 'b', 'e']) == D)
 
     def testConflictWithInstalled(self):
         packages = ["g", "h", "i"]
-        (C, D, pkg_conflicts) = pisi.operations.calculate_conflicts(packages, self.packagedb)
+        (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
         self.assert_(not D)
         self.assert_(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
         self.assert_("notinst1" not in pkg_conflicts["g"])
 
     def testConflictWithEachOtherAndInstalled(self):
         packages = ["a", "b", "g", "h", "i"]
-        (C, D, pkg_conflicts) = pisi.operations.calculate_conflicts(packages, self.packagedb)
+        (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
         self.assert_(set(['a', 'b']) == D)
         self.assert_(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
         self.assert_(set(['inst2', 'inst3', 'inst4']) == pkg_conflicts["h"])

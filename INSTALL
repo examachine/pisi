@@ -47,7 +47,6 @@ $ git clone https://github.com/pars-linux/uludag.git
 Installing piksemel:
 
 $ cd uludag/piksemel
-$ 
 
 
 Ubuntu instructions:
@@ -67,6 +66,7 @@ Install COMAR dependencies
 
 $ sudo port install dbus policykit
 $ pip install dbus
+
 
 OS X Instructions:
 ------------------

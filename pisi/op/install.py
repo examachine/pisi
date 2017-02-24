@@ -9,53 +9,43 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
+# Author: Eray Ozkural <eray at pardus.org.tr>
 
-"Atomic package operations such as install/remove/upgrade"
+
+""" 
+Install package
+@author Eray Ozkural
+"""
+
+import os
+import sys
+import bsddb3.db as db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import sys
-import os
-import bsddb3.db as db
-
 import pisi
 import pisi.context as ctx
-import pisi.db.package as packagedb
-import pisi.data.dependency as dependency
 import pisi.util as util
-from pisi.data.specfile import *
-from pisi.data.metadata import MetaData
-from pisi.data.files import Files
 from pisi.uri import URI
-import pisi.ui
+import pisi.ui as ui
 from pisi.version import Version
+import pisi.data.dependency as dependency
+import pisi.data.pgraph as pgraph
+import pisi.cli
+
+import common
+import conflict
+import remove
+import upgrade
+import upgradepisi
+
 
 class Error(pisi.Error):
     pass
 
-class NotfoundError(pisi.Error):
-    pass
-
-# single package operations
-
-class AtomicOperation(object):
-
-    def __init__(self, ignore_dep = None):
-        #self.package = package
-        if ignore_dep==None:
-            self.ignore_dep = ctx.config.get_option('ignore_dependency')
-        else:
-            self.ignore_dep = ignore_dep
-
-    def run(self, package):
-        "perform an atomic package operation"
-        pass
-
-
-class Install(AtomicOperation):
+class Install(common.AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
     @staticmethod
@@ -234,7 +224,7 @@ class Install(AtomicOperation):
             self.old_files = ctx.installdb.files(pkg.name)
             self.old_path = ctx.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.reinstall = True
-            self.remove_old = Remove(pkg.name)
+            self.remove_old = remove.Remove(pkg.name)
             self.remove_old.run_preremove()
 
     def postinstall(self):
@@ -315,7 +305,7 @@ class Install(AtomicOperation):
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
             for path in leftover:
-                    Remove.remove_file( old_fileinfo[path] )
+                    remove.Remove.remove_file( old_fileinfo[path] )
 
 
     def store_pisi_files(self):
@@ -379,175 +369,212 @@ def install_single_name(name, upgrade = False):
     """install a single package from ID"""
     install = Install.from_name(name)
     install.install(not upgrade)
-
-class Remove(AtomicOperation):
     
-    def __init__(self, package_name, ignore_dep = None):
-        super(Remove, self).__init__(ignore_dep)
-        self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepo.installed)
-        try:
-            self.files = ctx.installdb.files(self.package_name)
-        except pisi.Error, e:
-            # for some reason file was deleted, we still allow removes!
-            ctx.ui.error(unicode(e))
-            ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
-            self.files = Files()
-
-    def run(self):
-        """Remove a single package"""
-        
-        ctx.ui.status(_('Removing package %s') % self.package_name)
-        ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
-        if not ctx.installdb.is_installed(self.package_name):
-            raise Exception(_('Trying to remove nonexistent package ')
-                            + self.package_name)
-                            
-        self.check_dependencies()
-            
-        self.run_preremove()
-        for fileinfo in self.files.list:
-            self.remove_file(fileinfo)
-
-        txn = ctx.dbenv.txn_begin()
-        try:
-            self.remove_db(txn)
-            txn.commit()
-        except db.DBError, e:
-            txn.abort()
-            raise e
-
-        self.remove_pisi_files()
-        ctx.ui.status()
-        ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
-
-    def check_dependencies(self):
-        #FIXME: why is this not implemented? -- exa
-        #we only have to check the dependencies to ensure the
-        #system will be consistent after this removal
-        pass
-        # is there any package who depends on this package?
-
-    @staticmethod
-    def remove_file(fileinfo):
-        fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
-
-        # we should check if the file belongs to another
-        # package (this can legitimately occur while upgrading
-        # two packages such that a file has moved from one package to
-        # another as in #2911)
-        if ctx.filesdb.has_file(fpath):
-            pkg, existing_file = ctx.filesdb.get_file(fpath)
-            if pkg != self.package_name:
-                ctx.ui.warning(_('Not removing conflicted file : %s') % fpath) 
-                return
-
-        if fileinfo.permanent:
-            # do not remove precious files :)
-            pass
-        elif fileinfo.type == ctx.const.conf:
-            # config files are precious, leave them as they are
-            # unless they are the same as provided by package.
-            try:
-                if pisi.util.sha1_file(fpath) == fileinfo.hash:
-                    os.unlink(fpath)
-            except pisi.util.FileError, e:
-                pass
-        else:
-            if os.path.isfile(fpath) or os.path.islink(fpath):
-                os.unlink(fpath)
-            elif os.path.isdir(fpath) and not os.listdir(fpath):
-                os.rmdir(fpath)
-            else:
-                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
-                return
-
-            # remove emptied directories
-            dpath = os.path.dirname(fpath)
-            while dpath != '/' and not os.listdir(dpath):
-                os.rmdir(dpath)
-                dpath = os.path.dirname(dpath)
-
-    def run_preremove(self):
-        if ctx.comar:
-            import pisi.comariface
-            pisi.comariface.pre_remove(
-                self.package_name,
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-            )
-
-    def remove_pisi_files(self):
-        util.clean_dir(self.package.pkg_dir())
-
-    def remove_db(self, txn):
-        ctx.installdb.remove(self.package_name, txn)
-        ctx.filesdb.remove_files(self.files, txn)
-        pisi.db.package.remove_tracking_package(self.package_name, txn)
-
-
-def remove_single(package_name):
-    Remove(package_name).run()
-
-def build(package):
-    # wrapper for build op
-    import pisi.build
-    return pisi.build.build(package)
-
-def virtual_install(metadata, files, txn):
-    """Recreate the package info for rebuilddb command"""
-    # installdb
-    ctx.installdb.install(metadata.package.name,
-                          metadata.package.version,
-                          metadata.package.release,
-                          metadata.package.build,
-                          metadata.package.distribution,
-                          rebuild=True,
-                          txn=txn)
-
-    # filesdb
-    if files:
-        ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
-
-    # installed packages
-    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepo.installed, txn=txn)
-
-def resurrect_package(package_fn, write_files, txn = None):
-    """Resurrect the package from xml files"""
-
-    from os.path import exists
-
-    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package', 
-                                  package_fn, ctx.const.metadata_xml)
-    if not exists(metadata_xml):
-        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
     
-    metadata = MetaData()
-    metadata.read(metadata_xml)
-    
-    errs = metadata.errors()
-    if errs:   
-        util.Checks.print_errors(errs)
-        raise Error, _("MetaData format wrong (%s)") % package_fn
-    
-    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
+# high level operations
 
-    if write_files:
-        files_xml = util.join_path(ctx.config.lib_dir(), 'package',
-                                package_fn, ctx.const.files_xml)
-        if not exists(files_xml):
-            raise Error, _("Files XML '%s' cannot be found") % files_xml
-    
-        files = Files()
-        files.read(files_xml)
-        if files.errors():
-            raise Error, _("Invalid %s") % ctx.const.files_xml
+def install(packages, reinstall = False):
+    """install a list of packages (either files/urls, or names)"""
+
+    # FIXME: this function name "install" makes impossible to import
+    # and use install module directly.
+
+    # determine if this is a list of files/urls or names
+    if packages[0].endswith(ctx.const.package_suffix): # they all have to!
+        return install_pkg_files(packages)
     else:
-        files = None
+        return install_pkg_names(packages, reinstall)
 
-    #import pisi.atomicoperations
-    def f(t):
-        pisi.atomicoperations.virtual_install(metadata, files, t)
-    ctx.txn_proc(f, txn)
+def install_pkg_files(package_URIs):
+    """install a number of pisi package files"""
+    from data.package import Package
 
-    ctx.ui.info(_('OK.'))
+    ctx.ui.debug('A = %s' % str(package_URIs))
+
+    for x in package_URIs:
+        if not x.endswith(ctx.const.package_suffix):
+            raise Error(_('Mixing file names and package names not supported yet.'))
+
+    if ctx.config.get_option('ignore_dependency'):
+        # simple code path then
+        for x in package_URIs:
+            install_single_file(x)
+        return # short circuit
+            
+    # read the package information into memory first
+    # regardless of which distribution they come from
+    d_t = {}
+    dfn = {}
+    for x in package_URIs:
+        package = Package(x)
+        package.read()
+        name = str(package.metadata.package.name)
+        d_t[name] = package.metadata.package
+        dfn[name] = x
+
+    def satisfiesDep(dep):
+        # is dependency satisfied among available packages
+        # or packages to be installed?
+        return dependency.installed_satisfies_dep(dep) \
+               or dependency.dict_satisfies_dep(d_t, dep)
+            
+    # for this case, we have to determine the dependencies
+    # that aren't already satisfied and try to install them 
+    # from the repository
+    dep_unsatis = []
+    for name in d_t.keys():
+        pkg = d_t[name]
+        deps = pkg.runtimeDependencies()
+        for dep in deps:
+            if not satisfiesDep(dep):
+                dep_unsatis.append(dep)
+
+    # now determine if these unsatisfied dependencies could
+    # be satisfied by installing packages from the repo
+
+    # if so, then invoke install_pkg_names
+    extra_packages = [x.package for x in dep_unsatis]
+    if extra_packages:
+        ctx.ui.info(_("""The following packages will be installed
+in the respective order to satisfy extra dependencies:
+""") + util.strlist(extra_packages))
+        if not ctx.ui.confirm(_('Do you want to continue?')):
+            raise Error(_('External dependencies not satisfied'))
+        install_pkg_names(extra_packages)
+
+    class PackageDB:
+        def get_package(self, key, repo = None):
+            return d_t[str(key)]
+    
+    packagedb = PackageDB()
+   
+    A = d_t.keys()
+   
+    if len(A)==0:
+        ctx.ui.info(_('No packages to install.'))
+        return
+    
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            for dep in pkg.runtimeDependencies():
+                if dependency.dict_satisfies_dep(d_t, dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    if ctx.config.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
+    order = G_f.topological_sort()
+    if not ctx.get_option('ignore_file_conflicts'):
+        conflict.check_conflicts(order, packagedb)
+    order.reverse()
+    ctx.ui.info(_('Installation order: ') + util.strlist(order) )
+
+    if ctx.get_option('dry_run'):
+        return
+
+    ctx.ui.notify(ui.packagestogo, order = order)
+        
+    for x in order:
+        install_single_file(dfn[x])
+
+
+def install_pkg_names(A, reinstall = False):
+    """This is the real thing. It installs packages from
+    the repository, trying to perform a minimum number of
+    installs"""
+
+    A = [str(x) for x in A] #FIXME: why do we still get unicode input here? :/ -- exa
+    # A was a list, remove duplicates and expand components
+    A_0 = A = component.expand_components(set(A))
+    ctx.ui.debug('A = %s' % str(A))
+    
+    # filter packages that are already installed
+    if not reinstall:
+        Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
+        d = A - Ap
+        if len(d) > 0:
+            ctx.ui.warning(_('Not re-installing the following packages: ') +
+                           util.strlist(d))
+            A = Ap
+
+    if len(A)==0:
+        ctx.ui.info(_('No packages to install.'))
+        return
+
+    A |= upgrade.upgrade_base(A)
+        
+    if not ctx.config.get_option('ignore_dependency'):
+        G_f, order = plan_install_pkg_names(A)
+    else:
+        G_f = None
+        order = A
+
+    ctx.ui.info(_("""Following packages will be installed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
+
+    total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
+    total_size, symbol = util.human_readable_size(total_size)
+    ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
+
+    if ctx.get_option('dry_run'):
+        return
+
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+            return False
+            
+    ctx.ui.notify(ui.packagestogo, order = order)
+
+    pisi_installed = ctx.installdb.is_installed('pisi')
+    
+    for x in order:
+        install_single_name(x, True)  # allow reinstalls here
+        
+    if 'pisi' in order and pisi_installed:
+        upgradepisi.upgrade_pisi()
+
+def plan_install_pkg_names(A):
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = ctx.packagedb.get_package(x)
+            for dep in pkg.runtimeDependencies():
+                ctx.ui.debug('checking %s' % str(dep))
+                # we don't deal with already *satisfied* dependencies
+                if not dependency.installed_satisfies_dep(dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    if ctx.config.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
+    order = G_f.topological_sort()
+    order.reverse()
+    if not ctx.get_option('ignore_file_conflicts'):
+        conflict.check_conflicts(order, ctx.packagedb)
+    return G_f, order

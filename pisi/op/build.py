@@ -13,11 +13,10 @@
 #          A. Murat Eren <meren at pardus.org.tr>
 #          Eray Ozkural <eray at pardus.org.tr>
 
-"""package building code"""
+"""Package builder and build operation"""
 
 # python standard library
 import os
-import sys
 import glob
 from copy import deepcopy
 from os.path import basename, dirname
@@ -33,7 +32,6 @@ from pisi.util import join_path as join, parenturi
 from pisi.file import File
 import pisi.context as ctx
 import pisi.data.dependency as dependency
-import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
 from pisi.data.files import Files, FileInfo
 from pisi.fetcher import fetch_url
@@ -940,3 +938,81 @@ def build_until(pspec, state):
         return
 
     __buildState_buildpackages(pb, last)
+
+#def build(package):
+#    # wrapper for build op
+#    import pisi.build
+#    return pisi.build.build(package)
+
+
+##def build_names(A, rebuild = true):
+##
+##    # A was a list, remove duplicates and expand components
+##    A_0 = A = expand_src_components(set(A))
+##    ctx.ui.debug('A = %s' % str(A))
+##
+##    # filter packages that are already installed
+##    if not rebuild:
+##        Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
+##        d = A - Ap
+##        if len(d) > 0:
+##            ctx.ui.warning(_('Not re-building the following packages: ') +
+##                           util.strlist(d))
+##            A = Ap
+##
+##    if len(A)==0:
+##        ctx.ui.info(_('No packages to build.'))
+##        return
+##        
+##    if not ctx.config.get_option('ignore_dependency'):
+##        G_f, order_inst = plan_build_pkg_names(A)
+##    else:
+##        G_f = None
+##        order_inst = []
+##
+##    ctx.ui.info(_("""The following minimal list of packages will be installed
+##in the respective order to satisfy dependencies:
+##""") + util.strlist(order))
+##
+##    if ctx.get_option('dry_run'):
+##        return
+##
+##    if len(order) > len(A_0):
+##        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+##            return False
+##            
+##    ctx.ui.notify(ui.packagestogo, order = order)
+##            
+##    for x in order:
+##        atomicoperations.install_single_name(x)
+##
+##def plan_build_names(A):
+##    # try to construct a pisi graph of packages to
+##    # install / reinstall
+##
+##    G_f = pgraph.PGraph(packagedb)               # construct G_f
+##
+##    # find the "install closure" graph of G_f by package 
+##    # set A using packagedb
+##    for x in A:
+##        G_f.add_package(x)
+##    B = A
+##    
+##    while len(B) > 0:
+##        Bp = set()
+##        for x in B:
+##            pkg = packagedb.get_package(x)
+##            for dep in pkg.runtimeDependencies():
+##                ctx.ui.debug('checking %s' % str(dep))
+##                # we don't deal with already *satisfied* dependencies
+##                if not dependency.installed_satisfies_dep(dep):
+##                    if not dep.package in G_f.vertices():
+##                        Bp.add(str(dep.package))
+##                    G_f.add_dep(x, dep)
+##        B = Bp
+##    if ctx.config.get_option('debug'):
+##        G_f.write_graphviz(sys.stdout)
+##    order = G_f.topological_sort()
+##    order.reverse()
+##    check_conflicts(order)
+##    return G_f, order
