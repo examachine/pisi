@@ -20,6 +20,6 @@ pisi-cli -Dtmp $dbg --ignore-comar -y remove unzip
 pisi-cli -Dtmp $dbg info zip*.pisi
 pisi-cli -Dtmp $dbg --ignore-comar -y install zip*.pisi
 pisi-cli -Dtmp $dbg list-pending
-pisi-cli -Dtmp $dbg configure-pending
+#pisi-cli -Dtmp $dbg configure-pending
 pisi-cli -Dtmp $dbg remove-repo repo1
 pisi-cli -Dtmp $dbg clean
