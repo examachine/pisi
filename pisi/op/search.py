@@ -38,7 +38,7 @@ def search_package_names(query):
 def search_package_terms(terms, lang = None, search_names = True,
                          repo = db.itembyrepo.alldb):
     if not lang:
-        lang = pisi.pxml.autoxml.LocalText.get_lang()
+        lang = pisi.exml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
     r2 = pisi.search.query_terms('description', lang, terms, repo = repo)
     r = r1.union(r2)
@@ -50,7 +50,7 @@ def search_package_terms(terms, lang = None, search_names = True,
 def search_package(query, lang = None, search_names = True,
                    repo = db.itembyrepo.alldb):
     if not lang:
-        lang = pisi.pxml.autoxml.LocalText.get_lang()
+        lang = pisi.exml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query('summary', lang, query, repo = repo)
     r2 = pisi.search.query('description', lang, query, repo = repo)
     r = r1.union(r2)

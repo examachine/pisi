@@ -27,8 +27,8 @@ from os.path import basename
 
 # pisi modules
 import pisi
-from pisi.pxml.xmlfile import XmlFile
-import pisi.pxml.autoxml as autoxml
+from pisi.exml.xmlfile import XmlFile
+import pisi.exml.autoxml as autoxml
 import pisi.context as ctx
 from dependency import Dependency
 import dependency

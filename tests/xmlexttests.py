@@ -17,7 +17,7 @@ import pisi
 import pisi.api
 import pisi.context as ctx
 import pisi.util as util
-from pisi.pxml import xmlext
+from pisi.exml import xmlext
 
 import testcase
 

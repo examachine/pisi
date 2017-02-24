@@ -11,7 +11,7 @@ import pisi.config
 import pisi.specfile as specfile
 import pisi.context as ctx
 import pisi.util
-import pisi.pxml.xmlfilecdom as xmlfile
+import pisi.exml.xmlfilecdom as xmlfile
 
 options = pisi.config.Options()
 if len(sys.argv) > 2:

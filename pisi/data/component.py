@@ -17,8 +17,8 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-import pisi.pxml.xmlfile as xmlfile
-import pisi.pxml.autoxml as autoxml
+import pisi.exml.xmlfile as xmlfile
+import pisi.exml.autoxml as autoxml
 import pisi.db.lockeddbshelve as shelve
 from pisi.db.itembyrepo import ItemByRepoDB
 import pisi.db.itembyrepo as itembyrepodb

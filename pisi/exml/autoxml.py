@@ -39,8 +39,8 @@ _ = __trans.ugettext
 
 # PiSi
 import pisi
-from pisi.pxml.xmlext import *
-from pisi.pxml.xmlfile import XmlFile
+from pisi.exml.xmlext import *
+from pisi.exml.xmlfile import XmlFile
 import pisi.context as ctx
 import pisi.util as util
 import pisi.oo as oo

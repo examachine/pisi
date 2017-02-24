@@ -51,7 +51,7 @@ in summary, description, and package name fields.
     def get_lang(self):
         lang = ctx.get_option('language')
         if not lang:
-            lang = pisi.pxml.autoxml.LocalText.get_lang()
+            lang = pisi.exml.autoxml.LocalText.get_lang()
         if not lang in ['en', 'tr']:
             lang = 'en'
         return lang

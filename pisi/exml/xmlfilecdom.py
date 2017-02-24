@@ -42,7 +42,7 @@ XHTML_NS = unicode(XHTML_NAMESPACE)
 XML_NS = unicode(XML_NAMESPACE)
 
 import pisi
-from pisi.pxml.xmlextcdom import *
+from pisi.exml.xmlextcdom import *
 from pisi.file import File
 from pisi.util import join_path as join
 

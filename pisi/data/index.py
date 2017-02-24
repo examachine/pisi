@@ -28,9 +28,9 @@ import pisi.db.package as packagedb
 import pisi.db.source as sourcedb
 import pisi.util as util
 from pisi.data.package import Package
-from pisi.pxml.xmlfile import XmlFile
+from pisi.exml.xmlfile import XmlFile
 from pisi.file import File
-import pisi.pxml.autoxml as autoxml
+import pisi.exml.autoxml as autoxml
 from pisi.uri import URI
 import component
 import specfile
