@@ -143,7 +143,7 @@ def delete_cache():
 
 # The following are PISI operations which constitute the PISI API
 
-from pisi.op.build import build    
+from pisi.op.build import build, build_until  
 from pisi.op.install import install
 from pisi.op.remove import remove
 from pisi.op.upgrade import upgrade
