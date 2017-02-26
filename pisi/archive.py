@@ -107,7 +107,6 @@ class ArchiveTar(ArchiveBase):
         else:
             raise ArchiveError(_("Archive type not recognized"))
  
-        print '* opening tarfile', self.file_path
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
@@ -176,7 +175,7 @@ class ArchiveZip(ArchiveBase):
     extensively. This class provides unpacking and packing magic for
     zip archives."""
     
-    symmagic = 2716663808 #long of hex val '0xA1ED0000L'
+    symmagic = 0xA1ED0000L
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
