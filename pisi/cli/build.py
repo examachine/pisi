@@ -24,7 +24,6 @@ class Error(pisi.Error):
 
 from command import *
 
-
 class Build(Command):
     """Build PISI packages
 
@@ -52,9 +51,9 @@ unpack, setup, build, install, package.
     package_formats = ('1.0', '1.1')
 
     def options(self):
-        self.buildno_opts()
-        self.abandoned_files_opt()
-        self.ignoredep_opt()
+        buildno_opts(self)
+        abandoned_files_opt(self)
+        ignoredep_opt(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
         #self.parser.add_option("-s", "--step", action="store", default=None,
