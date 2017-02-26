@@ -1,137 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
-<!-- eric4 project file for project pisi -->
-<!-- Saved: 2017-02-24, 04:01:56 -->
+<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!-- eric project file for project pisi -->
+<!-- Saved: 2017-02-27, 01:19:22 -->
 <!-- Copyright (C) 2017 PiSi Development Team,  -->
-<Project version="4.6">
+<Project version="5.1">
   <Language>en</Language>
-  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <Hash>e0aec664d394fcfe968462e2af7e55288f102815</Hash>
+  <ProgLanguage mixed="0">Python2</ProgLanguage>
   <ProjectType>Console</ProjectType>
   <Description>The package management software of Pardus distribution. </Description>
+  <Version></Version>
   <Author>PiSi Development Team</Author>
   <Email></Email>
   <Sources>
-    <Source>tests/popt/actions.py</Source>
-    <Source>tests/zip/actions.py</Source>
-    <Source>tests/unzip/actions.py</Source>
-    <Source>tests/configfiletests.py</Source>
-    <Source>tests/sourcedbtests.py</Source>
-    <Source>tests/utiltests.py</Source>
-    <Source>tests/installdbtests.py</Source>
-    <Source>tests/run.py</Source>
-    <Source>tests/metadatatests.py</Source>
-    <Source>tests/constantstests.py</Source>
-    <Source>tests/fetchertests.py</Source>
-    <Source>tests/archivetests.py</Source>
-    <Source>tests/versiontests.py</Source>
-    <Source>tests/actionsapitests.py</Source>
-    <Source>tests/specfiletests.py</Source>
-    <Source>tests/packagetests.py</Source>
-    <Source>tests/packagedbtests.py</Source>
-    <Source>tests/graphtests.py</Source>
-    <Source>pisi/actionsapi/get.py</Source>
-    <Source>pisi/actionsapi/shelltools.py</Source>
-    <Source>pisi/actionsapi/variables.py</Source>
-    <Source>pisi/actionsapi/autotools.py</Source>
-    <Source>pisi/actionsapi/pisitools.py</Source>
-    <Source>pisi/actionsapi/kde.py</Source>
-    <Source>pisi/actionsapi/__init__.py</Source>
-    <Source>pisi/actionsapi/libtools.py</Source>
-    <Source>pisi/actionsapi/coreutils.py</Source>
-    <Source>pisi/cli/pisicli.py</Source>
-    <Source>pisi/cli/__init__.py</Source>
-    <Source>pisi/cli/commands.py</Source>
-    <Source>pisi/__init__.py</Source>
-    <Source>pisi/build.py</Source>
-    <Source>pisi/config.py</Source>
-    <Source>pisi/ui.py</Source>
-    <Source>pisi/operations.py</Source>
-    <Source>pisi/context.py</Source>
-    <Source>pisi/sourcearchive.py</Source>
-    <Source>pisi/configfile.py</Source>
-    <Source>pisi/constants.py</Source>
-    <Source>pisi/fetcher.py</Source>
-    <Source>pisi/archive.py</Source>
-    <Source>pisi/version.py</Source>
-    <Source>setup.py</Source>
-    <Source>pisi/actionsapi/pisitoolsfunctions.py</Source>
-    <Source>pisi/uri.py</Source>
-    <Source>pisi/api.py</Source>
     <Source>TODO</Source>
+    <Source>pisi-cli</Source>
+    <Source>pisi/__init__.py</Source>
+    <Source>pisi/actionsapi/__init__.py</Source>
+    <Source>pisi/actionsapi/autotools.py</Source>
+    <Source>pisi/actionsapi/coreutils.py</Source>
+    <Source>pisi/actionsapi/get.py</Source>
+    <Source>pisi/actionsapi/kde.py</Source>
+    <Source>pisi/actionsapi/libtools.py</Source>
+    <Source>pisi/actionsapi/perlmodules.py</Source>
+    <Source>pisi/actionsapi/pisitools.py</Source>
+    <Source>pisi/actionsapi/pisitoolsfunctions.py</Source>
     <Source>pisi/actionsapi/pythonmodules.py</Source>
     <Source>pisi/actionsapi/scons.py</Source>
+    <Source>pisi/actionsapi/shelltools.py</Source>
+    <Source>pisi/actionsapi/variables.py</Source>
+    <Source>pisi/api.py</Source>
+    <Source>pisi/archive.py</Source>
+    <Source>pisi/cli/__init__.py</Source>
     <Source>pisi/cli/colors.py</Source>
-    <Source>pisi-cli</Source>
-    <Source>pisi/actionsapi/perlmodules.py</Source>
+    <Source>pisi/cli/commands.py</Source>
+    <Source>pisi/cli/pisicli.py</Source>
     <Source>pisi/comariface.py</Source>
-    <Source>po/tr.po</Source>
-    <Source>pisi/oo.py</Source>
-    <Source>tests/dependencytests.py</Source>
-    <Source>pisi/atomicoperations.py</Source>
-    <Source>tests/ootests.py</Source>
-    <Source>tests/testcase.py</Source>
-    <Source>tests/xmlexttests.py</Source>
-    <Source>tests/filestests.py</Source>
-    <Source>tests/autoxmltests.py</Source>
-    <Source>pisi/pxml/xmlextpiks.py</Source>
-    <Source>pisi/pxml/autoxml.py</Source>
-    <Source>pisi/pxml/xmlfilemdom.py</Source>
-    <Source>pisi/pxml/xmlextmdom.py</Source>
-    <Source>pisi/pxml/__init__.py</Source>
-    <Source>pisi/pxml/xmlfile.py</Source>
-    <Source>pisi/pxml/xmlext.py</Source>
-    <Source>pisi/pxml/xmlfilecdom.py</Source>
-    <Source>pisi/pxml/xmlextcdom.py</Source>
-    <Source>pisi/pxml/xmlfilepiks.py</Source>
-    <Source>tools/svndist.py</Source>
-    <Source>tests/filetests.py</Source>
+    <Source>pisi/config.py</Source>
+    <Source>pisi/configfile.py</Source>
+    <Source>pisi/constants.py</Source>
+    <Source>pisi/context.py</Source>
+    <Source>pisi/fetcher.py</Source>
     <Source>pisi/file.py</Source>
-    <Source>pisi/search/invertedindex.py</Source>
-    <Source>pisi/search/tokenize.py</Source>
+    <Source>pisi/oo.py</Source>
     <Source>pisi/search/__init__.py</Source>
+    <Source>pisi/search/invertedindex.py</Source>
     <Source>pisi/search/preprocess.py</Source>
-    <Source>tests/searchtests.py</Source>
-    <Source>tests/repodbtests.py</Source>
-    <Source>tests/buildtests.py</Source>
-    <Source>tools/pygettext.py</Source>
-    <Source>tests/conflicttests.py</Source>
-    <Source>scripts/cat-db.py</Source>
-    <Source>scripts/rmcomp-source-repo.py</Source>
-    <Source>scripts/missing-binary.py</Source>
-    <Source>scripts/convert_history.py</Source>
+    <Source>pisi/search/tokenize.py</Source>
+    <Source>pisi/sourcearchive.py</Source>
+    <Source>pisi/ui.py</Source>
+    <Source>pisi/uri.py</Source>
+    <Source>pisi/version.py</Source>
+    <Source>po/tr.po</Source>
     <Source>scripts/calc-build-order.py</Source>
-    <Source>scripts/fix_old_metadata_files.py</Source>
-    <Source>scripts/repo-diff.py</Source>
-    <Source>scripts/find-lib-deps.py</Source>
+    <Source>scripts/cat-db.py</Source>
     <Source>scripts/check-source-repo.py</Source>
+    <Source>scripts/convert_history.py</Source>
     <Source>scripts/fetchAll.py</Source>
+    <Source>scripts/find-lib-deps.py</Source>
+    <Source>scripts/fix_old_metadata_files.py</Source>
+    <Source>scripts/lspisi</Source>
+    <Source>scripts/missing-binary.py</Source>
+    <Source>scripts/pisimedia</Source>
+    <Source>scripts/pisish</Source>
+    <Source>scripts/repo-diff.py</Source>
     <Source>scripts/repostats.py</Source>
-    <Source>tests/zip2/actions.py</Source>
-    <Source>tests/unzip2/actions.py</Source>
-    <Source>tests/stress/lang/de/actions.py</Source>
-    <Source>tests/stress/lang/ef/actions.py</Source>
+    <Source>scripts/rmcomp-source-repo.py</Source>
+    <Source>setup.py</Source>
+    <Source>tests/actionsapitests.py</Source>
+    <Source>tests/archivetests.py</Source>
+    <Source>tests/autoxmltests.py</Source>
+    <Source>tests/buildtests.py</Source>
+    <Source>tests/configfiletests.py</Source>
+    <Source>tests/conflicttests.py</Source>
+    <Source>tests/constantstests.py</Source>
+    <Source>tests/dependencytests.py</Source>
+    <Source>tests/fetchertests.py</Source>
+    <Source>tests/filestests.py</Source>
+    <Source>tests/filetests.py</Source>
+    <Source>tests/graphtests.py</Source>
+    <Source>tests/helloworld/actions.py</Source>
+    <Source>tests/installdbtests.py</Source>
+    <Source>tests/metadatatests.py</Source>
+    <Source>tests/ootests.py</Source>
+    <Source>tests/packagedbtests.py</Source>
+    <Source>tests/packagetests.py</Source>
+    <Source>tests/pccts/actions.py</Source>
+    <Source>tests/popt/actions.py</Source>
+    <Source>tests/repodbtests.py</Source>
+    <Source>tests/run.py</Source>
+    <Source>tests/searchtests.py</Source>
+    <Source>tests/sourcedbtests.py</Source>
+    <Source>tests/specfiletests.py</Source>
     <Source>tests/stress/comp/ab/actions.py</Source>
     <Source>tests/stress/comp/ab/comar/package.py</Source>
     <Source>tests/stress/comp/bc/actions.py</Source>
     <Source>tests/stress/comp/cd/actions.py</Source>
-    <Source>tests/helloworld/actions.py</Source>
-    <Source>tests/pccts/actions.py</Source>
-    <Source>scripts/lspisi</Source>
-    <Source>scripts/pisish</Source>
-    <Source>scripts/pisimedia</Source>
+    <Source>tests/stress/lang/de/actions.py</Source>
+    <Source>tests/stress/lang/ef/actions.py</Source>
+    <Source>tests/testcase.py</Source>
+    <Source>tests/unzip/actions.py</Source>
+    <Source>tests/unzip2/actions.py</Source>
+    <Source>tests/utiltests.py</Source>
+    <Source>tests/versiontests.py</Source>
+    <Source>tests/xmlexttests.py</Source>
+    <Source>tests/zip/actions.py</Source>
+    <Source>tests/zip2/actions.py</Source>
+    <Source>tools/pygettext.py</Source>
+    <Source>tools/svndist.py</Source>
   </Sources>
-  <Forms>
-  </Forms>
-  <Translations>
-  </Translations>
-  <Resources>
-  </Resources>
-  <Interfaces>
-  </Interfaces>
+  <Forms/>
+  <Translations/>
+  <Resources/>
+  <Interfaces/>
   <Others>
-    <Other>pisi-cli</Other>
-    <Other>pisiapi</Other>
     <Other>doc</Other>
+    <Other>pisi-cli</Other>
   </Others>
   <MainScript>pisi-cli</MainScript>
   <Vcs>
@@ -142,85 +126,73 @@
           <string>add</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>checkout</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>commit</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>diff</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>export</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>global</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>history</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>log</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>remove</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>status</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>tag</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
         <key>
           <string>update</string>
         </key>
         <value>
-          <list>
-          </list>
+          <list/>
         </value>
       </dict>
     </VcsOptions>
@@ -236,11 +208,11 @@
     </VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
-    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES"/>
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.ui" type="FORMS"/>
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS"/>
   </FiletypeAssociations>
   <Documentation>
     <DocumentationParams>
@@ -255,7 +227,7 @@
             </key>
             <value>
               <list>
-                <unicode></unicode>
+                <string></string>
               </list>
             </value>
             <key>
@@ -263,14 +235,14 @@
             </key>
             <value>
               <list>
-                <unicode>Python</unicode>
+                <string>Python</string>
               </list>
             </value>
             <key>
               <string>outputFile</string>
             </key>
             <value>
-              <unicode>pisiapi</unicode>
+              <string>pisiapi</string>
             </value>
           </dict>
         </value>
@@ -284,14 +256,14 @@
             </key>
             <value>
               <list>
-                <unicode></unicode>
+                <string></string>
               </list>
             </value>
             <key>
               <string>outputDirectory</string>
             </key>
             <value>
-              <unicode>doc</unicode>
+              <string>doc</string>
             </value>
             <key>
               <string>qtHelpEnabled</string>
@@ -304,7 +276,7 @@
             </key>
             <value>
               <list>
-                <unicode></unicode>
+                <string></string>
               </list>
             </value>
             <key>
