@@ -1,0 +1,206 @@
+These statistics pertain to the last PISI release marked by
+Eray Ozkural which corresponds to 1.1beta9.
+
+$ gitinspector -HTlrm --until=2006-06-01 
+Statistical information for the repository 'pisi-pardus' was gathered on 2017/02/27.
+The following historical commit information, by author, was found in the repository:
+
+Author                     Commits    Insertions      Deletions    % of changes
+A. Murat Eren                  171          4632           3359           11.72
+Ahmet AYGÜN                      2             4              4            0.01
+Bahadır Kandemir                 9            84             27            0.16
+Baris Metin                    512          7420           3663           16.25
+Eray Özkural                   957         20476          13684           50.08
+Faik Uygur                      85          1041            756            2.63
+Gurer Ozen                      49          3830            768            6.74
+Onur Küçük                       1             2              2            0.01
+S.Çağlar Onur                  298          3833           4548           12.29
+İsmail Dönmez                   19            39             35            0.11
+
+Below are the number of rows from each author that have survived and are still
+intact in the current revision:
+
+Author                     Rows      Stability          Age       % in comments
+A. Murat Eren              1024           22.1          5.1                4.69
+Ahmet AYGÜN                   2           50.0          1.8                0.00
+Bahadır Kandemir             49           58.3          1.5                2.04
+Baris Metin                2934           39.5          9.2               41.75
+Eray Özkural              10447           51.0          6.5               10.74
+Faik Uygur                  445           42.7          1.5                8.31
+Gurer Ozen                 1202           31.4          6.7                6.91
+S.Çağlar Onur              1569           40.9          7.8               13.89
+İsmail Dönmez                21           53.8          4.9                0.00
+
+The following history timeline has been gathered from the repository:
+
+Author                  2005-06    2005-07    2005-08    2005-09    2005-10 
+A. Murat Eren                 .          .          .          .          . 
+Bahadır Kandemir                                                          . 
+Baris Metin                -+++  ---++++++          +          +          . 
+Eray Özkural           ----++++        -++   ---+++++  ---++++++ ----++++++ 
+Faik Uygur                                                                . 
+Gurer Ozen                  +++                     +          .          + 
+Onur Küçük                                                     .            
+S.Çağlar Onur              ---+         -+         -+          .          . 
+İsmail Dönmez                                                  .          . 
+Modified Rows:            14659       9077       7276       3916       8884 
+
+Author                  2005-11    2005-12    2006-01    2006-02    2006-03 
+A. Murat Eren          ----++++          .                ---+++         ++ 
+Bahadır Kandemir                                    .          .          . 
+Baris Metin                   .          .                     .          . 
+Eray Özkural          ----+++++  ---++++++          +        +++  ---++++++ 
+Faik Uygur                    .          .                                  
+Gurer Ozen                                                     .            
+S.Çağlar Onur                 .          .   ++++++++   -------+          . 
+İsmail Dönmez                 .          .                                . 
+Modified Rows:            10868       2913        182        908       3016 
+
+Author                  2006-04    2006-05 
+A. Murat Eren                 .            
+Ahmet AYGÜN                   .            
+Bahadır Kandemir              .          . 
+Baris Metin                --++          . 
+Eray Özkural          --+++++++   ---+++++ 
+Faik Uygur                 -+++        --+ 
+Gurer Ozen                    .          + 
+S.Çağlar Onur                 +          . 
+İsmail Dönmez                 .          . 
+Modified Rows:             3765       2743 
+
+The following files are suspiciously big (in order of severity):
+pisi/cli/commands.py (1194 estimated lines of code)
+pisi/build.py (826 estimated lines of code)
+pisi/pxml/autoxml.py (738 estimated lines of code)
+scripts/repostats.py (642 estimated lines of code)
+pisi/operations.py (640 estimated lines of code)
+tools/pygettext.py (583 estimated lines of code)
+pisi/util.py (546 estimated lines of code)
+
+The following files have an elevated cyclomatic complexity (in order of severity):
+pisi/operations.py (342 in cyclomatic complexity)
+pisi/build.py (302 in cyclomatic complexity)
+pisi/pxml/autoxml.py (296 in cyclomatic complexity)
+pisi/cli/commands.py (283 in cyclomatic complexity)
+pisi/util.py (277 in cyclomatic complexity)
+tools/pygettext.py (192 in cyclomatic complexity)
+scripts/repostats.py (178 in cyclomatic complexity)
+pisi/api.py (169 in cyclomatic complexity)
+pisi/atomicoperations.py (155 in cyclomatic complexity)
+pisi/itembyrepodb.py (114 in cyclomatic complexity)
+pisi/file.py (113 in cyclomatic complexity)
+pisi/actionsapi/shelltools.py (94 in cyclomatic complexity)
+pisi/pxml/xmlextcdom.py (93 in cyclomatic complexity)
+pisi/fetcher.py (89 in cyclomatic complexity)
+pisi/version.py (81 in cyclomatic complexity)
+pisi/dbshelve.py (81 in cyclomatic complexity)
+pisi/pxml/xmlextpiks.py (78 in cyclomatic complexity)
+pisi/pxml/xmlextmdom.py (77 in cyclomatic complexity)
+pisi/archive.py (76 in cyclomatic complexity)
+pisi/lockeddbshelve.py (74 in cyclomatic complexity)
+pisi/cli/__init__.py (66 in cyclomatic complexity)
+pisi/actionsapi/get.py (61 in cyclomatic complexity)
+pisi/comariface.py (57 in cyclomatic complexity)
+pisi/dependency.py (56 in cyclomatic complexity)
+pisi/packagedb.py (52 in cyclomatic complexity)
+pisi/installdb.py (52 in cyclomatic complexity)
+pisi/graph.py (52 in cyclomatic complexity)
+
+The following responsibilities, by author, were found in the current revision of the
+repository (comments are excluded from the line count, if possible):
+
+A. Murat Eren is mostly responsible for:
+   255 pisi/fetcher.py
+   149 pisi/build.py
+    88 pisi/actionsapi/shelltools.py
+    82 pisi/archive.py
+    81 tests/actionsapitests.py
+    72 pisi/util.py
+    55 scripts/fix_old_metadata_files.py
+    53 tests/utiltests.py
+    29 tests/buildtests.py
+    23 pisi/actionsapi/pisitools.py
+
+Ahmet AYGÜN is mostly responsible for:
+     2 pisi/cli/commands.py
+
+Bahadır Kandemir is mostly responsible for:
+    37 scripts/missing-binary.py
+     6 scripts/repostats.py
+     3 pisi/specfile.py
+     1 pisi/cli/commands.py
+     1 pisi/actionsapi/shelltools.py
+
+Baris Metin is mostly responsible for:
+   198 pisi/build.py
+   142 pisi/util.py
+   116 pisi/version.py
+   103 pisi/cli/commands.py
+    76 pisi/configfile.py
+    68 pisi/uri.py
+    59 tests/archivetests.py
+    50 pisi/api.py
+    47 pisi/cli/colors.py
+    47 pisi/archive.py
+
+Eray Özkural is mostly responsible for:
+  1030 pisi/cli/commands.py
+   732 pisi/pxml/autoxml.py
+   583 tools/pygettext.py
+   561 pisi/operations.py
+   400 pisi/build.py
+   386 pisi/atomicoperations.py
+   342 pisi/api.py
+   252 pisi/dbshelve.py
+   216 pisi/file.py
+   215 pisi/specfile.py
+
+Faik Uygur is mostly responsible for:
+    60 tests/conflicttests.py
+    55 pisi/operations.py
+    52 pisi/archive.py
+    46 pisi/cli/commands.py
+    39 pisi/api.py
+    35 pisi/util.py
+    35 pisi/build.py
+    23 pisi/atomicoperations.py
+    16 pisi/installdb.py
+    10 pisi/package.py
+
+Gurer Ozen is mostly responsible for:
+   628 scripts/repostats.py
+   118 pisi/environment.py
+    82 scripts/convert_history.py
+    34 pisi/pxml/xmlextpiks.py
+    29 pisi/comariface.py
+    27 pisi/pxml/xmlfilepiks.py
+    25 setup.py
+    20 pisi/util.py
+     9 pisi/pxml/xmlextmdom.py
+     8 pisi/pxml/xmlextcdom.py
+
+S.Çağlar Onur is mostly responsible for:
+   171 pisi/actionsapi/pisitools.py
+   131 pisi/actionsapi/get.py
+   108 pisi/actionsapi/shelltools.py
+    86 pisi/actionsapi/autotools.py
+    84 tests/helloworld/actions.py
+    77 scripts/repo-diff.py
+    65 pisi/util.py
+    65 pisi/actionsapi/coreutils.py
+    50 scripts/fetchAll.py
+    47 pisi/actionsapi/pisitoolsfunctions.py
+
+İsmail Dönmez is mostly responsible for:
+     6 pisi/util.py
+     4 pisi/dependency.py
+     3 pisi/pxml/autoxml.py
+     3 pisi/actionsapi/pisitools.py
+     2 pisi/metadata.py
+     1 pisi/lockeddbshelve.py
+     1 pisi/environment.py
+     1 pisi/build.py
+
+The extensions below were found in the repository history (extensions used during
+statistical analysis are marked):
+* conf [cpp] cron diff dtd e3p guess [hh] in lyx patch po pot pspec [py] py-1 py-2 py-3 sh spec sty sub tex txt upgrade xml 
