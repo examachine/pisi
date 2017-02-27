@@ -79,7 +79,7 @@ http://www.ficksworkshop.com/blog/post/installing-gcc-on-mac
 
 Install PISI dependencies 
 $ sudo port
-> install python27 py27-pip bsddb3 coreutils xz gnupg
+> install python27 py27-pip bsddb3 coreutils md5sha1sum xz gnupg
 > select --set python python27
 > select --set pip pip27
 > exit
