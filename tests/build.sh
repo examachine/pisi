@@ -12,10 +12,10 @@ rm -rf tmp
 pisi-cli -Dtmp build --ignore-dependency https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/zip/pspec.xml https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/unzip/pspec.xml
 
 #partial-builds
-pisi-cli -Dtmp build --until=setup https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
-pisi-cli -Dtmp build --until=build https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
-pisi-cli -Dtmp build --until=install https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
-pisi-cli -Dtmp build --until=package https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=setup https://raw.githubusercontent.com/pars-linux/corporate2/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=build https://raw.githubusercontent.com/pars-linux/corporate2/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=install https://raw.githubusercontent.com/pars-linux/corporate2/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=package https://raw.githubusercontent.com/pars-linux/corporate2/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
 
 #echo "*** repository tests"
 
@@ -31,12 +31,12 @@ pisi-cli -Dtmp install --ignore-comar zip
 pisi-cli -Dtmp list-installed
 pisi-cli -Dtmp remove  --ignore-comar unzip
 pisi-cli -Dtmp install --ignore-comar zip*.pisi
-pisi-cli -Dtmp install --ignore-comar hdparm*.pisi flex*.pisi grep*.pisi
+pisi-cli -Dtmp install --ignore-comar gnuconfig*.pisi
 pisi-cli -Dtmp remove-repo repo1
 # pisi-cli list-available
 
 echo "*** database contents"
 for x in `find tmp -iname '*.bdb'`; do
     echo "contents of database " $x;
-    tools/cat-db.py $x;
+    scripts/cat-db.py $x;
 done
