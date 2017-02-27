@@ -132,8 +132,9 @@ class ComarProvide:
 class Archive:
 
     s_uri = [ autoxml.String, autoxml.mandatory ]
-    a_type =[ autoxml.String, autoxml.mandatory ]
-    a_sha1sum =[ autoxml.String, autoxml.mandatory ]
+    a_type = [ autoxml.String, autoxml.mandatory ]
+    a_sha1sum = [ autoxml.String, autoxml.mandatory ]
+    a_norootdir = [ autoxml.String, autoxml.optional ]
 
     def decode_hook(self, node, errs, where):
         self.name = basename(self.uri)

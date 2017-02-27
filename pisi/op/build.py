@@ -315,8 +315,11 @@ class Builder:
 
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."), noln = True)
-        self.sourceArchive.unpack()
-        ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
+        if self.spec.source.archive.norootdir == "true":
+            self.sourceArchive.unpack(target_dir = self.srcDir)
+        else:
+            self.sourceArchive.unpack()
+        ctx.ui.info(_("Unpacked (%s)") % self.pkg_work_dir())
         self.set_state("unpack")
 
     def run_setup_action(self):

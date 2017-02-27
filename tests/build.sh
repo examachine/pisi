@@ -12,10 +12,10 @@ rm -rf tmp
 pisi-cli -Dtmp build --ignore-dependency https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/zip/pspec.xml https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/unzip/pspec.xml
 
 #partial-builds
-pisi-cli -Dtmp build --until=setup https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/gawk/pspec.xml
-pisi-cli -Dtmp build --until=build https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/gawk/pspec.xml
-pisi-cli -Dtmp build --until=install hhttps://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/gawk/pspec.xml
-pisi-cli -Dtmp build --until=package https://raw.githubusercontent.com/pars-linux/corporate2/master/system/base/gawk/pspec.xml
+pisi-cli -Dtmp build --until=setup https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=build https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=install https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
+pisi-cli -Dtmp build --until=package https://raw.githubusercontent.com/pars-linux/corporate2/blob/14d1eacfc824fb8d0bff8173e7ac06b36b88d10d/system/devel/gnuconfig/pspec.xml
 
 #echo "*** repository tests"
 
