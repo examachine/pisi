@@ -46,17 +46,22 @@ $ git clone https://github.com/pars-linux/uludag.git
 
 Installing piksemel:
 
+$ git clone https://github.com/pars-linux/uludag
 $ cd uludag/piksemel
+$ sudo -H ./setup.py install
+
 
 
 Ubuntu instructions:
 --------------------
 
-TODO:
-
 Install PISI dependencies 
-$ sudo apt-get install python bsddb3 coreutils xz gnupg
-$ pip install bsddb3 pycurl urlgrabber
+$ sudo apt-get install python python-bsddb3 coreutils xz-utils gnupg
+$ sudo apt-get install python-pycurl python-urlgrabber
+
+or for the second line
+
+$ pip install  pycurl urlgrabber
 
 set up gnupg2 if needed:
 
@@ -64,9 +69,18 @@ $ gpg --gen-key
 
 Install COMAR dependencies
 
-$ sudo port install dbus policykit
-$ pip install dbus
+$ sudo apt-get install dbus libpolkit-gobject-1-dev python-dbus cmake
 
+Install COMAR
+
+$ git clone https://github.com/pars-linux/comar
+$ cd comar
+$ cmake . 
+$ (sudo -H) make DESTDIR=/usr/local/ install
+$ cd ..
+$ git clone https://github.com/pars-linux/comar-api
+$ cd comar-api
+$ (sudo -H) ./setup.py install
 
 OS X Instructions:
 ------------------
