@@ -93,14 +93,8 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             rmode = 'r:'
-            if util.is_osx():
-                ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
+            ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
 
-            else:
-                ret, out, err = util.run_batch("lzma d %s %s" %
-                                               (self.file_path +
-                                                ctx.const.lzma_suffix,
-                                                self.file_path))
             if ret != 0:
                 raise LZMAError(err)
             self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
@@ -158,10 +152,7 @@ class ArchiveTar(ArchiveBase):
 
         if self.tar.mode == 'w' and self.type == 'tarlzma':
             batch = None
-            if util.is_osx():
-                lzma = "lzma -z"
-            else:
-                lzma = "lzmash"
+            lzma = "lzma -z"
             if ctx.config.values.build.compressionlevel:
                 lzma += " -%d" % ctx.config.values.build.compressionlevel
             ret, out, err = util.run_batch("%s %s" % (lzma, self.file_path))
