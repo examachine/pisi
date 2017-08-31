@@ -3,4 +3,5 @@ tmp
 .#*
 pisi-index.xml*
 *.pisi
+*.bak
 
