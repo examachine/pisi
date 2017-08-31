@@ -13,6 +13,7 @@
 
 
 import sys
+sys.path.append('.')
 import locale
 import traceback
 import exceptions
@@ -25,7 +26,7 @@ import pisi.cli.pisicli as pisicli
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 def exit():
     pisi.api.finalize()

@@ -23,7 +23,7 @@ import re
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # Pisi Modules
 import pisi.context as ctx

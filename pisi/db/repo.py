@@ -15,7 +15,7 @@ import os, fcntl
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 from . import lockeddbshelve as shelve

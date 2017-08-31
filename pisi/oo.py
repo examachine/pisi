@@ -15,7 +15,7 @@ I find these quite handy. Use them :) -- Eray Ozkural"""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 
 class autoprop(type):

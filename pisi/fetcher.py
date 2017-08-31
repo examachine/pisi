@@ -33,7 +33,7 @@ from time import time,gmtime
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 from urlgrabber import urlgrab, grabber
 

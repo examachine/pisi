@@ -18,7 +18,7 @@ import os
 import gettext
 from functools import reduce
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 
 from .fun import prefix,remove_prefix

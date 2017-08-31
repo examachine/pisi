@@ -35,7 +35,7 @@ from io import StringIO
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # PiSi
 import pisi
