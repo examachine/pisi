@@ -2,5 +2,5 @@
 # -*- coding: utf-8 -*-
 
 import os
-print "Sana da merhaba %s" % (os.getenv("USER"))
+print("Sana da merhaba %s" % (os.getenv("USER")))
 

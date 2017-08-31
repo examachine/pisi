@@ -14,15 +14,16 @@
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 
 import operator
+from functools import reduce
 
 def every(pred, seq):
-    return reduce(operator.and_, map(pred, seq), True)
+    return reduce(operator.and_, list(map(pred, seq)), True)
 
 def any(pred, seq):
-    return reduce(operator.or_, map(pred, seq), False)
+    return reduce(operator.or_, list(map(pred, seq)), False)
 
 def unzip(seq):
-    return zip(*seq)
+    return list(zip(*seq))
 
 def concat(l):
     '''concatenate a list of lists'''
@@ -30,13 +31,13 @@ def concat(l):
 
 def strlist(l):
     """concatenate string reps of l's elements"""
-    return "".join(map(lambda x: str(x) + ' ', l))
+    return "".join([str(x) + ' ' for x in l])
 
 def multisplit(str, chars):
     """ split str with any of chars"""
     l = [str]
     for c in chars:
-        l = concat(map(lambda x:x.split(c), l))
+        l = concat([x.split(c) for x in l])
     return l
 
 def same(l):

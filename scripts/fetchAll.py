@@ -42,7 +42,7 @@ if __name__ == "__main__":
     try:
         packages = scanPSPEC(sys.argv[1])
     except:
-        print "Usage: fetchAll.py path2repo"
+        print("Usage: fetchAll.py path2repo")
         sys.exit(1)
         
     for package in packages:
@@ -52,12 +52,12 @@ if __name__ == "__main__":
         URI = pisi.uri.URI(spec.source.archive.uri)
 
         if not isCached(URI.filename(), spec.source.archive.sha1sum):
-            print URI, " -> " , os.path.join(ctx.config.archives_dir(), URI.filename())
+            print(URI, " -> " , os.path.join(ctx.config.archives_dir(), URI.filename()))
             try:
                 fetch_url(URI, ctx.config.archives_dir())
-            except pisi.fetcher.FetchError, e:
-                print e
+            except pisi.fetcher.FetchError as e:
+                print(e)
                 pass
         else:
-            print URI, "already downloaded..."
+            print(URI, "already downloaded...")
     pisi.api.finalize()

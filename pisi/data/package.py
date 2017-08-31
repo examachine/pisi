@@ -74,7 +74,7 @@ class Package:
                     ctx.ui.info(_("Trying to fetch xdelta: %s") % xdelta_url)
                     try:
                         fetch_url(xdelta_url, dest, ctx.ui.Progress)
-                    except FetchError,e:
+                    except FetchError as e:
                         ctx.ui.warning(_('XDelta %s: not exists') % xdelta_url)
                     else:
                         # generate new one using old pisi file and xdelta
@@ -148,12 +148,12 @@ class Package:
         errs = self.metadata.errors()
         if errs:
             util.Checks.print_errors(errs)
-            raise Error, _("MetaData format wrong")
+            raise Error(_("MetaData format wrong"))
 
         self.files = Files()
         self.files.read( join(outdir, ctx.const.files_xml) )
         if self.files.errors():
-            raise Error, _("Invalid %s") % ctx.const.files_xml
+            raise Error(_("Invalid %s") % ctx.const.files_xml)
         
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \

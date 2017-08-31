@@ -13,7 +13,7 @@
 
 '''Files database implementation'''
 
-import lockeddbshelve as shelve
+from . import lockeddbshelve as shelve
 
 class FilesDB(shelve.LockedDBShelf):
 
@@ -32,7 +32,7 @@ class FilesDB(shelve.LockedDBShelf):
     def remove_files(self, files, txn = None):
         def proc(txn):
             for x in files.list:
-                if self.has_key(x.path):
+                if x.path in self:
                     self.delete(x.path, txn)
         self.txn_proc(proc, txn)
 
@@ -55,7 +55,7 @@ class FilesDB(shelve.LockedDBShelf):
         import fnmatch
         glob = str(glob)
         infos = []
-        for key in self.keys():
+        for key in list(self.keys()):
             if fnmatch.fnmatch(key, glob):
 
                 # FIXME: Why should we assign path attribute manually

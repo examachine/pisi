@@ -40,7 +40,7 @@ class BuildTestCase(testcase.TestCase):
         pspec = 'tests/buildtests/a/pspec.xml'
         pb = Builder(pspec)
         pb.build()
-        self.assert_(os.path.exists('tmp/a-1.0-1-1.pisi'))
+        self.assertTrue(os.path.exists('tmp/a-1.0-1-1.pisi'))
 
     def testBuildNumber(self):
         self.testBasicBuild()
@@ -49,12 +49,12 @@ class BuildTestCase(testcase.TestCase):
         shutil.copy('tests/buildtests/a/actions.py-2', 'tests/buildtests/a/actions.py')
         pb = Builder(pspec)
         pb.build()
-        self.assert_(os.path.exists('tmp/a-1.0-1-2.pisi'))
+        self.assertTrue(os.path.exists('tmp/a-1.0-1-2.pisi'))
 
         pb = Builder(pspec)
         pb.build()
         # because nothing is changed
-        self.assert_(not os.path.exists('tmp/a-1.0-1-3.pisi'))
+        self.assertTrue(not os.path.exists('tmp/a-1.0-1-3.pisi'))
         
         os.remove('tests/buildtests/a/actions.py')
         os.remove('tmp/a-1.0-1-2.pisi')

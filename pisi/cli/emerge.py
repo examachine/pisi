@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import autocommand
-from build import Build
+from .command import autocommand
+from .build import Build
 
-class Emerge(Build):
+class Emerge(Build, metaclass=autocommand):
     """Build and install PISI source packages from repository
 
 Usage: emerge <sourcename> ...
@@ -35,7 +35,6 @@ downloaded from a repository containing sources.
 
 You can also give the name of a component.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(Emerge, self).__init__(args)

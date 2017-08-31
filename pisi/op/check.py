@@ -24,7 +24,7 @@ import pisi
 import pisi.context as ctx
 import pisi.util as util
 
-import info
+from . import info
 
 class Error(pisi.Error):
     pass

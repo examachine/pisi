@@ -31,12 +31,12 @@ class PackageDBTestCase(testcase.TestCase):
         if not ctx.repodb.has_repo('test'):
             ctx.repodb.add_repo('test', Repo(pisi.uri.URI('fakerepo.xml')) )
         ctx.packagedb.add_package(self.spec.packages[1], 'test')
-        self.assert_(ctx.packagedb.has_package('popt-libs'))
+        self.assertTrue(ctx.packagedb.has_package('popt-libs'))
         # close the database and remove lock
         #self.pdb.close()
     
     def testRemove(self):
         ctx.packagedb.remove_package('popt-libs', 'test')
-        self.assert_(not ctx.packagedb.has_package('popt-libs', 'test'))
+        self.assertTrue(not ctx.packagedb.has_package('popt-libs', 'test'))
 
 suite = unittest.makeSuite(PackageDBTestCase)

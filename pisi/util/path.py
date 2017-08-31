@@ -16,11 +16,12 @@
 import os
 
 import gettext
+from functools import reduce
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 
-from fun import prefix,remove_prefix
+from .fun import prefix,remove_prefix
 
 def splitpath(a):
     """split path into components and return as a list
@@ -52,9 +53,9 @@ def commonprefix(l):
     """an improved version of os.path.commonprefix,
     returns a list of path components"""
     common = []
-    comps = map(splitpath, l)
+    comps = list(map(splitpath, l))
     for i in range(0, min(len,l)):
-        compi = map(lambda x: x[i], comps) # get ith slice
+        compi = [x[i] for x in comps] # get ith slice
         if same(compi):
             common.append(compi[0])
     return common

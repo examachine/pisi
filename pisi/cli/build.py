@@ -22,9 +22,9 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import *
+from .command import *
 
-class Build(Command):
+class Build(Command, metaclass=autocommand):
     """Build PISI packages
 
 Usage: build [<pspec.xml> | <sourcename>] ...
@@ -39,7 +39,6 @@ If you would like to run the build process partially,
 provide the --until <state> option where <state> is one of 
 unpack, setup, build, install, package.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(Build, self).__init__(args)

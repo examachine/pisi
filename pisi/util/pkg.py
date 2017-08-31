@@ -23,8 +23,8 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 
-import process
-import path
+from . import process
+from . import path
  
 def package_name(name, version, release, build, prependSuffix=True):
     fn = name + '-' + version + '-' + release
@@ -56,7 +56,7 @@ def env_update():
 
     env_dir = path.join_path(ctx.config.dest_dir(), "/etc/env.d")
     if not os.path.exists(env_dir):
-        os.makedirs(env_dir, 0755)
+        os.makedirs(env_dir, 0o755)
 
     pisi.environment.update_environment(ctx.config.dest_dir())
 

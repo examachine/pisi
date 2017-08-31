@@ -29,10 +29,10 @@ import pisi.util as util
 import pisi.data.dependency as dependency
 import pisi.ui as ui
 
-import install
-import build
-import component
-import upgradepisi
+from . import install
+from . import build
+from . import component
+from . import upgradepisi
 
 class Error(pisi.Error):
     pass

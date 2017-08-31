@@ -54,7 +54,7 @@ def info_name(package_name, installed=False):
     if installed and ctx.installdb.is_installed(package.name):
         try:
             files = ctx.installdb.files(package.name)
-        except pisi.Error, e:
+        except pisi.Error as e:
             ctx.ui.warning(e)
             files = None
     else:

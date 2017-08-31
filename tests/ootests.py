@@ -21,8 +21,7 @@ class OOTestCase(unittest.TestCase):
         pass
         
     def testautosuper(self):
-        class A:
-            __metaclass__ = autosuper
+        class A(metaclass=autosuper):
             def meth(self):
                 return "A"
         class B(A):
@@ -35,11 +34,10 @@ class OOTestCase(unittest.TestCase):
             def meth(self):
                 return "D" + self.__super.meth()
         
-        self.assert_( D().meth() == "DCBA" )
+        self.assertTrue( D().meth() == "DCBA" )
 
     def testconstant(self):
-        class A:
-            __metaclass__ = constant
+        class A(metaclass=constant):
             def __init__(self):
                 self.a = 1
                 self.b = 2
@@ -47,22 +45,20 @@ class OOTestCase(unittest.TestCase):
         try:
             passed = False
             mya.a = 0
-        except ConstError, e:
+        except ConstError as e:
             passed = True
-        self.assert_(passed)
+        self.assertTrue(passed)
 
     def testsingleton(self):
-        class A:
-            __metaclass__ = singleton
+        class A(metaclass=singleton):
             def __init__(self):
                 self.a = time.time()
         a1 = A()
         a2 = A()
-        self.assert_(a1 is a2)
+        self.assertTrue(a1 is a2)
 
     def testconstantsingleton(self):
-        class A:
-            __metaclass__ = constantsingleton
+        class A(metaclass=constantsingleton):
             def __init__(self):
                 self.a = 1
                 self.b = 2
@@ -70,11 +66,11 @@ class OOTestCase(unittest.TestCase):
         try:
             passed = False
             mya.a = 0
-        except ConstError, e:
+        except ConstError as e:
             passed = True
-        self.assert_(passed)
+        self.assertTrue(passed)
         self.assertEqual(mya.a, 1)
         mya2 = A()
-        self.assert_(mya is mya2)
+        self.assertTrue(mya is mya2)
 
 suite = unittest.makeSuite(OOTestCase)

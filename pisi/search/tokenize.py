@@ -16,15 +16,15 @@
 import string
 
 def tokenize(lang, str):
-    if type(str) != type(unicode()):
-        str = unicode(str)
+    if type(str) != type(str()):
+        str = str(str)
     tokens = []
-    token = unicode()
+    token = str()
     for x in str:
         if x in string.whitespace or x in string.punctuation:
             if len(token) > 0:
                 tokens.append(token)
-                token = unicode()
+                token = str()
         else:
             token += x
             

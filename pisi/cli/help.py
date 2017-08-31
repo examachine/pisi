@@ -22,16 +22,14 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import Command, autocommand, usage_text
+from .command import Command, autocommand, usage_text
 
-class Help(Command):
+class Help(Command, metaclass=autocommand):
     """Prints help for given commands
 
 Usage: help [ <command1> <command2> ... <commandn> ]
 
 If run without parameters, it prints the general help."""
-
-    __metaclass__ = autocommand
 
     def __init__(self, args = None):
         #TODO? Discard Help's own usage doc in favor of general usage doc

@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import command
+from . import command
 
 
-class Index(command.Command):
+class Index(command.Command, metaclass=command.autocommand):
     """Index PISI files in a given directory
 
 Usage: index <directory> ...
@@ -38,7 +38,6 @@ source and binary packages.
 If you give multiple directories, the command still works, but puts
 everything in a single index file.
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Index, self).__init__(args)

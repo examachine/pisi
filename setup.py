@@ -34,7 +34,7 @@ class Install(install):
     
     def installi18n(self):
         for lang in i18n_languages.split(' '):
-            print "Installing '%s' translations..." % lang
+            print("Installing '%s' translations..." % lang)
             os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
             if not self.prefix:
                 self.prefix = "/"
@@ -53,7 +53,7 @@ class Install(install):
             pass
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
-            print 'Installing', pdf          
+            print('Installing', pdf)          
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 

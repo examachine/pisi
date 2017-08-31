@@ -62,7 +62,7 @@ def get_file_type(path, pinfo_list, install_dir):
     if len(matches)>0:
         best_matched_path = Sort(matches)[0]
     else:
-        raise Error, _("No file matches %s in Spec file." % path)
+        raise Error(_("No file matches %s in Spec file." % path))
     info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
     return info.fileType, info.permanent
 
@@ -354,7 +354,7 @@ class Builder:
 
         for package in self.spec.packages:
             for path in package.files:
-                map(lambda p: all_paths_in_packages.append(p), [p for p in glob.glob(install_dir + path.path)])
+                list(map(lambda p: all_paths_in_packages.append(p), [p for p in glob.glob(install_dir + path.path)]))
 
         for root, dirs, files in os.walk(install_dir):
             for file_ in files:
@@ -380,10 +380,10 @@ class Builder:
             #localSymbols = locals()
             #globalSymbols = globals()
             buf = open(scriptfile).read()
-            exec compile(buf, "error", "exec") in localSymbols, globalSymbols
-        except IOError, e:
+            exec(compile(buf, "error", "exec"), localSymbols, globalSymbols)
+        except IOError as e:
             raise Error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
-        except SyntaxError, e:
+        except SyntaxError as e:
             raise Error(_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
@@ -409,7 +409,7 @@ class Builder:
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
-        print func
+        print(func)
         if func in self.actionLocals:
             self.actionLocals[func]()
         else:
@@ -428,7 +428,7 @@ class Builder:
                 build_deps_names = set([x.package for x in build_deps])
                 devel_deps_names = set(ctx.componentdb.get_component('system.devel').packages)
                 extra_names = devel_deps_names - build_deps_names
-                extra_names = filter(lambda x: not ctx.installdb.is_installed(x), extra_names)
+                extra_names = [x for x in extra_names if not ctx.installdb.is_installed(x)]
                 if extra_names:
                     ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
                                util.strlist(extra_names))
@@ -508,8 +508,8 @@ class Builder:
         static_package_obj = pisi.specfile.Package()
         static_package_obj.name = self.spec.source.name + ctx.const.static_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        static_package_obj.summary['en'] = u'Ar files for %s' % (self.spec.source.name)
-        static_package_obj.description['en'] = u'Ar files for %s' % (self.spec.source.name)
+        static_package_obj.summary['en'] = 'Ar files for %s' % (self.spec.source.name)
+        static_package_obj.description['en'] = 'Ar files for %s' % (self.spec.source.name)
         static_package_obj.partOf = self.spec.source.partOf
         for f in ar_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "library"))
@@ -535,8 +535,8 @@ class Builder:
         debug_package_obj.debug_package = True
         debug_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        debug_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
-        debug_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
+        debug_package_obj.summary['en'] = 'Debug files for %s' % (self.spec.source.name)
+        debug_package_obj.description['en'] = 'Debug files for %s' % (self.spec.source.name)
         debug_package_obj.partOf = self.spec.source.partOf + '-debug'
         for f in debug_files:
             debug_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
@@ -571,7 +571,7 @@ class Builder:
         metadata.package.architecture = "Any"
         metadata.package.packageFormat = ctx.get_option('package_format')
         
-        size = long(0)
+        size = int(0)
         if package.debug_package:
             d = self.pkg_debug_dir()
         else:
@@ -622,7 +622,7 @@ class Builder:
                     continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
-                fsize = long(util.dir_size(fpath))
+                fsize = int(util.dir_size(fpath))
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
                                      size=fsize, hash=fhash)
 
@@ -631,7 +631,7 @@ class Builder:
             for path in glob.glob(wildcard_path):
                 add_path(path)
 
-        for (p, fileinfo) in d.iteritems():
+        for (p, fileinfo) in d.items():
             files.append(fileinfo)
 
         files_xml_path = util.join_path(self.pkg_dir(), ctx.const.files_xml)
@@ -654,8 +654,8 @@ class Builder:
                         return
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
-                except Exception, e:
-                    print e
+                except Exception as e:
+                    print(e)
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
@@ -673,7 +673,7 @@ class Builder:
             return (1, None)
             ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
         else:
-            a = filter(lambda (x,y): y != None, found)
+            a = [x_y for x_y in found if x_y[1] != None]
             ctx.ui.debug(str(a))
             if a:
                 # sort in order of increasing build number

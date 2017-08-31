@@ -30,7 +30,7 @@ repo_uri = sys.argv[1]
 
 specfiles = []
 
-print "reading pspecfiles, just a moment"
+print("reading pspecfiles, just a moment")
 for root, dirs, files in os.walk(repo_uri):
     for fn in files:
         if fn == 'pspec.xml':
@@ -71,11 +71,11 @@ def plan_build(specfiles):
     order.reverse()
     return G_f, order
 
-print "planning build order"
+print("planning build order")
 try:
     G_f, order = plan_build(specfiles)
-    print order 
-except pisi.graph.CycleException, e:
-    print e
+    print(order) 
+except pisi.graph.CycleException as e:
+    print(e)
 
 pisi.api.finalize()

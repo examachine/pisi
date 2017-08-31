@@ -46,7 +46,7 @@ class ConflictTestCase(testcase.TestCase):
         ctx.installdb.install('inst3', '5.2', '2', '3')
         ctx.installdb.install('inst4', '2.1', '2', '3')
 
-        for name in packages.keys():
+        for name in list(packages.keys()):
             pkg = pisi.data.specfile.Package()
             pkg.name = name
             pkg.conflicts = packages[name]
@@ -64,20 +64,20 @@ class ConflictTestCase(testcase.TestCase):
     def testConflictWithEachOther(self):
         packages = ["a", "b", "c", "d", "e"]
         (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
-        self.assert_(set(['a', 'b', 'e']) == D)
+        self.assertTrue(set(['a', 'b', 'e']) == D)
 
     def testConflictWithInstalled(self):
         packages = ["g", "h", "i"]
         (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
-        self.assert_(not D)
-        self.assert_(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
-        self.assert_("notinst1" not in pkg_conflicts["g"])
+        self.assertTrue(not D)
+        self.assertTrue(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
+        self.assertTrue("notinst1" not in pkg_conflicts["g"])
 
     def testConflictWithEachOtherAndInstalled(self):
         packages = ["a", "b", "g", "h", "i"]
         (C, D, pkg_conflicts) = pisi.op.conflict.calculate_conflicts(packages, self.packagedb)
-        self.assert_(set(['a', 'b']) == D)
-        self.assert_(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
-        self.assert_(set(['inst2', 'inst3', 'inst4']) == pkg_conflicts["h"])
+        self.assertTrue(set(['a', 'b']) == D)
+        self.assertTrue(set(['inst1', 'inst2', 'inst3', 'inst4']) == C)
+        self.assertTrue(set(['inst2', 'inst3', 'inst4']) == pkg_conflicts["h"])
 
 suite = unittest.makeSuite(ConflictTestCase)

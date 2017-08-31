@@ -22,16 +22,14 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import Command, autocommand
-from colors import *
+from .command import Command, autocommand
+from .colors import *
 
-class ListInstalled(Command):
+class ListInstalled(Command, metaclass=autocommand):
     """Print the list of all installed packages  
 
 Usage: list-installed
 """
-
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListInstalled, self).__init__(args)
@@ -50,23 +48,23 @@ Usage: list-installed
         list.sort()
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
-            print         '========================================================================'
+            print('========================================================================')
         for pkg in list:
             package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepo.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
-                ctx.ui.info(unicode(package))
-                ctx.ui.info(unicode(inst_info))
+                ctx.ui.info(str(package))
+                ctx.ui.info(str(inst_info))
             elif self.options.install_info:
                 ctx.ui.info('%-15s  |%s' % (package.name, inst_info.one_liner()))
             else:
-                ctx.ui.info('%15s - %s' % (package.name, unicode(package.summary)))
+                ctx.ui.info('%15s - %s' % (package.name, str(package.summary)))
         self.finalize()
 
 
 
 
-class ListAvailable(Command):
+class ListAvailable(Command, metaclass=autocommand):
     """List available packages in the repositories
 
 Usage: list-available [ <repo1> <repo2> ... repon ]
@@ -75,7 +73,6 @@ Gives a brief list of PISI packages published in the specified
 repositories. If no repository is specified, we list packages in
 all repositories. 
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListAvailable, self).__init__(args)
@@ -114,7 +111,7 @@ all repositories.
         for p in list:
             package = ctx.packagedb.get_package(p)
             if self.options.long:
-                ctx.ui.info(unicode(package))
+                ctx.ui.info(str(package))
             else:
                 lenp = len(p)
                 if p in installed_list:
@@ -122,10 +119,10 @@ all repositories.
                         continue
                     p = colorize(p, 'green')
                 p = p + ' ' * max(0, 15 - lenp)
-                ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
+                ctx.ui.info('%s - %s ' % (p, str(package.summary)))
 
                 
-class ListComponents(Command):
+class ListComponents(Command, metaclass=autocommand):
     """List available components
 
 Usage: list-components
@@ -133,7 +130,6 @@ Usage: list-components
 Gives a brief list of PISI components published in the 
 repositories.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListComponents, self).__init__(args)
@@ -153,24 +149,23 @@ repositories.
         for p in list:
             component = ctx.componentdb.get_component(p)
             if self.options.long:
-                ctx.ui.info(unicode(component))
+                ctx.ui.info(str(component))
             else:
                 lenp = len(p)
                 #if p in installed_list:
                 #    p = colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
-                ctx.ui.info('%s - %s ' % (component.name, unicode(component.summary)))
+                ctx.ui.info('%s - %s ' % (component.name, str(component.summary)))
         self.finalize()
 
 
-class ListSources(Command):
+class ListSources(Command, metaclass=autocommand):
     """List available sources
 
 Usage: list-sources
 
 Gives a brief list of sources published in the repositories.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListSources, self).__init__(args)
@@ -191,23 +186,22 @@ Gives a brief list of sources published in the repositories.
             sf, repo = ctx.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')
-                ctx.ui.info(unicode(sf.source))
+                ctx.ui.info(str(sf.source))
             else:
                 lenp = len(p)
                 #if p in installed_list:
                 #    p = colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
-                ctx.ui.info('%s - %s' % (sf.source.name, unicode(sf.source.summary)))
+                ctx.ui.info('%s - %s' % (sf.source.name, str(sf.source.summary)))
         self.finalize()
 
-class ListUpgrades(Command):
+class ListUpgrades(Command, metaclass=autocommand):
     """List packages to be upgraded
 
 Usage: list-upgrades
 
 Lists the packages that will be upgraded.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListUpgrades, self).__init__(args)
@@ -229,13 +223,13 @@ Lists the packages that will be upgraded.
         list.sort()
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
-            print         '========================================================================'
+            print('========================================================================')
         for pkg in list:
             package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepo.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)
-                print inst_info
+                print(inst_info)
             elif self.options.install_info:
                 ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
             else:
@@ -243,13 +237,11 @@ Lists the packages that will be upgraded.
         self.finalize()
 
 
-class ListPending(Command):
+class ListPending(Command, metaclass=autocommand):
     """List pending packages
     
 Lists packages waiting to be configured.
 """
-
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListPending, self).__init__(args)
@@ -260,7 +252,7 @@ Lists packages waiting to be configured.
         self.init(database = True, write = False)
 
         list = ctx.installdb.list_pending()
-        for p in list.keys():
-            print p
+        for p in list(list.keys()):
+            print(p)
         self.finalize()
 

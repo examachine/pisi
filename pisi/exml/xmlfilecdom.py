@@ -38,8 +38,8 @@ from Ft.Xml.Domlette import NoExtDtdReader
 from Ft.Xml.Domlette import Print, PrettyPrint
 from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
 
-XHTML_NS = unicode(XHTML_NAMESPACE)
-XML_NS = unicode(XML_NAMESPACE)
+XHTML_NS = str(XHTML_NAMESPACE)
+XML_NS = str(XML_NAMESPACE)
 
 import pisi
 from pisi.exml.xmlextcdom import *
@@ -73,9 +73,9 @@ class XmlFile(object):
         try:
             self.doc = NoExtDtdReader.parseUri(Ft.Lib.Uri.OsPathToUri(localpath))
             return self.doc.documentElement
-        except Ft.FtException, e:
+        except Ft.FtException as e:
             raise Error(_("File '%s' has invalid XML: %s") % (localpath, str(e)) )
-        except exceptions.ValueError, e:
+        except exceptions.ValueError as e:
             raise Error(_("File '%s' not found") % localpath )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
@@ -129,15 +129,14 @@ class XmlFile(object):
     def getChildrenWithType(self, tagpath, type):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
-        return filter(lambda x:x.nodeType == type, node.childNodes)
+        return [x for x in node.childNodes if x.nodeType == type]
 
     # get only child elements
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
         try:
-            return filter(lambda x:x.nodeType == x.ELEMENT_NODE,
-                          node.childNodes)
+            return [x for x in node.childNodes if x.nodeType == x.ELEMENT_NODE]
         except AttributeError:
             return None
 

@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import command
-import packageop
+from . import command
+from . import packageop
 
-class Upgrade(packageop.PackageOp):
+class Upgrade(packageop.PackageOp, metaclass=command.autocommand):
     """Upgrade PISI packages
 
 Usage: Upgrade [<package1> <package2> ... <packagen>]
@@ -43,8 +43,6 @@ reinstall a package from a pisi file, use the install command.
 You can also specify components instead of package names, which will be
 expanded to package names.
 """
-
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Upgrade, self).__init__(args)

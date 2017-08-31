@@ -24,12 +24,10 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import oo
+from . import oo
 
-class Constants:
+class Constants(metaclass=oo.constantsingleton):
     "PISI Constants Singleton"
-
-    __metaclass__ = oo.constantsingleton
     
     def __init__(self):
         # suffix for package names

@@ -27,9 +27,9 @@ class Error(pisi.Exception):
 class FileError(pisi.Error):
     pass
 
-from fun import *
-from term import *
-from path import *
-from fs import *
-from process import *
-from pkg import *
+from .fun import *
+from .term import *
+from .path import *
+from .fs import *
+from .process import *
+from .pkg import *

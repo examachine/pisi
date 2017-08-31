@@ -21,10 +21,10 @@ import pisi.cli
 class Error(pisi.Error):
     pass
 
-import command
-import packageop
+from . import command
+from . import packageop
 
-class Remove(packageop.PackageOp):
+class Remove(packageop.PackageOp, metaclass=command.autocommand):
     """Remove PISI packages
 
 Usage: remove <package1> <package2> ... <packagen>
@@ -34,7 +34,6 @@ Remove package(s) from your system. Just give the package names to remove.
 You can also specify components instead of package names, which will be
 expanded to package names.
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Remove, self).__init__(args)

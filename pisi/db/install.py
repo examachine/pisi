@@ -25,7 +25,7 @@ _ = __trans.ugettext
 # PiSi
 import pisi
 import pisi.context as ctx
-import lockeddbshelve as shelve
+from . import lockeddbshelve as shelve
 from pisi.data.files import Files
 import pisi.util as util
 from pisi.util import join_path as join
@@ -99,7 +99,7 @@ class InstallDB:
     def is_recorded(self, pkg, txn = None):
         pkg = str(pkg)
         def proc(txn):
-            return self.d.has_key(pkg)
+            return pkg in self.d
         return self.d.txn_proc(proc, txn)
 
     def is_installed(self, pkg, txn = None):
@@ -124,7 +124,7 @@ class InstallDB:
     def list_pending(self):
         # warning: reads the entire db
         dict = {}
-        for (pkg, x) in self.dp.items():
+        for (pkg, x) in list(self.dp.items()):
             pkginfo = self.d[pkg]
             dict[pkg] = pkginfo
         return dict

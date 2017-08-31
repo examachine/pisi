@@ -67,10 +67,10 @@ def txn_proc(proc, txn = None):
             autotxn = dbenv.txn_begin()
             try:
                 retval = proc(autotxn)
-            except db.DBError, e:
+            except db.DBError as e:
                 autotxn.abort()
                 raise e
-            except Exception, e:
+            except Exception as e:
                 autotxn.abort()
                 raise e
             autotxn.commit()
