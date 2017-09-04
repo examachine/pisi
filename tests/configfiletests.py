@@ -48,15 +48,15 @@ class ConfigFileTestCase(unittest.TestCase):
         cf = self.cf
         
         #build
-        self.assert_(cf.build.cflags)
-        self.assert_(cf.build.cxxflags)
+        self.assertTrue(cf.build.cflags)
+        self.assertTrue(cf.build.cxxflags)
 
         #general
-        self.assert_(cf.general.destinationdirectory)
+        self.assertTrue(cf.general.destinationdirectory)
 
         #dirs
-        self.assert_(cf.dirs.index_dir)
-        self.assert_(cf.dirs.tmp_dir)
-        self.assert_(cf.dirs.packages_dir)
+        self.assertTrue(cf.dirs.index_dir)
+        self.assertTrue(cf.dirs.tmp_dir)
+        self.assertTrue(cf.dirs.packages_dir)
 
 suite = unittest.makeSuite(ConfigFileTestCase)

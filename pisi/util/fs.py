@@ -20,14 +20,14 @@ import statvfs
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
 
-import process
-from path import join_path
-from fun import remove_prefix
+from . import process
+from .path import join_path
+from .fun import remove_prefix
 
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
@@ -71,12 +71,12 @@ def dir_size(dir):
         return getsize(dir)
 
     if islink(dir):
-        return long(len(os.readlink(dir)))
+        return int(len(os.readlink(dir)))
 
     def sizes():
         for root, dirs, files in os.walk(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
-            yield sum([long(len(os.readlink((join(root, name))))) for name in files if islink(join(root,name))])
+            yield sum([int(len(os.readlink((join(root, name))))) for name in files if islink(join(root,name))])
     return sum( sizes() )
 
 def copy_file(src,dest):
@@ -130,7 +130,7 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
 
         try:
             return func(f)
-        except pisi.util.FileError, e:
+        except pisi.util.FileError as e:
             if os.path.islink(f):
                 ctx.ui.info(_("Including external link '%s'") % f)
             elif os.path.isdir(f):

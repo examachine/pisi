@@ -16,7 +16,7 @@ from optparse import OptionParser
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -37,7 +37,7 @@ class PreParser(OptionParser):
         OptionParser.__init__(self, usage=usage_text, version=version)
 
     def error(self, msg):
-        raise ParserError, msg
+        raise ParserError(msg)
 
     def parse_args(self, args=None):
         self.opts = []

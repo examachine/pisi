@@ -14,7 +14,7 @@
 """PISI package relation graph that represents the state of packagedb"""
 
 import pisi
-from graph import Digraph
+from .graph import Digraph
 
 # Cache the results from packagedb queries in a graph
 

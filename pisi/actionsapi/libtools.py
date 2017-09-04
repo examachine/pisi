@@ -16,7 +16,7 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # Pisi-Core Modules
 import pisi.context as ctx

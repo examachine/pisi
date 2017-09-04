@@ -13,7 +13,7 @@
    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import command
+from . import command
 
 
-class RebuildDb(command.Command):
+class RebuildDb(command.Command, metaclass=command.autocommand):
     """Rebuild Databases
 
 Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
@@ -35,7 +35,6 @@ Rebuilds the PISI databases
 If package specs are given, they should be the names of package 
 dirs under /var/lib/pisi
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(RebuildDb, self).__init__(args)

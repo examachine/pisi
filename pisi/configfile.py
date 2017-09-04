@@ -48,11 +48,11 @@
 #qt_dir = /usr/qt/3
 
 import os
-from ConfigParser import ConfigParser, NoSectionError
+from configparser import ConfigParser, NoSectionError
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 
@@ -109,7 +109,7 @@ class ConfigurationSection(object):
             self.defaults = DirectoriesDefaults
         else:
             e = _("No section by name '%s'") % section
-            raise Error, e
+            raise Error(e)
 
         self.section = section
 

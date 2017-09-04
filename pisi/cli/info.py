@@ -15,7 +15,7 @@ import sys
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -25,16 +25,15 @@ import pisi.util as util
 class Error(pisi.Error):
     pass
 
-import command 
+from . import command 
 
-class Info(command.Command):
+class Info(command.Command, metaclass=command.autocommand):
     """Display package information
 
 Usage: info <package1> <package2> ... <packagen>
 
 <packagei> is either a package name or a .pisi file, 
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Info, self).__init__(args)
@@ -71,7 +70,7 @@ Usage: info <package1> <package2> ... <packagen>
                     index.add_component(component)
                 else:
                     if not self.options.short:
-                        ctx.ui.info(unicode(component))
+                        ctx.ui.info(str(component))
                     else:
                         ctx.ui.info("%s - %s" % (component.name, component.summary)) 
             else: # then assume it was a package 
@@ -114,23 +113,23 @@ Usage: info <package1> <package2> ... <packagen>
 
         if ctx.get_option('short'):
             pkg = metadata.package
-            ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
+            ctx.ui.info('%15s - %s' % (pkg.name, str(pkg.summary)))
         else:
-            ctx.ui.info(unicode(metadata.package))
+            ctx.ui.info(str(metadata.package))
             if repo:
                 revdeps =  [x[0] for x in 
                             ctx.packagedb.get_rev_deps(metadata.package.name, repo)]
-                print _('Reverse Dependencies:'), util.strlist(revdeps)
+                print(_('Reverse Dependencies:'), util.strlist(revdeps))
         if self.options.files or self.options.files_path:
             if files:
-                print _('\nFiles:')
+                print(_('\nFiles:'))
                 files.list.sort(key = lambda x:x.path)
                 for fileinfo in files.list:
                     if self.options.files:
-                        print fileinfo
+                        print(fileinfo)
                     else:
-                        print fileinfo.path
+                        print(fileinfo.path)
             else:
                 ctx.ui.warning(_('File information not available'))
         if not self.options.short:
-            print
+            print()

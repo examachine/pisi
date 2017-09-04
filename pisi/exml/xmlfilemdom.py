@@ -26,7 +26,7 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import xml.dom.minidom as mdom
 from xml.parsers.expat import ExpatError
@@ -65,7 +65,7 @@ class XmlFile(object):
 
         try:
             self.doc = mdom.parse(localpath)
-        except ExpatError, inst:
+        except ExpatError as inst:
             raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
                                                                 str(inst)))
 
@@ -120,15 +120,14 @@ class XmlFile(object):
     def getChildrenWithType(self, tagpath, type):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
-        return filter(lambda x:x.nodeType == type, node.childNodes)
+        return [x for x in node.childNodes if x.nodeType == type]
 
     # get only child elements
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
         try:
-            return filter(lambda x:x.nodeType == x.ELEMENT_NODE,
-                          node.childNodes)
+            return [x for x in node.childNodes if x.nodeType == x.ELEMENT_NODE]
         except AttributeError:
             return None
 

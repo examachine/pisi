@@ -9,7 +9,7 @@ import os
 import shutil
 
 def run(cmd):
-    print 'running', cmd
+    print('running', cmd)
     os.system(cmd)
 
 sys.path.insert(0, '.')
@@ -22,10 +22,10 @@ ver = pisi.__version__
 if os.path.exists('svndist/pisi-%s' % ver):
     shutil.rmtree('svndist/pisi-%s' % ver)
     
-print 'Exporting svn directory'
+print('Exporting svn directory')
 run('svn export http://svn.uludag.org.tr/uludag/trunk/pisi svndist/pisi-%s' % ver)
 
 os.chdir('svndist')
 run('tar cjvf pisi-%s.tar.bz2 pisi-%s' % (ver, ver))
 
-print 'Have a look at svndist directory'
+print('Have a look at svndist directory')

@@ -34,7 +34,7 @@ class XmlExtTestCase(testcase.TestCase):
         codeswith = xmlext.getAllNodes(self.doc, 'OtherInfo/CodesWith/Person')
         self.assertEqual(len(codeswith), 5)
         self.assertEqual(xmlext.getNodeText(codeswith[1]),
-                         u'Çağlar')
+                         'Çağlar')
         
     def testAdd(self):
         node = xmlext.newDocument('pardus')

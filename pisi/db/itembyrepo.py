@@ -17,14 +17,14 @@ import types
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-import lockeddbshelve as shelve
+from . import lockeddbshelve as shelve
 
-installed, thirdparty, repos, alldb = range(1, 5)
+installed, thirdparty, repos, alldb = list(range(1, 5))
 
 """installed and thirdparty are special databases to keep track 
 of already installed stuff and third party stuff not in any real repository.
@@ -54,11 +54,11 @@ class ItemByRepoDB(object):
         return self.d.txn_proc(proc, txn)
 
     def items(self):
-        return self.d.items()
+        return list(self.d.items())
 
     @staticmethod
     def not_just_tracking(data):
-        keys = data.keys()
+        keys = list(data.keys())
         if len(keys)==1:
             if 'trdparty' in keys or 'inst' in keys:
                 return False
@@ -73,16 +73,16 @@ class ItemByRepoDB(object):
         #return False
         
     def list_if(self, pred):
-        return [ k for k,data in self.d.items() if pred(k, data)]
+        return [ k for k,data in list(self.d.items()) if pred(k, data)]
 
     def list(self, repo = None):
         if repo == None:
             repo = repos
         if repo not in [repos, alldb]:
-            return [ k for k,data in self.d.items() if data.has_key(self.repo_str(repo))]
+            return [ k for k,data in list(self.d.items()) if self.repo_str(repo) in data]
         else:
             if repo == alldb:
-                return [ pkg for pkg in self.d.keys() ]
+                return [ pkg for pkg in list(self.d.keys()) ]
             else:
                 return self.list_if( lambda k,data: ItemByRepoDB.not_just_tracking(data) )
 
@@ -131,7 +131,7 @@ class ItemByRepoDB(object):
             return haskey and ItemByRepoDB.not_just_tracking(data)
         else:
             repostr = self.repo_str(repo)
-            return haskey and self.d.get(name, txn).has_key(repostr)
+            return haskey and repostr in self.d.get(name, txn)
 
     def get_item_repo(self, name, repo = None, txn = None):
         name = str(name)
@@ -143,11 +143,11 @@ class ItemByRepoDB(object):
             s = self.d.get(name, txn=txn)
             if repo in [repos, alldb]:
                 for repostr in self.order(repo):
-                    if s.has_key(repostr):
+                    if repostr in s:
                         return (s[repostr], self.str_repo(repostr))
             else:
                 repostr = self.repo_str(repo)
-                if s.has_key(repostr):
+                if repostr in s:
                     return (s[repostr], repo)
             raise NotfoundError(_('Key %s in repo %s not found') % (name, repo))
             #return None
@@ -177,7 +177,7 @@ class ItemByRepoDB(object):
         assert not repo in [alldb, repos]
         repostr = self.repo_str(repo)
         def proc(txn):
-            if not self.d.has_key(name):
+            if name not in self.d:
                 s = dict()
             else:
                 s = self.d.get(name, txn)
@@ -191,7 +191,7 @@ class ItemByRepoDB(object):
         def p(txn):
             s = self.d.get(name, txn)
             repostr = self.repo_str(repo)            
-            if s.has_key(repostr):
+            if repostr in s:
                 del s[repostr]
             if (len(s)==0):
                 self.d.delete(name, txn)
@@ -215,6 +215,6 @@ class ItemByRepoDB(object):
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
-            for key in self.d.keys():
+            for key in list(self.d.keys()):
                 self.remove_item_repo(key, repo, txn=txn)
         self.d.txn_proc(proc, txn)

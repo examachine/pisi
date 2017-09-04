@@ -13,9 +13,9 @@
 
 
 import sys
+sys.path.append('.')
 import locale
 import traceback
-import exceptions
 import signal
 import bsddb3.db as db
 
@@ -25,7 +25,7 @@ import pisi.cli.pisicli as pisicli
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 def exit():
     pisi.api.finalize()
@@ -35,7 +35,7 @@ def handle_exception(exception, value, tb):
     signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
-    if exception == exceptions.KeyboardInterrupt:
+    if exception == KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
         exit()
     elif isinstance(value, pisi.Error):
@@ -56,9 +56,9 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.error(_("System Error. Program Terminated."))
 
     if ctx.get_option('debug'):
-        ui.error(u"%s: %s" % (exception, value))
+        ui.error("%s: %s" % (exception, value))
     else:
-         ui.error(unicode(value))
+         ui.error(str(value))
 
     ui.info(_("Please use 'pisi help' for general help."))
 
@@ -79,5 +79,5 @@ if __name__ == "__main__":
     cli = pisicli.PisiCLI()
     try:
         cli.run_command()
-    except pisi.op.upgradepisi.PisiUpgradeException, e:
-        print _('PISI has been upgraded.')
+    except pisi.op.upgradepisi.PisiUpgradeException as e:
+        print(_('PISI has been upgraded.'))

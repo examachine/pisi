@@ -24,7 +24,7 @@ class RepoDBTestCase(testcase.TestCase):
         # written by cartman the celebrity, for bug #1909 
         
         for i in range(2):
-            print '\nTest %d\n' % (i)
+            print('\nTest %d\n' % (i))
             pisi.api.add_repo("foo","bar")
             pisi.api.remove_repo("foo")
 

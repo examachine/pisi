@@ -31,11 +31,11 @@ import codecs
 import types
 import formatter
 import sys
-from StringIO import StringIO
+from io import StringIO
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # PiSi
 import pisi
@@ -50,15 +50,15 @@ class Error(pisi.Error):
 
 # requirement specs
 
-mandatory, optional = range(2) # poor man's enum
+mandatory, optional = list(range(2)) # poor man's enum
 
 # basic types
 
-String = types.StringType
-Text = types.UnicodeType
-Integer = types.IntType
-Long = types.LongType
-Float = types.FloatType
+String = bytes
+Text = str
+Integer = int
+Long = int
+Float = float
 
 #class datatype(type):
 #    def __init__(cls, name, bases, dict):
@@ -96,7 +96,7 @@ class LocalText(dict):
 
     def encode(self, node, errs):
         assert self.tag != ''
-        for key in self.iterkeys():
+        for key in self.keys():
             newnode = addNode(node, self.tag)
             setNodeAttribute(newnode, 'xml:lang', key)
             addText(newnode, '',  self[key].encode('utf8'))
@@ -115,22 +115,22 @@ class LocalText(dict):
         except:
             raise Error(_('LocalText: unable to get either current or default locale'))
 
-    def errors(self, where = unicode()):
+    def errors(self, where = str()):
         errs = []
         langs = [ LocalText.get_lang(), 'en', 'tr', ]
-        if not util.any(lambda x : self.has_key(x), langs):
+        if not util.any(lambda x : x in self, langs):
             errs.append( where + ': ' + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
         #FIXME: check if all entries are unicode
         return errs
 
     def format(self, f, errs):
         L = LocalText.get_lang()
-        if self.has_key(L):
+        if L in self:
             f.add_flowing_data(self[L])
-        elif self.has_key('en'):
+        elif 'en' in self:
             # fallback to English, blah
             f.add_flowing_data(self['en'])
-        elif self.has_key('tr'):
+        elif 'tr' in self:
             # fallback to Turkish
             f.add_flowing_data(self['tr'])
         else:
@@ -148,12 +148,12 @@ class LocalText(dict):
 
     def __str__(self):
         L = LocalText.get_lang()
-        if self.has_key(L):
+        if L in self:
             return self[L]
-        elif self.has_key('en'):
+        elif 'en' in self:
             # fallback to English, blah
             return self['en']
-        elif self.has_key('tr'):
+        elif 'tr' in self:
             # fallback to Turkish
             return self['tr']
         else:
@@ -257,13 +257,13 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         xmlfile_support = XmlFile in bases
 
-        cls.autoxml_bases = filter(lambda base: isinstance(base, autoxml), bases)
+        cls.autoxml_bases = [base for base in bases if isinstance(base, autoxml)]
 
         #TODO: initialize class attribute __xml_tags
         #setattr(cls, 'xml_variables', [])
 
         # default class tag is class name
-        if not dict.has_key('tag'): 
+        if 'tag' not in dict: 
             cls.tag = name
 
         # generate helper routines, for each XML component
@@ -277,21 +277,21 @@ class autoxml(oo.autosuper, oo.autoprop):
         # read declaration order from source
         # code contributed by bahadir kandemir
         from inspect import getsourcelines
-        from itertools import ifilter
+        
         import re
         
         fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
 
-        lines = filter(fn, getsourcelines(cls)[0])
-        decl_order = map(lambda x:x.split()[0], lines)
+        lines = list(filter(fn, getsourcelines(cls)[0]))
+        decl_order = [x.split()[0] for x in lines]
         
         # there should be at most one str member, and it should be 
         # the first to process
         
-        order = filter(lambda x: not x.startswith('s_'), decl_order)
+        order = [x for x in decl_order if not x.startswith('s_')]
         
         # find string member
-        str_members = filter(lambda x:x.startswith('s_'), decl_order)
+        str_members = [x for x in decl_order if x.startswith('s_')]
         if len(str_members)>1:
             raise Error('Only one str member can be defined')
         elif len(str_members)==1:
@@ -319,7 +319,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def initialize(self, uri = None, keepDoc = False, tmpDir = '/tmp',
                        **args):
             if xmlfile_support:
-                if args.has_key('tag'):
+                if 'tag' in args:
                     XmlFile.__init__(self, tag = args['tag'])
                 else:
                     XmlFile.__init__(self, tag = cls.tag)
@@ -328,7 +328,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
             for init in inits:#self.__class__.initializers:
                 init(self)
-            for x in args.iterkeys():
+            for x in args.keys():
                 setattr(self, x, args[x])
             # init hook
             if hasattr(self, 'init'):
@@ -339,7 +339,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node, errs, where = unicode(cls.tag)):
+        def decode(self, node, errs, where = str(cls.tag)):
             for base in cls.autoxml_bases:
                 base.decode(self, node, errs, where)
             for decode_member in decoders:#self.__class__.decoders:
@@ -359,7 +359,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.encode = encode
 
         cls.errorss = errorss
-        def errors(self, where = unicode(name)):
+        def errors(self, where = str(name)):
             errs = []
             for base in cls.autoxml_bases:
                 errs.extend(base.errors(self, where))
@@ -392,18 +392,18 @@ class autoxml(oo.autosuper, oo.autoprop):
                 for x in errs:
                     ctx.ui.warning(x)
         cls.print_text = print_text
-        if not dict.has_key('__str__'):
+        if '__str__' not in dict:
             def str(self):
-                strfile = StringIO(u'')
+                strfile = StringIO('')
                 self.print_text(strfile)
-                print 'strfile=',unicode(strfile)
+                print('strfile=',str(strfile))
                 s = strfile.getvalue()
                 strfile.close()
-                print 's=',s,type(s)
+                print('s=',s,type(s))
                 return s
             cls.__str__ = str
         
-        if not dict.has_key('__eq__'):
+        if '__eq__' not in dict:
             def equal(self, other):
                 # handle None
                 if other ==None:
@@ -489,8 +489,8 @@ class autoxml(oo.autosuper, oo.autoprop):
     def gen_tag(cls, tag, spec):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
-        if type(tag_type) is types.TypeType and \
-           autoxml.basic_cons_map.has_key(tag_type):
+        if type(tag_type) is type and \
+           tag_type in autoxml.basic_cons_map:
             def readtext(node, tagpath):
                 #print 'read tag', node, tagpath
                 return getNodeText(node, tagpath)
@@ -498,11 +498,11 @@ class autoxml(oo.autosuper, oo.autoprop):
                 #print 'write tag', node, tagpath, text
                 addText(node, tagpath, text.encode('utf8'))
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
-        elif type(tag_type) is types.ListType:
+        elif type(tag_type) is list:
             return cls.gen_list_tag(tag, spec)
         elif tag_type is LocalText:
             return cls.gen_insetclass_tag(tag, spec)
-        elif type(tag_type) is autoxml or type(tag_type) is types.TypeType:
+        elif type(tag_type) is autoxml or type(tag_type) is type:
             return cls.gen_class_tag(tag, spec)
         else:
             raise Error(_('gen_tag: unrecognized tag type %s in spec') %
@@ -537,7 +537,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def decode(self, node, errs, where):
             """decode component from DOM node"""
             #print '*', name
-            setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
+            setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
             
         def encode(self, node, errs):
             """encode self inside, possibly new, DOM node using xml"""
@@ -585,7 +585,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         "returns split of the tag path into last tag and the rest"
         try:
             lastsep = tagpath.rindex('/')
-        except ValueError, e:
+        except ValueError as e:
             return ('', tagpath)
         return (tagpath[:lastsep], tagpath[lastsep+1:])
 
@@ -634,8 +634,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 try:
                     #print token_type, autoxml.basic_cons_map[token_type]
                     value = autoxml.basic_cons_map[token_type](text)
-                except Exception, e:
-                    print 'exception', e
+                except Exception as e:
+                    print('exception', e)
                     value = None
                     errs.append(where + ': ' + _('Type mismatch: read text cannot be decoded'))
                 return value
@@ -647,7 +647,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def encode(node, value, errs):
             """encode given value inside DOM node"""
             if value:
-                writetext(node, token, unicode(value))
+                writetext(node, token, str(value))
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory token %s not available') % token)
@@ -661,7 +661,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def format(value, f, errs):
             """format value for pretty printing"""
-            f.add_literal_data(unicode(value))
+            f.add_literal_data(str(value))
 
         return initialize, decode, encode, errors, format
 
@@ -744,7 +744,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             for node in nodes:
                 dummy = newNode(node, "Dummy")
                 addNode(dummy, '', node)
-                l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix, 'utf8')))
+                l.append(decode_item(dummy, errs, where + str("[%s]" % ix, 'utf8')))
                 #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                 ix += 1
             return l
@@ -838,13 +838,13 @@ class autoxml(oo.autosuper, oo.autoprop):
         return (init, decode, encode, errors, format)
 
     basic_cons_map = {
-        types.StringType : str,
+        bytes : str,
         #TODO: python 3.x: same behavior?
         #python 2.x: basic_cons_map[unicode](a) where a is unicode str yields
         #TypeError: decoding Unicode is not supported
         #types.UnicodeType : lambda x: unicode(x,'utf8'), lambda x:x?
-        types.UnicodeType : lambda x:x, #: unicode
-        types.IntType : int,
-        types.FloatType : float,
-        types.LongType : long
+        str : lambda x:x, #: unicode
+        int : int,
+        float : float,
+        int : int
         }

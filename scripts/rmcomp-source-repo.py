@@ -28,7 +28,7 @@ for root, dirs, files in os.walk(repo_uri):
             path = pisi.util.join_path(root, fn)
             ctx.ui.info('Looking at %s' % path)
             ls = file(path).readlines()
-            ls = filter(lambda x:x.find('<PartOf>')==-1, ls)
+            ls = [x for x in ls if x.find('<PartOf>')==-1]
             f = file(path, 'w')
             for x in ls:
                 f.write(x)

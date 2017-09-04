@@ -14,16 +14,16 @@
 import os
 import fcntl
 import types
-import cPickle
+import pickle
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
 #import bsddb3.dbshelve as shelve
-import dbshelve as shelve
+from . import dbshelve as shelve
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -109,7 +109,7 @@ def init_dbenv(write=False, writeversion=False):
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
-    def __init__(self, dbname, mode=0644,
+    def __init__(self, dbname, mode=0o644,
                  filetype=db.DB_BTREE, dbenv = None):
         if dbenv == None:
             dbenv = ctx.dbenv
@@ -132,7 +132,7 @@ class LockedDBShelf(shelve.DBShelf):
         # superclass does something funky, we don't need that
         pass
 
-    def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0644):
+    def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0o644):
         self.filename = filename        
         self.closed = False
         if type(flags) == type(''):
@@ -148,7 +148,7 @@ class LockedDBShelf(shelve.DBShelf):
             elif sflag == 'n':
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
-                raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
+                raise Error(_("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"))
         self.flags = flags
         if self.flags & db.DB_RDONLY == 0:
             flags |= db.DB_AUTO_COMMIT # use txn subsystem in write mode
@@ -179,9 +179,9 @@ class LockedDBShelf(shelve.DBShelf):
     @staticmethod
     def encodekey(key):
         '''utility method for dbs that must store unicodes in keys'''
-        if type(key)==types.UnicodeType:
+        if type(key)==str:
             return key.encode('utf-8')
-        elif type(key)==types.StringType:
+        elif type(key)==bytes:
             return key
         else:
             raise Error('Key must be either string or unicode')

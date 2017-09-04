@@ -19,8 +19,8 @@ all kinds of things: source tarballs, index files, packages, and God
 knows what."""
 
 # python standard library modules
-import urllib2
-import urllib
+import urllib.request, urllib.error, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 import ftplib
 import os
 import socket
@@ -33,7 +33,7 @@ from time import time,gmtime
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 from urlgrabber import urlgrab, grabber
 
@@ -250,7 +250,7 @@ class Fetcher:
                     reget        = self._test_range_support(archive_file),
                     copy_local   = 1,
                     user_agent   = 'PISI Fetcher/' + pisi.__version__)
-        except grabber.URLGrabError, e:
+        except grabber.URLGrabError as e:
             raise FetchError(_('Could not fetch destination file "%s": %s')
                              % (self.url.get_uri(), e))
 
@@ -297,17 +297,17 @@ class Fetcher:
         if not os.path.exists(partial_file):
             return None
 
-        import urllib2
+        import urllib.request, urllib.error, urllib.parse
         try:
-            file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
-        except urllib2.URLError:
+            file_obj = urllib.request.urlopen(urllib.request.Request(self.url.get_uri()))
+        except urllib.error.URLError:
             ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
             os.remove(partial_file)
             return None
 
         headers = file_obj.info()
         file_obj.close()
-        if headers.has_key('Content-Length'):
+        if 'Content-Length' in headers:
             return 'simple'
         else:
             ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
@@ -315,7 +315,7 @@ class Fetcher:
             return None
 
     def fetchRemoteFileOld (self, archive_file):
-        from httplib import HTTPException
+        from http.client import HTTPException
 
         if os.path.exists(archive_file) and self.resume:
             if self.scheme == 'http' or self.scheme == 'https' or self.scheme == 'ftp':
@@ -330,23 +330,23 @@ class Fetcher:
         try:
             try:
                 try:
-                    fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
+                    fileObj = urllib.request.urlopen(self.formatRequest(urllib.request.Request(uri)))
                 except RangeError:
                     ctx.ui.info(_('Requested range not satisfiable, starting again.'))
                     dest = open(archive_file, 'wb')
                     self.exist_size = 0
-                    fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
+                    fileObj = urllib.request.urlopen(self.formatRequest(urllib.request.Request(uri)))
                 headers = fileObj.info()
                 flag = 0
-            except ValueError, e:
+            except ValueError as e:
                 self.err(_('Cannot fetch %s; value error: %s') % (uri, e))
-            except urllib2.HTTPError, e:
+            except urllib.error.HTTPError as e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e))
-            except urllib2.URLError, e:
+            except urllib.error.URLError as e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-            except OSError, e:
+            except OSError as e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e))
-            except HTTPException, e:
+            except HTTPException as e:
                 self.err(_('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
         finally:
             if flag:
@@ -393,36 +393,36 @@ class Fetcher:
             'ftp'  : FTPRangeHandler
         }
 
-        if self.exist_size and range_handlers.has_key(self.scheme):
-            opener = urllib2.build_opener(range_handlers.get(self.scheme)())
-            urllib2.install_opener(opener)
+        if self.exist_size and self.scheme in range_handlers:
+            opener = urllib.request.build_opener(range_handlers.get(self.scheme)())
+            urllib.request.install_opener(opener)
             request.add_header('Range', 'bytes=%d-' % self.exist_size)
 
         proxy_handler = None
 
         if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
             http_proxy = ctx.config.values.general.http_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(http_proxy).scheme(): http_proxy})
+            proxy_handler = urllib.request.ProxyHandler({URI(http_proxy).scheme(): http_proxy})
 
         elif ctx.config.values.general.https_proxy and self.url.scheme() == "https":
             https_proxy = ctx.config.values.general.https_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(https_proxy): https_proxy})
+            proxy_handler = urllib.request.ProxyHandler({URI(https_proxy): https_proxy})
 
         elif ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
             ftp_proxy = ctx.config.values.general.ftp_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(http_proxy): ftp_proxy})
+            proxy_handler = urllib.request.ProxyHandler({URI(http_proxy): ftp_proxy})
 
         if proxy_handler:
             ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
-            opener = urllib2.build_opener(proxy_handler)
-            urllib2.install_opener(opener)
+            opener = urllib.request.build_opener(proxy_handler)
+            urllib.request.install_opener(opener)
 
         return request
 
     def err (self, error):
         raise FetchError(error)
 
-class HTTPRangeHandler(urllib2.BaseHandler):
+class HTTPRangeHandler(urllib.request.BaseHandler):
     """ 
     to override the urllib2 error: 'Error 206: Partial Content'
     this reponse from the HTTP server is already what we expected to get.
@@ -437,24 +437,24 @@ class HTTPRangeHandler(urllib2.BaseHandler):
         raise RangeError
 
 
-class FTPRangeHandler(urllib2.FTPHandler):
+class FTPRangeHandler(urllib.request.FTPHandler):
     """
     FTP Range support..
     """
     def ftp_open(self, req):
         host = req.get_host()
-        host, port = urllib.splitport(host)
+        host, port = urllib.parse.splitport(host)
         if port is None:
             port = ftplib.FTP_PORT
 
         try:
             host = socket.gethostbyname(host)
-        except socket.error, msg:
+        except socket.error as msg:
             raise FetchError(msg)
 
-        path, attrs = urllib.splitattr(req.get_selector())
+        path, attrs = urllib.parse.splitattr(req.get_selector())
         dirs = path.split('/')
-        dirs = map(urllib.unquote, dirs)
+        dirs = list(map(urllib.parse.unquote, dirs))
         dirs, file = dirs[:-1], dirs[-1]
         if dirs and not dirs[0]:
             dirs = dirs[1:]
@@ -462,7 +462,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
             fw = self.connect_ftp('', '', host, port, dirs)
             type = file and 'I' or 'D'
             for attr in attrs:
-                attr, value = urllib.splitattr(attr)
+                attr, value = urllib.parse.splitattr(attr)
                 if attr.lower() == 'type' and \
                    value in ('a', 'A', 'i', 'I', 'd', 'D'):
                     type = value.upper()
@@ -491,13 +491,13 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 headers += 'Content-Length: %d\n' % retrlen
 
             try:    
-                from cStringIO import StringIO
-            except ImportError, msg: 
-                from StringIO import StringIO
+                from io import StringIO
+            except ImportError as msg: 
+                from io import StringIO
 
             return urllib.addinfourl(fp, Message(StringIO(headers)), req.get_full_url())
-        except ftplib.all_errors, msg:
-            raise IOError, (_('ftp error'), msg), sys.exc_info()[2]
+        except ftplib.all_errors as msg:
+            raise IOError(_('ftp error'), msg).with_traceback(sys.exc_info()[2])
 
     def connect_ftp(self, user, passwd, host, port, dirs):
         fw = ftpwrapper('', '', host, port, dirs)
@@ -517,21 +517,21 @@ class ftpwrapper(urllib.ftpwrapper):
         if file and not isdir:
             try:
                 self.ftp.nlst(file)
-            except ftplib.error_perm, reason:
-                raise IOError, (_('ftp error'), reason), sys.exc_info()[2]
+            except ftplib.error_perm as reason:
+                raise IOError(_('ftp error'), reason).with_traceback(sys.exc_info()[2])
             # Restore the transfer mode!
             self.ftp.voidcmd(cmd)
             try:
                 cmd = 'RETR ' + file
                 conn = self.ftp.ntransfercmd(cmd, rest)
-            except ftplib.error_perm, reason:
+            except ftplib.error_perm as reason:
                 if str(reason)[:3] == '501':
                     # workaround for REST not suported error
                     fp, retrlen = self.retrfile(file, type)
                     fp = RangeableFileObject(fp, (rest,''))
                     return (fp, retrlen)
                 elif str(reason)[:3] != '550':
-                    raise IOError, (_('ftp error'), reason), sys.exc_info()[2]
+                    raise IOError(_('ftp error'), reason).with_traceback(sys.exc_info()[2])
         if not conn:
             self.ftp.voidcmd('TYPE A')
             if file: cmd = 'LIST ' + file

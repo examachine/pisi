@@ -15,12 +15,12 @@ import os, fcntl
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
-import lockeddbshelve as shelve
+from . import lockeddbshelve as shelve
 import pisi.context as ctx
-import package
+from . import package
 import pisi.util as util
 from pisi.uri import URI
        
@@ -66,7 +66,7 @@ class RepoDB(object):
 
     def has_repo(self, name):
         name = str(name)
-        return self.d.has_key("repo-" + name)
+        return "repo-" + name in self.d
 
     def get_repo(self, name):
         name = str(name)

@@ -13,7 +13,7 @@
    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -22,9 +22,9 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import command
+from . import command
 
-class Check(command.Command):
+class Check(command.Command, metaclass=command.autocommand):
     """Verify installation
 
 Usage: check [<package1> <package2> ... <packagen>]
@@ -37,7 +37,6 @@ Just give the names of packages.
 
 If no packages are given, checks all installed packages.
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Check, self).__init__(args)
