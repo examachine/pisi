@@ -18,8 +18,8 @@ import types
 
 import pisi
 import pisi.api
-from pisi.pxml import xmlfile
-from pisi.pxml import autoxml
+from pisi.exml import xmlfile
+from pisi.exml import autoxml
 import pisi.util as util
 
 class AutoXmlTestCase(unittest.TestCase):

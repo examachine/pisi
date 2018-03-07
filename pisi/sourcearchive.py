@@ -14,7 +14,7 @@
 
 # python standard library
 
-from os.path import join
+import os
 from os import access, R_OK
 
 import gettext
@@ -28,7 +28,6 @@ import pisi.context as ctx
 from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.fetcher import fetch_url
-from pisi.mirrors import Mirrors
 
 class Error(pisi.Error):
     pass
@@ -39,7 +38,7 @@ class SourceArchive:
     def __init__(self, spec, pkg_work_dir):
         self.url = URI(spec.source.archive.uri)
         self.pkg_work_dir = pkg_work_dir
-        self.archiveFile = join(ctx.config.archives_dir(), self.url.filename())
+        self.archiveFile = util.join_path(ctx.config.archives_dir(), self.url.filename())
         self.archive = spec.source.archive
 
     def fetch(self, interactive=True):
@@ -62,7 +61,7 @@ class SourceArchive:
 
         return False
 
-    def unpack(self, clean_dir=True):
+    def unpack(self, clean_dir=True, target_dir=None):
 
         ctx.ui.debug("unpack: %s, %s" % (self.archiveFile, self.archive.sha1sum))
 
@@ -71,4 +70,8 @@ class SourceArchive:
             raise Error, _("Unpack: archive file integrity is compromised")
             
         archive = Archive(self.archiveFile, self.archive.type)
-        archive.unpack(self.pkg_work_dir, clean_dir)
+        unpack_dir = self.pkg_work_dir
+        if self.archive.norootdir == "true":
+            os.makedirs(target_dir)
+            unpack_dir = target_dir
+        archive.unpack(unpack_dir, clean_dir)

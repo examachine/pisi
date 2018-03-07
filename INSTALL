@@ -28,7 +28,7 @@ You can install PISI on your system with a single command.
 If you are on a Pardus system, you should delete /usr/lib/pardus/pisi
 when you are installing the SVN version
 
-PiSi requires piksemel XML processing library, the newest version
+PISI requires piksemel XML processing library, the newest version
 Berkekey DB python bindings called "bsddb3" and Pardus configuration 
 manager COMAR in order to run.
 
@@ -39,14 +39,96 @@ run the following command as root:
 
 For testing, please read tests/README
 
+Downloading Uludag Sources:
+
+$ git clone https://github.com/pars-linux/uludag.git
+
+
+Installing piksemel:
+
+$ git clone https://github.com/pars-linux/uludag
+$ cd uludag/piksemel
+$ sudo -H ./setup.py install
+
+
+
+Ubuntu instructions:
+--------------------
+
+Install PISI dependencies 
+$ sudo apt-get install python python-bsddb3 coreutils xz-utils gnupg
+$ sudo apt-get install python-pycurl python-urlgrabber
+
+or for the second line
+
+$ pip install  pycurl urlgrabber
+
+set up gnupg2 if needed:
+
+$ gpg --gen-key
+
+Install COMAR dependencies
+
+$ sudo apt-get install dbus libpolkit-gobject-1-dev python-dbus cmake
+
+Install COMAR
+
+$ git clone https://github.com/pars-linux/comar
+$ cd comar
+$ cmake . 
+$ (sudo -H) make DESTDIR=/usr/local/ install
+$ cd ..
+$ git clone https://github.com/pars-linux/comar-api
+$ cd comar-api
+$ (sudo -H) ./setup.py install
 
 OS X Instructions:
 ------------------
 
+Mac Ports approach:
+
+Install MacPorts, and then GCC using the following guides:
+https://guide.macports.org/#installing
+http://www.ficksworkshop.com/blog/post/installing-gcc-on-mac
+
+Install PISI dependencies 
+$ sudo port
+> install python27 py27-pip bsddb3 coreutils md5sha1sum xz gnupg
+> select --set python python27
+> select --set pip pip27
+> exit
+$ pip install pycurl urlgrabber
+$ pip download bsddb3
+$ python setup.py build
+$ sudo YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 python setup.py install
+
+set up gnupg2 if needed:
+
+$ gpg --gen-key
+
+Install COMAR dependencies
+
+$ sudo port install dbus dbus-python27 policykit cmake
+$ cd comar/comar
+Append
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/opt/local/lib")
+to the end of CMakeLists.txt
+$ cmake . 
+$ make DESTDIR=/usr/local/ install
+$ cd ..
+$ git clone https://github.com/pars-linux/comar-api.git
+$ cd comar-api
+$ ./setup.py install
+
+
+And then proceed with Generic PISI installation instructions above,
+as usual.
+
+Homebrew approach:
+
 Install homebrew from https://brew.sh, and then 
 
 $ brew install python
-
 $ pip install bsddb3
 
 I used the following command to install the latest berkeley-db:
@@ -63,6 +145,8 @@ set up gnupg2 if needed:
 
 $ gpg --gen-key
 
+Install comar, if you can. :)
+
 $ ./setup.py install
 
 $ ln -s /usr/local/bin/pisi-cli /usr/local/bin/pisi
@@ -72,3 +156,4 @@ move configuration to /etc
 $ sudo cp -a /usr/local/etc/pisi/ /etc/pisi
 
 It should work on a current OS X installation.
+

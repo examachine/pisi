@@ -24,16 +24,12 @@ import pisi
 import pisi.context as ctx
 import specfile
 import metadata
-import pisi.db.package as packagedb
-import pisi.db.source as sourcedb
 import pisi.util as util
 from pisi.data.package import Package
-from pisi.pxml.xmlfile import XmlFile
+from pisi.exml.xmlfile import XmlFile
 from pisi.file import File
-import pisi.pxml.autoxml as autoxml
-from pisi.uri import URI
+import pisi.exml.autoxml as autoxml
 import component
-import specfile
 
 
 class Error(pisi.Error):
@@ -51,7 +47,7 @@ class Index(XmlFile):
     #t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
-    def name():
+    def name(self):
         return self.distribution.name + self.distribution.repositoryname
 
     def read_uri(self, uri, tmpdir, force = False):
@@ -157,10 +153,10 @@ class Index(XmlFile):
             #ctx.ui.error(str(Error(*errs)))
 
     def add_spec(self, path, repo_uri):
-        import pisi.build
+        import pisi.op.build
         ctx.ui.info(_('Adding %s to source index') % path)
         #TODO: may use try/except to handle this
-        builder = pisi.build.Builder(path)
+        builder = pisi.op.build.Builder(path)
             #ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
             #ctx.ui.error(str(Error(*errs)))
         builder.fetch_component()

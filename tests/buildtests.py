@@ -16,7 +16,9 @@ import glob
 import os
 
 import testcase
-from pisi.build import *
+
+import pisi
+from pisi.op.build import *
 
 class BuildTestCase(testcase.TestCase):
 

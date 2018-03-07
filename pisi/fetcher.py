@@ -298,7 +298,6 @@ class Fetcher:
             return None
 
         import urllib2
-        print '**', self.url.get_uri()
         try:
             file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
         except urllib2.URLError:

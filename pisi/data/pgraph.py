@@ -13,9 +13,8 @@
 
 """PISI package relation graph that represents the state of packagedb"""
 
-import string
-
-from graph import *
+import pisi
+from graph import Digraph
 
 # Cache the results from packagedb queries in a graph
 

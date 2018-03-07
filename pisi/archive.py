@@ -25,7 +25,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-# PiSi modules
+# PISI modules
 import pisi
 import pisi.util as util
 import pisi.context as ctx
@@ -93,21 +93,14 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             rmode = 'r:'
-            if util.is_osx():
-                ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
+            ret, out, err = util.run_batch("lzma -d -f " + self.file_path)
 
-            else:
-                ret, out, err = util.run_batch("lzma d %s %s" %
-                                               (self.file_path +
-                                                ctx.const.lzma_suffix,
-                                                self.file_path))
             if ret != 0:
                 raise LZMAError(err)
             self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
         else:
             raise ArchiveError(_("Archive type not recognized"))
  
-        print '* opening tarfile', self.file_path
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
@@ -159,10 +152,7 @@ class ArchiveTar(ArchiveBase):
 
         if self.tar.mode == 'w' and self.type == 'tarlzma':
             batch = None
-            if util.is_osx():
-                lzma = "lzma -z"
-            else:
-                lzma = "lzmash"
+            lzma = "lzma -z"
             if ctx.config.values.build.compressionlevel:
                 lzma += " -%d" % ctx.config.values.build.compressionlevel
             ret, out, err = util.run_batch("%s %s" % (lzma, self.file_path))
@@ -176,7 +166,7 @@ class ArchiveZip(ArchiveBase):
     extensively. This class provides unpacking and packing magic for
     zip archives."""
     
-    symmagic = 2716663808 #long of hex val '0xA1ED0000L'
+    symmagic = 0xA1ED0000L
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)

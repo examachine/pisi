@@ -27,11 +27,10 @@ from os.path import basename
 
 # pisi modules
 import pisi
-from pisi.pxml.xmlfile import XmlFile
-import pisi.pxml.autoxml as autoxml
+from pisi.exml.xmlfile import XmlFile
+import pisi.exml.autoxml as autoxml
 import pisi.context as ctx
 from dependency import Dependency
-import dependency
 import component
 import pisi.util as util
 
@@ -133,8 +132,9 @@ class ComarProvide:
 class Archive:
 
     s_uri = [ autoxml.String, autoxml.mandatory ]
-    a_type =[ autoxml.String, autoxml.mandatory ]
-    a_sha1sum =[ autoxml.String, autoxml.mandatory ]
+    a_type = [ autoxml.String, autoxml.mandatory ]
+    a_sha1sum = [ autoxml.String, autoxml.mandatory ]
+    a_norootdir = [ autoxml.String, autoxml.optional ]
 
     def decode_hook(self, node, errs, where):
         self.name = basename(self.uri)

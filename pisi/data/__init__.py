@@ -11,7 +11,9 @@
 #
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 
-'''PISI XML Document Schemas specified as AutoXML classes,
+'''
+Persistent data structure package for PISI.
+PISI XML Document Schemas specified as AutoXML classes,
 and provided with appropriate accessor/modifier methods.
 '''
 

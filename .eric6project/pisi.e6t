@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
+<!-- eric6 tasks file for project pisi -->
+<!-- Saved: 2017-02-27, 02:59:26 -->
+<Tasks version="6.0">
+  <ProjectScanFilter></ProjectScanFilter>
+  <Task priority="1" completed="False" type="0" uid="{5c9141d9-6918-4418-a510-f516b787a2f7}">
+    <Summary>FIXME: can't do this due to name clashes in config and other singletons booo</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/__init__.py</Filename>
+      <Linenumber>38</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{bc1c96c6-4e93-4a02-abe0-301d89a94166}">
+    <Summary>FIXME: Only one package uses this until now, hmmm</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/actionsapi/autotools.py</Filename>
+      <Linenumber>92</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{94bbb880-ad94-44c1-9c12-1b57f4b6a15e}">
+    <Summary>FIXME: Currently it behave same as HOST,</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/actionsapi/get.py</Filename>
+      <Linenumber>114</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{f88185ad-ef21-4a2e-8ff7-a95a86079aed}">
+    <Summary>FIXME: In-place filtering is disabled when standard input is read</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/actionsapi/pisitools.py</Filename>
+      <Linenumber>192</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{0a363ce5-37bb-48a5-9dcc-8ab6cdbf0508}">
+    <Summary>FIXME: use an internal install routine for these</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/actionsapi/pisitoolsfunctions.py</Filename>
+      <Linenumber>60</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{44c25dd5-c2a0-419e-abfd-686850a1d26f}">
+    <Summary>TODO: Eventually we should consider getting these from a/the</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/actionsapi/variables.py</Filename>
+      <Linenumber>73</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{826b6069-037e-41e1-959e-1acb5f20a64e}">
+    <Summary>TODO: this is definitely not dynamic beyond this point!</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/api.py</Filename>
+      <Linenumber>80</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{1a68a387-281a-4bde-8450-a2f28a2058f9}">
+    <Summary>TODO: need to look at more kinds of info messages</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/cli/__init__.py</Filename>
+      <Linenumber>68</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{0daf6a61-28d7-4186-9be8-ebaa06467ae5}">
+    <Summary>TODO: this seems quite redundant?</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/cli/__init__.py</Filename>
+      <Linenumber>93</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{7fa6e478-1613-417b-ba31-6b7534e099f4}">
+    <Summary>TODO: remove this</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/config.py</Filename>
+      <Linenumber>120</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="3" uid="{4aa7b59d-4f90-41d3-87e4-a8ace3145b9d}">
+    <Summary>NOTE: these don't seem very well, constants are used</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/constants.py</Filename>
+      <Linenumber>59</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{e8351413-77be-4c12-af2b-4b6280400d17}">
+    <Summary>FIXME: these seem redundant</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/constants.py</Filename>
+      <Linenumber>81</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{c2113bd5-71ba-4d28-96f1-23c058953065}">
+    <Summary>FIXME: Maybe we can create a simple rollback mechanism. There are other</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/context.py</Filename>
+      <Linenumber>50</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{c170a1f2-f765-456a-8156-c81c890b21b0}">
+    <Summary>FIXME: remove this redundancy, and move all this stuff to database.py</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/context.py</Filename>
+      <Linenumber>62</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{517703c3-8fdc-4668-be40-4b3ef2e8d903}">
+    <Summary>FIXME: will be superseded by a</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/fetcher.py</Filename>
+      <Linenumber>225</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{3e2290fb-106e-46e6-9dcc-800d58c4f078}">
+    <Summary>TODO: code to use old .sha1sum file, is this a necessary optimization?</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/file.py</Filename>
+      <Linenumber>107</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{2c28b2a6-1c17-40b7-8040-95aab1d484b1}">
+    <Summary>TODO: use a special function here?</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/file.py</Filename>
+      <Linenumber>126</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{882ece73-ea47-44a3-b91a-66b7cc71a3c1}">
+    <Summary>FIXME: merge this with info, this just means &quot;important message&quot;</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>pisi/ui.py</Filename>
+      <Linenumber>80</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{cd0f0170-39aa-46b8-8dd6-39bc067c590d}">
+    <Summary>FIXME: This check should be in specfile</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>scripts/repostats.py</Filename>
+      <Linenumber>243</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{12f9c750-e506-46f7-aa1c-b2bb7afbe0b8}">
+    <Summary>FIXME: this check also belongs to specfile</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>scripts/repostats.py</Filename>
+      <Linenumber>447</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{fce08e7d-c429-49d6-baef-043ca9dd54e7}">
+    <Summary>FIXME: check version/release match too?</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>scripts/repostats.py</Filename>
+      <Linenumber>598</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{3046093f-3b34-4df9-8813-950641103657}">
+    <Summary>FIXME: test incomplete</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tests/actionsapitests.py</Filename>
+      <Linenumber>25</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{ee79500d-a7e0-4606-b1c8-a06e136da4bd}">
+    <Summary>FIXME: test incomplete</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tests/actionsapitests.py</Filename>
+      <Linenumber>34</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{aa9d503e-2b99-44f4-9d41-79fc1a1be2bd}">
+    <Summary>TODO: no link file in pccts package. Need to find a ZIP file</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tests/archivetests.py</Filename>
+      <Linenumber>73</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{beabeff2-1573-4742-9241-4cf45e77fbdd}">
+    <Summary>FIXME: python 2.x bug likely</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tests/autoxmltests.py</Filename>
+      <Linenumber>60</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{54a29a46-0314-487e-891a-f525ab7d785f}">
+    <Summary>TODO: make these into options for run.py</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tests/testcase.py</Filename>
+      <Linenumber>28</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="3" uid="{48ab04bf-d628-44ed-9402-875408172175}">
+    <Summary>NOTE: pygettext attempts to be option and feature compatible with GNU</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tools/pygettext.py</Filename>
+      <Linenumber>58</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="0" uid="{e218138a-1f23-4698-8623-68c3d0d40603}">
+    <Summary>FIXME: currently this option has no effect at all.</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tools/pygettext.py</Filename>
+      <Linenumber>532</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{efdfddab-ff34-410c-9bfc-c03f77df3a36}">
+    <Summary>TODO: arguments for svn snapshot with rev number, or a tag to override default</Summary>
+    <Description></Description>
+    <Created>2017-02-27, 02:57:14</Created>
+    <Resource>
+      <Filename>tools/svndist.py</Filename>
+      <Linenumber>5</Linenumber>
+    </Resource>
+  </Task>
+</Tasks>

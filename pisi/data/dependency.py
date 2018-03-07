@@ -20,8 +20,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 from pisi.version import Version
-import pisi.pxml.autoxml as autoxml
-import pisi.db.itembyrepo as itembyrepodb
+import pisi.exml.autoxml as autoxml
 
 class Dependency:
 

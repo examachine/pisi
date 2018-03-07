@@ -15,6 +15,11 @@
 
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
+
 from fun import prefix,remove_prefix
 
 def splitpath(a):
@@ -42,6 +47,7 @@ def parenturi(a):
     return parentpath(a, '/')
 
 # I'm not sure how necessary this is. Ahem.
+# TODO: FIXME: just looks wrong!
 def commonprefix(l):
     """an improved version of os.path.commonprefix,
     returns a list of path components"""

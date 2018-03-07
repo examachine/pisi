@@ -3,15 +3,15 @@ Authors and contributors
 
 Authors:
 
-Eray Özkural <eray [at] pardus.org.tr> - ops, db, autoxml, graph, deps, api, CLI, search, tests, docs, 300+ bugfixes
+Eray Özkural <eray [at] pardus.org.tr> - ops, db, exml, graph, deps, api, CLI, search, tests, docs, 300+ bugfixes
 Barış Metin <baris [at] pardus.org.tr> - build code path, bugfixes, tests
 S. Çağlar Onur <caglar [at] pardus.org.tr> - actionsapi, tests
 A. Murat Eren <meren [at] pardus.org.tr> - archive, fetcher, ui stuff, tests
+Gürer Özen <gurer [at] pardus.org.tr> - repostats, comar interface, xml spec, fixes
 
 Contributors:
 
-Faik Uygur <faik [at] pardus.org.tr> - bugfix, refactoring
-Gürer Özen <gurer [at] pardus.org.tr> - comar interface
+Faik Uygur <faik [at] pardus.org.tr> - ops bugfix, test, refactoring
 İsmail Dönmez <ismail [at] pardus.org.tr> - GUI code (not part of this repo)
 Görkem Çetin <gorkem [at] pardus.org.tr>
 Bahadır Kandemir <bahadir [at] pardus.org.tr>
@@ -19,4 +19,5 @@ Ahmet Aygun <ahmet.aygun [at] pardus.org.tr>
 Onur Küçük <onur [at] pardus.org.tr>
 Furkan Duman <fduman [at] pardus.org.tr>
 
-Sorted in the order of decreasing amount of contributions
+Sorted in the order of decreasing amount of contributions, according to
+the git statistics until pisi-1.1beta9 which contained most of the code.
