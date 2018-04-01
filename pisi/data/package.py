@@ -40,7 +40,7 @@ class Package:
         url = URI(packagefn)
         
         if url.is_remote_file():
-            from fetcher import fetch_url, FetchError
+            from pisi.fetcher import fetch_url, FetchError
             dest = ctx.config.packages_dir()
             self.filepath = join(dest, url.filename())
 
