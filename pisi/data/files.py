@@ -16,10 +16,8 @@ during the build process of a package and used in installation.'''
 
 import pisi.exml.autoxml as autoxml
 
-class FileInfo:
+class FileInfo(metaclass=autoxml.autoxml):
     """File holds the information for a File node/tag in files.xml"""
-
-    __metaclass__ = autoxml.autoxml
 
     t_Path = [ autoxml.String, autoxml.mandatory ]
     t_Type = [ autoxml.String, autoxml.mandatory ]
@@ -33,9 +31,7 @@ class FileInfo:
         return s
 
 
-class Files(autoxml.XmlFile):
-
-    __metaclass__ = autoxml.autoxml
+class Files(autoxml.XmlFile, metaclass=autoxml.autoxml):
 
     tag = "Files"
 

@@ -21,9 +21,9 @@ import pisi.cli
 class Error(pisi.Error):
     pass
 
-from command import Command, autocommand
+from .command import Command, autocommand
 
-class DeleteCache(Command):
+class DeleteCache(Command, metaclass=autocommand):
     """Delete cache files
     
 Usage: delete-cache
@@ -31,8 +31,6 @@ Usage: delete-cache
 Sources, packages and temporary files are stored
 under /var directory. Since these accumulate they can 
 consume a lot of disk space."""
-
-    __metaclass__ = autocommand
 
     def __init__(self, args=None):
         super(DeleteCache, self).__init__(args)

@@ -38,12 +38,12 @@ def configure_pending():
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
     G_f = pgraph.PGraph(ctx.packagedb, pisi.db.itembyrepo.installed) # construct G_f
-    for x in A.keys():
+    for x in list(A.keys()):
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
-        for x in B.keys():
+        for x in list(B.keys()):
             pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepo.installed)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():

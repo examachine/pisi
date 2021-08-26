@@ -121,7 +121,7 @@ class ArchiveTar(ArchiveBase):
                 if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
-                    except OSError, e:
+                    except OSError as e:
                         ctx.ui.warning(e)
 
             self.tar.extract(tarinfo)
@@ -166,7 +166,7 @@ class ArchiveZip(ArchiveBase):
     extensively. This class provides unpacking and packing magic for
     zip archives."""
     
-    symmagic = 0xA1ED0000L
+    symmagic = 0xA1ED0000
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
@@ -187,7 +187,7 @@ class ArchiveZip(ArchiveBase):
         if os.path.isdir(file_name) and not os.path.islink(file_name):
             self.zip_obj.writestr(file_name + '/', '')
             attr_obj = self.zip_obj.getinfo(file_name + '/')
-            attr_obj.external_attr = stat.S_IMODE(os.stat(file_name)[0]) << 16L
+            attr_obj.external_attr = stat.S_IMODE(os.stat(file_name)[0]) << 16
             for f in os.listdir(file_name):
                 self.add_to_archive(os.path.join(file_name, f))
         else:
@@ -318,7 +318,7 @@ class Archive:
             'binary': ArchiveBinary
         }
 
-        if not handlers.has_key(arch_type):
+        if arch_type not in handlers:
             raise ArchiveError(_("Archive type not recognized"))
 
         self.archive = handlers.get(arch_type)(file_path, arch_type)

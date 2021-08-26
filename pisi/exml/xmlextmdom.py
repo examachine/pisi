@@ -49,7 +49,7 @@ def parse(filename):
     try:
         dom = mdom.parse(filename)
         return dom.documentElement
-    except ExpatError, inst:
+    except ExpatError as inst:
         raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
                                                             str(inst)))
 
@@ -69,7 +69,7 @@ def getNodeAttribute(node, attrname):
 
 def getChildElts(node):
     """get only child elements"""
-    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
+    return [x for x in node.childNodes if x.nodeType == x.ELEMENT_NODE]
 
 def getTagByName(parent, childName):
     return [x for x in parent.childNodes
@@ -129,7 +129,7 @@ def getAllNodes(node, tagPath):
     nodeList = [node] # basis case
 
     for tag in tags:
-        results = map(lambda x: getTagByName(x, tag), nodeList)
+        results = [getTagByName(x, tag) for x in nodeList]
         nodeList = []
         for x in results:
             nodeList.extend(x)

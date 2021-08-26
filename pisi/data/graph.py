@@ -138,7 +138,7 @@ class Digraph(object):
                 return '_'
             else:
                 return char
-        return pisi.util.concat(map(repl, str(u)))
+        return pisi.util.concat(list(map(repl, str(u))))
 
     def write_graphviz(self, f):
         f.write('digraph G {\n')

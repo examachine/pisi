@@ -56,7 +56,7 @@ def resurrect_package(package_fn, write_files, txn = None):
     metadata_xml = util.join_path(ctx.config.lib_dir(), 'package', 
                                   package_fn, ctx.const.metadata_xml)
     if not exists(metadata_xml):
-        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
+        raise Error(_("Metadata XML '%s' cannot be found") % metadata_xml)
     
     metadata = MetaData()
     metadata.read(metadata_xml)
@@ -64,7 +64,7 @@ def resurrect_package(package_fn, write_files, txn = None):
     errs = metadata.errors()
     if errs:   
         util.Checks.print_errors(errs)
-        raise Error, _("MetaData format wrong (%s)") % package_fn
+        raise Error(_("MetaData format wrong (%s)") % package_fn)
     
     ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
 
@@ -72,12 +72,12 @@ def resurrect_package(package_fn, write_files, txn = None):
         files_xml = util.join_path(ctx.config.lib_dir(), 'package',
                                 package_fn, ctx.const.files_xml)
         if not exists(files_xml):
-            raise Error, _("Files XML '%s' cannot be found") % files_xml
+            raise Error(_("Files XML '%s' cannot be found") % files_xml)
     
         files = Files()
         files.read(files_xml)
         if files.errors():
-            raise Error, _("Invalid %s") % ctx.const.files_xml
+            raise Error(_("Invalid %s") % ctx.const.files_xml)
     else:
         files = None
 
@@ -100,7 +100,7 @@ def rebuild_db(files=False):
         replica = []
         for pkg in os.listdir(pisi.util.join_path(pisi.api.ctx.config.lib_dir(), 'package')):
             (name, ver) = util.parse_package_name(pkg)
-            if i_version.has_key(name):
+            if name in i_version:
                 if Version(ver) > Version(i_version[name]):
                     # found a greater version, older one is a replica
                     replica.append(name + '-' + i_version[name])

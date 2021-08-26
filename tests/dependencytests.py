@@ -23,27 +23,27 @@ class DependencyTestCase(unittest.TestCase):
         gtkmmdep = Dependency()
         gtkmmdep.versionFrom = '1.9.1'
         gtkmmdep.package = 'atk'
-        self.assert_( not gtkmmdep.satisfies('atk', '1.8.0', '1') )
-        self.assert_( gtkmmdep.satisfies('atk', '1.9.1', '2') )
-        self.assert_( gtkmmdep.satisfies('atk', '1.10.5', '3') )
+        self.assertTrue( not gtkmmdep.satisfies('atk', '1.8.0', '1') )
+        self.assertTrue( gtkmmdep.satisfies('atk', '1.9.1', '2') )
+        self.assertTrue( gtkmmdep.satisfies('atk', '1.10.5', '3') )
 
     def testReleaseFrom(self):
         # releaseFrom isn't taken into account #2294
         dep = Dependency()
         dep.releaseFrom = '121'
         dep.package = 'dbus'
-        self.assert_(not dep.satisfies('dbus', '1.2', '2'))
+        self.assertTrue(not dep.satisfies('dbus', '1.2', '2'))
 
     def testReleaseTo(self):
         dep = Dependency()
         dep.releaseTo = '22'
         dep.package = 'dbus'
-        self.assert_(not dep.satisfies('dbus', '1.2', '25'))
+        self.assertTrue(not dep.satisfies('dbus', '1.2', '25'))
 
     def testReleaseIs(self):
         dep = Dependency()
         dep.release = '42'
         dep.package = 'dbus'
-        self.assert_(dep.satisfies('dbus', '1.2', '42'))
+        self.assertTrue(dep.satisfies('dbus', '1.2', '42'))
 
 suite = unittest.makeSuite(DependencyTestCase)

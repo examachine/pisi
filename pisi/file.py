@@ -54,14 +54,14 @@ class InvalidSignature(pisi.Error):
 
 class File:
 
-    (read, write) = range(2) # modes
-    (bz2, gzip, auto) = range(3) # compress enums
-    (detached, whatelse) = range(2)
+    (read, write) = list(range(2)) # modes
+    (bz2, gzip, auto) = list(range(3)) # compress enums
+    (detached, whatelse) = list(range(2))
 
     @staticmethod
     def make_uri(uri):
         "handle URI arg"
-        if type(uri) == types.StringType or type(uri) == types.UnicodeType:
+        if type(uri) == bytes or type(uri) == str:
             uri = URI(uri)
         elif not isinstance(uri, URI):
             raise Error(_("uri must have type either URI or string"))
@@ -226,8 +226,8 @@ class File:
     def isatty(self):
         return self.__file__.isatty()
 
-    def next(self):
-        return self.__file__.next()
+    def __next__(self):
+        return next(self.__file__)
     
     def read(self, size = None):
         if size:
@@ -248,7 +248,7 @@ class File:
             return self.__file__.readlines()
         
     def xreadlines(self):
-        return self.__file__.xreadlines()
+        return self.__file__
     
     def seek(self, offset, whence=0):
         self.__file__.seek(offset, whence)

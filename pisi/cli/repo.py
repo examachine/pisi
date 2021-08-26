@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import Command, autocommand
+from .command import Command, autocommand
 
 
-class AddRepo(Command):
+class AddRepo(Command, metaclass=autocommand):
     """Add a repository
 
 Usage: add-repo <repo> <indexuri>
@@ -37,7 +37,6 @@ If no repo is given, add-repo pardus-devel repo is added by default
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(AddRepo, self).__init__(args)
@@ -68,14 +67,13 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             return
 
 
-class RemoveRepo(Command):
+class RemoveRepo(Command, metaclass=autocommand):
     """Remove repositories
 
 Usage: remove-repo <repo1> <repo2> ... <repon>
 
 Remove all repository information from the system.
 """
-    __metaclass__ = autocommand
 
     def __init__(self,args):
         super(RemoveRepo, self).__init__(args)
@@ -94,14 +92,13 @@ Remove all repository information from the system.
             return
 
 
-class UpdateRepo(Command):
+class UpdateRepo(Command, metaclass=autocommand):
     """Update repository databases
 Usage: update-repo [<repo1> <repo2> ... <repon>]
 <repoi>: repository name
 Synchronizes the PISI databases with the current repository.
 If no repository is given, all repositories are updated.
 """
-    __metaclass__ = autocommand
 
     def __init__(self,args):
         super(UpdateRepo, self).__init__(args)
@@ -126,14 +123,13 @@ If no repository is given, all repositories are updated.
         self.finalize()
 
 
-class ListRepo(Command):
+class ListRepo(Command, metaclass=autocommand):
     """List repositories
 
 Usage: list-repo
 
 Lists currently tracked repositories.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(ListRepo, self).__init__(args)
@@ -145,6 +141,6 @@ Lists currently tracked repositories.
         self.init(database = True, write = False)
         for repo in ctx.repodb.list():
             ctx.ui.info(repo)
-            print '  ', ctx.repodb.get_repo(repo).indexuri.get_uri()
+            print('  ', ctx.repodb.get_repo(repo).indexuri.get_uri())
         self.finalize()
 

@@ -67,7 +67,7 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            raise Error, _("Unpack: archive file integrity is compromised")
+            raise Error(_("Unpack: archive file integrity is compromised"))
             
         archive = Archive(self.archiveFile, self.archive.type)
         unpack_dir = self.pkg_work_dir

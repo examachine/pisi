@@ -35,8 +35,8 @@ import pisi.data.pgraph as pgraph
 import pisi.cli
 import pisi.search
 
-import component
-import common
+from . import component
+from . import common
 
 class Error(pisi.Error):
     pass
@@ -49,9 +49,9 @@ class Remove(common.AtomicOperation):
         self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepo.installed)
         try:
             self.files = ctx.installdb.files(self.package_name)
-        except pisi.Error, e:
+        except pisi.Error as e:
             # for some reason file was deleted, we still allow removes!
-            ctx.ui.error(unicode(e))
+            ctx.ui.error(str(e))
             ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
             self.files = Files()
 
@@ -74,7 +74,7 @@ class Remove(common.AtomicOperation):
         try:
             self.remove_db(txn)
             txn.commit()
-        except db.DBError, e:
+        except db.DBError as e:
             txn.abort()
             raise e
 
@@ -112,7 +112,7 @@ class Remove(common.AtomicOperation):
             try:
                 if pisi.util.sha1_file(fpath) == fileinfo.hash:
                     os.unlink(fpath)
-            except pisi.util.FileError, e:
+            except pisi.util.FileError as e:
                 pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):

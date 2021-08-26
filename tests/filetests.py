@@ -24,11 +24,11 @@ class FileTestCase(testcase.TestCase):
     def testLocalFile(self):
         f = File("tests/popt/pspec.xml", File.read)
         x = f.readlines()
-        self.assert_(len(x)>0)
+        self.assertTrue(len(x)>0)
         
     def testRemoteRead(self):
         f = File("https://github.com/examachine/pisi/wiki", File.read)
         x = f.readlines()
-        self.assert_(len(x)>0)
+        self.assertTrue(len(x)>0)
 
 suite = unittest.makeSuite(FileTestCase)

@@ -22,10 +22,8 @@ import pisi.context as ctx
 from pisi.version import Version
 import pisi.exml.autoxml as autoxml
 
-class Dependency:
+class Dependency(metaclass=autoxml.autoxml):
 
-    __metaclass__ = autoxml.autoxml
-    
     s_Package = [autoxml.String, autoxml.mandatory]
     a_version = [autoxml.String, autoxml.optional]
     a_versionFrom = [autoxml.String, autoxml.optional]
@@ -68,7 +66,7 @@ class Dependency:
 def dict_satisfies_dep(dict, depinfo):
     """determine if a package in a dictionary satisfies given dependency spec"""
     pkg_name = depinfo.package
-    if not dict.has_key(pkg_name):
+    if pkg_name not in dict:
         return False
     else:
         pkg = dict[pkg_name]

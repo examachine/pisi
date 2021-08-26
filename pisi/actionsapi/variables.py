@@ -63,7 +63,7 @@ class Env(object):
 
         # Using environment variables is somewhat tricky. Each time
         # you need them you need to check for their value.
-        if self.__vars.has_key(attr):
+        if attr in self.__vars:
             return os.getenv(self.__vars[attr])
         else:
             return None

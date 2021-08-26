@@ -26,7 +26,7 @@ import pisi.context as ctx
 import pisi.util as util
 import pisi.cli
 
-import remove
+from . import remove
 
 class Error(pisi.Error):
     pass
@@ -74,7 +74,7 @@ def check_conflicts(order, packagedb):
 
     if pkg_conflicts:
         conflicts = ""
-        for pkg in pkg_conflicts.keys():
+        for pkg in list(pkg_conflicts.keys()):
             conflicts += _("[%s conflicts with: %s]") % (pkg, util.strlist(pkg_conflicts[pkg]))
 
         ctx.ui.info(_("The following packages have conflicts: %s") %

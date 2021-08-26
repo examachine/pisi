@@ -23,8 +23,8 @@ class GraphTestCase(unittest.TestCase):
         self.g1.from_list([ (0,2), (0,3), (3,4), (2,4), (0,5), (5,4) ])
 
     def testCycle(self):
-        self.assert_(not self.g0.cycle_free())
-        self.assert_(self.g1.cycle_free())
+        self.assertTrue(not self.g0.cycle_free())
+        self.assertTrue(self.g1.cycle_free())
 
     def testTopologicalSort(self):
         order = self.g1.topological_sort()

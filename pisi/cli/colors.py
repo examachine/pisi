@@ -61,7 +61,7 @@ colors = {'black'              : "\033[30m",
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
-    if colors.has_key(color) and not ctx.get_option('no_color'):
+    if color in colors and not ctx.get_option('no_color'):
         return colors[color] + msg + colors['default']
     else:
         return msg

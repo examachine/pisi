@@ -22,7 +22,7 @@ import pisi.context as ctx
 import pisi.cli
 import pisi.search
 
-import upgrade
+from . import upgrade
 
 class Error(pisi.Error):
     pass
@@ -35,4 +35,4 @@ def list_available(repo = None):
 def list_upgradable():
     ignore_build = ctx.get_option('ignore_build_no')
 
-    return filter(upgrade.is_upgradable, ctx.installdb.list_installed())
+    return list(filter(upgrade.is_upgradable, ctx.installdb.list_installed()))

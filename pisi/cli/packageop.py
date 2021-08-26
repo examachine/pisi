@@ -21,7 +21,7 @@ import pisi.cli
 class Error(pisi.Error):
     pass
 
-import command
+from . import command
 
 class PackageOp(command.Command):
     """Abstract package operation command"""

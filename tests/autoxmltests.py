@@ -26,20 +26,18 @@ class AutoXmlTestCase(unittest.TestCase):
 
     def setUp(self):
 
-        class OtherInfo:
-            __metaclass__ = autoxml.autoxml
-            t_BirthDate = [types.StringType, autoxml.mandatory]
-            t_Interest = [types.StringType, autoxml.optional]
-            t_CodesWith = [ [types.UnicodeType], autoxml.optional, 'CodesWith/Person']
+        class OtherInfo(metaclass=autoxml.autoxml):
+            t_BirthDate = [bytes, autoxml.mandatory]
+            t_Interest = [bytes, autoxml.optional]
+            t_CodesWith = [ [str], autoxml.optional, 'CodesWith/Person']
         
-        class A(xmlfile.XmlFile):
-            __metaclass__ = autoxml.autoxml
-            t_Name = [types.UnicodeType, autoxml.mandatory]
+        class A(xmlfile.XmlFile, metaclass=autoxml.autoxml):
+            t_Name = [str, autoxml.mandatory]
             t_Description = [autoxml.LocalText, autoxml.mandatory]
-            t_Number = [types.IntType, autoxml.optional]
-            t_Email = [types.StringType, autoxml.optional]
-            a_href = [types.StringType, autoxml.mandatory]
-            t_Projects = [ [types.StringType], autoxml.mandatory, 'Project']
+            t_Number = [int, autoxml.optional]
+            t_Email = [bytes, autoxml.optional]
+            a_href = [bytes, autoxml.mandatory]
+            t_Projects = [ [bytes], autoxml.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, autoxml.optional ]
             s_Comment = [ autoxml.Text, autoxml.mandatory]
         
@@ -47,7 +45,7 @@ class AutoXmlTestCase(unittest.TestCase):
 
     def testDeclaration(self):
         self.assertEqual(len(self.A.decoders), 8) # how many fields in A?
-        self.assert_(hasattr(self.A, 'encode'))
+        self.assertTrue(hasattr(self.A, 'encode'))
 
     def testReadWrite(self):
         a = self.A()
@@ -58,26 +56,26 @@ class AutoXmlTestCase(unittest.TestCase):
         # test read
         a.read('tests/a.xml')
         # print a FIXME: python 2.x bug likely
-        self.assert_(a.href.startswith('http://www.cs'))
+        self.assertTrue(a.href.startswith('http://www.cs'))
         self.assertEqual(a.number, 868)
-        self.assertEqual(a.name, u'Eray Özkural')
+        self.assertEqual(a.name, 'Eray Özkural')
         self.assertEqual(len(a.projects), 3)
         self.assertEqual(len(a.otherInfo.codesWith), 5)
-        self.assert_(not a.errors())
+        self.assertTrue(not a.errors())
 
         a.print_text(file('/tmp/a', 'w'))
         la = file('/tmp/a').readlines()
-        self.assert_( util.any(lambda x:x.find('18071976')!=-1, la) )
+        self.assertTrue( util.any(lambda x:x.find('18071976')!=-1, la) )
         a.write('/tmp/a.xml')
         return
         
     def testWriteRead(self):
         a = self.A()
-        a.name = u"Barış Metin"
+        a.name = "Barış Metin"
         a.number = 31
         a.email = "baris@uludag.org.tr"
-        a.description['tr'] = u'Melek, melek'
-        a.comment = u'Bu da zibidi aslında ama çaktırmıyor'
+        a.description['tr'] = 'Melek, melek'
+        a.comment = 'Bu da zibidi aslında ama çaktırmıyor'
         a.href = 'http://cekirdek.uludag.org.tr/~baris'
         a.otherInfo.birthDate = '30101979'
         a.projects = [ 'pisi', 'tasma', 'plasma' ]
@@ -93,13 +91,13 @@ class LocalTextTestCase(unittest.TestCase):
 
     def setUp(self):
         a = autoxml.LocalText()
-        a['tr'] = u'Zibidi'
-        a['en'] = u'ingiliz hıyarlari ne anlar zibididen?'
+        a['tr'] = 'Zibidi'
+        a['en'] = 'ingiliz hıyarlari ne anlar zibididen?'
         self.a = a
 
     def testStr(self):
-        s = unicode(self.a)
-        self.assert_(s!= None and len(s)>=6)
+        s = str(self.a)
+        self.assertTrue(s!= None and len(s)>=6)
 
 suite1 = unittest.makeSuite(AutoXmlTestCase)
 suite2 = unittest.makeSuite(LocalTextTestCase)

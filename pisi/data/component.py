@@ -27,9 +27,7 @@ class Error(pisi.Error):
 __metaclass__ = autoxml.autoxml
 
 
-class Distribution(xmlfile.XmlFile):
-
-    __metaclass__ = autoxml.autoxml
+class Distribution(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
     tag = "PISI"
 
@@ -43,10 +41,8 @@ class Distribution(xmlfile.XmlFile):
     t_Architecture = [autoxml.Text, autoxml.optional] # architecture identifier
 
 
-class Component(xmlfile.XmlFile):
+class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     "representation for component declarations"
-
-    __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
     
@@ -110,14 +106,14 @@ class ComponentDB(object):
     def get_component(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.db.itembyrepo.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError as e:
             raise Error(_('Component %s not found') % name)
 
     def get_component_repo(self, name, repo=None, txn = None):
         #name = shelve.LockedDBShelf.encodekey(name)
         try:
             return self.d.get_item_repo(name, repo, txn=txn)
-        except pisi.db.itembyrepo.NotfoundError, e:
+        except pisi.db.itembyrepo.NotfoundError as e:
             raise Error(_('Component %s not found') % name)
 
     def get_union_comp(self, name, txn = None, repo = pisi.db.itembyrepo.repos ):
@@ -128,7 +124,7 @@ class ComponentDB(object):
             pkgs = set()
             srcs = set()
             for repostr in self.d.order(repo = repo):
-                if s.has_key(repostr):
+                if repostr in s:
                     pkgs |= set(s[repostr].packages)
                     srcs |= set(s[repostr].sources)
             comp = self.get_component(name)

@@ -23,21 +23,16 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import specfile
+from . import specfile
 import pisi.exml.xmlfile as xmlfile
 import pisi.exml.autoxml as autoxml
 
-class Source:
-    __metaclass__ = autoxml.autoxml
-
+class Source(metaclass=autoxml.autoxml):
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [specfile.Packager, autoxml.mandatory]
 
-class Package(specfile.Package):
-    __metaclass__ = autoxml.autoxml
-    
-    # if this is working autoxml r0Xx0rz
+class Package(specfile.Package, metaclass=autoxml.autoxml):
     t_PartOf = [autoxml.String, autoxml.mandatory]
     
     t_Build = [ autoxml.Integer, autoxml.optional]
@@ -63,11 +58,9 @@ class Package(specfile.Package):
             (self.architecture, self.installedSize)
         return s
 
-class MetaData(xmlfile.XmlFile):
+class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""
-
-    __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
 

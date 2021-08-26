@@ -57,7 +57,7 @@ class ContextTestCase(unittest.TestCase):
             "metadata_xml": "metadata.xml"
             }
             
-        for k in constDict.keys():
+        for k in list(constDict.keys()):
             if hasattr(const, k):
                 value = getattr(const, k)
                 self.assertEqual(value, constDict[k])
