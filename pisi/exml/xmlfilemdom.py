@@ -26,7 +26,7 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import xml.dom.minidom as mdom
 from xml.parsers.expat import ExpatError

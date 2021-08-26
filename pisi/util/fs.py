@@ -16,11 +16,10 @@
 import os
 import hashlib
 import shutil
-import statvfs
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -343,7 +342,7 @@ def strip_file(filepath, outpath):
 def partition_freespace(directory):
     """ returns free space of given directory's partition """
     st = os.statvfs(directory)
-    return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
+    return st.f_bsize * st.f_bfree
 
 def clean_locks(top = '.'):
     for root, dirs, files in os.walk(top):
