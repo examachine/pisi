@@ -56,9 +56,9 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.error(_("System Error. Program Terminated."))
 
     if ctx.get_option('debug'):
-        ui.error("%s: %s" % (exception, value))
+        ui.error(u"%s: %s" % (exception, value))
     else:
-         ui.error(str(value))
+         ui.error(unicode(value))
 
     ui.info(_("Please use 'pisi help' for general help."))
 
@@ -79,5 +79,5 @@ if __name__ == "__main__":
     cli = pisicli.PisiCLI()
     try:
         cli.run_command()
-    except pisi.op.upgradepisi.PisiUpgradeException as e:
-        print(_('PISI has been upgraded.'))
+    except pisi.op.upgradepisi.PisiUpgradeException, e:
+        print _('PISI has been upgraded.')

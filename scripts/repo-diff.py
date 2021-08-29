@@ -37,18 +37,18 @@ def listIntersection(firstRepo, secondRepo):
     keys.sort()
     for i in keys:
         if firstRepo[i] != secondRepo[i]:
-            print("    %s: %s (r%s) -> %s (r%s)" % (i, firstRepo[i][0], firstRepo[i][1], secondRepo[i][0], secondRepo[i][1]))
+            print(("    %s: %s (r%s) -> %s (r%s)" % (i, firstRepo[i][0], firstRepo[i][1], secondRepo[i][0], secondRepo[i][1])))
 
 def listComplement(firstRepo, secondRepo):
     keys = list(set(firstRepo.keys()) - set(secondRepo.keys()))
     keys.sort()
     for i in keys:
-        print("    %s" % i)
+        print(("    %s" % i))
 
 def usage(miniMe):
-    print("""Usage:
+    print(("""Usage:
       %s    pathToSvn   component   (ex: %s /home/caglar/svn/pardus/ system/devel)
-    """ % (miniMe, miniMe))
+    """ % (miniMe, miniMe)))
 
     sys.exit(1)
 

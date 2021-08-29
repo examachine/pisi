@@ -52,12 +52,12 @@ if __name__ == "__main__":
         URI = pisi.uri.URI(spec.source.archive.uri)
 
         if not isCached(URI.filename(), spec.source.archive.sha1sum):
-            print(URI, " -> " , os.path.join(ctx.config.archives_dir(), URI.filename()))
+            print((URI, " -> " , os.path.join(ctx.config.archives_dir(), URI.filename())))
             try:
                 fetch_url(URI, ctx.config.archives_dir())
             except pisi.fetcher.FetchError as e:
                 print(e)
                 pass
         else:
-            print(URI, "already downloaded...")
+            print((URI, "already downloaded..."))
     pisi.api.finalize()

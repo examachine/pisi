@@ -34,16 +34,16 @@ def exit(retval = 0):
 if __name__ == "__main__":
 
     locale.setlocale(locale.LC_ALL, '')
-    print("""Welcome to the interactive PISI shell.
+    print """Welcome to the interactive PISI shell.
 Type "help" to see a list of commands.
 To end the session, type "exit".
 You can run system commands by prefixing with '!' as in '!ls'.
 Copyright 2006 (c) Pardus.
-""")
+"""
     while 1:
-        cmd = input('pisi> ')
+        cmd = raw_input('pisi> ')
         if cmd.strip()=='exit':
-            print('Bye!')
+            print 'Bye!'
             exit()
         if cmd.startswith('!'):
             cmd = cmd[1:]
@@ -52,9 +52,9 @@ Copyright 2006 (c) Pardus.
         try:
             cli = PisiCLI(cmd.split())
             cli.run_command()
-        except pisi.operations.PisiUpgradeException as e:
-            print(_('PISI has been upgraded.'))
-        except Exception as value:
+        except pisi.operations.PisiUpgradeException, e:
+            print _('PISI has been upgraded.')
+        except Exception, value:
             signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
             ui = pisi.cli.CLI() # make a temporary UI
             show_traceback = False
@@ -78,15 +78,15 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
                 ui.error(_("System Error. Program Terminated."))
         
             if ctx.get_option('debug'):
-                ui.error("%s: %s" % (exception, value))
+                ui.error(u"%s: %s" % (exception, value))
             else:
-                 ui.error(str(value))
+                 ui.error(unicode(value))
         
             ui.info(_("Please type 'help' for general help."))
         
             if show_traceback:
                 ui.info(_("Traceback:"))
                 #traceback.print_exc(file=sys.stdout)
-                traceback.print_tb(sys.exc_info()[2])
+                traceback.print_tb(sys.exc_traceback)
             else:
                 ui.info(_("Use --debug to see a traceback."))

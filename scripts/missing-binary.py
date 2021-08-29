@@ -38,9 +38,9 @@ def getPackages(pspecList):
     return packages
 
 def usage(miniMe):
-    print("""Usage:
+    print(("""Usage:
       %s srcREP binREP (ex: %s /home/bahadir/repos/pardus/devel/kernel /home/bahadir/binary)
-    """ % (miniMe, miniMe))
+    """ % (miniMe, miniMe)))
 
     sys.exit(1)
 
@@ -61,4 +61,4 @@ if __name__ == "__main__":
     print("Missing binary packages:")
     for p, v, s in packages:
         if not [x for x in binaries if x.startswith("%s-%s" % (p, v))]:
-            print("    %s (%s)" % (p, s))
+            print(("    %s (%s)" % (p, s)))

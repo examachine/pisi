@@ -37,18 +37,18 @@ def listIntersection(firstRepo, secondRepo):
     keys.sort()
     for i in keys:
         if firstRepo[i] != secondRepo[i]:
-            print "    %s: %s (r%s) -> %s (r%s)" % (i, firstRepo[i][0], firstRepo[i][1], secondRepo[i][0], secondRepo[i][1])
+            print("    %s: %s (r%s) -> %s (r%s)" % (i, firstRepo[i][0], firstRepo[i][1], secondRepo[i][0], secondRepo[i][1]))
 
 def listComplement(firstRepo, secondRepo):
     keys = list(set(firstRepo.keys()) - set(secondRepo.keys()))
     keys.sort()
     for i in keys:
-        print "    %s" % i
+        print("    %s" % i)
 
 def usage(miniMe):
-    print """Usage:
+    print("""Usage:
       %s    pathToSvn   component   (ex: %s /home/caglar/svn/pardus/ system/devel)
-    """ % (miniMe, miniMe)
+    """ % (miniMe, miniMe))
 
     sys.exit(1)
 
@@ -67,26 +67,26 @@ if __name__ == "__main__":
     stable = getVersion(findPspec(join_path(svnRoot,"stable/pardus-1/", postfix)))
     devel = getVersion(findPspec(join_path(svnRoot, "devel/", postfix)))
 
-    print "Tag --> Stable"
+    print("Tag --> Stable")
     listIntersection(tag, stable)
-    print
+    print()
 
-    print "Tag has, Stable hasn't"
+    print("Tag has, Stable hasn't")
     listComplement(tag, stable)
-    print
+    print()
 
-    print "Stable has, Tag hasn't"
+    print("Stable has, Tag hasn't")
     listComplement(stable, tag)
-    print
+    print()
 
-    print "Stable --> Devel"
+    print("Stable --> Devel")
     listIntersection(stable, devel)
-    print
+    print()
 
-    print "Stable has, Devel hasn't"
+    print("Stable has, Devel hasn't")
     listComplement(stable, devel)
-    print
+    print()
 
-    print "Devel has, Stable hasn't"
+    print("Devel has, Stable hasn't")
     listComplement(devel, stable)
-    print
+    print()
