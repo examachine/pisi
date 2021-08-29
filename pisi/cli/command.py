@@ -18,7 +18,7 @@ from optparse import OptionParser
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -43,7 +43,7 @@ class Command(object):
         for name in list:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
-            summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
+            summary = trans.gettext(commandcls.__doc__).split('\n')[0]
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' (%s)' % commandcls.name[1]
@@ -163,7 +163,7 @@ class Command(object):
         """print help for the command"""
         print(self.format_name() + ': ')
         trans = gettext.translation('pisi', fallback=True)
-        print(trans.ugettext(self.__doc__) + '\n')
+        print(trans.gettext(self.__doc__) + '\n')
         print(self.parser.format_option_help())
 
     def die(self):

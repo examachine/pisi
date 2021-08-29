@@ -17,7 +17,7 @@ import getopt
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 from svn import core, client
 
