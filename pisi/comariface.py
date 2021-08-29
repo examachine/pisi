@@ -15,9 +15,12 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
-import comar
+try:
+    import comar
+except ModuleNotFoundError:
+    print("comar package is not found")
 import pisi
 import pisi.context as ctx
 

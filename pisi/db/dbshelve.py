@@ -62,7 +62,7 @@ class DBShelf:
     #def __del__(self):
     #    self.close()
 
-    allowed_chars = string.letters + string.digits + '-'
+    allowed_chars = string.ascii_letters + string.digits + '-'
     def check_key(key):
         return pisi.util.all(lambda x: x in allowed_chars, key)
     

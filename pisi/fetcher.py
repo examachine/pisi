@@ -19,15 +19,14 @@ all kinds of things: source tarballs, index files, packages, and God
 knows what."""
 
 # python standard library modules
-import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
 import ftplib
 import os
 import socket
 import sys
 from mimetypes import guess_type
-from mimetools import Message
-from base64 import encodestring
+from email.mime.message import MIMEMessage as Message
+from base64 import encodebytes
 from shutil import move
 from time import time,gmtime
 
@@ -257,14 +256,14 @@ class Fetcher:
     def _get_http_headers(self):
         headers = []
         if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
-            enc = base64.encodestring('%s:%s' % self.url.auth_info())
+            enc = base64.encodebytes('%s:%s' % self.url.auth_info())
             headers.append(('Authorization', 'Basic %s' % enc),)
         return tuple(headers)
 
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = base64.encodestring('%s:%s' % self.url.auth_info())
+            enc = base64.encodebytes('%s:%s' % self.url.auth_info())
             headers.append(('Authorization', 'Basic %s' % enc),)
         return tuple(headers)
 
@@ -384,7 +383,7 @@ class Fetcher:
 
     def formatRequest(self, request):
         if self.url.auth_info():
-            enc = encodestring('%s:%s' % self.url.auth_info())
+            enc = encodebytes('%s:%s' % self.url.auth_info())
             request.add_header('Authorization', 'Basic %s' % enc)
 
         range_handlers = {
@@ -503,7 +502,7 @@ class FTPRangeHandler(urllib.request.FTPHandler):
         fw = ftpwrapper('', '', host, port, dirs)
         return fw
 
-class ftpwrapper(urllib.ftpwrapper):
+class ftpwrapper(urllib.request.ftpwrapper):
     def retrfile(self, file, type, rest=None):
         self.endtransfer()
         if type in ('d', 'D'): cmd = 'TYPE A'; isdir = 1

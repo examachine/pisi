@@ -19,7 +19,7 @@ from os import access, R_OK
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # pisi modules
 import pisi

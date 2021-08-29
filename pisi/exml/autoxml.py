@@ -393,7 +393,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     ctx.ui.warning(x)
         cls.print_text = print_text
         if '__str__' not in dict:
-            def str(self):
+            def strany(self):
                 strfile = StringIO('')
                 self.print_text(strfile)
                 print('strfile=',str(strfile))
@@ -401,7 +401,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 strfile.close()
                 print('s=',s,type(s))
                 return s
-            cls.__str__ = str
+            cls.__str__ = strany
         
         if '__eq__' not in dict:
             def equal(self, other):
@@ -572,7 +572,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
-        if identifier is "":
+        if identifier == "":
             return ""
         else:
             if identifier[0]=='I':
