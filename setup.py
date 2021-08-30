@@ -16,6 +16,7 @@ import shutil
 import glob
 import sys
 import inspect
+import subprocess
 from distutils.core import setup
 from distutils.command.install import install
 
@@ -35,7 +36,8 @@ class Install(install):
     def installi18n(self):
         for lang in i18n_languages.split(' '):
             print("Installing '%s' translations..." % lang)
-            os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
+            subprocess.run(["msgfmt", "po/{}.po".format(lang),
+                            "-o", "po/{}.mo".format(lang)])
             if not self.prefix:
                 self.prefix = "/"
             destpath = os.path.join(self.prefix, "usr/share/locale/%s/LC_MESSAGES" % lang)
