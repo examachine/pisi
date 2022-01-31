@@ -45,7 +45,7 @@ def is_package_name(fn, package_name = None):
             import string
             for x in verstr.split('-'):
                 # weak rule: version components after '-' start with a digit
-                if x is '' or (not x[0] in string.digits):
+                if x == '' or (not x[0] in string.digits):
                     return False
             return True
     return False
