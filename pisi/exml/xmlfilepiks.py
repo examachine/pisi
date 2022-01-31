@@ -58,7 +58,6 @@ class XmlFile(object):
         return self.doc
         
     def readxmlfile(self, file):
-        raise Exception("not implemented")
         try:
             self.doc = iks.parse(file)
             return self.doc
