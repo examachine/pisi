@@ -32,20 +32,20 @@ class Install(install):
         self.installi18n()
         self.installdoc()
         self.generateConfigFile()
-    
+
     def installi18n(self):
         for lang in i18n_languages.split(' '):
-            print("Installing '%s' translations..." % lang)
+            print("Installing translations: ", lang)
             subprocess.run(["msgfmt", "po/{}.po".format(lang),
                             "-o", "po/{}.mo".format(lang)])
             if not self.prefix:
                 self.prefix = "/"
-            destpath = os.path.join(self.prefix, "usr/share/locale/%s/LC_MESSAGES" % lang)
+            destpath = os.path.join(self.prefix, "usr/share/locale/{}/LC_MESSAGES".format(lang))
             try:
                 os.makedirs(destpath)
             except:
                 pass
-            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
+            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "{}.mo".format(i18n_domain)))
 
     def installdoc(self):
         destpath = os.path.join(self.prefix, "usr/share/doc/pisi")
@@ -55,7 +55,7 @@ class Install(install):
             pass
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
-            print('Installing', pdf)          
+            print('Installing: ', pdf)
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 
@@ -73,22 +73,22 @@ class Install(install):
 
         for d in defaults:
             section_name = d[0][:-len('Defaults')].lower()
-            pisiconf.write("[%s]\n" % section_name)
-            
+            pisiconf.write("[{}]\n".format(section_name))
+
             section_members = [m for m in inspect.getmembers(d[1]) \
                                if not m[0].startswith('__') \
                                and not m[0].endswith('__')]
-        
+
             for member in section_members:
-                pisiconf.write("# %s = %s\n" % (member[0], member[1]))
+                pisiconf.write("# {} = {}\n".format(member[0], member[1]))
 
             pisiconf.write('\n')
 
 
 setup(name="pisi",
     version= pisi.__version__,
-    description="PISI (Packages Installed Successfully as Intended)",
-    long_description="PISI is the package management system of Pardus Linux.",
+    description="PiSi (Packages Installed Successfully as Intended)",
+    long_description="PiSi is the package management system of Pisi GNU/Linux.",
     license="GNU AGPL-3.0",
     author="Eray Ozkural, Baris Metin, S. Caglar Onur, Murat Eren, Gurer Ozen and contributors",
     author_email="eray.ozkural@gmail.com",
