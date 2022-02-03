@@ -32,8 +32,8 @@ def exit():
     sys.exit(1)
 
 def handle_exception(exception, value, tb):
-    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
-    ui = pisi.cli.CLI() # make a temporary UI
+    signal.signal(signal.SIGINT, signal.SIG_IGN)  # disable further interrupts
+    ui = pisi.cli.CLI()  # make a temporary UI
     show_traceback = False
     if exception == exceptions.KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
@@ -48,7 +48,7 @@ You have to run rebuild-db only when there is file corruption and database upgra
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("""Unhandled internal exception.
-Please file a bug report. (http://bugs.uludag.org.tr)"""))
+Please file a bug report. (https://www.pisilinux.org/bugs)"""))
     else:
         # For any other exception (possibly Python exceptions) show
         # the traceback!
@@ -56,9 +56,9 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.error(_("System Error. Program Terminated."))
 
     if ctx.get_option('debug'):
-        ui.error("%s: %s" % (exception, value))
+        ui.error("{}: {}".format(exception, value))
     else:
-         ui.error(str(value))
+        ui.error(str(value))
 
     ui.info(_("Please use 'pisi help' for general help."))
 
@@ -72,7 +72,6 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
     exit()
 
 if __name__ == "__main__":
-   
     sys.excepthook = handle_exception
 
     locale.setlocale(locale.LC_ALL, '')
@@ -80,4 +79,4 @@ if __name__ == "__main__":
     try:
         cli.run_command()
     except pisi.op.upgradepisi.PisiUpgradeException as e:
-        print((_('PISI has been upgraded.')))
+        print((_('PiSi has been upgraded.')))
