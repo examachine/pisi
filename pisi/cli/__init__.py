@@ -61,7 +61,7 @@ class CLI(UI):
                 out = sys.stderr
             else:
                 out = sys.stdout
-            out.write(msg)
+            out.write(msg.decode())
             out.flush()
 
     def info(self, msg, verbose = False, noln = False):
