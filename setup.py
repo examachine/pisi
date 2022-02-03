@@ -55,7 +55,7 @@ class Install(install):
             pass
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
-            print('Installing: ', pdf)
+            print('Installing:', pdf)
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 
