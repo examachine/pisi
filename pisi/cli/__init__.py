@@ -41,7 +41,7 @@ def printu(obj, err = False):
         out = sys.stderr
     else:
         out = sys.stdout
-    out.write(obj.encode('utf-8'))
+    out.write(obj)
     out.flush()
 
 class CLI(UI):
