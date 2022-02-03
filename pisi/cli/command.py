@@ -38,9 +38,9 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        list = [x.name[0] for x in Command.cmd]
-        list.sort()
-        for name in list:
+        list_cmds = [x.name[0] for x in Command.cmd]
+        list_cmds.sort()
+        for name in list_cmds:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
             summary = trans.gettext(commandcls.__doc__).split('\n')[0]
