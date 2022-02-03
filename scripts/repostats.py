@@ -17,7 +17,7 @@ import getopt
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 from svn import core, client
 
@@ -31,11 +31,11 @@ from pisi.cli import printu
 
 # default html templates
 
-def_table_html = u"""
+def_table_html = """
 <tr><td>%s</td><td>%s</td></tr>
 """
 
-def_repo_sizes_html = u"""
+def_repo_sizes_html = """
 <h3>Boyutlar</h3>
 <p>Toplam kurulu boyut %(total)s</p>
 <p>Dosya tiplerine göre liste:</p>
@@ -44,7 +44,7 @@ def_repo_sizes_html = u"""
 </table></tbody>
 """
 
-def_repo_html = u"""
+def_repo_html = """
 <html><head>
     <title>Depo istatistikleri</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -85,7 +85,7 @@ Depoda toplam %(nr_source)d
 </body></html>
 """
 
-def_packager_html = u"""
+def_packager_html = """
 <html><head>
     <title>Paketçi %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -106,7 +106,7 @@ def_packager_html = u"""
 </body></html>
 """
 
-def_package_html = u"""
+def_package_html = """
 <html><head>
     <title>İkili paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -137,7 +137,7 @@ def_package_html = u"""
 </body></html>
 """
 
-def_history_html= u"""
+def_history_html= """
 <h5>Sürüm %s</h5><p>
 Tarih: %s<br>
 Yapan: <a href="./%s.html">%s</a><br>
@@ -145,7 +145,7 @@ Açıklama: %s
 </p>
 """
 
-def_source_html = u"""
+def_source_html = """
 <html><head>
     <title>Kaynak paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -183,7 +183,7 @@ Hata kayıtlarına bak</a></p>
 </body></html>
 """
 
-def_sources_html = u"""
+def_sources_html = """
 <html><head>
     <title>Kaynak paketler listesi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -204,7 +204,7 @@ def_sources_html = u"""
 </body></html>
 """
 
-def_missing_html = u"""
+def_missing_html = """
 <html><head>
     <title>Eksik ikili paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -308,11 +308,11 @@ class Histogram:
             self.list[name] = self.list.get(name, 0) + 1
     
     def note(self, name):
-        if not self.list.has_key(name):
+        if name not in self.list:
             self.list[name] = 0
     
     def get_list(self, max=0):
-        items = self.list.items()
+        items = list(self.list.items())
         items.sort(valuesort)
         if max != 0:
             return items[:max]
@@ -344,8 +344,8 @@ class Missing:
         self.revRuntimeDeps = []
     
     def report_html(self):
-        bDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
+        bDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in self.revBuildDeps]
+        rDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in self.revRuntimeDeps]
         dict = {
             "name": self.name,
             "revBuildDeps": ", ".join(bDeps),
@@ -357,7 +357,7 @@ class Missing:
 class Package:
     def __init__(self, source, pakspec):
         name = pakspec.name
-        if packages.has_key(name):
+        if name in packages:
             errors.append(_("Duplicate binary packages:\n%s\n%s\n") % (
                 source.name, packages[name].source.name))
             return
@@ -378,30 +378,28 @@ class Package:
         # mark reverse build dependencies
         for d in self.source.spec.source.buildDependencies:
             p = d.package
-            if packages.has_key(p):
+            if p in packages:
                 packages[p].revBuildDeps.append(self.name)
             else:
-                if not missing.has_key(p):
+                if p not in missing:
                     Missing(p)
                 missing[p].revBuildDeps.append(self.name)
         # mark reverse runtime dependencies
         for d in self.pakspec.packageDependencies:
             p = d.package
-            if packages.has_key(p):
+            if p in packages:
                 packages[p].revRuntimeDeps.append(self.name)
             else:
-                if not missing.has_key(p):
+                if p not in missing:
                     Missing(p)
                 missing[p].revRuntimeDeps.append(self.name)
     
     def report_html(self):
         source = self.source.spec.source
-        bDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
-            (map(lambda x: x.package, source.buildDependencies)))
-        rDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
-            (map(lambda x: x.package, self.pakspec.packageDependencies)))
-        rbDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rrDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
+        bDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in ([x.package for x in source.buildDependencies])]
+        rDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in ([x.package for x in self.pakspec.packageDependencies])]
+        rbDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in self.revBuildDeps]
+        rrDeps = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in self.revRuntimeDeps]
         dict = {
             "name": self.name,
             "source": source.name,
@@ -418,7 +416,7 @@ class Package:
 class Source:
     def __init__(self, path, spec):
         name = spec.source.name
-        if sources.has_key(name):
+        if name in sources:
             errors.append(_("Duplicate source packages:\n%s\n%s\n") % (
                 path, sources[name].path))
             return
@@ -469,11 +467,10 @@ class Source:
     
     def report_html(self):
         source = self.spec.source
-        paks = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
-            (map(lambda x: x.name, self.spec.packages)))
-        histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
-        ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
-            x.filename, x.filename), source.patches)
+        paks = ["<a href='package-%s.html'>%s</a>" % (x, x) for x in ([x.name for x in self.spec.packages])]
+        histdata = [(x.release, x.date, x.name, x.name, x.comment) for x in self.spec.history]
+        ptch = ["<a href='%s/files/%s'>%s</a>" % (self.uri,
+            x.filename, x.filename) for x in source.patches]
         dict = {
             "name": self.name,
             "homepage": source.homepage,
@@ -497,7 +494,7 @@ class Packager:
         else:
             name = spec.source.packager.name
             email = spec.source.packager.email
-        if packagers.has_key(name):
+        if name in packagers:
             if email != packagers[name].email:
                 e = _("Developer '%s <%s>' has another mail address '%s' in source package '%s'") % (
                     name, packagers[name].email, email, spec.source.name)
@@ -523,10 +520,10 @@ class Packager:
                 Packager(spec, update)
     
     def report_html(self):
-        srcs = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), self.sources)
+        srcs = ["<a href='./source-%s.html'>%s</a>" % (x, x) for x in self.sources]
         srcs.sort()
-        upds = map(lambda x: "<b><a href='./source-%s.html'>%s</a> (%s)</b><br>%s<br>" % (
-            x[0], x[0], x[1], x[2]), self.updates)
+        upds = ["<b><a href='./source-%s.html'>%s</a> (%s)</b><br>%s<br>" % (
+            x[0], x[0], x[1], x[2]) for x in self.updates]
         dict = {
             "name": self.name,
             "email": mangle_email(self.email),
@@ -581,11 +578,11 @@ class Repository:
             spec = pisi.specfile.SpecFile()
             try:
                 spec.read(os.path.join(pak, "pspec.xml"))
-            except Exception, inst:
+            except Exception as inst:
                 errors.append(_("Cannot parse '%s':\n%s\n") % (pak, inst.args[0]))
                 continue
             self.processPspec(pak, spec)
-        for p in packages.values():
+        for p in list(packages.values()):
             p.markDeps()
     
     def processPisi(self, path):
@@ -594,7 +591,7 @@ class Repository:
         md = pisi.metadata.MetaData()
         md.read("metadata.xml")
         self.total_installed_size += md.package.installedSize
-        if packages.has_key(md.package.name):
+        if md.package.name in packages:
             # FIXME: check version/release match too?
             packages[md.package.name].installed_size = md.package.installedSize
         else:
@@ -602,7 +599,7 @@ class Repository:
         fd = pisi.files.Files()
         fd.read("files.xml")
         for f in fd.list:
-            if self.installed_sizes.has_key(f.type):
+            if f.type in self.installed_sizes:
                 # Emtpy directories and symlinks has None size
                 if not f.size is None:
                     self.installed_sizes[f.type] += int(f.size)
@@ -616,7 +613,7 @@ class Repository:
                     self.processPisi(os.path.join(root, fn))
     
     def report_html(self):
-        miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
+        miss = ["<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x) for x in list(missing.keys())]
         upeople = []
         for p in self.people.get_list():
             upeople.append(("<a href='./%s.html'>%s</a>" % (p[0], p[0]), p[1]))
@@ -631,9 +628,9 @@ class Repository:
         for p in self.longpy.get_list(5):
             ulongpy.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         if self.total_installed_size:
-            items = self.installed_sizes.items()
+            items = list(self.installed_sizes.items())
             items.sort(valuesort)
-            elts = "".join(map(lambda x: "<tr><td>%s</td><td>%d</td></tr>" % (x[0], x[1]), items))
+            elts = "".join(["<tr><td>%s</td><td>%d</td></tr>" % (x[0], x[1]) for x in items])
             sizes = template_get("repo_sizes") % { "total": self.total_installed_size, "sizes": elts }
         else:
             sizes = ""
@@ -649,7 +646,7 @@ class Repository:
             "errors": e
         }
         template_write("paksite/index.html", "repo", dict)
-        srclist = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), sources)
+        srclist = ["<a href='./source-%s.html'>%s</a>" % (x, x) for x in sources]
         srclist.sort()
         dict = {
             "source_list": "<br>".join(srclist)
@@ -700,7 +697,7 @@ if __name__ == "__main__":
     
     if missing:
         printu(_("These dependencies are not available in repository:\n"))
-        for m in missing.keys():
+        for m in list(missing.keys()):
             printu("  %s\n" % m)
     
     if do_web:
@@ -709,11 +706,11 @@ if __name__ == "__main__":
         except:
             pass
         repo.report_html()
-        for p in packagers.values():
+        for p in list(packagers.values()):
             p.report_html()
-        for p in missing.values():
+        for p in list(missing.values()):
             p.report_html()
-        for p in packages.values():
+        for p in list(packages.values()):
             p.report_html()
-        for p in sources.values():
+        for p in list(sources.values()):
             p.report_html()

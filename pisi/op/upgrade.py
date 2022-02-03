@@ -19,7 +19,7 @@ import sys
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -31,10 +31,10 @@ import pisi.ui as ui
 from pisi.version import Version
 import pisi.search
 
-import install
-import conflict
-import component
-import upgradepisi
+from . import install
+from . import conflict
+from . import component
+from . import upgradepisi
 
 class Error(pisi.Error):
     pass
@@ -57,12 +57,12 @@ def upgrade_base(A = set()):
     if not ctx.get_option('bypass_safety'):
         if ctx.componentdb.has_component('system.base'):
             systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
-            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), systembase - A)
+            extra_installs = [x for x in systembase - A if not ctx.installdb.is_installed(x)]
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
             G_f, install_order = install.plan_install_pkg_names(extra_installs)
-            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
+            extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x, ignore_build)]
             upgrade_order = []
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +

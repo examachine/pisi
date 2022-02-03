@@ -60,7 +60,7 @@ class ActionsAPITestCase(TestCase):
 
         '''check file content'''
         for file in self.filelist:
-            self.assert_(fileContent.__contains__(file))
+            self.assertTrue(fileContent.__contains__(file))
 
     def testShelltoolsCopy(self):
         from pisi.actionsapi.shelltools import copy
@@ -94,7 +94,7 @@ class ActionsAPITestCase(TestCase):
 
         copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
         ourguy = 'tests/actionsapitests/%s' % os.readlink('tests/actionsapitests/linktoafile')
-        self.assert_(os.path.exists(ourguy))
+        self.assertTrue(os.path.exists(ourguy))
         os.remove('tests/actionsapitests/adirectory/linktoafile')
 
         copy('tests/actionsapitests/file', 'tests/actionsapitests/file-copy')
@@ -116,16 +116,16 @@ class ActionsAPITestCase(TestCase):
     def testShelltoolsCanAccessFile(self):
         from pisi.actionsapi.shelltools import can_access_file
 
-        self.assert_(can_access_file('tests/actionsapitests/file'))
-        self.assert_(not can_access_file('tests/actionsapitests/fileX'))
-        self.assert_(can_access_file('tests/actionsapitests/linktoafile'))
+        self.assertTrue(can_access_file('tests/actionsapitests/file'))
+        self.assertTrue(not can_access_file('tests/actionsapitests/fileX'))
+        self.assertTrue(can_access_file('tests/actionsapitests/linktoafile'))
 
     def testShelltoolsCanAccessDir(self):
         from pisi.actionsapi.shelltools import can_access_directory
 
-        self.assert_(can_access_directory('tests/actionsapitests/adirectory'))
-        self.assert_(not can_access_directory('tests/actionsapitests/adirectoryX'))
-        self.assert_(can_access_directory('tests/actionsapitests/linktoadirectory'))
+        self.assertTrue(can_access_directory('tests/actionsapitests/adirectory'))
+        self.assertTrue(not can_access_directory('tests/actionsapitests/adirectoryX'))
+        self.assertTrue(can_access_directory('tests/actionsapitests/linktoadirectory'))
 
         
     def testShelltoolsMakedirs(self):

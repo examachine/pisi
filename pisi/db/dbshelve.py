@@ -35,7 +35,7 @@ Now added support for overriding the marshalling method
 
 #------------------------------------------------------------------------
 
-import cPickle
+import pickle
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
 import string
@@ -62,7 +62,7 @@ class DBShelf:
     #def __del__(self):
     #    self.close()
 
-    allowed_chars = string.letters + string.digits + '-'
+    allowed_chars = string.ascii_letters + string.digits + '-'
     def check_key(key):
         return pisi.util.all(lambda x: x in allowed_chars, key)
     
@@ -70,7 +70,7 @@ class DBShelf:
         if txn:
             return self.db.has_key(key, txn)
         else:
-            return self.db.has_key(key)
+            return key in self.db
 
     def txn_proc(self, proc, txn):
         # can be used to txn protect a method automatically
@@ -79,12 +79,12 @@ class DBShelf:
                 autotxn = self.dbenv.txn_begin()
                 try:
                     retval = proc(autotxn)
-                except db.DBError, e:
+                except db.DBError as e:
                     autotxn.abort()
                     raise e
-                except Exception, e:
+                except Exception as e:
                     autotxn.abort()
-                    e.args += tuple(traceback.format_tb(sys.exc_traceback))
+                    e.args += tuple(traceback.format_tb(sys.exc_info()[2]))
                     raise e
                 autotxn.commit()
             else: # execute without transactions
@@ -95,12 +95,12 @@ class DBShelf:
             
     def decode(self, data):
         try:
-            return cPickle.loads(data)
-        except cPickle.UnpicklingError:
+            return pickle.loads(data)
+        except pickle.UnpicklingError:
             raise CodingError()
 
     def encode(self, obj):
-        return cPickle.dumps(obj, 1)
+        return pickle.dumps(obj, 1)
 
     def clear(self, txn = None):
         def proc(txn):
@@ -144,7 +144,7 @@ class DBShelf:
         txn = self.dbenv.txn_begin()
         try:
             self.db.delete(key, txn)
-        except db.DBError, e:
+        except db.DBError as e:
             txn.abort()
             raise e
         txn.commit()
@@ -153,13 +153,13 @@ class DBShelf:
         if txn != None:
             return self.db.keys(txn)
         else:
-            return self.db.keys()
+            return list(self.db.keys())
 
     def items(self, txn=None):
         if txn != None:
             items = self.db.items(txn)
         else:
-            items = self.db.items()
+            items = list(self.db.items())
         newitems = []
 
         for k, v in items:
@@ -170,9 +170,9 @@ class DBShelf:
         if txn != None:
             values = self.db.values(txn)
         else:
-            values = self.db.values()
+            values = list(self.db.values())
 
-        return map(lambda x : self.decode(x), values)
+        return [self.decode(x) for x in values]
 
     #-----------------------------------
     # Other methods
@@ -185,7 +185,7 @@ class DBShelf:
         if self.get_type() != db.DB_RECNO:
             self.append = self.__append
             return self.append(value, txn=txn)
-        raise db.DBError, "append() only supported when dbshelve opened with filetype=dbshelve.db.DB_RECNO"
+        raise db.DBError("append() only supported when dbshelve opened with filetype=dbshelve.db.DB_RECNO")
 
 
     def associate(self, secondaryDB, callback, flags=0):
@@ -201,7 +201,7 @@ class DBShelf:
         # given nothing is passed to the extension module.  That way
         # an exception can be raised if set_get_returns_none is turned
         # off.
-        data = apply(self.db.get, args, kw)
+        data = self.db.get(*args, **kw)
         try:
             return self.decode(data)
         except (TypeError, CodingError):
@@ -261,7 +261,7 @@ class DBShelfCursor:
     def get(self, *args):
         count = len(args)  # a method overloading hack
         method = getattr(self, 'get_%d' % count)
-        apply(method, args)
+        method(*args)
 
     def get_1(self, flags):
         rec = self.dbc.get(flags)

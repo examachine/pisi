@@ -17,7 +17,7 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -57,7 +57,7 @@ def update_repo(repo, force=False):
         repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
-        except pisi.file.AlreadyHaveException, e:
+        except pisi.file.AlreadyHaveException as e:
             ctx.ui.info(_('No updates available for repository %s.') % repo)
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
@@ -67,7 +67,7 @@ def update_repo(repo, force=False):
 
         try:
             index.check_signature(repouri, repo)
-        except pisi.file.NoSignatureFound, e:
+        except pisi.file.NoSignatureFound as e:
             ctx.ui.warning(e)
 
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
@@ -88,8 +88,8 @@ def rebuild_repo(repo):
         pisi.util.check_dir(tmpdir)
         try:
             index.read_uri(indexpath, tmpdir, force=True) # don't look for sha1sum there
-        except IOError, e:
-            ctx.ui.warning(_("Input/Output error while reading %s: %s") % (indexpath, unicode(e)))
+        except IOError as e:
+            ctx.ui.warning(_("Input/Output error while reading %s: %s") % (indexpath, str(e)))
             return
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
         ctx.ui.info(_('OK.'))

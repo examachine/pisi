@@ -32,8 +32,8 @@ class SourceDBTestCase(testcase.TestCase):
 
     def testAddRemove(self):
         self.sourcedb.add_spec(self.spec, 'test')
-        self.assert_(self.sourcedb.has_spec("popt"))
+        self.assertTrue(self.sourcedb.has_spec("popt"))
         self.sourcedb.remove_spec("popt", 'test')
-        self.assert_(not self.sourcedb.has_spec("popt"))
+        self.assertTrue(not self.sourcedb.has_spec("popt"))
 
 suite = unittest.makeSuite(SourceDBTestCase)

@@ -29,7 +29,7 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import Ft
 from Ft.Xml.Domlette import implementation
@@ -38,8 +38,8 @@ import Ft.Lib
 import pisi
 
 from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
-XHTML_NS = unicode(XHTML_NAMESPACE)
-XML_NS = unicode(XML_NAMESPACE)
+XHTML_NS = str(XHTML_NAMESPACE)
+XML_NS = str(XML_NAMESPACE)
 
 class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
@@ -57,7 +57,7 @@ def parse(filename):
     try:
         doc = NoExtDtdReader.parseUri(Ft.Lib.Uri.OsPathToUri(filename))
         return doc.documentElement
-    except Ft.FtException, e:
+    except Ft.FtException as e:
         raise Error(_("File '%s' has invalid XML: %s") % (filename, str(e)))
 
 def newNode(node, tag):
@@ -90,7 +90,7 @@ def setNodeAttribute(node, attrname, value):
 
 def getChildElts(node):
     """get only child elements"""
-    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
+    return [x for x in node.childNodes if x.nodeType == x.ELEMENT_NODE]
 
 def getTagByName(parent, childName):
     return [x for x in parent.childNodes
@@ -150,7 +150,7 @@ def getAllNodes(node, tagPath):
     nodeList = [node] # basis case
 
     for tag in tags:
-        results = map(lambda x: getTagByName(x, tag), nodeList)
+        results = [getTagByName(x, tag) for x in nodeList]
         nodeList = []
         for x in results:
             nodeList.extend(x)

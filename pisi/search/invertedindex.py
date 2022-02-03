@@ -16,6 +16,7 @@ import types
 import pisi.db.lockeddbshelve as shelve
 from pisi.db.itembyrepo import ItemByRepoDB
 import pisi.db.itembyrepo as itembyrepodb
+from functools import reduce
 
 class InvertedIndex(object):
     """a database of term -> set of documents"""
@@ -44,10 +45,10 @@ class InvertedIndex(object):
         name = shelve.LockedDBShelf.encodekey(name)
         def proc(txn):
             terms= set()
-            if self.d.d.has_key(name):
+            if name in self.d.d:
                 s = self.d.d.get(name, txn=txn)
                 for repostr in self.d.order(repo = repo):
-                    if s.has_key(repostr):
+                    if repostr in s:
                         terms |= s[repostr]
             return terms
         return self.d.txn_proc(proc, txn)

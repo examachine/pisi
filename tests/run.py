@@ -29,13 +29,13 @@ def run_test_suite(testsuite):
 
 def run_all():
 
-    print '** Running all tests'
+    print('** Running all tests')
     #testsuite = unittest.TestSuite()
     for root, dirs, files in os.walk('tests'):
-        testsources = filter(lambda x:x.endswith('tests.py'), files)
+        testsources = [x for x in files if x.endswith('tests.py')]
         for testsource in testsources:
             module = __import__(testsource[:len(testsource)-3])
-            print '\n* Running tests in', testsource
+            print('\n* Running tests in', testsource)
             run_test_suite(module.suite)
 
 if __name__ == "__main__":
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         for test in tests:
             test += 'tests'
             module = __import__(test)
-            print "* Running tests in", test
+            print("* Running tests in", test)
             run_test_suite(module.suite)
     else: # run all tests
         run_all()

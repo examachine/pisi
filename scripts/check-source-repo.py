@@ -27,6 +27,6 @@ for root, dirs, files in os.walk(repo_uri):
             sf = specfile.SpecFile()
             sf.read(pisi.util.join_path(root, fn))
             sf.check()
-            print '%s: %s' % (sf.source.name, sf.source.version)
+            print(('%s: %s' % (sf.source.name, sf.source.version)))
 
 pisi.api.finalize()

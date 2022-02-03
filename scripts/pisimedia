@@ -20,7 +20,7 @@ import pisi.context as ctx
 usage = "Usage: pisimedia <pisi-index.xml>"
 
 if len(sys.argv)!=2:
-    print usage
+    print(usage)
     sys.exit(1)
     
 #op = sys.argv[1]
@@ -30,7 +30,7 @@ if len(sys.argv)!=2:
 
 idx = sys.argv[1]    
 if not os.path.exists(idx):
-    print "pisi index %s cannot be found" % idx
+    print("pisi index %s cannot be found" % idx)
     
 pisi.api.init()
 
@@ -44,7 +44,7 @@ try:
     pisi.api.update_repo(tmprepo)
     packages = ctx.packagedb.list_packages(repo=tmprepo)
     pisi.api.install(packages, reinstall=True)
-except Exception, e:
+except Exception as e:
     ctx.ui.error(e)
     
 if ctx.repodb.has_repo(tmprepo):

@@ -13,7 +13,7 @@
    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-from command import Command, autocommand
+from .command import Command, autocommand
 
 
-class Graph(Command):
+class Graph(Command, metaclass=autocommand):
     """Graph package relations
 
 Usage: graph [<package1> <package2> ...]
@@ -35,8 +35,6 @@ conflicts relations starting from given packages. By default
 shows the package relations among repository packages, and writes
 the package in graphviz format to 'pgraph.dot'.
 """
-
-    __metaclass__ = autocommand
 
     def __init__(self, args=None):
         super(Graph, self).__init__(args)

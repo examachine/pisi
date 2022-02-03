@@ -20,7 +20,7 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # standard python modules
 from os.path import basename
@@ -30,8 +30,8 @@ import pisi
 from pisi.exml.xmlfile import XmlFile
 import pisi.exml.autoxml as autoxml
 import pisi.context as ctx
-from dependency import Dependency
-import component
+from .dependency import Dependency
+from . import component
 import pisi.util as util
 
 
@@ -209,9 +209,9 @@ class Package:
             build = '--'
         s = _('Name: %s, version: %s, release: %s, build %s\n') % (
               self.name, self.version, self.release, build)
-        s += _('Summary: %s\n') % unicode(self.summary)
-        s += _('Description: %s\n') % unicode(self.description)
-        s += _('Component: %s\n') % unicode(self.partOf)
+        s += _('Summary: %s\n') % str(self.summary)
+        s += _('Description: %s\n') % str(self.description)
+        s += _('Component: %s\n') % str(self.partOf)
         s += _('Provides: ')
         for x in self.providesComar:
            s += x.om + ' '
@@ -224,9 +224,7 @@ class Package:
         return s + '\n'
 
 
-class SpecFile(XmlFile):
-    __metaclass__ = autoxml.autoxml #needed when we specify a superclass
-
+class SpecFile(XmlFile, metaclass=autoxml.autoxml):
     tag = "PISI"
 
     t_Source = [ Source, autoxml.mandatory]

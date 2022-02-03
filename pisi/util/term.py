@@ -17,11 +17,11 @@ import os
 import sys
 
 def has_xterm():
-    return os.environ.has_key("TERM") and sys.stderr.isatty()
+    return "TERM" in os.environ and sys.stderr.isatty()
     
 def xterm_title(message):
     """sets message as a console window's title"""
-    if os.environ.has_key("TERM") and sys.stderr.isatty():
+    if "TERM" in os.environ and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
             if terminalType.startswith(term):
@@ -31,6 +31,6 @@ def xterm_title(message):
 
 def xterm_title_reset():
     """resets console window's title"""
-    if os.environ.has_key("TERM"):
+    if "TERM" in os.environ:
         terminalType = os.environ["TERM"]
         xterm_title(os.environ["TERM"])

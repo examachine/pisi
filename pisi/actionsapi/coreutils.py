@@ -14,31 +14,31 @@
 # Standard Python Modules
 import re
 import sys
-from itertools import izip
-from itertools import imap
+
+
 from itertools import count
-from itertools import ifilter
-from itertools import ifilterfalse
+
+from itertools import filterfalse
 
 # ActionsAPI
 import pisi.actionsapi
 
 def cat(filename):
-    return file(filename).xreadlines()
+    return file(filename)
 
 class grep:
     '''keep only lines that match the regexp'''
     def __init__(self, pat, flags = 0):
         self.fun = re.compile(pat, flags).match
     def __ror__(self, input):
-        return ifilter(self.fun, input)
+        return filter(self.fun, input)
 
 class tr:
     '''apply arbitrary transform to each sequence element'''
     def __init__(self, transform):
         self.tr = transform
     def __ror__(self, input):
-        return imap(self.tr, input)
+        return map(self.tr, input)
 
 class printto:
     '''print sequence elements one per line'''
@@ -46,7 +46,7 @@ class printto:
         self.out = out
     def __ror__(self,input):
         for line in input:
-            print >> self.out, line
+            print(line, file=self.out)
 
 printlines = printto(sys.stdout)
 

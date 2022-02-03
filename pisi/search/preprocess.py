@@ -11,7 +11,7 @@
 #
 # Author:  Eray Ozkural <eray@pardus.org.tr>
 
-import tokenize
+from . import tokenize
 
 def lowly_python(str):
     def lowly_char(c):
@@ -36,6 +36,6 @@ def preprocess(lang, str):
     terms = tokenize.tokenize(lang, str)
     
     # normalize
-    terms = map(lambda x: lower(lang, x), terms)
+    terms = [lower(lang, x) for x in terms]
     
     return terms

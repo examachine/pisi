@@ -23,7 +23,7 @@ import bsddb3.db as db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -35,12 +35,12 @@ import pisi.data.dependency as dependency
 import pisi.data.pgraph as pgraph
 import pisi.cli
 
-import common
-import component
-import conflict
-import remove
-import upgrade
-import upgradepisi
+from . import common
+from . import component
+from . import conflict
+from . import remove
+from . import upgrade
+from . import upgradepisi
 
 
 class Error(pisi.Error):
@@ -106,7 +106,7 @@ class Install(common.AtomicOperation):
         try:
             self.update_databases(txn)
             txn.commit()
-        except db.DBError, e:
+        except db.DBError as e:
             txn.abort()
             raise e
 
@@ -251,16 +251,16 @@ class Install(common.AtomicOperation):
 
         config_changed = []
         if self.reinstall:
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
+            new = set([str(x.path) for x in self.files.list])
+            old = set([str(x.path) for x in self.old_files.list])
             
             # handle special cases for upgrades
             overlap = old & new
             self.files.list.sort(key=lambda x:x.path)
             self.old_files.list.sort(key=lambda x:x.path)
             def get_upgrades(list):
-                return filter(lambda x : str(x.path) in overlap, list)
-            (upgrade_new, upgrade_old) = map(get_upgrades, [self.files.list, self.old_files.list])
+                return [x for x in list if str(x.path) in overlap]
+            (upgrade_new, upgrade_old) = list(map(get_upgrades, [self.files.list, self.old_files.list]))
             for newf, oldf in zip(upgrade_new, upgrade_old):
                 assert newf.path == oldf.path
                 if newf.type == 'config' and oldf.type == 'config': # config upgrade
@@ -273,7 +273,7 @@ class Install(common.AtomicOperation):
                                 os.unlink(fpath + '.old')
                             os.rename(fpath, fpath + '.old')
                         # otherwise, old config file not changed, overwrite
-                    except pisi.util.FileError, e:
+                    except pisi.util.FileError as e:
                         pass
         else:
             for file in self.files.list:
@@ -286,7 +286,7 @@ class Install(common.AtomicOperation):
                                 if os.path.exists(fpath + '.old'):
                                     os.unlink(fpath + '.old')
                                 os.rename(fpath, fpath + '.old')
-                        except pisi.util.FileError, e:
+                        except pisi.util.FileError as e:
                             pass
 
         self.package.extract_install(ctx.config.dest_dir())
@@ -299,8 +299,8 @@ class Install(common.AtomicOperation):
 
         if self.reinstall:
             # remove left over files
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
+            new = set([str(x.path) for x in self.files.list])
+            old = set([str(x.path) for x in self.old_files.list])
             leftover = old - new
             old_fileinfo = {}
             for fileinfo in self.old_files.list:
@@ -423,7 +423,7 @@ def install_pkg_files(package_URIs):
     # that aren't already satisfied and try to install them 
     # from the repository
     dep_unsatis = []
-    for name in d_t.keys():
+    for name in list(d_t.keys()):
         pkg = d_t[name]
         deps = pkg.runtimeDependencies()
         for dep in deps:
@@ -449,7 +449,7 @@ in the respective order to satisfy extra dependencies:
     
     packagedb = PackageDB()
    
-    A = d_t.keys()
+    A = list(d_t.keys())
    
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
@@ -504,7 +504,7 @@ def install_pkg_names(A, reinstall = False):
     
     # filter packages that are already installed
     if not reinstall:
-        Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
+        Ap = set([x for x in A if not ctx.installdb.is_installed(x)])
         d = A - Ap
         if len(d) > 0:
             ctx.ui.warning(_('Not re-installing the following packages: ') +

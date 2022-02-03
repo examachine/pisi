@@ -13,7 +13,7 @@
    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import info
-from command import Command, autocommand
+from . import info
+from .command import Command, autocommand
 
-class Search(info.Info):
+class Search(info.Info, metaclass=autocommand):
     """Search packages
 
 Usage: search <term1> <term2> ... <termn>
@@ -33,7 +33,6 @@ Usage: search <term1> <term2> ... <termn>
 Finds a package containing specified search terms
 in summary, description, and package name fields.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(Search, self).__init__(args)
@@ -73,14 +72,13 @@ in summary, description, and package name fields.
 
         self.finalize()
 
-class SearchFile(Command):
+class SearchFile(Command, metaclass=autocommand):
     """Search for a file
 
 Usage: search-file <path1> <path2> ... <pathn>
 
 Finds the installed package which contains the specified file.
 """
-    __metaclass__ = autocommand
 
     def __init__(self, args):
         super(SearchFile, self).__init__(args)

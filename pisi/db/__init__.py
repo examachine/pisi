@@ -16,11 +16,10 @@
 
 import re
 import string
-import statvfs
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -31,9 +30,9 @@ class Error(pisi.Exception):
 class FileError(pisi.Error):
     pass
 
-from install import *
-from itembyrepo import *
-from package import *
-from files import *
-from repo import *
-from source import *
+from .install import *
+from .itembyrepo import *
+from .package import *
+from .files import *
+from .repo import *
+from .source import *

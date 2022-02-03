@@ -21,7 +21,7 @@ import sys
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -29,10 +29,10 @@ import pisi.util as util
 import pisi.data.dependency as dependency
 import pisi.ui as ui
 
-import install
-import build
-import component
-import upgradepisi
+from . import install
+from . import build
+from . import component
+from . import upgradepisi
 
 class Error(pisi.Error):
     pass

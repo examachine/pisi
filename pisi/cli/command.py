@@ -18,7 +18,7 @@ from optparse import OptionParser
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -38,12 +38,12 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        list = [x.name[0] for x in Command.cmd]
-        list.sort()
-        for name in list:
+        list_cmds = [x.name[0] for x in Command.cmd]
+        list_cmds.sort()
+        for name in list_cmds:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
-            summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
+            summary = trans.gettext(commandcls.__doc__).split('\n')[0]
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' (%s)' % commandcls.name[1]
@@ -53,7 +53,7 @@ class Command(object):
     @staticmethod
     def get_command(cmd, fail=False, args=None):
     
-        if Command.cmd_dict.has_key(cmd):
+        if cmd in Command.cmd_dict:
             return Command.cmd_dict[cmd](args)
     
         if fail:
@@ -161,10 +161,10 @@ class Command(object):
 
     def help(self):
         """print help for the command"""
-        print self.format_name() + ': '
+        print(self.format_name() + ': ')
         trans = gettext.translation('pisi', fallback=True)
-        print trans.ugettext(self.__doc__) + '\n'
-        print self.parser.format_option_help()
+        print(trans.gettext(self.__doc__) + '\n')
+        print(self.parser.format_option_help())
 
     def die(self):
         """exit program"""
@@ -182,7 +182,7 @@ class autocommand(type):
             raise pisi.cli.Error(_('Command lacks name'))
         longname, shortname = name
         def add_cmd(cmd):
-            if Command.cmd_dict.has_key(cmd):
+            if cmd in Command.cmd_dict:
                 raise pisi.cli.Error(_('Duplicate command %s') % cmd)
             else:
                 Command.cmd_dict[cmd] = cls

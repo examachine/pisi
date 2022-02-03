@@ -3,7 +3,7 @@
 PISI package manager of Pardus linux distribution. The original 
 development branch by the original author. It is prononunced as "pee-see".
 
-##Synopsis:
+# Synopsis
 
 PISI is the next-gen package manager initially developed for the 
 PARDUS distribution in 2005. In Turkish, PISI means "kitty", and
@@ -25,7 +25,7 @@ PISI is quite portable and appropriate for embedded systems, and is
 a comprehensive packaging solution for any OS environment beyond
 Pardus derivatives.
 
-##Package contents:
+# Package Contents
 
 * build: build scripts
 * doc: documentation
@@ -36,7 +36,7 @@ Pardus derivatives.
 * tests: unit tests, stress tests and test scripts
 * tools: misc. tools used by developers
 
-##Basic usage:
+# Basic Usage
 
 PISI is self-documenting. To see help about basic usage, simply issue
 

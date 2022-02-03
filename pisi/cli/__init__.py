@@ -16,7 +16,7 @@ import locale
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
@@ -35,13 +35,13 @@ class Exception(pisi.Exception):
 
 
 def printu(obj, err = False):
-    if not isinstance(obj, unicode):
-        obj = unicode(obj)
+    if not isinstance(obj, str):
+        obj = str(obj)
     if err:
         out = sys.stderr
     else:
         out = sys.stdout
-    out.write(obj.encode('utf-8'))
+    out.write(obj)
     out.flush()
 
 class CLI(UI):
@@ -55,13 +55,13 @@ class CLI(UI):
 
     def output(self, msg, err = False, verbose = False):
         if (verbose and self.show_verbose) or (not verbose):                
-            if type(msg)==type(unicode()):
+            if type(msg)==type(str()):
                 msg = msg.encode('utf-8')
             if err:
                 out = sys.stderr
             else:
                 out = sys.stdout
-            out.write(msg)
+            out.write(msg.decode())
             out.flush()
 
     def info(self, msg, verbose = False, noln = False):
@@ -69,10 +69,10 @@ class CLI(UI):
         # let's cheat from KDE :)
         if not noln:
             msg += '\n'
-        self.output(unicode(msg), verbose=verbose)
+        self.output(str(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):
-        msg = unicode(msg)
+        msg = str(msg)
         if ctx.log:
             ctx.log.warning(msg)
         if ctx.get_option('no_color'):
@@ -81,7 +81,7 @@ class CLI(UI):
             self.output(colorize(msg + '\n', 'purple'), err=True, verbose=verbose)
 
     def error(self, msg):
-        msg = unicode(msg)
+        msg = str(msg)
         if ctx.log:
             ctx.log.error(msg)
         if ctx.get_option('no_color'):
@@ -91,17 +91,17 @@ class CLI(UI):
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
-        msg = unicode(msg)
+        msg = str(msg)
         if ctx.log:
             ctx.log.info(msg)
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
-        print msg
+        print(msg)
         for i in range(0,len(opts)):
-            print i + 1, opts(i)
+            print(i + 1, opts(i))
         while True:
-            s = raw_input(msg + colorize('1-%d' % len(opts), 'red'))
+            s = input(msg + colorize('1-%d' % len(opts), 'red'))
             try:
                 opt = int(s)
                 if 1 <= opt and opt <= len(opts):
@@ -110,7 +110,7 @@ class CLI(UI):
                 pass
         
     def confirm(self, msg):
-        msg = unicode(msg)
+        msg = str(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
@@ -118,7 +118,7 @@ class CLI(UI):
             yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
             prompt = msg + colorize(_(' (yes/no)'), 'red')
-            s = raw_input(prompt.encode('utf-8'))
+            s = input(prompt.encode('utf-8'))
             if yesexpr.search(s):
                 return True
 
@@ -135,7 +135,7 @@ class CLI(UI):
 
     def status(self, msg = None):
         if msg:
-            msg = unicode(msg)
+            msg = str(msg)
             self.output(colorize(msg + '\n', 'purple'))
             util.xterm_title(msg)
 

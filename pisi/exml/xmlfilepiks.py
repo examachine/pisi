@@ -25,10 +25,10 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import codecs
-import exceptions
+import builtins as exceptions
 
 import piksemel as iks
 
@@ -58,11 +58,10 @@ class XmlFile(object):
         return self.doc
         
     def readxmlfile(self, file):
-        raise Exception("not implemented")
         try:
             self.doc = iks.parse(file)
             return self.doc
-        except Exception, e:
+        except Exception as e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
 
@@ -77,7 +76,7 @@ class XmlFile(object):
         try:
             self.doc = iks.parse(localpath)
             return self.doc
-        except Exception, e:
+        except Exception as e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):

@@ -22,20 +22,20 @@ class InstallDBTestCase(testcase.TestCase):
 
     def testRemoveDummy(self):
         ctx.installdb.remove('installtest')
-        self.assert_(not ctx.installdb.is_installed('installtest'))
+        self.assertTrue(not ctx.installdb.is_installed('installtest'))
         
     def testInstall(self):
         ctx.installdb.purge('installtest')
         ctx.installdb.install('installtest', '0.1', '2', '3')
-        self.assert_(ctx.installdb.is_recorded('installtest'))
-        self.assert_(ctx.installdb.is_installed('installtest'))
+        self.assertTrue(ctx.installdb.is_recorded('installtest'))
+        self.assertTrue(ctx.installdb.is_installed('installtest'))
 
     def testRemovePurge(self):
         ctx.installdb.install('installtest', '0.1', '2', '3')
-        self.assert_(ctx.installdb.is_installed('installtest'))
+        self.assertTrue(ctx.installdb.is_installed('installtest'))
         ctx.installdb.remove('installtest')
-        self.assert_(ctx.installdb.is_removed('installtest'))
+        self.assertTrue(ctx.installdb.is_removed('installtest'))
         ctx.installdb.purge('installtest')
-        self.assert_(not ctx.installdb.is_recorded('installtest'))
+        self.assertTrue(not ctx.installdb.is_recorded('installtest'))
 
 suite = unittest.makeSuite(InstallDBTestCase)

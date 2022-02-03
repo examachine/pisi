@@ -14,12 +14,12 @@
 # Simplifies working with URLs, module provides common URL
 # parsing and processing
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 from os.path import basename
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi.util as util
 
@@ -81,7 +81,7 @@ class URI(object):
         
     def set_auth_info(self, authTuple):
         if not isinstance(authTuple, tuple):
-            raise Exception, _("setAuthInfo needs a tuple (user, pass)")
+            raise Exception(_("setAuthInfo needs a tuple (user, pass)"))
         self.__authinfo = authTuple
 
     def auth_info(self):

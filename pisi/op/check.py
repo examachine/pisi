@@ -18,13 +18,13 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
 import pisi.util as util
 
-import info
+from . import info
 
 class Error(pisi.Error):
     pass

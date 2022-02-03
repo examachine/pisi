@@ -25,14 +25,14 @@ import types
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-import lockeddbshelve as shelve
-from itembyrepo import ItemByRepoDB
-import itembyrepo
+from . import lockeddbshelve as shelve
+from .itembyrepo import ItemByRepoDB
+from . import itembyrepo
 
 class Error(pisi.Error):
     pass
@@ -64,7 +64,7 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except itembyrepo.NotfoundError, e:
+        except itembyrepo.NotfoundError as e:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):
@@ -98,7 +98,7 @@ class PackageDB(object):
                 dep_name = str(dep.package)
                 if self.dr.has_key(dep_name, repo, txn):
                     revdep = self.dr.get_item(dep_name, repo, txn)
-                    revdep = filter(lambda (n,d):n!=name, revdep)
+                    revdep = [n_d for n_d in revdep if n_d[0]!=name]
                     revdep.append( (name, dep) )
                     self.dr.add_item(dep_name, revdep, repo, txn)
                 else:
@@ -106,10 +106,10 @@ class PackageDB(object):
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
             # index summary and description
-            for (lang, doc) in package_info.summary.iteritems():
+            for (lang, doc) in package_info.summary.items():
                 if lang in ['en', 'tr']:
                     pisi.search.add_doc('summary', lang, package_info.name, doc, repo=repo, txn=txn)
-            for (lang, doc) in package_info.description.iteritems():
+            for (lang, doc) in package_info.description.items():
                 if lang in ['en', 'tr']:
                     pisi.search.add_doc('description', lang, package_info.name, doc, repo=repo, txn=txn)
 
@@ -128,15 +128,15 @@ class PackageDB(object):
                 dep_name = str(dep.package)
                 if self.dr.has_key(dep_name, repo, txn):
                     revdep = self.dr.get_item(dep_name, repo, txn)
-                    revdep = filter(lambda (n,d):n!=name, revdep)
+                    revdep = [n_d1 for n_d1 in revdep if n_d1[0]!=name]
                     self.dr.add_item(dep_name, revdep, repo, txn)
             if self.dr.has_key(name, repo, txn=txn):
                 self.dr.remove_item(name, repo, txn=txn)
             ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
-            for (lang, doc) in package_info.summary.iteritems():
+            for (lang, doc) in package_info.summary.items():
                 if lang in ['en', 'tr']:
                     pisi.search.remove_doc('summary', lang, package_info.name, doc, repo=repo, txn=txn)
-            for (lang, doc) in package_info.description.iteritems():
+            for (lang, doc) in package_info.description.items():
                 if lang in ['en', 'tr']:
                     pisi.search.remove_doc('description', lang, package_info.name, doc, repo=repo, txn=txn)
         self.d.txn_proc(proc, txn)

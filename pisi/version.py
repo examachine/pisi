@@ -60,7 +60,7 @@ class VersionItem:
         # trick.
         if len(itemstring) > 1:
 
-            for keyword in keywords.keys():
+            for keyword in list(keywords.keys()):
                 if itemstring.startswith(keyword):
 
                     if self._keyword == "NOKEY":

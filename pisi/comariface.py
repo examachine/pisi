@@ -15,9 +15,12 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
-import comar
+try:
+    import comar
+except ModuleNotFoundError:
+    print("comar package is not found")
 import pisi
 import pisi.context as ctx
 
@@ -64,10 +67,10 @@ def wait_for_result(com, package_name=None):
             # our precious communication link, so we waitsss
             if package_name == "comar":
                 if not wait_comar():
-                    raise Error, _("Could not restart comar")
+                    raise Error(_("Could not restart comar"))
                 return
             else:
-                raise Error, _("connection with comar unexpectedly closed")
+                raise Error(_("connection with comar unexpectedly closed"))
         
         cmd = reply[0]
         if cmd == com.RESULT and not multiple:
@@ -81,12 +84,12 @@ def wait_for_result(com, package_name=None):
             return
         elif cmd == com.FAIL:
             e = _("Configuration error: %s") % reply[2]
-            raise Error, e
+            raise Error(e)
         elif cmd == com.ERROR:
             e = _("Script error: %s") % reply[2]
-            raise Error, e
+            raise Error(e)
         elif cmd == com.DENIED:
-            raise Error, _("comar denied our access")
+            raise Error(_("comar denied our access"))
 
 def post_install(package_name, provided_scripts, scriptpath, metapath, filepath):
     ctx.ui.info(_("Configuring package"))

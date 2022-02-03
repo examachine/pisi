@@ -20,9 +20,9 @@ sys.path.append('.')
 import pisi
 import pisi.cli
 
-d = shelve.open( sys.argv[1], 'r', 0660, filetype = db.DB_BTREE )
+d = shelve.open( sys.argv[1], 'r', 0o660, filetype = db.DB_BTREE )
 
-for key, data in d.items():
-    pisi.cli.printu(u'%s: %s\n' % (key, data))
+for key, data in list(d.items()):
+    pisi.cli.printu('%s: %s\n' % (key, data))
 
 d.close()

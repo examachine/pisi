@@ -15,7 +15,7 @@ I find these quite handy. Use them :) -- Eray Ozkural"""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 
 class autoprop(type):
@@ -24,10 +24,10 @@ class autoprop(type):
     def __init__(cls, name, bases, dict):
         super(autoprop, cls).__init__(name, bases, dict)
         props = {}
-        for name in dict.keys():
+        for name in list(dict.keys()):
             if name.startswith("_get_") or name.startswith("_set_"):
                 props[name[5:]] = 1
-        for name in props.keys():
+        for name in list(props.keys()):
             fget = getattr(cls, "_get_%s" % name, None)
             fset = getattr(cls, "_set_%s" % name, None)
             setattr(cls, name, property(fget, fset))
@@ -76,17 +76,17 @@ class constant(type):
     def __init__(cls, name, bases, dict):
         super(constant, cls).__init__(name, bases, dict)
         def __setattr__(self, name, value):
-            if self.__dict__.has_key(name):
-                raise ConstError, _("Can't rebind constant: %s") % name
+            if name in self.__dict__:
+                raise ConstError(_("Can't rebind constant: %s") % name)
             # Binding an attribute once to a const is available
             self.__dict__[name] = value
         cls.__setattr__ = __setattr__
 
         def __delattr__(self, name):
-            if self.__dict__.has_key(name):
-                raise ConstError, _("Can't unbind constant: %s") % name
+            if name in self.__dict__:
+                raise ConstError(_("Can't unbind constant: %s") % name)
             # we don't have an attribute by this name
-            raise NameError, name
+            raise NameError(name)
         cls.__delattr__ = __delattr__
 
 

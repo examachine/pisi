@@ -28,7 +28,7 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import piksemel as iks
@@ -43,7 +43,7 @@ def getAllNodes(node, tagPath):
         return []
     nodeList = [node] # basis case
     for tag in tags:
-        results = map(lambda x: getTagByName(x, tag), nodeList)
+        results = [getTagByName(x, tag) for x in nodeList]
         nodeList = []
         for x in results:
             nodeList.extend(x)
@@ -78,7 +78,7 @@ def getNodeText(node, tagpath = ""):
         return None
     if child.type() == iks.DATA:
         # KLUDGE: FIXME: python 2.x bug: force decoding as UTF-8
-        child_data = unicode(child.data(), 'utf8')
+        child_data = str(child.data(), 'utf8')
         #print 'child_data=', child_data
         return child_data.strip() # in any case, strip whitespaces...
     else:

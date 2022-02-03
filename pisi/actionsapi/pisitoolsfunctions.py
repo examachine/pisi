@@ -19,7 +19,7 @@ import glob
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # Pisi Modules
 import pisi.context as ctx
@@ -74,14 +74,14 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
-    print '* readable_insinto', destinationDirectory, sourceFiles
+    print('* readable_insinto', destinationDirectory, sourceFiles)
     for sourceFile in sourceFiles:
-        print '* installing', sourceFile
+        print('* installing', sourceFile)
         sourceFile = join_path(get.sourceDIR(), sourceFile)
         for source in glob.glob(sourceFile):
             system('install -m0644 "%s" %s' % (source, destinationDirectory))
 
-def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
+def lib_insinto(sourceFile, destinationDirectory, permission = 0o644):
     '''inserts a library fileinto destinationDirectory with given permission'''
 
     if not sourceFile or not destinationDirectory:

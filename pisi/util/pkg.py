@@ -18,13 +18,13 @@ import string
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
 
-import process
-import path
+from . import process
+from . import path
  
 def package_name(name, version, release, build, prependSuffix=True):
     fn = name + '-' + version + '-' + release
@@ -45,7 +45,7 @@ def is_package_name(fn, package_name = None):
             import string
             for x in verstr.split('-'):
                 # weak rule: version components after '-' start with a digit
-                if x is '' or (not x[0] in string.digits):
+                if x == '' or (not x[0] in string.digits):
                     return False
             return True
     return False
@@ -56,7 +56,7 @@ def env_update():
 
     env_dir = path.join_path(ctx.config.dest_dir(), "/etc/env.d")
     if not os.path.exists(env_dir):
-        os.makedirs(env_dir, 0755)
+        os.makedirs(env_dir, 0o755)
 
     pisi.environment.update_environment(ctx.config.dest_dir())
 

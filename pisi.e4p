@@ -8,7 +8,7 @@
   <Hash>e0aec664d394fcfe968462e2af7e55288f102815</Hash>
   <ProgLanguage mixed="0">Python2</ProgLanguage>
   <ProjectType>Console</ProjectType>
-  <Description>The package management software of Pardus distribution. </Description>
+  <Description>The package management software of Pardus distribution.</Description>
   <Version></Version>
   <Author>PiSi Development Team</Author>
   <Email></Email>

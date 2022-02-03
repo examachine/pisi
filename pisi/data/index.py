@@ -18,27 +18,25 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.context as ctx
-import specfile
-import metadata
+from . import specfile
+from . import metadata
 import pisi.util as util
 from pisi.data.package import Package
 from pisi.exml.xmlfile import XmlFile
 from pisi.file import File
 import pisi.exml.autoxml as autoxml
-import component
+from . import component
 
 
 class Error(pisi.Error):
     pass
     
 
-class Index(XmlFile):
-    __metaclass__ = autoxml.autoxml
-
+class Index(XmlFile, metaclass=autoxml.autoxml):
     tag = "PISI"
 
     t_Distribution = [ component.Distribution, autoxml.optional ]
@@ -118,7 +116,7 @@ class Index(XmlFile):
 
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
-        md.package.packageSize = long(os.path.getsize(path))
+        md.package.packageSize = int(os.path.getsize(path))
         if ctx.config.options and ctx.config.options.absolute_uris:
             # FIXME: the name "absolute_uris" does not seem to fit below :/
             md.package.packageURI = os.path.realpath(path)
@@ -130,7 +128,7 @@ class Index(XmlFile):
         errs = md.errors()
         if md.errors():
             ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
-            ctx.ui.error(unicode(Error(*errs)))
+            ctx.ui.error(str(Error(*errs)))
         else:
             self.packages.append(md.package)
 

@@ -23,8 +23,8 @@ class Exception(pisi.Exception):
 
 # API
 
-from invertedindex import InvertedIndex
-import preprocess as p
+from .invertedindex import InvertedIndex
+from . import preprocess as p
 
 def init(ids, langs):
     "initialize databases"
@@ -42,8 +42,8 @@ def finalize():
     import pisi.context as ctx
     
     if ctx.invidx:
-        for id in ctx.invidx.iterkeys():
-            for lang in ctx.invidx[id].iterkeys():
+        for id in ctx.invidx.keys():
+            for lang in ctx.invidx[id].keys():
                 ctx.invidx[id][lang].close()
         ctx.invidx = {}    
     
@@ -56,7 +56,7 @@ def remove_doc(id, lang, docid, str, repo = None, txn = None):
     ctx.invidx[id][lang].remove_doc(docid, terms, repo = repo, txn = txn)
 
 def query_terms(id, lang, terms, repo = None, txn = None):
-    terms = map(lambda x: p.lower(lang, x), terms)
+    terms = [p.lower(lang, x) for x in terms]
     return ctx.invidx[id][lang].query(terms, repo = repo, txn = txn)
 
 def query(id, lang, str, repo = None, txn = None):

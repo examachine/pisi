@@ -12,13 +12,13 @@
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
 
 try:
-    from xmlextpiks import *
+    from .xmlextpiks import *
 except:
     try:
         #if pisi.context.use_mdom:
         #    gibidi
-        from xmlextcdom import  *
+        from .xmlextcdom import  *
     except:
         #raise Error('cannot find 4suite implementation')
-        print 'xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom'
-        from xmlextmdom import *
+        print('xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom')
+        from .xmlextmdom import *

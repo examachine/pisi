@@ -56,6 +56,6 @@ def findMetadata():
 
 for file in findMetadata():
     if saveMetadata(fixMetadata(file), file):
-        print "Güncellendi          : ", file
+        print(("Güncellendi          : ", file))
     else:
-        print "Hiç bir şey yapılmadı: ", file
+        print(("Hiç bir şey yapılmadı: ", file))

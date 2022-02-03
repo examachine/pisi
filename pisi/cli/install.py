@@ -13,7 +13,7 @@
    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 import pisi.cli
@@ -22,10 +22,10 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import command
-import packageop
+from . import command
+from . import packageop
 
-class Install(packageop.PackageOp):
+class Install(packageop.PackageOp, metaclass=command.autocommand):
     """Install PISI packages
 
 Usage: install <package1> <package2> ... <packagen>
@@ -36,7 +36,6 @@ specified a package name, it should exist in a specified repository.
 You can also specify components instead of package names, which will be
 expanded to package names.
 """
-    __metaclass__ = command.autocommand
 
     def __init__(self, args):
         super(Install, self).__init__(args)
